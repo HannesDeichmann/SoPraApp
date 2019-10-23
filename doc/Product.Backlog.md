@@ -105,19 +105,19 @@ Ausführliche Beschreibung:
 
 ##### Task 2.1.1.1 Wegpunkt erstellen
 
-- Aufwandschätzung: [2]
+- Aufwandschätzung: [2] Stunden
 
 ##### Task 2.1.1.2 Wegpunkt bearbeiten
 
-- Aufwandschätzung: [1]
+- Aufwandschätzung: [1] Stunden
 
 ##### Task 2.1.1.3 Karte/Bild einfügen
 
-- Aufwandschätzung: [2]
+- Aufwandschätzung: [2] Stunden
 
 ##### Task 2.1.1.4 Wegpunkt lokalisieren (Karte/Bild)
 
-- Aufwandschätzung: [1]
+- Aufwandschätzung: [1] Stunden
 
 #### Implementable Story 2.1.2 Route
 
@@ -130,27 +130,27 @@ Ausführliche Beschreibung:
 
 ##### Task 2.1.2.1 Route erstellen
 
-- Aufwandschätzung: [3]
+- Aufwandschätzung: [3] Stunden
 
 ##### Task 2.1.2.2 Route bearbeiten
 
-- Aufwandschätzung: [1]
+- Aufwandschätzung: [1] Stunden
 
 ##### Task 2.1.2.3 Route löschen
 
-- Aufwandschätzung: [1]
+- Aufwandschätzung: [1] Stunden
 
 ##### Task 2.1.2.4 Zufällige Route
 
-- Aufwandschätzung: [3]
+- Aufwandschätzung: [3] Stunden
 
 ##### Task 2.1.2.5 Route kopieren
 
-- Aufwandschätzung: [1]
+- Aufwandschätzung: [1] Stunden
 
 ##### Task 2.1.2.6 Wächter zuweisen
 
-- Aufwandschätzung: [1]
+- Aufwandschätzung: [1] Stunden
 
 ### Feature 2.2 Wächterplaner
 
@@ -173,15 +173,15 @@ Ausführliche Beschreibung:
 
 ##### Task 2.2.1.1 Wächter erstellen
 
-- Aufwandschätzung: [2]
+- Aufwandschätzung: [2] Stunden
 
 ##### Task 2.2.1.2 Wächter bearbeiten
 
-- Aufwandschätzung: [1]
+- Aufwandschätzung: [1] Stunden
 
 ##### Task 2.2.1.3 Wächter löschen
 
-- Aufwandschätzung: [1]
+- Aufwandschätzung: [1] Stunden
 
 #### Implementable Story 2.2.2 Routenprotokoll
 
@@ -194,11 +194,11 @@ Ausführliche Beschreibung:
 
 ##### Task 2.2.2.1 Routenprotokoll anzeigen
 
-- Aufwandschätzung: [2]
+- Aufwandschätzung: [2] Stunden
 
 ##### Task 2.2.2.2 Routeprotokoll bearbeiten
 
-- Aufwandschätzung: [1]
+- Aufwandschätzung: [1] Stunden
 
 ## Epic 3 Sensoren
 
@@ -225,8 +225,6 @@ Ausführliche Beschreibung:
   - *TODO (Beschreibung von Testfällen die das erwartete Verhalten des gesamten Features überprüfen.)*
   - *TODO*
   - *TODO*
-
-
 
 ### Feature 3.3 Vibration
 
