@@ -102,5 +102,138 @@ Ausführliche Beschreibung:
 - Akzeptanztests:
   - *TODO (Beschreibung von Testfällen die das erwartete Verhalten der gesamten Implementable Story überprüfen.)*
   - *TODO*
-  
-##### Task 2.1.1.1 
+
+##### Task 2.1.1.1 Wegpunkt erstellen
+
+- Aufwandschätzung: [2]
+
+##### Task 2.1.1.2 Wegpunkt bearbeiten
+
+- Aufwandschätzung: [1]
+
+##### Task 2.1.1.3 Karte/Bild einfügen
+
+- Aufwandschätzung: [2]
+
+##### Task 2.1.1.4 Wegpunkt lokalisieren (Karte/Bild)
+
+- Aufwandschätzung: [1]
+
+#### Implementable Story 2.1.2 Route
+
+> Als Admin möchte ich Routen erstellen und verwalten können, um die Aufgaben der Wächter zuteilen und definieren kann.
+
+- Aufwandschätzung: [90] Story Points
+- Akzeptanztests:
+  - *TODO (Beschreibung von Testfällen die das erwartete Verhalten der gesamten Implementable Story überprüfen.)*
+  - *TODO*
+
+##### Task 2.1.2.1 Route erstellen
+
+- Aufwandschätzung: [3]
+
+##### Task 2.1.2.2 Route bearbeiten
+
+- Aufwandschätzung: [1]
+
+##### Task 2.1.2.3 Route löschen
+
+- Aufwandschätzung: [1]
+
+##### Task 2.1.2.4 Zufällige Route
+
+- Aufwandschätzung: [3]
+
+##### Task 2.1.2.5 Route kopieren
+
+- Aufwandschätzung: [1]
+
+##### Task 2.1.2.6 Wächter zuweisen
+
+- Aufwandschätzung: [1]
+
+### Feature 2.2 Wächterplaner
+
+> Als Admin möchte ich meine Wächter organisieren können.
+
+- Aufwandsschätzung: L
+- Akzeptanztests:
+  - *TODO (Beschreibung von Testfällen die das erwartete Verhalten des gesamten Features überprüfen.)*
+  - *TODO*
+  - *TODO*
+
+#### Implementable Story 2.2.1 Wächter
+
+> Als Admin möchte ich Wächter erstellen und verwalten können, um sie den Routen zuweisen zu können
+
+- Aufwandschätzung: [50] Story Points
+- Akzeptanztests:
+  - *TODO (Beschreibung von Testfällen die das erwartete Verhalten der gesamten Implementable Story überprüfen.)*
+  - *TODO*
+
+##### Task 2.2.1.1 Wächter erstellen
+
+- Aufwandschätzung: [2]
+
+##### Task 2.2.1.2 Wächter bearbeiten
+
+- Aufwandschätzung: [1]
+
+##### Task 2.2.1.3 Wächter löschen
+
+- Aufwandschätzung: [1]
+
+#### Implementable Story 2.2.2 Routenprotokoll
+
+> Als Admin möchte ich das Routenprotokoll erstellen und verwalten können, um den Verlauf der Routen einsehen zu können.
+
+- Aufwandschätzung: [60] Story Points
+- Akzeptanztests:
+  - *TODO (Beschreibung von Testfällen die das erwartete Verhalten der gesamten Implementable Story überprüfen.)*
+  - *TODO*
+
+##### Task 2.2.2.1 Routenprotokoll anzeigen
+
+- Aufwandschätzung: [2]
+
+##### Task 2.2.2.2 Routeprotokoll bearbeiten
+
+- Aufwandschätzung: [1]
+
+## Epic 3 Sensoren
+
+> Als System möchte ich die benötigenten Sensoren ansprechen und auslesen können.
+
+Ausführliche Beschreibung:
+
+### Feature 3.1 GPS und QR-Code
+
+> Als System möchte ich die GPS Daten auslesen können und QR-Codes (mit der Kamera) scannen können.
+
+- Aufwandsschätzung: M
+- Akzeptanztests:
+  - *TODO (Beschreibung von Testfällen die das erwartete Verhalten des gesamten Features überprüfen.)*
+  - *TODO*
+  - *TODO*
+
+### Feature 3.2 NFC
+
+> Als System möchte ich den NFC Sensor ansprechen und auslesen können.
+
+- Aufwandsschätzung: S
+- Akzeptanztests:
+  - *TODO (Beschreibung von Testfällen die das erwartete Verhalten des gesamten Features überprüfen.)*
+  - *TODO*
+  - *TODO*
+
+
+
+### Feature 3.3 Vibration
+
+> Als System möchte ich die Vibrations Funktion des Handys ansprechen können.
+
+- Aufwandsschätzung: XS
+- Akzeptanztests:
+  - *TODO (Beschreibung von Testfällen die das erwartete Verhalten des gesamten Features überprüfen.)*
+  - *TODO*
+  - *TODO*
