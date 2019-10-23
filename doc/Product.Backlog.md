@@ -2,122 +2,105 @@
 
 Hier werden **alle** Anforderungen in Form von **User Stories** geordnet aufgelistet.
 
-## Epic 1 *Titel*
+## Epic 1 Wächter-Modus
 
-> Als *Rolle* möchte ich *Ziel/Wunsch*, um *Nutzen*.
+> Als Wächter möchte ich den Wächtermodus nutzen können, um Routen ablaufen zu können.
 
-Ausführliche Beschreibung:
+Ausführliche Beschreibung: 
 
-### Feature 1.1 *Titel*
+### Feature 1.1 Route abarbeiten
 
-> Als *Rolle* möchte ich *Ziel/Wunsch*, um *Nutzen*.
+> Als Wächter möchte ich meine Route abarbeiten, um meine Arbeit zu erfüllen.
 
-- Aufwandsschätzung: [XS, S, M, L, XL]
+- Aufwandsschätzung: L
 - Akzeptanztests:
   - *TODO (Beschreibung von Testfällen die das erwartete Verhalten des gesamten Features überprüfen.)*
   - *TODO*
   - *TODO*
 
-#### Implementable Story 1.1.1 *Titel*
+#### Implementable Story 1.1.1 Wegpunkt abarbeiten
 
-> Als *Rolle* möchte ich *Ziel/Wunsch*, um *Nutzen*.
+> Als Wächter möchte ich Wegpunkte abarbeiten können, um meine Route zu dokumentieren.
 
-- Aufwandsschätzung: [0-100] Story Points
+- Aufwandsschätzung: [90] Story Points
 - Akzeptanztests:
   - *TODO (Beschreibung von Testfällen die das erwartete Verhalten der gesamten Implementable Story überprüfen.)*
   - *TODO*
   - *TODO*
 
-##### Task 1.1.1.1 *Titel/Beschreibung*
+##### Task 1.1.1.1 Passwortabfrage
 
-- Aufwandsschätzung: [0-24] Stunden
+- Aufwandsschätzung: [5] Stunden
 
-##### Task 1.1.1.2 *Titel/Beschreibung*
+##### Task 1.1.1.2 Scan-Funktion (QR-Code oder NFC)
 
-- Aufwandsschätzung: [0-24] Stunden
+- Aufwandsschätzung: [3] Stunden
 
-##### Task 1.1.1.3 *Titel/Beschreibung*
+##### Task 1.1.1.3 Aktuelle Wegpunkt Anzeige
 
-- Aufwandsschätzung: [0-24] Stunden
+- Aufwandsschätzung: [1] Stunden
 
-#### Implementable Story 1.1.2 *Titel*
+##### Task 1.1.1.4 Countdown
 
-> Als *Rolle* möchte ich *Ziel/Wunsch*, um *Nutzen*.
+- Aufwandsschätzung: [2] Stunden
 
-- Aufwandsschätzung: [0-100] Story Points
+##### Task 1.1.1.5 Pausenknopf um die Routenzeit zu pausieren, damit kein Alarm ausgelöst wird
+
+- Aufwandschätzung: [1] Stunden
+
+##### Task 1.1.1.6 Routenanzeige um alle Folgenden Wegpunkte zu sehen
+
+- Aufwandschätzung: [2] Stunden
+
+##### Task 1.1.1.7 Dokumentation um abgearbeiteten Wegpunkt in einen Routenprotokoll zu vermerken
+
+- Aufwandschätzung: [2] Stunden 
+
+#### Implementable Story 1.1.2 Alarm
+
+> Als Wächter möchte ich einen ALarm auslösen, um Hilfe zu holen.
+
+- Aufwandsschätzung: [50] Story Points
 - Akzeptanztests:
   - *TODO (Beschreibung von Testfällen die das erwartete Verhalten der gesamten Implementable Story überprüfen.)*
   - *TODO*
   - *TODO*
 
-##### Task 1.1.2.1 *Titel/Beschreibung*
+##### Task 1.1.2.1 Vibration um den Wächter selbst zu alamieren, falls er einen Wegpunkt nicht in der gegebene Zeit erricht hat
 
-- Aufwandsschätzung: [0-24] Stunden
+- Aufwandsschätzung: [2] Stunden
 
-##### Task 1.1.2.2 *Titel/Beschreibung*
+##### Task 1.1.2.2 Fehlermeldung (Ersatzfunktion für Servernachricht)
 
-- Aufwandsschätzung: [0-24] Stunden
+- Aufwandsschätzung: [1] Stunden
 
-##### Task 1.1.2.3 *Titel/Beschreibung*
+##### Task 1.1.2.3 Dokumentation um einen Alarm im Routenprotokoll vermerken zu können
 
-- Aufwandsschätzung: [0-24] Stunden
+- Aufwandsschätzung: [2] Stunden
 
-### Feature 1.2 *Titel*
+## Epic 2 Admin-Modus
 
-> Als *Rolle* möchte ich *Ziel/Wunsch*, um *Nutzen*.
+> Als Admin möchte ich im Admin Modus Routen und Wächter verwalten können, um die Aufgaben zu planen und auszulesen.
 
-- Aufwandsschätzung: [XS, S, M, L, XL]
+Ausführliche Beschreibung: 
+
+### Feature 2.1 Routenplaner
+
+> Als Admin möchte ich meine Routen planen, um das Wachpersonal zu organisieren.
+
+- Aufwandsschätzung: XL
 - Akzeptanztests:
   - *TODO (Beschreibung von Testfällen die das erwartete Verhalten des gesamten Features überprüfen.)*
   - *TODO*
   - *TODO*
 
-#### Implementable Story 1.2.1 *Titel*
+#### Implementable Story 2.1.1 Wegpunnkte
 
-> Als *Rolle* möchte ich *Ziel/Wunsch*, um *Nutzen*.
+> Als Admin möchte ich Wegpunkte erstellen können, um sie zu einer Route zusammenzufassen.
 
-- Aufwandsschätzung: [0-100] Story Points
+- Aufwandsschätzung: [50] Story Points
 - Akzeptanztests:
   - *TODO (Beschreibung von Testfällen die das erwartete Verhalten der gesamten Implementable Story überprüfen.)*
   - *TODO*
-  - *TODO*
-
-##### Task 1.2.1.1 *Titel/Beschreibung*
-
-- Aufwandsschätzung: [0-24] Stunden
-
-##### Task 1.2.1.2 *Titel/Beschreibung*
-
-- Aufwandsschätzung: [0-24] Stunden
-
-##### Task 1.2.1.3 *Titel/Beschreibung*
-
-- Aufwandsschätzung: [0-24] Stunden
-
-#### Implementable Story 1.2.2 *Titel*
-
-> Als *Rolle* möchte ich *Ziel/Wunsch*, um *Nutzen*.
-
-- Aufwandsschätzung: [0-100] Story Points
-- Akzeptanztests:
-  - *TODO (Beschreibung von Testfällen die das erwartete Verhalten der gesamten Implementable Story überprüfen.)*
-  - *TODO*
-  - *TODO*
-
-##### Task 1.2.2.1 *Titel/Beschreibung*
-
-- Aufwandsschätzung: [0-24] Stunden
-
-##### Task 1.2.2.2 *Titel/Beschreibung*
-
-- Aufwandsschätzung: [0-24] Stunden
-
-##### Task 1.2.2.3 *Titel/Beschreibung*
-
-- Aufwandsschätzung: [0-24] Stunden
-
-## Epic 2 *Titel*
-
-> Als *Rolle* möchte ich *Ziel/Wunsch*, um *Nutzen*.
-
-*Wie bei Epic 1.*
+  
+##### Task 2.1.1.1 
