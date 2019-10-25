@@ -87,8 +87,8 @@ Der Admin-Modus erlaubt die unabhängige Erstellung von Routen und Wächterprofi
 Routen können dabei auch ohne einen Wächter der sie ausführt erstellt werden und andersherum. Die Routen werden mit Hilfe von Wegpunkten
 erstellt, die der Admin einzeln initialisieren muss. Als Additional Feature kann er sie auf einem hochgeladenen Bild oder einer Karte des Gebiets
 einordnen, um dem Wächter visuelle Unterstützung zu geben. 
-Der Admin kann sich in ein Protokoll anzeigen lassen, in dem abgelaufene Routen verzeichnet werden (mit Soll-Zeit und tatsächlicher Zeit) und 
-kann einzelne löschen, jedoch keine Bearbeitung der Zeiten vornehmen, um Manipulation vorzubeugen.
+Der Admin kann sich ein Protokoll anzeigen lassen, in dem abgelaufene Routen verzeichnet werden (mit Soll-Zeit und tatsächlicher Zeit) und 
+kann einzelne löschen, jedoch keine Bearbeitung der Zeiten vornehmen, wodurch Manipulation vorgebeugt wird.
 
 ### Feature 2.1 Routenplaner
 
@@ -96,11 +96,9 @@ kann einzelne löschen, jedoch keine Bearbeitung der Zeiten vornehmen, um Manipu
 
 - Aufwandsschätzung: XL
 - Akzeptanztests:
-  - *TODO (Beschreibung von Testfällen die das erwartete Verhalten des gesamten Features überprüfen.)*
-  - *TODO*
-  - *TODO*
+  - Eine Route mit Wegpunkt-Objekten erstellen und einem Wächter zuweisen
 
-#### Implementable Story 2.1.1 Wegpunnkte
+#### Implementable Story 2.1.1 Wegpunkte
 
 > Als Admin möchte ich Wegpunkte erstellen können, um sie zu einer Route zusammenzufassen.
 
@@ -214,8 +212,7 @@ kann einzelne löschen, jedoch keine Bearbeitung der Zeiten vornehmen, um Manipu
 
 - Aufwandschätzung: [60] Story Points
 - Akzeptanztests:
-  - *TODO (Beschreibung von Testfällen die das erwartete Verhalten der gesamten Implementable Story überprüfen.)*
-  - *TODO*
+  - Eine Route im Protokoll abspeicher lasen und anzeigen lassen
 
 ##### Task 2.2.2.1 Routenprotokoll anzeigen
 
