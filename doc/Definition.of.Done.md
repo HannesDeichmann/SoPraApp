@@ -5,8 +5,11 @@
 - [ ] Der Entwurf wurde aktualisiert.
 - [ ] Der Code ist kommentiert.
 - [ ] *TODO zusätzliches Kriterium 1/[EDIT .gitlab/merge_reqeust_templates/General.md](/.gitlab/merge_request_templates/General.md)*
+- [ ] Keine kritischen Bugs sind offen
 - [ ] *TODO zusätzliches Kriterium 2/[EDIT .gitlab/merge_reqeust_templates/General.md](/.gitlab/merge_request_templates/General.md)*
+- [ ] Alle TODOs wurden ausgefüllt
 - [ ] *TODO zusätzliches Kriterium 3/[EDIT .gitlab/merge_reqeust_templates/General.md](/.gitlab/merge_request_templates/General.md)*
+- [ ] Review wurde durchgeführt und Projekt ggf. verbessert
 
 ## Merge Request Template
 
