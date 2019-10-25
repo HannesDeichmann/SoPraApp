@@ -83,6 +83,12 @@ Ausführliche Beschreibung:
 > Als Admin möchte ich im Admin Modus Routen und Wächter verwalten können, um die Aufgaben zu planen und auszulesen.
 
 Ausführliche Beschreibung: 
+Der Admin-Modus erlaubt die unabhängige Erstellung von Routen und Wächterprofilen, wobei er diese beliebig bearbeiten kann.
+Routen können dabei auch ohne einen Wächter der sie ausführt erstellt werden und andersherum. Die Routen werden mit Hilfe von Wegpunkten
+erstellt, die der Admin einzeln initialisieren muss. Als Additional Feature kann er sie auf einem hochgeladenen Bild oder einer Karte des Gebiets
+einordnen, um dem Wächter visuelle Unterstützung zu geben. 
+Der Admin kann sich in ein Protokoll anzeigen lassen, in dem abgelaufene Routen verzeichnet werden (mit Soll-Zeit und tatsächlicher Zeit) und 
+kann einzelne löschen, jedoch keine Bearbeitung der Zeiten vornehmen, um Manipulation vorzubeugen.
 
 ### Feature 2.1 Routenplaner
 
@@ -100,8 +106,13 @@ Ausführliche Beschreibung:
 
 - Aufwandsschätzung: [50] Story Points
 - Akzeptanztests:
-  - *TODO (Beschreibung von Testfällen die das erwartete Verhalten der gesamten Implementable Story überprüfen.)*
-  - *TODO*
+  - Wegpunkt erstellen: 
+  > Testobjekt vom Typ Wegpunkt erstellen und Attribute ausgeben 
+  - Wegpunkt bearbeiten: 
+  > Ändern aller Attribute des Testobjekts und erneute Ausgabe der neuen Attribute
+  - Wegpunkt löschen: 
+  > Löschen des Wegpunkts und Ausgabe der Attribute. Wenn ein Error auftritt bzw. das Objekt nicht gefunden wird, ist das 
+  > Löschen erfolgreich
 
 ##### Task 2.1.1.1 Wegpunkt erstellen
 
@@ -121,12 +132,23 @@ Ausführliche Beschreibung:
 
 #### Implementable Story 2.1.2 Route
 
-> Als Admin möchte ich Routen erstellen und verwalten können, um die Aufgaben der Wächter zuteilen und definieren kann.
+> Als Admin möchte ich Routen erstellen und verwalten können, um die Aufgaben der Wächter zu definieren.
 
 - Aufwandschätzung: [90] Story Points
 - Akzeptanztests:
-  - *TODO (Beschreibung von Testfällen die das erwartete Verhalten der gesamten Implementable Story überprüfen.)*
-  - *TODO*
+   - Route erstellen: 
+  > Testobjekt vom Typ Route erstellen und Attribute ausgeben 
+  - Route bearbeiten: 
+  > Ändern aller Attribute des Testobjekts und erneute Ausgabe der neuen Attribute
+  - Route löschen: 
+  > Löschen des Wegpunkts und Ausgabe der Attribute. Wenn ein Error auftritt bzw. das Objekt nicht gefunden wird, war das 
+  > Löschen erfolgreich
+  - Route kopieren:
+  > Kopie eines Routenobjekts erstellen und Attribute beider Objekte ausgeben: Wenn beide Attribute gleich sind war das Kopieren erfolgreich
+  - Zufällige Route:
+  > Zufällige Route erstellen und überprüfen, ob die maximale Anzahl an Wegpunkten verwendet wurde sowie die Zeiten passen
+  - Wächter zuweisen:
+  > Das Attribut "Wächter" eines Routenobjekts auf ein Objekt des Typs Wächter ändern und diesen ausgeben
 
 ##### Task 2.1.2.1 Route erstellen
 
@@ -158,9 +180,7 @@ Ausführliche Beschreibung:
 
 - Aufwandsschätzung: L
 - Akzeptanztests:
-  - *TODO (Beschreibung von Testfällen die das erwartete Verhalten des gesamten Features überprüfen.)*
-  - *TODO*
-  - *TODO*
+  - die Gleichen wie die Testfälle der Implementable Story "Wächter"
 
 #### Implementable Story 2.2.1 Wächter
 
@@ -168,8 +188,13 @@ Ausführliche Beschreibung:
 
 - Aufwandschätzung: [50] Story Points
 - Akzeptanztests:
-  - *TODO (Beschreibung von Testfällen die das erwartete Verhalten der gesamten Implementable Story überprüfen.)*
-  - *TODO*
+  - Wächter erstellen: 
+  > Testobjekt vom Typ Wächter erstellen und Attribute ausgeben 
+  - Wächter bearbeiten: 
+  > Ändern aller Attribute des Testobjekts und erneute Ausgabe der neuen Attribute
+  - Wächter löschen: 
+  > Löschen des Wegpunkts und Ausgabe der Attribute. Wenn ein Error auftritt bzw. das Objekt nicht gefunden wird, ist das 
+  > Löschen erfolgreich
 
 ##### Task 2.2.1.1 Wächter erstellen
 
