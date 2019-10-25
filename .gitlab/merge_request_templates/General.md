@@ -12,6 +12,6 @@
 - [ ] Die Testabdeckung beträgt mindestens 75 %.
 - [ ] Der Entwurf wurde aktualisiert.
 - [ ] Der Code ist kommentiert.
-- [ ] *TODO zusätzliches Kriterium 1/[EDIT .gitlab/merge_reqeust_templates/General.md](/.gitlab/merge_request_templates/General.md)*
-- [ ] *TODO zusätzliches Kriterium 2/[EDIT .gitlab/merge_reqeust_templates/General.md](/.gitlab/merge_request_templates/General.md)*
-- [ ] *TODO zusätzliches Kriterium 3/[EDIT .gitlab/merge_reqeust_templates/General.md](/.gitlab/merge_request_templates/General.md)*
+- [ ] Keine kritischen Bugs sind offen
+- [ ] Alle TODOs wurden ausgefüllt
+- [ ] Review wurde durchgeführt und Projekt ggf. verbessert
