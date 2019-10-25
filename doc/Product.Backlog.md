@@ -80,7 +80,7 @@ Ausführliche Beschreibung:
 
 ## Epic 2 Admin-Modus
 
-> Als Admin möchte ich im Admin Modus Routen und Wächter verwalten können, um die Aufgaben zu planen und auszulesen.
+> Als Admin möchte ich Routen und Wächter verwalten können, um die Aufgabenverteilung zu planen.
 
 Ausführliche Beschreibung: 
 Der Admin-Modus erlaubt die unabhängige Erstellung von Routen und Wächterprofilen, wobei er diese beliebig bearbeiten kann.
@@ -96,7 +96,7 @@ kann einzelne löschen, jedoch keine Bearbeitung der Zeiten vornehmen, wodurch M
 
 - Aufwandsschätzung: XL
 - Akzeptanztests:
-  - Eine Route mit Wegpunkt-Objekten erstellen und einem Wächter zuweisen
+  - Eine Route mit Wegpunkt-Objekten erstellen und einer Wächter-Instanz zuweisen
 
 #### Implementable Story 2.1.1 Wegpunkte
 
@@ -208,11 +208,11 @@ kann einzelne löschen, jedoch keine Bearbeitung der Zeiten vornehmen, wodurch M
 
 #### Implementable Story 2.2.2 Routenprotokoll
 
-> Als Admin möchte ich das Routenprotokoll erstellen und verwalten können, um den Verlauf der Routen einsehen zu können.
+> Als Admin möchte ich das Routenprotokoll erstellen und verwalten können, um den Verlauf der Routen einzusehen.
 
 - Aufwandschätzung: [60] Story Points
 - Akzeptanztests:
-  - Eine Route im Protokoll abspeicher lasen und anzeigen lassen
+  - Eine abgeschlossene Route im Protokoll abspeichern und anzeigen lassen
 
 ##### Task 2.2.2.1 Routenprotokoll anzeigen
 
@@ -224,7 +224,7 @@ kann einzelne löschen, jedoch keine Bearbeitung der Zeiten vornehmen, wodurch M
 
 ## Epic 3 Sensoren
 
-> Als System möchte ich die benötigenten Sensoren ansprechen und auslesen können.
+> Als System möchte ich die benötigten Sensoren ansprechen und auslesen können.
 
 Ausführliche Beschreibung:
 
