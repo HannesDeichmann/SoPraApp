@@ -8,5 +8,5 @@ In dieser App werden folgende DSGVO-relevanten Daten benutzt:
 * Vor und Nachname des Wachmanns
 	* Unerlässlich, um Wachmänner verantwortlich machen zu können
 	* Speicherort: Lokale Datenbank
-	* verschlüsselt: ja
+	* Verschlüsselt: ja
 	* Übermittlung an andere Apps, nein da die App ohne Server funktioniert
