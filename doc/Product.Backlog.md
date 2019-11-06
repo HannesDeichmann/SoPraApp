@@ -27,7 +27,9 @@ wird der stille Alarm aktiviert, der durch ein Textfenster visuell unterstützt 
   
 #### Implementable Story 1.1.1 Wegpunkt abarbeiten
 
-> Als Wächter möchte ich Wegpunkte abarbeiten können, um meine Route zu dokumentieren.
+> Als Wächter möchte ich Wegpunkte abarbeiten können, um meine Route zu dokumentieren. Jeder Wegpunkt muss zu einer bestimmten Zeit 
+abgearbeitet werden, wobei mich ein Countdown auf die verbliebene Zeit hinweist. Falls ich nicht innerhalb der vorgegebene Zeit beim Wegpunkt bin,
+habe ich eine Toleranzzeit, in der der Wegpunkt immer noch abgearbeitet werden kann.
 
 - Aufwandsschätzung: [90] Story Points
 - Akzeptanztests:
@@ -52,9 +54,9 @@ wird der stille Alarm aktiviert, der durch ein Textfenster visuell unterstützt 
 
 - Aufwandsschätzung: [5] Stunden
 
-##### Task 1.1.1.2 Scan-Funktion (QR-Code oder NFC)
+##### Task 1.1.1.2 Scan-Funktion
 
-> Jeder Wegpunkt hat einen eigenen NFC-Tag oder QR-Coder, bei betätigen eines Knopfes wird das Element gescannt und die Zeit dokumentiert.
+> Jeder Wegpunkt hat einen eigenen NFC-Tag. Bei Betätigen eines Knopfes wird der Tag gescannt und die Zeit dokumentiert.
 
 - Aufwandsschätzung: [3] Stunden
 
@@ -124,24 +126,31 @@ wird der stille Alarm aktiviert, der durch ein Textfenster visuell unterstützt 
 > Als Admin möchte ich Routen und Wächter verwalten können, um die Aufgabenverteilung zu planen.
 
 ##### Ausführliche Beschreibung: 
-Der Admin-Modus erlaubt die unabhängige Erstellung von Routen und Wächterprofilen, wobei er diese beliebig bearbeiten kann.
+Der Admin-Modus erlaubt die unabhängige Erstellung von Routen und Wächterprofilen, wobei er diese beliebig bearbeiten und verbinden kann.
 Routen können dabei auch ohne einen Wächter der sie ausführt erstellt werden und andersherum. Die Routen werden mit Hilfe von Wegpunkten
 erstellt, die der Admin einzeln initialisieren muss. Als Additional Feature kann er sie auf einem hochgeladenen Bild oder einer Karte des Gebiets
 einordnen, um dem Wächter visuelle Unterstützung zu geben. 
 Der Admin kann sich ein Protokoll anzeigen lassen, in dem abgelaufene Routen verzeichnet werden (mit Soll-Zeit und tatsächlicher Zeit) und 
-kann einzelne löschen, jedoch keine Bearbeitung der Zeiten vornehmen, wodurch Manipulation vorgebeugt wird.
+kann einzelne löschen, jedoch keine Bearbeitung der Zeiten vornehmen, wodurch Manipulation vorgebeugt wird. Die Routen, Wegpunkte sowie Wächterprofile werden
+in csv-Dateien gespeichert, wobei sie verschlüsselt sind.
 
 ### Feature 2.1 Routenplaner
 
-> Als Admin möchte ich meine Routen planen, um das Wachpersonal zu organisieren.
+> Als Admin möchte ich individuelle Routen planen und erstellen.
 
 - Aufwandsschätzung: XL
 - Akzeptanztests:
-  - Eine Route mit Wegpunkt-Objekten erstellen und einer Wächter-Instanz zuweisen
+  - Eine Route mit Wegpunkt-Objekten erstellenn
 
 #### Implementable Story 2.1.1 Wegpunkte
 
 > Als Admin möchte ich Wegpunkte erstellen können, um sie zu einer Route zusammenzufassen.
+- Attribute:
+- Name
+- NFC Tag
+- Verbindung zu anderen Wegpunkten
+- Zeiten zu anderen Wegpunkten
+- Lokalisation auf Karte
 
 - Aufwandsschätzung: [50] Story Points
 - Akzeptanztests:
@@ -152,6 +161,7 @@ kann einzelne löschen, jedoch keine Bearbeitung der Zeiten vornehmen, wodurch M
   - Wegpunkt löschen: 
   > Löschen des Wegpunkts und Ausgabe der Attribute. Wenn ein Error auftritt bzw. das Objekt nicht gefunden wird, ist das 
   > Löschen erfolgreich
+  > NFC Tag zuordnen
 
 ##### Task 2.1.1.1 Wegpunkt erstellen
 
@@ -168,6 +178,10 @@ kann einzelne löschen, jedoch keine Bearbeitung der Zeiten vornehmen, wodurch M
 ##### Task 2.1.1.4 Wegpunkt lokalisieren (Karte/Bild)
 
 - Aufwandschätzung: [1] Stunden
+
+##### Task 2.1.1.5 NFC Tags zuordnen
+
+- Aufwandschätzung: [5] Stunden
 
 #### Implementable Story 2.1.2 Route
 
@@ -186,8 +200,6 @@ kann einzelne löschen, jedoch keine Bearbeitung der Zeiten vornehmen, wodurch M
   > Kopie eines Routenobjekts erstellen und Attribute beider Objekte ausgeben: Wenn beide Attribute gleich sind war das Kopieren erfolgreich
   - Zufällige Route:
   > Zufällige Route erstellen und überprüfen, ob die maximale Anzahl an Wegpunkten verwendet wurde sowie die Zeiten passen
-  - Wächter zuweisen:
-  > Das Attribut "Wächter" eines Routenobjekts auf ein Objekt des Typs Wächter ändern und diesen ausgeben
 
 ##### Task 2.1.2.1 Route erstellen
 
@@ -209,13 +221,13 @@ kann einzelne löschen, jedoch keine Bearbeitung der Zeiten vornehmen, wodurch M
 
 - Aufwandschätzung: [1] Stunden
 
-##### Task 2.1.2.6 Wächter zuweisen
+##### Task 2.1.2.6 Route suchen
 
-- Aufwandschätzung: [1] Stunden
+ - Aufwandsschätzung: [3] Stunden 
 
 ### Feature 2.2 Wächterplaner
 
-> Als Admin möchte ich meine Wächter organisieren können.
+> Als Admin möchte ich meine Wächter organisieren können, indem ich Wächterprofile anlege(Vor- und Nachname, Benutzer-ID und Passwort)
 
 - Aufwandsschätzung: L
 - Akzeptanztests:
@@ -223,7 +235,7 @@ kann einzelne löschen, jedoch keine Bearbeitung der Zeiten vornehmen, wodurch M
 
 #### Implementable Story 2.2.1 Wächter
 
-> Als Admin möchte ich Wächter erstellen und verwalten können, um sie den Routen zuweisen zu können
+> Als Admin möchte ich Wächter erstellen und verwalten können
 
 - Aufwandschätzung: [50] Story Points
 - Akzeptanztests:
@@ -247,54 +259,46 @@ kann einzelne löschen, jedoch keine Bearbeitung der Zeiten vornehmen, wodurch M
 
 - Aufwandschätzung: [1] Stunden
 
-#### Implementable Story 2.2.2 Routenprotokoll
+### Feature 2.3 Verwaltung
 
-> Als Admin möchte ich das Routenprotokoll erstellen und verwalten können, um den Verlauf der Routen einzusehen.
+> Als Admin möchte ich meine Wächter und Routen zuordnen können und die jeweiligen Uhrzeiten und Wochentage festlegen
+sowie gemachte Routen in einer Chronik einsehen. 
+
+- Aufwandsschätzung: M
+- Akzeptanztests:
+  - Eine Route einem Wächter zuweisen und einen Zeitpunkt eintragen
+
+#### Implementable Stroy 2.3.1 Organisation 
+
+> Als Admin möchte ich erstellte Wächter und Routen einander zuweisen (indem ich sie in einer Tabelle auswähle)
+und mir in einer Übersicht anzeigen lassen.
+
+ - Aufwandschätzung: [70] Story Points
+ - Aktzeptanztests:
+  - Mehrere Route zuweisen und anzeigen lassen 
+
+##### Task 2.3.1.1 Route zuweisen 
+
+ - Aufwandsschätzung: [2] Stunden
+
+##### Task 2.3.1.2 Wächter zuweisen 
+
+ - Aufwandsschätzung: [2] Stunden
+
+#### Implementable Story 2.3.2 Routenprotokoll
+
+> Als Admin möchte ich das Routenprotokoll einsehen und Altrouten, also abgelaufene Routen, die im Protokoll stehen,
+löschen können. Das Routenprotokoll speichert die Routen in chronologischer Reihenfolge.
 
 - Aufwandschätzung: [60] Story Points
 - Akzeptanztests:
   - Eine abgeschlossene Route im Protokoll abspeichern und anzeigen lassen
+  - Eine e
 
-##### Task 2.2.2.1 Routenprotokoll anzeigen
+##### Task 2.3.2.1 Routenprotokoll anzeigen
 
 - Aufwandschätzung: [2] Stunden
 
-##### Task 2.2.2.2 Routeprotokoll bearbeiten
+##### Task 2.3.2.2 Altroute löschen 
 
 - Aufwandschätzung: [1] Stunden
-
-## Epic 3 Sensoren
-
-> Als System möchte ich die benötigten Sensoren ansprechen und auslesen können.
-
-Ausführliche Beschreibung:
-
-### Feature 3.1 GPS und QR-Code
-
-> Als System möchte ich die GPS Daten auslesen können und QR-Codes (mit der Kamera) scannen können.
-
-- Aufwandsschätzung: M
-- Akzeptanztests:
-  - *TODO (Beschreibung von Testfällen die das erwartete Verhalten des gesamten Features überprüfen.)*
-  - *TODO*
-  - *TODO*
-
-### Feature 3.2 NFC
-
-> Als System möchte ich den NFC Sensor ansprechen und auslesen können.
-
-- Aufwandsschätzung: S
-- Akzeptanztests:
-  - *TODO (Beschreibung von Testfällen die das erwartete Verhalten des gesamten Features überprüfen.)*
-  - *TODO*
-  - *TODO*
-
-### Feature 3.3 Vibration
-
-> Als System möchte ich die Vibrations Funktion des Handys ansprechen können.
-
-- Aufwandsschätzung: XS
-- Akzeptanztests:
-  - *TODO (Beschreibung von Testfällen die das erwartete Verhalten des gesamten Features überprüfen.)*
-  - *TODO*
-  - *TODO*
