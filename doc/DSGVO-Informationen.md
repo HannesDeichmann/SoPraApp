@@ -1,9 +1,9 @@
 #DSGVO-relevante Informationen
 im SoPra WS19/20
 Team-Nr: 8
-App-Name: SafeTheBuilding
+App-Name: Wächter-App
 
-In dieser App werden folgende DSGV-relevanten Daten benutzt:
+In dieser App werden folgende DSGVO-relevanten Daten benutzt:
 
 * Vor und Nachname des Wachmanns
 	* Unerlässlich, um Wachmänner verantwortlich machen zu können
