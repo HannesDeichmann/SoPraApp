@@ -102,11 +102,17 @@ Benötigt Schnittstelle von: Daten, um auf Wegpunkt-Objekte zugreifen zu können
 
 ## Beschreibung der wichtigen Klassenhierarchie 1
 
-**TODO:** Die wichtigen Klassen und ihre Hierarchie beschreiben.
+Die Admin Klasse Verwaltet das gesamte Programm, da der Admin alle Daten für Wächterprofile, Wegpunkte, Routen und Kalender eingeben muss.
 
 ## Beschreibung der wichtigen Klasse 2
 
+Die Guard(Wächter) Klasse steltt die Funktionen, um die eingetliche Arbeit um Routen abzulaufen zur verfügung.
+Er kann die durch den Admin festgelegt Routen bearbeiten, indem er die Wegpunkte der angezeigten Reihenfolge nach abläuft.
+
 ## Beschreibung der wichtigen Klasse 3
+
+Die Routen Klasse speichert die Wegpunkte der Route, welcher die Basis der Patrouille sind. 
+Außerdem bietet sie zugriff auf die Kate mit den Wegpunkten und stellt die Basis für das Protokoll dar.
 
 # GUI-Skizze
 
