@@ -6,7 +6,7 @@
 
 **TODO:** Verweis auf Standards wie zum Beispiel verwendete Entwurfsmuster o.ä.
 
-# Komponentendiagramm
+## Komponentendiagramm
 
 ![komponentendiagramm](images/Komponentendiagramm.png)
 
@@ -14,18 +14,52 @@
 
 **TODO:** Komponentendiagramm der eigenen und externen Komponenten der App erstellen.
 
-## Komponente 1
+# Komponente 1: Login
 
-**TODO:** Beschreibung der Komponente inklusive seiner verwendeten und bereitgestellten Schnittstellen
+Die Login Komponente benötigt eine Schnittstelle von Benutzerkonten, um zwischen Wachmann und Admin zu unterscheiden. Dazu hat sie zwei Komponenten Wachmann-Modus und Admin-Modus, von der eine ausgeführt wird sobald jemand sich eingeloggt hat.
 
-## Komponente 2
+## Komponente 2: Admin Modus
 
-**TODO:** Beschreibung der Komponente inklusive seiner verwendeten und bereitgestellten Schnittstellen
+Der Admin-Modus wird aktiviert, sobald sich ein Admin angemeldet hat. Der Admin-Modus erlaubt die unabhängige Erstellung von Routen und Wächterprofilen, wobei er diese beliebig bearbeiten und verbinden kann.
+Routen können dabei auch ohne einen Wächter der sie ausführt erstellt werden und andersherum. Die Routen werden mit Hilfe von Wegpunkten
+erstellt, die der Admin einzeln initialisieren muss. Als Additional Feature kann er sie auf einem hochgeladenen Bild oder einer Karte des Gebiets
+einordnen, um dem Wächter visuelle Unterstützung zu geben.
+Der Admin kann sich ein Protokoll anzeigen lassen, in dem abgelaufene Routen verzeichnet werden (mit Soll-Zeit und tatsächlicher Zeit) und
+kann einzelne löschen, jedoch keine Bearbeitung der Zeiten vornehmen, wodurch Manipulation vorgebeugt wird. Die Routen, Wegpunkte sowie Wächterprofile werden
+in csv-Dateien gespeichert, wobei sie verschlüsselt sind.
 
-## Externe Komponente 1
+## Komponente 3: Wächter Modus 
 
-**TODO:** Beschreibung der **externen** Komponente/Bibliothek und wie diese verwendet werden soll.
+Der Wächter-Modus wird aktiviert, sobald sich ein Wächter angemeldet hat.
+Die Wachmänner nutzen ihn um auf ihrer App die nächsten Wegpunkte anzeigen zu lassen.
+Dabei läuft ein Countdown ab, der anzeigt, wie viel Zeit ihnen noch bleibt um zum nächsten Wegpunkt zu kommen. Sobald ein Wachmann einen Wegpunkt erreicht hat,
+muss er einen NFC Tag abscannen, bei dem sein Passwort abgefragt wird. Um den Überblick zu behalten, kann er sich, durch die Routenanzeigen Komponente, eine Routenübersicht anschauen
+und auf seinen Standort zugreifen, der über die Kartenanzeige Komponente visualisiert wird. Falls der Wachmann sein Passwort drei Mal falsch eingibt, der Countdown abgelaufen ist, oder ein Wegpunkt übersprungen wurde
+wird der stille Alarm aktiviert, der durch ein Textfenster visuell unterstützt wird. Dazu stellt er eine Schnittstelle zur Alarmanzeige bereit.
 
+## Komponente 4: Routenanzeige
+
+Sie benötigt eine Schnittstelle von den Daten um die Routen aufrufen zu können. Der Wachmann kann mit diesen Daten eine Route in Form einer Tabelle anzeigen lassen.
+
+## Komponente 5: Kartenanzeige
+
+Die Kartenanzeige benötigt eine Schnittstelle vom Karteneditor, damit die Karte die vom Admin eingefügt wird auch vom Wachmann geöffnet werden kann.
+
+## Komponente 6: Alarmanzeige
+
+Die Alarmanzeige benötigt eine Schnittstelle vom Wächter-Modus, da dieser den Alarm auslöst. Sie gibt diesen dann an den Admin weiter, für den eine Schnittstelle bereit gestellt wird.
+
+## Komponente 7: Datenanzeige
+
+Über den Fiktiven Server kann der Admin sich die Routen mit Zeitdifferenz, Alarmort und Pausenzeit einsehen, dazu wird eine Schnittstelle für die Protokollverwaltung hinzugefügt.
+
+## Komponente 8: Daten
+
+Alle wichtigen Informationen werden in csv-Dateien gespeichert, diese werden vom Wegpunkteditor, Routeneditor und Routenanzeige genutzt, Dazu wird eine Schnittstelle bereit gestellt.
+
+## Komponente 9: Benutzerkonten
+
+Alle Wachmänner und Admins werden hier gespeichert, diese können durch eine Schnittstelle in der Wächtereditor Komponente verändert werden. Damit sich auch nur die Admins/Wächter anmelden können wird auch dafür eine Schnittstelle bereit gestellt.
 # Klassendiagramm
 
 ![klassendiagramm](images/Klassendiagramm.png)
