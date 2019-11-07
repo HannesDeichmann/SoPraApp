@@ -11,9 +11,6 @@ Verwendetes Entwurfsmuster: Top-Down (Epic->Feature->Implementable Story->Task)
 
 ![komponentendiagramm](images/Komponentendiagramm.png)
 
-*Gubaer at the German language Wikipedia [GFDL](http://www.gnu.org/copyleft/fdl.html) or [CC-BY-SA-3.0](http://creativecommons.org/licenses/by-sa/3.0/), via Wikimedia Commons.*
-
-**TODO:** Komponentendiagramm der eigenen und externen Komponenten der App erstellen.
 
 # Komponente 1: Login
 
@@ -96,9 +93,6 @@ Benötigt Schnittstelle von: Daten, um auf Wegpunkt-Objekte zugreifen zu können
 
 ![klassendiagramm](images/Klassendiagramm.png)
 
-*Gubaer at the German language Wikipedia [GFDL](http://www.gnu.org/copyleft/fdl.html) or [CC-BY-SA-3.0](http://creativecommons.org/licenses/by-sa/3.0/), via Wikimedia Commons*
-
-**TODO:** Klassendiagramm der Aufteilung der eigenen Komponenten in Klassen darstellen.
 
 ## Beschreibung der wichtigen Klassenhierarchie 1
 
@@ -117,7 +111,3 @@ Außerdem bietet sie zugriff auf die Kate mit den Wegpunkten und stellt die Basi
 # GUI-Skizze
 
 ![GUI-Skizze von Jan-Peter Ostberg, CC-BY-SA 4.0](sketches/GUI-Skizze.png)
-
-GUI-Skizze von Jan-Peter Ostberg, CC-BY-SA 4.0
-
-**TODO:** Eigene möglichst handschriftliche GUI-Skizzen erstellen und beschreiben.
