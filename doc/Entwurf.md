@@ -1,10 +1,11 @@
 # Einführung
 
-*Dieser Entwurf legt die prinzipielle Lösungsstruktur fest und enthält alles, was man benötigt, um einem Außenstehenden den prinzipiellen Aufbau der App erklären zu können.* (**keep it simple**)
+Die App besteht aus einem Admin-Modus sowie einem Wächter-Modus. Der Admin verwaltet die Profile, Wegpunkte, Routen, einen Kalender zur Organisation von Arbeitszeiten und ein Protokoll, in dem beendete Routen abgespeichert werden. 
+Der Wächter-Modus ist für die Wachmänner gedacht, um ihre Routen abzuarbeiten. In diesem Modus kann man sich die ganze Route, den nächsten Wegpunkt sowie die restliche Zeit, um diesen zu erreichen, und eine Karte anzeigen lassen. 
+Bei jedem Wegpunkt muss der Wächter einen Code eingeben und diesen mit Hilfe eines NFC-Tags abscannen, was im Protokoll vermerkt wird.
 
-**TODO:** Beschreibung des grundlegenden Aufbaus.
 
-**TODO:** Verweis auf Standards wie zum Beispiel verwendete Entwurfsmuster o.ä.
+Verwendetes Entwurfsmuster: Top-Down (Epic->Feature->Implementable Story->Task)
 
 ## Komponentendiagramm
 
@@ -60,6 +61,37 @@ Alle wichtigen Informationen werden in csv-Dateien gespeichert, diese werden vom
 ## Komponente 9: Benutzerkonten
 
 Alle Wachmänner und Admins werden hier gespeichert, diese können durch eine Schnittstelle in der Wächtereditor Komponente verändert werden. Damit sich auch nur die Admins/Wächter anmelden können wird auch dafür eine Schnittstelle bereit gestellt.
+
+## Komponente 10: Protokollverwaltung
+
+Der Admin kann hier alle gemachten Routen in einer Tabelle einsehen
+Benötigt Schnittstelle von: Daten, um logEntrys anzeigen zu können und abzuspeichern
+
+## Komponente 11: Routeneditor
+
+Der Admin kann neue Routen erstellen sowie bereits bestehende Routen bearbeiten
+Benötigt Schnittstelle von: Daten, um auf Routenobjekte zugreifen zu können
+
+## Komponente 12: Wächtereditor
+
+Der Admin kann neue Wächter erstellen sowie bereits bestehende Wächter bearbeiten
+Benötigt Schnittstelle von: Daten, um auf Wächterobjekte zugreifen zu können
+
+## Komponente 13: Kalender
+
+Der Admin kann Routen und Wächter miteinander verknüpfen und bei Wochentagen sowie Uhrzeiten eintragen
+
+## Komponente 14: Karteneditor
+
+Der Admin kann hier eine Karte erstellen sowie Wegpunkt-Objekte darauf lokalisieren
+Liefert Schnittstelle für: Kartenanzeige, da die Karte von der Anzeige aufgerufen wird
+
+## Komponente 15: Wegpunkteditor
+
+Der Admin kann neue Wegpunkte erstellen sowie bereits bestehende Wegpunkte bearbeiten
+Benötigt Schnittstelle von: Daten, um auf Wegpunkt-Objekte zugreifen zu können
+
+
 # Klassendiagramm
 
 ![klassendiagramm](images/Klassendiagramm.png)
