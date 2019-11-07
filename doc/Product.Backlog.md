@@ -1,6 +1,6 @@
 # Product Backlog
-
-Hier werden **alle** Anforderungen in Form von **User Stories** geordnet aufgelistet.
+Hier werden **alle** Anforderungen in Form von **User Stories** geordnet 
+aufgelistet.
 
 ## Epic 1 Wächter-Modus
 
@@ -9,8 +9,8 @@ Hier werden **alle** Anforderungen in Form von **User Stories** geordnet aufgeli
 ##### Ausführliche Beschreibung:
 Der Wächter-Modus ist wie der Name schon sagt, für die Wächter gedacht. Um ihn zu starten muss der Wachmann sich mit einer Benutzerid und seinem Passwort anmelden.
 Die Wachmänner nutzen ihn um auf ihrer App die nächsten Wegpunkte anzeigen zu lassen.
-Dabei läuft ein Countdown ab, der anzeigt, wie viel Zeit ihnen noch bleibt um zum nächsten Wegpunkt zu erreichen. Sobald ein Wachmann einen Wegpunkt erreicht hat,
-muss er einen NFC Tag oder QR-Code abscannen, bei dem sein Passwort abgefragt wird. Um den Überblick zu behalten, kann er sich eine Routenübersicht anschauen
+Dabei läuft ein Countdown ab, der anzeigt, wie viel Zeit ihnen noch bleibt um zum nächsten Wegpunkt zu kommen. Sobald ein Wachmann einen Wegpunkt erreicht hat,
+muss er einen NFC Tag abscannen, bei dem sein Passwort abgefragt wird. Um den Überblick zu behalten, kann er sich eine Routenübersicht anschauen
 und auf seinen Standort zugreifen. Falls der Wachmann sein Passwort drei Mal falsch eingibt, der Countdown abgelaufen ist, oder ein Wegpunkt übersprungen wurde
 wird der stille Alarm aktiviert, der durch ein Textfenster visuell unterstützt wird.
 
@@ -23,7 +23,7 @@ wird der stille Alarm aktiviert, der durch ein Textfenster visuell unterstützt 
   - Wegpunkt abarbeiten:
   > Falls der Wächter sein Passwort richtig eingegeben hat, der Countdown nicht abgelaufen ist und er den NFC-Tag/QR-Code abgescannt hat wird der Wegpuntk als abgearbeitet angezeigt.
   - Alarm:
-  > Das Textfeld, dass den Alarm visuell unterstützt, wird beim aktivieren des Alarms angezeigt. Wobei der Alarm wie beim Testfall "Wegpunkt abarbeiten" aktiviert werden soll, zusätzlich sollten die Wegpunkte in der richtigen Reihenfolge abgearbeitet werden.
+  > Das Textfeld, dass den Alarm visuell unterstützt, wird beim Aktivieren des Alarms angezeigt, wobei der Alarm wie beim Testfall "Wegpunkt abarbeiten" aktiviert werden soll.
   
 
 #### Implementable Story 1.1.1 Wegpunkt abarbeiten
@@ -36,19 +36,13 @@ habe ich eine Toleranzzeit, in der der Wegpunkt immer noch abgearbeitet werden k
 - Akzeptanztests:
   - Passwortabfrage:
   > Bei jedem Wegpunkt und bei jedem App-Start wird das Passwort drei Mal abgefragt, falls es falsch eingegeben wurde. Beim Fehlgeschlagenen dritten Versuch wird der Alarm aktiviert.
-  - Scan-Funktion:
-  > Die Scan-Funktion sollte durch einen Knopf erreichbar sein. Der bei jedem Wegpunkt ausgeführt werden muss. Der Scan muss erfolgreich durchgeführt worden sein und falls nötig sollte auch die Kamera geöffnet werden.
-  - Wegpunkt Anzeige:
-  > Es wird solange der nächste Wegpunkt angezeigt, bis dieser abgescannt wurde und somit aktualisiert wurde. Dann muss der nächste Wegpunkt richtig angezeigt werden.
   - Countdown:
   > Der vom Admin eingestellte Countdown wird beim App-Start gestartet und bei jedem Wegpunkt aktualisiert.
   - Pausenknopf:
-  > Für das Testobjekt wird eine Pausenzeit eingestellt und getestet, ob diese eingehalten wird und  der Countdown um genau diese Zeit angehalten wird. Dadurch wird der stille Alarm verzögert.
-  - Routenanzeige
-  > Zuerst wird eine Route erstellt mit verschiedenen Wegpunkten. Diese soll richtig angezeigt werden und durch einen Button  geöffnet und geschlossen werden können. Außerdem wird der Standort des Wächters richtig angezeigt.
-  - Dokumentation:
-  > Es wird ein Wachmann simuliert, der gerade seine Route abgearbeitet hat. Dabei wird getestet, ob alle Pausen, Countdowns und Wegpunkte richtig dokumentiert wurden.  
- 
+  > Für das Testobjekt wird eine Pausenzeit eingestellt und getestet, ob diese eingehalten wird und der Countdown um genau diese Zeit angehalten wird. Dadurch wird der stille Alarm verzögert.
+  - Route starten/beenden:
+  > Eine Route starten und wieder beenden und überprüfen, ob sie im Protokoll vermerkt ist
+  
 
 ##### Task 1.1.1.1 Passwortabfrage
 
@@ -88,11 +82,11 @@ habe ich eine Toleranzzeit, in der der Wegpunkt immer noch abgearbeitet werden k
 
 #### Implementable Story 1.1.2 Visualisierung
 
-> Als Wächter möchte ich mir meine Route auf einer Karte sowie als Tabelle anzeigen lassen sowie meine Position anhand des zuletzt abgearbeiteten Wegpunkts. Zudem wird mir nach Starten 
+> Als Wächter möchte ich mir meine Route auf einer Karte sowie als Tabelle anzeigen lassen sowie meine Position anhand des zuletzt abgearbeiteten Wegpunkts.
 
 - Aufwandsschätzung: [90] Story Points
 - Akzeptanztests:
- -Wegpunkt-Anzeige:
+ - Wegpunkt-Anzeige:
  > Im Wächter-Home Screen wird mir nach Start einer Route der erste Wegpunkt angezeigt
  - Routenanzeige: 
  > Die Route mit allen abzulaufenden Wegpunkten in einer Tabelle anzeigen lassen
@@ -109,7 +103,7 @@ habe ich eine Toleranzzeit, in der der Wegpunkt immer noch abgearbeitet werden k
 
 > Die Routenanzeige ist als Übersicht für den Wächter gedacht. In dieser sind alle abzulaufenden Wegpunkte in einer Tabelle aufgelistet.
 
-- Aufwandschätzung: [2] Stunden
+- Aufwandsschätzung: [2] Stunden
 
 ##### Task 1.1.2.3 Kartenanzeige
 
@@ -119,7 +113,7 @@ habe ich eine Toleranzzeit, in der der Wegpunkt immer noch abgearbeitet werden k
 
 > Als Wächter möchte ich einen Alarm auslösen sowie einen automatischen stillen Alarm senden, falls ich einen Wegpunkt nicht innerhalb der vorgeschrieben Zeit erreiche.
 
-- Aufwandsschätzung: [M]
+- Aufwandsschätzung: M
 - Akzeptanztests:
   - Alarmmeldung:
   > Ein stiller Alarm wird simuliert und es wird getestet, ob der Zeitpunkt und der Ort richtig dokumentieren wurden.
@@ -166,7 +160,7 @@ richtigen Code einen Code zur Alarmauslösung eingeben kann.
 
 > Die Dokumentation arbeitet mit logEntry-Objekte der Routen, um diese nach Beendigung ins Protokoll zu überschreiben
 
-- Aufwandsschätzung: [S]
+- Aufwandsschätzung: S
 - Akzeptanztests:
  > Ein Alarm wurde ins logEntry-Objekt überschrieben
  > Eine Ist-Zeit wurde ins logEntry-Objekt überschrieben 
@@ -211,7 +205,7 @@ richtigen Code einen Code zur Alarmauslösung eingeben kann.
 
 > Der NFC-Tag bindet die Wegpunkte an reale physische Orte
 
-- Aufwandsschätzung: [M]
+- Aufwandsschätzung: M
 -Akzeptanztests: 
  > Ein Wegpunkt wird mit Hilfe eines NFC-Tags erfolgreich abgearbeitet
 
@@ -306,7 +300,7 @@ in csv-Dateien gespeichert, wobei sie verschlüsselt sind.
 - Zeiten zu anderen Wegpunkten
 - Lokalisation auf Karte
 
-- Aufwandsschätzung: [M]
+- Aufwandsschätzung: M
 - Akzeptanztests: 
  > Fertiges Wegpunkt-Objekt mit allen Attributen erstellen
 
@@ -339,19 +333,23 @@ in csv-Dateien gespeichert, wobei sie verschlüsselt sind.
 
 - Aufwandschätzung: [5] Stunden
 
+###### Task 2.2.1.4 Wegpunkt löschen
+
+- Aufwandsschätzung: [1] Stunde
+
 ### Feature 2.3 Wächter
 
 > Als Admin möchte ich meine Wächter organisieren können, indem ich Wächterprofile anlege(Vor- und Nachname, Benutzer-ID und Passwort)
 
 - Aufwandsschätzung: L
 - Akzeptanztests:
-  - die Gleichen wie die Testfälle der Implementable Story "Wächter"
+  > die Gleichen wie die Testfälle der Implementable Story "Wächtereditor"
 
-#### Implementable Story 2.3.1 Wächter
+#### Implementable Story 2.3.1 Wächtereditor
 
 > Als Admin möchte ich Wächter erstellen und verwalten können
 
-- Aufwandschätzung: [50] Story Points
+- Aufwandsschätzung: [50] Story Points
 - Akzeptanztests:
   - Wächter erstellen: 
   > Testobjekt vom Typ Wächter erstellen und Attribute ausgeben 
@@ -360,41 +358,87 @@ in csv-Dateien gespeichert, wobei sie verschlüsselt sind.
   - Wächter löschen: 
   > Löschen des Wegpunkts und Ausgabe der Attribute. Wenn ein Error auftritt bzw. das Objekt nicht gefunden wird, ist das 
   > Löschen erfolgreich
+  - Wächter suchen:
+  > Ein angelegtes Wächterprofil anhand seines Namens finden
 
 ##### Task 2.3.1.1 Wächter erstellen
 
-- Aufwandschätzung: [2] Stunden
+- Aufwandsschätzung: [2] Stunden
 
 ##### Task 2.3.1.2 Wächter bearbeiten
 
-- Aufwandschätzung: [1] Stunden
+- Aufwandsschätzung: [1] Stunden
 
 ##### Task 2.3.1.3 Wächter löschen
 
-- Aufwandschätzung: [1] Stunden
+- Aufwandsschätzung: [1] Stunden
+
+##### Task 2.3.1.4 Wächter suchen
+
+- Aufwandsschätzung: [2] Stunden
 
 ### Feature 2.4 Karte 
 
 > Als Admin möchte ich Wegpunkte auf einer Karte eintragen können
 
-- Aufwandsschätzung: [M]
+- Aufwandsschätzung: M
 - Akzeptanztests:
   > Mehrere Wegpunkte auf einer Karte anzeigen lassen
+
+#### Implementable Story 2.4.1 Lokalisierung
+
+> Als Admin kann ich Wegpunkte auf einer Karte markieren
+
+- Aufwandsschätzung: [30] Story Points
+- Akzeptanztests: 
+ >Einen Wegpunkt auf der Karte eintragen und im Wächter-Modus anzeigen lassen
+ 
+
+##### Task 2.4.1.1 Wegpunkt einzeichen	
+
+- Aufwandsschätzung: [3] Stunden
+
+
+#### Implementable Story 2.4.2 Karte erstellen
+
+> Als Admin kann ich ein Bild hochladen, um eine Karte der Wegpunkte anzulegen
+
+- Aufwandsschätzung: [30] Story Points
+- Akzeptanztests:
+ > Ein Bild hochladen und als Karte im Wächter-Modus aufrufen
+
+##### Task 2.4.2.1 Karte einfügen
+
+- Aufwandsschätzung: [3] Stunden 
+
 
 ### Feature 2.5 Organisation 
 
 > Als Admin möchte ich erstellte Wächter und Routen einander zuweisen (indem ich sie in einer Tabelle auswähle)
 und mir in einer Übersicht anzeigen lassen.
 
- - Aufwandschätzung: [70] Story Points
- - Aktzeptanztests:
-  - Mehrere Route Wächtern zuweisen und anzeigen lassen 
+- Aufwandsschätzung: M
+- Akzeptanztests:
+ > Mehrere Routen Wächtern zuweisen und anzeigen lassen 
 
-##### Task 2.3.1.1 Route zuweisen 
+#### Implementable Story 2.5.1 Kalender
+
+> Im Kalender möchte ich als Admin Routen und Wächter in einem zeitlichen Rahmen organisieren
+
+- Aufwandsschätzung: [40] Story Points
+- Akzeptantztests:  
+ > Mehrere Routen Wächtern zuweisen und zu bestimmten Uhrzeiten und Wochentagen einorden
+ 
+
+##### Task 2.5.1.1 Route zuweisen 
 
  - Aufwandsschätzung: [2] Stunden
 
-##### Task 2.3.1.2 Wächter zuweisen 
+##### Task 2.5.1.2 Wächter zuweisen 
+
+ - Aufwandsschätzung: [2] Stunden
+
+##### Task 2.5.1.3 Kalender anzeigen 
 
  - Aufwandsschätzung: [2] Stunden
 
@@ -403,19 +447,21 @@ und mir in einer Übersicht anzeigen lassen.
 > Als Admin möchte ich das Protokoll einsehen und logEntrys, also abgelaufene Routen, die im Protokoll stehen,
 löschen können. Das Protokoll speichert die Routen in chronologischer Reihenfolge.
 
-- Aufwandschätzung: [60] Story Points
+- Aufwandsschätzung: M
 - Akzeptanztests:
-  - Eine abgeschlossene Route im Protokoll abspeichern und anzeigen lassen
-  - Eine Route aus dem Protokoll löschen
-  - Das gesamte Protokoll als Tabelle exportieren
+  > Eine abgeschlossene Route im Protokoll abspeichern und anzeigen lassen
+  > Eine Route aus dem Protokoll löschen
+  > Das gesamte Protokoll als Tabelle exportieren
 
 #### Implementable Story 2.6.1 Protokoll verwalten
 
 > Als Admin möchte ich das Protokoll verwalten können
 
-- Aufwandsschätzung: [M]
+- Aufwandsschätzung: [50] Story Points
 - Akzeptantztests: 
- > 
+ > Eine abgeschlossene Route im Protokoll abspeichern und anzeigen lassen
+ > Eine Route aus dem Protokoll löschen
+ > Das gesamte Protokoll als Tabelle exportieren
 
 ##### Task 2.6.1.1 Protokoll anzeigen
 
@@ -427,4 +473,4 @@ löschen können. Das Protokoll speichert die Routen in chronologischer Reihenfo
 
 ##### Task 2.6.1.3 Eportieren
 
-- Aufwandschätzung: [3] Stunden
+- Aufwandsschätzung: [3] Stunden
