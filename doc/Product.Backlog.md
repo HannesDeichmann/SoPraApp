@@ -1,4 +1,4 @@
-# Product Backlog 
+# Product Backlog
 
 ## Epic 1 Wächter-Modus
 
