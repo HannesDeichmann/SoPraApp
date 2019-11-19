@@ -34,7 +34,7 @@ public class TextDialog extends DialogFragment {
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View v = inflater.inflate(R.layout.activity_main, null);
-        TextView tvHelloRef = (TextView) v.findViewById(R.id.tvHello);
+        TextView tvHelloRef = (TextView) v.findViewById(R.id.tvLogin);
 
         builder.setTitle(R.string.app_name);
         String message = tvHelloRef.getText().toString();

@@ -33,12 +33,12 @@ public class ExampleInstrumentedTest {
 
         MainActivity activity = rule.getActivity();
 
-        TextView tvHello = (TextView) activity.findViewById(R.id.tvHello);
+        TextView tvHello = (TextView) activity.findViewById(R.id.tvLogin);
         assertThat(tvHello,notNullValue());
         assertThat(tvHello, instanceOf(TextView.class));
         assertEquals("TextView text compare", "SoPra App", tvHello.getText().toString());
 
-        Button btnButton =(Button) activity.findViewById(R.id.btnButton);
+        Button btnButton =(Button) activity.findViewById(R.id.btnLogin);
         assertThat(btnButton,notNullValue());
         assertEquals("Test button text", "Click me!", btnButton.getText().toString());
 

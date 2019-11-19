@@ -10,23 +10,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView tvHelloRef;
-    Button btnButtonRef;
+    TextView tvLoginRef;
+    Button btnLoginRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tvHelloRef = (TextView) findViewById(R.id.tvHello);
-        btnButtonRef = (Button) findViewById(R.id.btnButton);
+        tvLoginRef = (TextView) findViewById(R.id.tvLogin);
+        btnLoginRef = (Button) findViewById(R.id.btnLogin);
 
-        btnButtonRef.setOnClickListener(new View.OnClickListener() {
+        btnLoginRef.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), DisplayActivity.class);
-                String message = tvHelloRef.getText().toString();
-                intent.putExtra("Message", message);
+                Intent intent = new Intent(view.getContext(), AdminActivity.class);
                 startActivity(intent);
 
 //                TextDialog dialog = new TextDialog();
