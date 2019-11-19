@@ -8,13 +8,13 @@ public class Waypoint{
     private int nfcTag;
     private Array connections;
 
-    public void waypoint(String name, int nfcTag){
+    public Waypoint(String name, int nfcTag){
         Waypoint waypoint = new Waypoint();
         waypoint.setName(name);
         waypoint.setNfcTag(nfcTag);
     }
 
-    public void waypoint(){
+    public Waypoint(){
         Waypoint waypoint = new Waypoint();
     }
 

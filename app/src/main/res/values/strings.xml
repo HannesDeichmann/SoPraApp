@@ -20,5 +20,10 @@
     <string name="button">Click me!</string>
     <string name="login">Login</string>
     <string name="admin_modus">Admin Modus</string>
-    <string name="routen">Routen</string>
+    <string name="routes">Routes</string>
+    <string name="waypoints">Waypoints</string>
+    <string name="close">Close</string>
+    <string name="create_waypoint">Create Waypoint</string>
+    <string name="New_Waypoint">New Waypoint</string>
+    <string name="create">Create</string>
 </resources>

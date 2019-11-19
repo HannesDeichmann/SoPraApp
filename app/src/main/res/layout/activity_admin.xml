@@ -20,11 +20,20 @@
         android:textSize="24sp" />
 
     <Button
-        android:id="@+id/btnRouten"
+        android:id="@+id/btnRoutes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="151dp"
-        android:text="@string/routen" />
+        android:text="@string/routes" />
+
+    <Button
+        android:id="@+id/btnWaypoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="247dp"
+        android:text="@string/waypoints" />
 </RelativeLayout>
