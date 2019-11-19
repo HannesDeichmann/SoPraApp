@@ -1,4 +1,4 @@
-# Definition of Done
+# Definition of Done.
 
 - [ ] Alle zur User Story assoziierten Test sind erfolgreich durchgelaufen.
 - [ ] Die Testabdeckung beträgt mindestens 75 %.
