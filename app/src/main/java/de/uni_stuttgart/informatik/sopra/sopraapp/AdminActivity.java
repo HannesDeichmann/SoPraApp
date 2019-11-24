@@ -30,5 +30,12 @@ public class AdminActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        btnRoutenRef.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), RouteActivity.class);
+                startActivity(intent);
+            }
+        }));
     }
 }
