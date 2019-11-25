@@ -26,4 +26,12 @@
     <string name="create_waypoint">Create Waypoint</string>
     <string name="New_Waypoint">New Waypoint</string>
     <string name="create">Create</string>
+    <string name="guards">Guards</string>
+    <string name="forname">Forname:</string>
+    <string name="surname">Surname:</string>
+    <string name="userid">UserId:</string>
+    <string name="userpw">Password:</string>
+    <string name="acceptGuard">Accept</string>
+    <string name="deleteGuard">Delete</string>
+    <string name="showGuard">Show Guards</string>
 </resources>
