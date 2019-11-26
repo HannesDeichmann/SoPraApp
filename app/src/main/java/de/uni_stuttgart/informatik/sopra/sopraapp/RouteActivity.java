@@ -27,8 +27,9 @@ public class RouteActivity extends AppCompatActivity {
         addWaypointRef.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                list.add("test");
-                //TODO get WayPointActivity and addWayPoint.getName to list
+                Intent intent = new Intent(view.getContext(), RouteWaypointListActivity.class);
+                startActivity(intent);
+                list.add(intent.getStringExtra("WaypointName"));
                 selectedWaypointList.setAdapter(myArrayAdapter);
 
             }

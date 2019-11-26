@@ -1,48 +1,66 @@
 package de.uni_stuttgart.informatik.sopra.sopraapp;
 
-import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class Waypoint{
+    private String waypointName;
+    private String waypointNfcTag;
+    private String waypointId;
+    private static ArrayList<Waypoint> waypointList = new ArrayList<Waypoint>();
+    public static final int waypointIdLength = 6;
+    public static final String waypointIdIndicator = "Login-Daten: ";
 
-    private String name;
-    private int nfcTag;
-    private Array connections;
-
-    public Waypoint(String name, int nfcTag){
-        Waypoint waypoint = new Waypoint();
-        waypoint.setName(name);
-        waypoint.setNfcTag(nfcTag);
+    public Waypoint(String waypointName, String waypointId, String waypointNfcTag){
+        this.setWaypointName(waypointName);
+        this.setWaypointId(waypointId);
+        this.setWaypointNfcTag(waypointNfcTag);
+        this.waypointList.add(this);
     }
 
     public Waypoint(){
-        Waypoint waypoint = new Waypoint();
+
+        this.setWaypointName("");
+        this.setWaypointId("");
+        this.setWaypointNfcTag("");
+        this.waypointList.add(this);
     }
 
-    public void setName(String name){
-        this.name=name;
+    @Override
+    public String toString(){
+        String waypointString = "";
+        waypointString += "Name: " + this.waypointName + " ";
+        waypointString += "Login-Daten: " + this.waypointId + " ";
+        waypointString += this.waypointNfcTag + "; ";
+        return waypointString;
+    }
+    public static ArrayList<Waypoint> getWaypointList() {
+        return waypointList;
     }
 
-    public String getName(){
-        return this.name;
+    public static void setWaypointList(ArrayList<Waypoint> waypointList) { Waypoint.waypointList = waypointList;}
+
+    public void setWaypointName(String waypointName){
+        this.waypointName=waypointName;
     }
 
-    public void setNfcTag(int nfcTag){
-        this.nfcTag = nfcTag;
+    public String getWaypointName(){
+        return this.waypointName;
     }
 
-    public int getNfcTag(){
-        return this.nfcTag;
+    public void setWaypointId(String waypointId){
+        this.waypointId=waypointId;
     }
 
-    public void setConnections(Waypoint waypoint, int duration){
-        //TODO
+    public String getWaypointId(){
+        return this.waypointId;
     }
 
-    public Array getConnections(){
-        return this.connections;
+    public void setWaypointNfcTag(String waypointNfcTag){
+        this.waypointNfcTag = waypointNfcTag;
     }
-    public void deleteWaypoint(){
-        //TODO
+
+    public String getWaypointNfcTag(){
+        return this.waypointNfcTag;
     }
 
 
