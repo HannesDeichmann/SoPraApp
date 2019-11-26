@@ -34,4 +34,8 @@
     <string name="acceptGuard">Accept</string>
     <string name="deleteGuard">Delete</string>
     <string name="showGuard">Show Guards</string>
+    <string name="show_waypoint">Show Waypoint</string>
+    <string name="name">Name</string>
+    <string name="nfc_tag">NFC Tag</string>
+    <string name="id">ID</string>
 </resources>
