@@ -9,19 +9,19 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class GuardActivity extends AppCompatActivity {
-    Button btnShowGuardsRef;
-    Button btnCreateGuardsRef;
-    Button btnDeleteGuardsRef;
-    EditText etForNameRef;
-    EditText etSurNameRef;
-    EditText etUserIdRef;
+    Button btnEditGuardRef;
+    Button btnAcceptGuardRef;
+    Button btnDeleteGuardRef;
+    EditText etForenameRef;
+    EditText etSurnameRef;
+    EditText etGuardIdRef;
     EditText etPasswordRef;
     Guard editedGuard;
 
     private void clearTextFields(){
-        etSurNameRef.setText("");
-        etForNameRef.setText("");
-        etUserIdRef.setText("");
+        etSurnameRef.setText("");
+        etForenameRef.setText("");
+        etGuardIdRef.setText("");
         etPasswordRef.setText("");
     }
 
@@ -30,12 +30,12 @@ public class GuardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guard);
 
-        btnShowGuardsRef = findViewById(R.id.btnShowGuard);
-        btnCreateGuardsRef = findViewById(R.id.btnCreateGuard);
-        btnDeleteGuardsRef = findViewById(R.id.btnDeleteGuard);
-        etForNameRef = findViewById(R.id.etForname);
-        etSurNameRef = findViewById(R.id.etSurname);
-        etUserIdRef = findViewById(R.id.etUserId);
+        btnEditGuardRef = findViewById(R.id.btnEditGuard);
+        btnAcceptGuardRef = findViewById(R.id.btnAcceptGuard);
+        btnDeleteGuardRef = findViewById(R.id.btnDeleteGuard);
+        etForenameRef = findViewById(R.id.etForname);
+        etSurnameRef = findViewById(R.id.etSurname);
+        etGuardIdRef = findViewById(R.id.etUserId);
         etPasswordRef = findViewById(R.id.pwUserPassword);
 
         String deleteGuardString = "";
@@ -49,9 +49,9 @@ public class GuardActivity extends AppCompatActivity {
             for (Guard guard : Guard.getGuardList()) {
                 if (guard.toString().contains(deleteGuardString)) {
                     editedGuard = guard;
-                    etSurNameRef.setText(guard.getSurname());
-                    etForNameRef.setText(guard.getForename());
-                    etUserIdRef.setText(guard.getUserId());
+                    etSurnameRef.setText(guard.getSurname());
+                    etForenameRef.setText(guard.getForename());
+                    etGuardIdRef.setText(guard.getUserId());
                     etPasswordRef.setText(guard.getUserPassword());
                 }
             }
@@ -59,31 +59,31 @@ public class GuardActivity extends AppCompatActivity {
             clearTextFields();
         }
 
-        btnCreateGuardsRef.setOnClickListener(new View.OnClickListener() {
+        btnAcceptGuardRef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (etUserIdRef.getText().length() == 6) {
+                if (etGuardIdRef.getText().length() == 6) {
                     Guard createdGuard;
                     if (editedGuard == null) {
                         createdGuard = new Guard();
                     } else {
                         createdGuard = editedGuard;
                     }
-                    createdGuard.setForename(etForNameRef.getText().toString());
-                    createdGuard.setSurname(etSurNameRef.getText().toString());
-                    createdGuard.setUserId(etUserIdRef.getText().toString());
+                    createdGuard.setForename(etForenameRef.getText().toString());
+                    createdGuard.setSurname(etSurnameRef.getText().toString());
+                    createdGuard.setUserId(etGuardIdRef.getText().toString());
                     createdGuard.setUserPassword(etPasswordRef.getText().toString());
 
                     clearTextFields();
 
                 } else {
                     //TODO Allertfenster
-                    etUserIdRef.setText("UserId needs 6 chars");
+                    etGuardIdRef.setText("UserId needs 6 chars");
                 }
             }
         });
 
-        btnDeleteGuardsRef.setOnClickListener(new View.OnClickListener() {
+        btnDeleteGuardRef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (editedGuard != null && Guard.getGuardList().contains(editedGuard)) {
@@ -93,12 +93,12 @@ public class GuardActivity extends AppCompatActivity {
                 }else {
                     //TODO Alertfenster
                     clearTextFields();
-                    etForNameRef.setText("There is no Guard to delete");
+                    etForenameRef.setText("There is no Guard to delete");
                 }
             }
         });
 
-        btnShowGuardsRef.setOnClickListener(new View.OnClickListener() {
+        btnEditGuardRef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), GuardListActivity.class);
