@@ -97,6 +97,7 @@ public class WaypointActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), WaypointListActivity.class);
+                intent.putExtra("root", "WaypointActivity");
                 startActivity(intent);
             }
         });

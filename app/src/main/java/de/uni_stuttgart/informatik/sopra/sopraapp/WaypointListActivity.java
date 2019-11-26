@@ -37,7 +37,12 @@ public class WaypointListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Intent intent = new Intent(view.getContext(), WaypointActivity.class);
+                Intent intent;
+                if(getIntent().getStringExtra("root")=="WaypointActivity") {
+                    intent = new Intent(view.getContext(), WaypointActivity.class);
+                }else{
+                    intent = new Intent(view.getContext(), WaypointActivity.class);
+                }
                 String string =  parent.getItemAtPosition(position).toString();
                 intent.putExtra("deleteWaypoint", string);
                 startActivity(intent);
