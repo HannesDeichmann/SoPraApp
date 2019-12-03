@@ -14,27 +14,29 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class RouteActivity extends AppCompatActivity {
-
+    private static ArrayList<String> list = new ArrayList<>();
+    private ListView selectedWaypointList;
+    private ArrayAdapter<String> myArrayAdapter;
+    private Button addWaypointRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route);
-        ListView selectedWaypointList = findViewById(R.id.selectedWaypointList);
-        ArrayList<String> list = new ArrayList<String>();
-        Button addWaypointRef = findViewById(R.id.addWaypoint);
-        ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, list);
 
-        addWaypointRef.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Intent intent = new Intent(view.getContext(), RouteWaypointListActivity.class);
-                startActivity(intent);
-                list.add(intent.getStringExtra("WaypointName"));
-                selectedWaypointList.setAdapter(myArrayAdapter);
+        selectedWaypointList = findViewById(R.id.selectedWaypointList);
+        addWaypointRef = findViewById(R.id.addWaypoint);
+        myArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, list);
 
-            }
-
+        addWaypointRef.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(), WaypointListActivity.class);
+            intent.putExtra("root","RouteActivity");
+            startActivity(intent);
         });
-        selectedWaypointList.setAdapter(myArrayAdapter);
+
+        if(getIntent().getExtras()!=null) {
+            Waypoint waypoint = (Waypoint) getIntent().getExtras().get("selectedWaypoint");
+            list.add(waypoint.getWaypointName());
+        }
+       selectedWaypointList.setAdapter(myArrayAdapter);
     }
 }

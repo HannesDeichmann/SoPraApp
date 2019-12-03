@@ -10,10 +10,10 @@
         android:id="@+id/tvWaypointNfcTag"
         android:layout_width="84dp"
         android:layout_height="31dp"
+        android:layout_below="@+id/tvWaypointId"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="11dp"
-        android:layout_marginTop="384dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="45dp"
         android:text="@string/nfc_tag"
         android:textAlignment="center" />
 
@@ -21,20 +21,24 @@
         android:id="@+id/btnDeleteWaypoint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:layout_below="@+id/etWaypointNfcTag"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="44dp"
-        android:layout_marginBottom="87dp"
+        android:layout_marginTop="222dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginBottom="100dp"
         android:text="@string/deleteGuard" />
 
     <TextView
         android:id="@+id/tvWaypointName"
         android:layout_width="84dp"
         android:layout_height="31dp"
+        android:layout_below="@+id/btnEditWaypoint"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="234dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="3dp"
+        android:layout_toStartOf="@+id/etWaypointName"
         android:text="@string/name"
         android:textAlignment="center" />
 
@@ -42,9 +46,9 @@
         android:id="@+id/etWaypointNfcTag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/etWaypointId"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="373dp"
+        android:layout_marginTop="35dp"
         android:ems="10"
         android:inputType="textPersonName" />
 
@@ -52,10 +56,10 @@
         android:id="@+id/tvWaypointId"
         android:layout_width="84dp"
         android:layout_height="31dp"
+        android:layout_below="@+id/tvWaypointName"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="314dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="45dp"
         android:text="@string/id"
         android:textAlignment="center" />
 
@@ -63,9 +67,9 @@
         android:id="@+id/etWaypointName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/btnEditWaypoint"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="35dp"
         android:ems="10"
         android:inputType="textPersonName" />
 
@@ -73,34 +77,36 @@
         android:id="@+id/etWaypointId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/etWaypointName"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="304dp"
+        android:layout_marginTop="35dp"
         android:ems="10"
         android:inputType="textPersonName" />
 
     <Button
-        android:id="@+id/btnCreateWaypoint"
+        android:id="@+id/btnAcceptWaypoint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/etWaypointNfcTag"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="275dp"
-        android:layout_marginBottom="87dp"
-        android:text="@string/create"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="222dp"
+        android:layout_marginBottom="100dp"
+        android:text="@string/accept"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="parent" />
 
     <Button
-        android:id="@+id/btnShowWaypoint"
+        android:id="@+id/btnEditWaypoint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="130dp"
-        android:layout_marginTop="87dp"
-        android:text="@string/show_waypoint" />
+        android:layout_marginTop="85dp"
+        android:text="@string/edit_waypoint" />
 </RelativeLayout>

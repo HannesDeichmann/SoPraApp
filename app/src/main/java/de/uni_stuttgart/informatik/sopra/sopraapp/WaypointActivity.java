@@ -5,18 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
-
-import java.util.ArrayList;
 
 public class WaypointActivity extends AppCompatActivity {
 
-    Button btnShowWaypointRef;
-    Button btnCreateWaypointRef;
+    Button btnEditWaypointRef;
+    Button btnAcceptWaypointRef;
     Button btnDeleteWaypointRef;
     EditText etWaypointNameRef;
     EditText etWaypointIdRef;
@@ -34,8 +29,8 @@ public class WaypointActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waypoint);
 
-        btnShowWaypointRef = findViewById(R.id.btnShowWaypoint);
-        btnCreateWaypointRef = findViewById(R.id.btnCreateWaypoint);
+        btnEditWaypointRef = findViewById(R.id.btnEditWaypoint);
+        btnAcceptWaypointRef = findViewById(R.id.btnAcceptWaypoint);
         btnDeleteWaypointRef = findViewById(R.id.btnDeleteWaypoint);
         etWaypointNameRef = findViewById(R.id.etWaypointName);
         etWaypointIdRef = findViewById(R.id.etWaypointId);
@@ -61,7 +56,7 @@ public class WaypointActivity extends AppCompatActivity {
             clearTextFields();
         }
 
-        btnCreateWaypointRef.setOnClickListener(new View.OnClickListener() {
+        btnAcceptWaypointRef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (etWaypointIdRef.getText().length() == 6) {
@@ -98,10 +93,11 @@ public class WaypointActivity extends AppCompatActivity {
             }
         });
 
-        btnShowWaypointRef.setOnClickListener(new View.OnClickListener() {
+        btnEditWaypointRef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), WaypointListActivity.class);
+                intent.putExtra("root", "WaypointActivity");
                 startActivity(intent);
             }
         });

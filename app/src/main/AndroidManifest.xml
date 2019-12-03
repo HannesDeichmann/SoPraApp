@@ -9,21 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MyTheme.DayNight">
-        <activity android:name=".RouteWaypointListActivity"></activity>
-        <activity android:name=".RouteActivity" />
-        <activity android:name=".WaypointActivity" />
-        <activity android:name=".WaypointListActivity" />
+        <activity android:name=".WaypointListActivity"/>
         <activity android:name=".GuardListActivity" />
         <activity android:name=".GuardActivity" />
+        <activity android:name=".RouteActivity" />
         <activity android:name=".WaypointActivity" />
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".DisplayActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

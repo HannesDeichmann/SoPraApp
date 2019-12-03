@@ -17,11 +17,13 @@ public class WaypointListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waypoint_list);
-
         ListView listView = findViewById(R.id.waypointList);
 
         ArrayList<String> waypointStringList = new ArrayList<>();
-
+        //delete/////////////////////////////////////////////////////////////////
+        new Waypoint("1","1","1");
+        new Waypoint("2","2","2");
+        //delete/////////////////////////////////////////////////////////////////
         for(Waypoint waypoint : Waypoint.getWaypointList()){
             waypointStringList.add(waypoint.toString());
         }
@@ -33,15 +35,22 @@ public class WaypointListActivity extends AppCompatActivity {
 
         listView.setAdapter(dataAdapter);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                Intent intent = new Intent(view.getContext(), WaypointActivity.class);
-                String string =  parent.getItemAtPosition(position).toString();
-                intent.putExtra("deleteWaypoint", string);
-                startActivity(intent);
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = null;
+            System.out.println(getIntent().getStringExtra("root"));
+
+            if(getIntent().getStringExtra("root").equals("WaypointActivity")) {
+                intent = new Intent(view.getContext(), WaypointActivity.class);
+            }else if(getIntent().getStringExtra("root").equals("RouteActivity")){
+                intent = new Intent(view.getContext(), RouteActivity.class);
+            }else{
+                //intent extra should be one of the checked above
             }
+            Waypoint waypoint =  Waypoint.getWaypointList().get(position);
+            String string = parent.getItemAtPosition(position).toString();
+            intent.putExtra("deleteWaypoint", string);
+            intent.putExtra("selectedWaypoint", waypoint);
+            startActivity(intent);
         });
 
     }
