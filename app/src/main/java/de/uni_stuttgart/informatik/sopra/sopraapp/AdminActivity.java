@@ -2,10 +2,9 @@ package de.uni_stuttgart.informatik.sopra.sopraapp;
 
 import android.os.Bundle;
 import android.content.Intent;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.EditText;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AdminActivity extends AppCompatActivity {
@@ -26,20 +25,17 @@ public class AdminActivity extends AppCompatActivity {
         btnWaypointsRef = findViewById(R.id.btnWaypoints);
         btnGuardsRef = findViewById(R.id.btnGuard);
 
-        btnWaypointsRef.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Intent intent = new Intent(view.getContext(), WaypointActivity.class);
-                startActivity(intent);
-            }
+        btnWaypointsRef.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(), WaypointActivity.class);
+            startActivity(intent);
         });
-
-        btnGuardsRef.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Intent intent = new Intent(view.getContext(), GuardActivity.class);
-                startActivity(intent);
-            }
+        btnRoutenRef.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(), RouteActivity.class);
+            startActivity(intent);
+        });
+        btnGuardsRef.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(), GuardActivity.class);
+            startActivity(intent);
         });
     }
 }
