@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RouteActivity">
+    tools:context=".RouteCreationActivity">
 
     <EditText
         android:id="@+id/routeName"
@@ -40,10 +40,9 @@
         />
 
     <ListView
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/selectedWaypointList"
-        android:layout_width="382dp"
-        android:layout_height="497dp"
+        android:layout_width="376dp"
+        android:layout_height="391dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -52,6 +51,25 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addWaypoint"
+        app:layout_constraintTop_toBottomOf="@+id/addWaypoint" />
+
+    <Button
+        android:id="@+id/saveRoute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="save"
+        app:layout_constraintTop_toBottomOf="@+id/selectedWaypointList"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/deleteRoute"
+        />
+
+    <Button
+        android:id="@+id/deleteRoute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="delete"
+        app:layout_constraintTop_toBottomOf="@+id/selectedWaypointList"
+        app:layout_constraintStart_toStartOf="@id/saveRoute"
+        app:layout_constraintEnd_toEndOf="parent"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
