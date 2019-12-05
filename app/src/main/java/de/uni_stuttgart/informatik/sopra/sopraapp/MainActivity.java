@@ -74,9 +74,11 @@ public class MainActivity extends AppCompatActivity {
                 if(guardUsername.equals("admin") && guardPassword.equals("admin")){
                     Intent intent = new Intent(view.getContext(), AdminActivity.class);
                     startActivity(intent);
-                }else {
-                    //check every guard if the given username exists and if yes, check if the
-                    //password matches
+                }else if(guardUsername.equals("") || guardPassword.equals("")) {
+                    tvLoginFeedbackRef.setText("Please enter a username and a password");
+                }else{
+                    //check every guard if the given username is found and if yes, check if the
+                    //passwords match
                     for (Guard guard : databaseGuard.getAllGuards()) {
                         if (guard.getUserId().equals(guardUsername)) {
                             if (guard.getUserPassword().equals(guardPassword)) {

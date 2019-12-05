@@ -16,8 +16,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginEnd="74dp"
-        android:layout_marginBottom="208dp"
+        android:layout_marginEnd="83dp"
+        android:layout_marginBottom="214dp"
         android:ems="10"
         android:inputType="textPersonName" />
 
@@ -62,8 +62,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginBottom="325dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginBottom="329dp"
         android:text="Username" />
 
     <TextView
@@ -72,8 +72,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginBottom="223dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="228dp"
         android:text="Password" />
 
     <EditText
@@ -83,8 +83,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginEnd="68dp"
-        android:layout_marginBottom="312dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="316dp"
         android:ems="10"
         android:inputType="textPersonName" />
 
@@ -95,19 +95,19 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginEnd="152dp"
-        android:layout_marginBottom="134dp"
+        android:layout_marginEnd="164dp"
+        android:layout_marginBottom="143dp"
         android:text="@string/login" />
 
     <TextView
         android:id="@+id/tvLoginFeedback"
-        android:layout_width="235dp"
-        android:layout_height="32dp"
+        android:layout_width="288dp"
+        android:layout_height="79dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="95dp"
-        android:layout_marginBottom="76dp"
+        android:layout_marginStart="59dp"
+        android:layout_marginBottom="33dp"
         android:textAlignment="center"
         android:textColor="#F43636" />
 

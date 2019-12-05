@@ -10,14 +10,14 @@ import android.widget.Button;
 public class GuardModeActivity extends AppCompatActivity {
 
     Button btnSelectARouteToStartRef;
-    Guard loggedInGuard;
+    private Guard loggedInGuard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guard_mode);
 
-        // loggedInGuard = getIntent().getExtra();
+        loggedInGuard = (Guard) getIntent().getExtras().get("guard");
         btnSelectARouteToStartRef = findViewById(R.id.btnSelectARouteToStart);
 
         btnSelectARouteToStartRef.setOnClickListener(new View.OnClickListener() {
