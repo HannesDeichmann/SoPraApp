@@ -38,7 +38,7 @@ public class ExampleInstrumentedTest {
         assertThat(tvHello, instanceOf(TextView.class));
         assertEquals("TextView text compare", "SoPra App", tvHello.getText().toString());
 
-        Button btnButton =(Button) activity.findViewById(R.id.btnLogin);
+        Button btnButton =(Button) activity.findViewById(R.id.btnAdminLogin);
         assertThat(btnButton,notNullValue());
         assertEquals("Test button text", "Click me!", btnButton.getText().toString());
 

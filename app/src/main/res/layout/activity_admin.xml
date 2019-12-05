@@ -16,7 +16,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="115dp"
         android:layout_marginTop="70dp"
-        android:text="@string/admin_modus"
+        android:text="@string/admin_mode"
         android:textSize="24sp" />
 
     <Button

@@ -1,8 +1,9 @@
 package de.uni_stuttgart.informatik.sopra.sopraapp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Guard {
+public class Guard implements Serializable {
     private String forename;
     private String surname;
     private String userId;
