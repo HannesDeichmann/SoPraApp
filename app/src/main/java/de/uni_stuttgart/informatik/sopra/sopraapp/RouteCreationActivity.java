@@ -63,14 +63,17 @@ public class RouteCreationActivity extends AppCompatActivity {
         if (i > 0) {
             route = (Route) getIntent().getExtras().get("route");
             for (int j = 0; j < route.getWaypoints().size(); j++) {
-                list.add(route.getWaypoints().get(j).getWaypoint().getWaypointName() + " - " + route.getWaypoints().get(j).getDuration().toMinutes() + "min.");
+                ArrayList<RouteWaypoint> r = route.getWaypoints();
+                RouteWaypoint rw= r.get(j);
+                Waypoint wp = rw.getWaypoint();
+                String s = wp.getWaypointName();
+                list.add(s + " - " + route.getWaypoints().get(j).getDuration().toMinutes() + "min.");
             }
             myArrayAdapter.notifyDataSetChanged();
 
         } else {
             i++;
         }
-
     }
 
     @Override
@@ -84,6 +87,4 @@ public class RouteCreationActivity extends AppCompatActivity {
         route.getWaypoints().add(waypoint);
         list.add(waypoint.getWaypoint().getWaypointName() + " - " + waypoint.getDuration().toMinutes() + "min.");
     }
-
-
 }

@@ -26,6 +26,7 @@ public class WaypointListActivity extends AppCompatActivity implements Durratoin
     ListView listView;
     DatabaseWaypoint databaseWaypoint;
     ArrayList<String> waypointStringList;
+    int waypointId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,8 @@ public class WaypointListActivity extends AppCompatActivity implements Durratoin
         listView.setOnItemClickListener((parent, view, position, id) -> {
             WaypointActivity.newWaypoint = false;
             //EIGENTLICH: Item.at(position) oder so ...
-            int waypointId = Integer.parseInt(databaseWaypoint.getAllWaypoints().get(position).getWaypointId());
+            waypoint = databaseWaypoint.getAllWaypoints().get(position);
+            waypointId = Integer.parseInt(waypoint.getWaypointId());
             if (getIntent().getStringExtra("root").equals("WaypointActivity")) {
                 intent = new Intent(view.getContext(), WaypointActivity.class);
                 intent.putExtra("editedWaypointId", waypointId);
