@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.time.Duration;
 import java.util.ArrayList;
 
 public class RouteCreationActivity extends AppCompatActivity {
@@ -41,6 +40,7 @@ public class RouteCreationActivity extends AppCompatActivity {
             finish();
         });
         btnDeleteRoute.setOnClickListener(v -> {
+            //TODO delete route from database
             i = 0;
             finish();
         });
@@ -71,6 +71,12 @@ public class RouteCreationActivity extends AppCompatActivity {
             i++;
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        i=0;
     }
 
     //not used jet
