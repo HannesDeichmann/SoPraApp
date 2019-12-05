@@ -17,6 +17,8 @@ public class WaypointActivity extends AppCompatActivity {
     EditText etWaypointIdRef;
     EditText etWaypointNfcTagRef;
     Waypoint editedWaypoint;
+    DatabaseWaypoint databaseWaypoint;
+    public static boolean newWaypoint = true;
 
     private void clearTextFields(){
         etWaypointNameRef.setText("");
@@ -24,6 +26,20 @@ public class WaypointActivity extends AppCompatActivity {
         etWaypointNfcTagRef.setText("");
     }
 
+    private Waypoint getEditedWaypoint() {
+        return databaseWaypoint.getWaypointById(getIntent().getIntExtra("editedWaypointId", 0));
+    }
+
+    private void checkEditNewWaypoint() {
+        if (newWaypoint == true) {
+            btnDeleteWaypointRef.setVisibility(View.INVISIBLE);
+        } else {
+            btnDeleteWaypointRef.setVisibility(View.VISIBLE);
+            etWaypointNameRef.setText(getEditedWaypoint().getWaypointName());
+            etWaypointIdRef.setText(getEditedWaypoint().getWaypointId());
+            etWaypointNfcTagRef.setText(getEditedWaypoint().getWaypointNfcTag());
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,41 +52,21 @@ public class WaypointActivity extends AppCompatActivity {
         etWaypointIdRef = findViewById(R.id.etWaypointId);
         etWaypointNfcTagRef = findViewById(R.id.etWaypointNfcTag);
 
-        String deleteWaypointString = "";
-        deleteWaypointString += getIntent().getStringExtra("deleteWaypoint");
-        editedWaypoint = null;
-        if (deleteWaypointString.contains(Waypoint.waypointIdIndicator)) {
-            int indexOfId = deleteWaypointString.indexOf(Waypoint.waypointIdIndicator);
-            deleteWaypointString = deleteWaypointString.substring(indexOfId, indexOfId + Waypoint.waypointIdIndicator.length()
-                    + Waypoint.waypointIdLength);
-
-            for (Waypoint waypoint : Waypoint.getWaypointList()) {
-                if (waypoint.toString().contains(deleteWaypointString)) {
-                    editedWaypoint = waypoint;
-                    etWaypointNameRef.setText(waypoint.getWaypointName());
-                    etWaypointIdRef.setText(waypoint.getWaypointId());
-                    etWaypointNfcTagRef.setText(waypoint.getWaypointNfcTag());
-                }
-            }
-        } else {
-            clearTextFields();
-        }
+        databaseWaypoint = new DatabaseWaypoint(this);
 
         btnAcceptWaypointRef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (etWaypointIdRef.getText().length() == 6) {
-                    Waypoint createdWaypoint;
-                    if (editedWaypoint == null) {
-                        createdWaypoint = new Waypoint();
-                    } else {
-                        createdWaypoint = editedWaypoint;
-                    }
+                    Waypoint createdWaypoint = new Waypoint();
                     createdWaypoint.setWaypointName(etWaypointNameRef.getText().toString());
                     createdWaypoint.setWaypointId(etWaypointIdRef.getText().toString());
                     createdWaypoint.setWaypointNfcTag(etWaypointNfcTagRef.getText().toString());
+                    databaseWaypoint.addWaypoint(createdWaypoint);
+                    newWaypoint = true;
+                    Intent intent = new Intent(view.getContext(), WaypointActivity.class);
+                    startActivity(intent);
                     clearTextFields();
-
                 } else {
                     //TODO Alertfenster
                     etWaypointIdRef.setText("WaypointId needs 6 chars");
@@ -81,15 +77,11 @@ public class WaypointActivity extends AppCompatActivity {
         btnDeleteWaypointRef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (editedWaypoint != null && Waypoint.getWaypointList().contains(editedWaypoint)) {
-                    Waypoint.getWaypointList().remove(editedWaypoint);
-                    editedWaypoint = null;
-                    clearTextFields();
-                }else {
-                    //TODO Alertfenster
-                    clearTextFields();
-                    etWaypointNameRef.setText("There is no Waypoint to delete");
-                }
+                databaseWaypoint.deleteWaypoint(getEditedWaypoint());
+                newWaypoint = true;
+                Intent intent = new Intent(view.getContext(), WaypointActivity.class);
+                startActivity(intent);
+                clearTextFields();
             }
         });
 
@@ -98,6 +90,14 @@ public class WaypointActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), WaypointListActivity.class);
                 intent.putExtra("root", "WaypointActivity");
+                startActivity(intent);
+            }
+        });
+
+        btnEditWaypointRef.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), WaypointListActivity.class);
                 startActivity(intent);
             }
         });

@@ -7,22 +7,37 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
 public class WaypointListActivity extends AppCompatActivity {
+    Button btnCancelWaypoint;
+    ListView listView;
+    DatabaseWaypoint databaseWaypoint;
+    ArrayList<String> waypointStringList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waypoint_list);
 
-        ListView listView = findViewById(R.id.waypointList);
+        databaseWaypoint = new DatabaseWaypoint(this);
+        btnCancelWaypoint = findViewById(R.id.btnCancelWaypoint);
+        listView = findViewById(R.id.waypointList);
+        waypointStringList = new ArrayList<>();
 
-        ArrayList<String> waypointStringList = new ArrayList<>();
+        btnCancelWaypoint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                WaypointActivity.newWaypoint = true;
+                Intent intent = new Intent(view.getContext(), WaypointActivity.class);
+                startActivity(intent);
+            }
+        });
 
-        for(Waypoint waypoint : Waypoint.getWaypointList()){
+        for(Waypoint waypoint : databaseWaypoint.getAllWaypoints()){
             waypointStringList.add(waypoint.toString());
         }
 
@@ -37,14 +52,11 @@ public class WaypointListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Intent intent;
-                if(getIntent().getStringExtra("root")=="WaypointActivity") {
-                    intent = new Intent(view.getContext(), WaypointActivity.class);
-                }else{
-                    intent = new Intent(view.getContext(), WaypointActivity.class);
-                }
-                String string =  parent.getItemAtPosition(position).toString();
-                intent.putExtra("deleteWaypoint", string);
+                Intent intent = new Intent(view.getContext(), WaypointActivity.class);
+                WaypointActivity.newWaypoint = false;
+                //EIGENTLICH: Item.at(position) oder so ...
+                int waypointId = Integer.parseInt(databaseWaypoint.getAllWaypoints().get(position).getWaypointId());
+                intent.putExtra("editedWaypointId", waypointId);
                 startActivity(intent);
             }
         });

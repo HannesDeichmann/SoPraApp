@@ -5,17 +5,20 @@ import java.util.ArrayList;
 
 public class Route {
 
-    private String name;
+    private String routeName;
     private ArrayList<Waypoint> waypoints;
-    private int startTime;
-    private int finishTime;
+    private String routeId;
 
-    public String getName() {
-        return name;
+    public String getRouteId() { return routeId; }
+
+    public void setRouteId(String id) { this.routeId = id; }
+
+    public String getRouteName() {
+        return routeName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRouteName(String name) {
+        this.routeName = name;
     }
 
     public ArrayList getWaypoints() {
@@ -26,24 +29,5 @@ public class Route {
         this.waypoints = waypoints;
     }
 
-    public int getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(int startTime) {
-        this.startTime = startTime;
-    }
-
-    public int getFinishTime() {
-        return finishTime;
-    }
-
-    public void setFinishTime(int finishTime) {
-        this.finishTime = finishTime;
-    }
-
-
-    public void addWaypoint(Waypoint waypoint){
-        this.waypoints.add(waypoint);
-    }
+    public void addWaypoint(Waypoint waypoint) { this.waypoints.add(waypoint); }
 }

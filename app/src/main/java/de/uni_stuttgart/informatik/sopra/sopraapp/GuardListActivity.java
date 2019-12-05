@@ -7,22 +7,34 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
 public class GuardListActivity extends AppCompatActivity {
 
+    Button btnCancel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guard_list);
 
+        DatabaseGuard guardDatabase = new DatabaseGuard(this);
+        btnCancel = findViewById(R.id.btnCancel);
         ListView listView = findViewById(R.id.guardList);
 
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GuardActivity.newGuard = true;
+                Intent intent = new Intent(view.getContext(), GuardActivity.class);
+                startActivity(intent);
+            }
+        });
         ArrayList<String> guardStringList = new ArrayList<>();
 
-        for(Guard guard : Guard.getGuardList()){
+        for(Guard guard : guardDatabase.getAllGuards()){
             guardStringList.add(guard.toString());
         }
 
@@ -38,11 +50,12 @@ public class GuardListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 Intent intent = new Intent(view.getContext(), GuardActivity.class);
-                String string =  parent.getItemAtPosition(position).toString();
-                intent.putExtra("deleteGuard", string);
+                GuardActivity.newGuard = false;
+                //EIGENTLICH: Item.at(position) oder so ...
+                int guardId = Integer.parseInt(guardDatabase.getAllGuards().get(position).getUserId());
+                intent.putExtra("editedGuardId", guardId);
                 startActivity(intent);
             }
         });
-
     }
 }
