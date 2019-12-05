@@ -6,7 +6,14 @@ import java.time.Duration;
 public class RouteWaypoint implements Serializable {
     private Waypoint waypoint;
     private Duration duration;
+    private String waypointId;
+    private String timeString;
+
     public RouteWaypoint(Waypoint waypoint, Duration duration){
+        this.waypoint = waypoint;
+        this.duration = duration;
+    }
+    public RouteWaypoint(String waypointId, String timeString){
         this.waypoint = waypoint;
         this.duration = duration;
     }
