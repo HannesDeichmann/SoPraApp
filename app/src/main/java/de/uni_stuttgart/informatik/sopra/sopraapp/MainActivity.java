@@ -38,20 +38,14 @@ public class MainActivity extends AppCompatActivity {
         //TODO BUG: Database darf nicht leer sein
         if(databaseGuard.getGuardCount() == 0) {
             databaseGuard.addGuard(new Guard("Damit", "Database", "123"));
-            databaseGuard.addGuard(new Guard("Damit", "Database", "!= empty"));
-            Route route = new Route();
-            Waypoint dieEckeHinterDemDönerladen= new Waypoint("DieEckeHinterDemDönerladen", "223456", "Tag1", "Hitler");
-            Duration duration = Duration.ofMinutes(600);
-            RouteWaypoint routeWaypoint= new RouteWaypoint(dieEckeHinterDemDönerladen, duration);
-            route.addWaypoint(routeWaypoint);
         }
         if(databaseWaypoint.getWaypointCount() == 0) {
             databaseWaypoint.addWaypoint(new Waypoint("FirstWaypoint", "123456", "Tag", "Note"));
         }
 
-        /*Test Data Set Hardcoded//////////////////////////////////////////
+
         Route route = new Route();
-        *Waypoint DieEckeHinterDemDönerladen= new Waypoint("DieEckeHinterDemDönerladen", "223456", "Tag1", "Hitler");
+        Waypoint DieEckeHinterDemDönerladen= new Waypoint("DieEckeHinterDemDönerladen", "223456", "Tag1", "Hitler");
         String minutes = "600";
         duration = Duration.ofMinutes(Integer.parseInt(minutes));
         RouteWaypoint routeWaypoint= new RouteWaypoint(DieEckeHinterDemDönerladen, duration);
@@ -65,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
         otto.addRoute(guardRoute2);
         otto.addRoute(guardRoute3);
         databaseGuard.addGuard(otto);
-        */
 
         tvLoginRef = (TextView) findViewById(R.id.tvLogin);
         btnAdminLoginRef = (Button) findViewById(R.id.btnAdminLogin);

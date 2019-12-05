@@ -12,7 +12,9 @@ public class PatrolActivity extends AppCompatActivity {
     private TextView tvCountdownRef;
     private TextView tvTimeRef;
     private TextView tvNextWaypointNameRef;
+    private  TextView tvRouteNameRef;
     private Button btnStartCountdownRef;
+    DatabaseGuard databaseGuard;
 
     private CountDownTimer countDownTimer;
     private long timeLeftInMilliseconds = 0;
@@ -25,18 +27,20 @@ public class PatrolActivity extends AppCompatActivity {
 
         tvTimeRef = findViewById(R.id.tvTime);
         tvCountdownRef = findViewById(R.id.tvCountdown);
+        tvRouteNameRef = findViewById(R.id.tvRouteName);
         tvNextWaypointNameRef = findViewById(R.id.tvNextWaypointName);
         btnStartCountdownRef = findViewById(R.id.btnStartCountdown);
 
         GuardRoute selectedRoute = (GuardRoute) getIntent().getExtras().get("selectedRoute");
-        String startTime = selectedRoute.getTime();
+        String startTime =  selectedRoute.getTime();
         Route route = selectedRoute.getRoute();
         RouteWaypoint nextWaypoint = route.getWaypoints().get(0);
         long timeLeft = nextWaypoint.getDuration().toMinutes();
         timeLeftInMilliseconds = 60000*timeLeft; // 60000 millisec = 1 min
 
         tvTimeRef.setText(startTime);
-        tvNextWaypointNameRef.setText(route.getWaypoints().get(0).toString());
+        tvRouteNameRef.setText(route.getRouteName());
+        tvNextWaypointNameRef.setText(route.getWaypoints().get(0).getWaypoint().getWaypointName());
 
         btnStartCountdownRef.setOnClickListener(new View.OnClickListener() {
             @Override
