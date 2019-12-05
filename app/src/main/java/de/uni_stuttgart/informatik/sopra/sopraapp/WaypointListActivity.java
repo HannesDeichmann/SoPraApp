@@ -1,23 +1,18 @@
 package de.uni_stuttgart.informatik.sopra.sopraapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.stream.Stream;
 
-public class WaypointListActivity extends AppCompatActivity implements DurratoinDialog.DurationDialogListener {
+public class WaypointListActivity extends AppCompatActivity implements DurationDialog.DurationDialogListener {
     private Intent intent;
     private Duration duration;
     private Waypoint waypoint;
@@ -38,13 +33,10 @@ public class WaypointListActivity extends AppCompatActivity implements Durratoin
         listView = findViewById(R.id.waypointList);
         waypointStringList = new ArrayList<>();
 
-        btnCancelWaypoint.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                WaypointActivity.newWaypoint = true;
-                Intent intent = new Intent(view.getContext(), WaypointActivity.class);
-                startActivity(intent);
-            }
+        btnCancelWaypoint.setOnClickListener(view -> {
+            WaypointActivity.newWaypoint = true;
+            Intent intent = new Intent(view.getContext(), WaypointActivity.class);
+            startActivity(intent);
         });
 
         for (Waypoint waypoint : databaseWaypoint.getAllWaypoints()) {
@@ -59,11 +51,11 @@ public class WaypointListActivity extends AppCompatActivity implements Durratoin
         listView.setAdapter(dataAdapter);
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
-            WaypointActivity.newWaypoint = false;
             //EIGENTLICH: Item.at(position) oder so ...
             waypoint = databaseWaypoint.getAllWaypoints().get(position);
             waypointId = Integer.parseInt(waypoint.getWaypointId());
             if (getIntent().getStringExtra("root").equals("WaypointActivity")) {
+                WaypointActivity.newWaypoint = false;
                 intent = new Intent(view.getContext(), WaypointActivity.class);
                 intent.putExtra("editedWaypointId", waypointId);
 
@@ -82,7 +74,7 @@ public class WaypointListActivity extends AppCompatActivity implements Durratoin
     }
 
     public void openDialog() {
-        DurratoinDialog duration = new DurratoinDialog();
+        DurationDialog duration = new DurationDialog();
         duration.show(getSupportFragmentManager(), "duration dialog");
     }
 

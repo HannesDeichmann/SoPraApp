@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-public class DurratoinDialog extends AppCompatDialogFragment {
+public class DurationDialog extends AppCompatDialogFragment {
     private EditText etduration;
     private DurationDialogListener listener;
     @NonNull
