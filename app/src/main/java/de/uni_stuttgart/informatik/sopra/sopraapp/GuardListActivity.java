@@ -22,7 +22,7 @@ public class GuardListActivity extends AppCompatActivity {
 
         ArrayList<String> guardStringList = new ArrayList<>();
 
-        for(Guard guard : Guard.getGuardList()){
+        for (Guard guard : Guard.getGuardList()) {
             guardStringList.add(guard.toString());
         }
 
@@ -37,12 +37,17 @@ public class GuardListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Intent intent = new Intent(view.getContext(), GuardActivity.class);
-                String string =  parent.getItemAtPosition(position).toString();
-                intent.putExtra("deleteGuard", string);
-                startActivity(intent);
-            }
-        });
+                Intent intent = null;
+                if (getIntent().getExtras().get("root").equals("Schedule")) {
+                    intent = new Intent(view.getContext(), ScheduleActivity.class);
+                } else if (getIntent().getExtras().get("root").equals("Guard")) {
+                    intent = new Intent(view.getContext(), GuardActivity.class);
+                }
+                    String string = parent.getItemAtPosition(position).toString();
+                    intent.putExtra("selectedGuard", string);
+                    startActivity(intent);
+                }
+            });
 
+        }
     }
-}

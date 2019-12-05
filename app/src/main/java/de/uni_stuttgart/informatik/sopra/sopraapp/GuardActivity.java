@@ -39,7 +39,7 @@ public class GuardActivity extends AppCompatActivity {
         etPasswordRef = findViewById(R.id.pwUserPassword);
 
         String deleteGuardString = "";
-        deleteGuardString += getIntent().getStringExtra("deleteGuard");
+        deleteGuardString += getIntent().getStringExtra("selectedGuard");
         editedGuard = null;
         if (deleteGuardString.contains(Guard.userIdIndicator)) {
             int indexOfId = deleteGuardString.indexOf(Guard.userIdIndicator);
@@ -102,6 +102,7 @@ public class GuardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), GuardListActivity.class);
+                intent.putExtra("root", "Guard");
                 startActivity(intent);
             }
         });
