@@ -9,8 +9,6 @@ public class Route implements Serializable {
 
     private String routeName;
     private ArrayList<RouteWaypoint> waypoints;
-    private int startTime;
-    private int finishTime;
     private String routeId;
 
     public Route(){
@@ -34,14 +32,6 @@ public class Route implements Serializable {
 
     public void setWaypoints(ArrayList waypoints) {
         this.waypoints = waypoints;
-    }
-
-    public int getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(int startTime) {
-        this.startTime = startTime;
     }
 
     public void addWaypoint(RouteWaypoint waypoint){
