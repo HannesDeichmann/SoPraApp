@@ -6,13 +6,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".GuardModeRouteListActivity">
+    tools:context=".GuardListActivity">
 
     <ListView
-        android:id="@+id/guardRouteList"
-        android:layout_width="385dp"
-        android:layout_height="686dp"
+        android:id="@+id/guardList"
+        android:layout_width="349dp"
+        android:layout_height="532dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/btnCancel"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

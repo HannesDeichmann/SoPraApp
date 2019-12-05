@@ -7,11 +7,12 @@
     tools:context=".GuardModeActivity">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="167dp"
-        android:layout_height="18dp"
+        android:id="@+id/tvGuardMode"
+        android:layout_width="188dp"
+        android:layout_height="29dp"
         android:layout_marginTop="16dp"
         android:text="@string/guard_mode"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -20,9 +21,38 @@
         android:id="@+id/btnSelectARouteToStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="216dp"
         android:text="@string/select_a_route_to_start"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/tvGuardMode" />
+
+    <Button
+        android:id="@+id/btnLogOut"
+        android:layout_width="219dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="152dp"
+        android:text="@string/log_out"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSelectARouteToStart" />
+
+    <TextView
+        android:id="@+id/tvLoggedInAs"
+        android:layout_width="94dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="36dp"
+        android:text="@string/logged_in_as"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvGuardMode" />
+
+    <TextView
+        android:id="@+id/tvUsername"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintStart_toEndOf="@+id/tvLoggedInAs"
+        app:layout_constraintTop_toBottomOf="@+id/tvGuardMode" />
 </androidx.constraintlayout.widget.ConstraintLayout>

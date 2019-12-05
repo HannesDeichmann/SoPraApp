@@ -18,9 +18,9 @@ public class Route implements Serializable {
     public void setRouteId(String id) { this.routeId = id; }
 
     public String getRouteName() {
-        return routeName;
+        return this.routeName;
     }
-    public String getRouteId() { return routeId; }
+    public String getRouteId() { return this.routeId; }
 
     public void setRouteName(String name) {
         this.routeName = name;

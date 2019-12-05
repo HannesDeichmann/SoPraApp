@@ -15,8 +15,9 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="115dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="78dp"
         android:text="@string/admin_mode"
+        android:textAlignment="center"
         android:textSize="24sp" />
 
     <Button
@@ -45,4 +46,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="329dp"
         android:text="@string/guards" />
+
+    <Button
+        android:id="@+id/btnSchedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="266dp"
+        android:text="@string/schedule" />
 </RelativeLayout>

@@ -16,8 +16,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginEnd="83dp"
-        android:layout_marginBottom="214dp"
+        android:layout_marginEnd="82dp"
+        android:layout_marginBottom="374dp"
         android:ems="10"
         android:inputType="textPersonName" />
 
@@ -30,6 +30,7 @@
         android:layout_marginStart="143dp"
         android:layout_marginTop="@dimen/component_label_horizontal_margin"
         android:text="@string/login"
+        android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -46,25 +47,15 @@
         android:text="@string/admin_mode"
         android:textSize="30sp" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnGuardLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvLogin"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="161dp"
-        android:text="@string/guard_mode"
-        android:textSize="30sp" />
-
     <TextView
         android:id="@+id/tvUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="3dp"
-        android:layout_marginBottom="329dp"
-        android:text="Username" />
+        android:layout_marginStart="2dp"
+        android:layout_marginBottom="484dp"
+        android:text="@string/username" />
 
     <TextView
         android:id="@+id/tvPassword"
@@ -72,9 +63,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginBottom="228dp"
-        android:text="Password" />
+        android:layout_marginStart="3dp"
+        android:layout_marginBottom="385dp"
+        android:text="@string/password" />
 
     <EditText
         android:id="@+id/etUsername"
@@ -83,8 +74,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginEnd="80dp"
-        android:layout_marginBottom="316dp"
+        android:layout_marginEnd="78dp"
+        android:layout_marginBottom="467dp"
         android:ems="10"
         android:inputType="textPersonName" />
 
@@ -95,8 +86,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginEnd="164dp"
-        android:layout_marginBottom="143dp"
+        android:layout_marginEnd="163dp"
+        android:layout_marginBottom="304dp"
         android:text="@string/login" />
 
     <TextView
@@ -107,7 +98,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="59dp"
-        android:layout_marginBottom="33dp"
+        android:layout_marginBottom="195dp"
         android:textAlignment="center"
         android:textColor="#F43636" />
 

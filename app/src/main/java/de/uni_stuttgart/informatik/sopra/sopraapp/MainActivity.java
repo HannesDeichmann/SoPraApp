@@ -9,11 +9,12 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.time.Duration;
+
 public class MainActivity extends AppCompatActivity {
 
     TextView tvLoginRef;
     Button btnAdminLoginRef;
-    Button btnGuardLoginRef;
     DatabaseGuard databaseGuard;
     DatabaseWaypoint databaseWaypoint;
     EditText etUsernameRef;
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     String guardUsername;
     String guardPassword;
     TextView tvLoginFeedbackRef;
-
+    private Duration duration;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,32 +35,42 @@ public class MainActivity extends AppCompatActivity {
 
         //TODO BUG: Database darf nicht leer sein
         if(databaseGuard.getGuardCount() == 0) {
-            databaseGuard.addGuard(new Guard("Damit", "Database", "!= empty"));
+            databaseGuard.addGuard(new Guard("Damit", "Database", "123"));
         }
         if(databaseWaypoint.getWaypointCount() == 0) {
             databaseWaypoint.addWaypoint(new Waypoint("FirstWaypoint", "123456", "Tag", "Note"));
         }
 
+        /*Test Data Set Hardcoded//////////////////////////////////////////
+        Route route = new Route();
+        *Waypoint DieEckeHinterDemDönerladen= new Waypoint("DieEckeHinterDemDönerladen", "223456", "Tag1", "Hitler");
+        String minutes = "600";
+        duration = Duration.ofMinutes(Integer.parseInt(minutes));
+        RouteWaypoint routeWaypoint= new RouteWaypoint(DieEckeHinterDemDönerladen, duration);
+        route.addWaypoint(routeWaypoint);
+        GuardRoute guardRoute1 = new GuardRoute(route, "1401");
+        GuardRoute guardRoute2 = new GuardRoute(route, "1401");
+        GuardRoute guardRoute3 = new GuardRoute(route, "1401");
+
+        Guard otto = new Guard("otto", "müllerich", "1234");
+        otto.addRoute(guardRoute1);
+        otto.addRoute(guardRoute2);
+        otto.addRoute(guardRoute3);
+        databaseGuard.addGuard(otto);
+        */
+
         tvLoginRef = (TextView) findViewById(R.id.tvLogin);
         btnAdminLoginRef = (Button) findViewById(R.id.btnAdminLogin);
-        btnGuardLoginRef = findViewById(R.id.btnGuardLogin);
         etUsernameRef = findViewById(R.id.etUsername);
         etPasswordRef = findViewById(R.id.etPassword);
         btnLoginRef = findViewById(R.id.btnLogin);
         tvLoginFeedbackRef = findViewById(R.id.tvLoginFeedback);
+        tvLoginFeedbackRef.setText("");
 
         btnAdminLoginRef.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), AdminActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        btnGuardLoginRef.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), GuardModeActivity.class);
                 startActivity(intent);
             }
         });
@@ -85,6 +96,9 @@ public class MainActivity extends AppCompatActivity {
                                 Intent intent = new Intent(view.getContext(), GuardModeActivity.class);
                                 intent.putExtra("guard", guard);
                                 startActivity(intent);
+                                tvLoginFeedbackRef.setText("");
+                                etUsernameRef.setText("");
+                                etPasswordRef.setText("");
                             } else {
                                 tvLoginFeedbackRef.setText("Wrong password");
                                 etPasswordRef.setText("");
