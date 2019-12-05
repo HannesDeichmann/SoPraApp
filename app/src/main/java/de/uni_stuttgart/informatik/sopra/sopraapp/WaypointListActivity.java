@@ -7,7 +7,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.time.Duration;
@@ -19,18 +22,31 @@ public class WaypointListActivity extends AppCompatActivity implements Durratoin
     private Duration duration;
     private Waypoint waypoint;
     private Route route;
+    Button btnCancelWaypoint;
+    ListView listView;
+    DatabaseWaypoint databaseWaypoint;
+    ArrayList<String> waypointStringList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waypoint_list);
-        ListView listView = findViewById(R.id.waypointList);
 
-        ArrayList<String> waypointStringList = new ArrayList<>();
-        //delete/////////////////////////////////////////////////////////////////
-        new Waypoint("Eingang","123456","111111");
-        new Waypoint("Ausgang","000000","222222");
-        //delete/////////////////////////////////////////////////////////////////
-        for(Waypoint waypoint : Waypoint.getWaypointList()){
+        databaseWaypoint = new DatabaseWaypoint(this);
+        btnCancelWaypoint = findViewById(R.id.btnCancelWaypoint);
+        listView = findViewById(R.id.waypointList);
+        waypointStringList = new ArrayList<>();
+
+        btnCancelWaypoint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                WaypointActivity.newWaypoint = true;
+                Intent intent = new Intent(view.getContext(), WaypointActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        for (Waypoint waypoint : databaseWaypoint.getAllWaypoints()) {
             waypointStringList.add(waypoint.toString());
         }
 
@@ -42,41 +58,40 @@ public class WaypointListActivity extends AppCompatActivity implements Durratoin
         listView.setAdapter(dataAdapter);
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
-
-            System.out.println(getIntent().getStringExtra("root"));
-            waypoint =  Waypoint.getWaypointList().get(position);
-            String string = parent.getItemAtPosition(position).toString();
-            if(getIntent().getStringExtra("root").equals("WaypointActivity")) {
+            WaypointActivity.newWaypoint = false;
+            //EIGENTLICH: Item.at(position) oder so ...
+            int waypointId = Integer.parseInt(databaseWaypoint.getAllWaypoints().get(position).getWaypointId());
+            if (getIntent().getStringExtra("root").equals("WaypointActivity")) {
                 intent = new Intent(view.getContext(), WaypointActivity.class);
-                intent.putExtra("deleteWaypoint", string);
+                intent.putExtra("editedWaypointId", waypointId);
 
                 startActivity(intent);
                 finish();
-            }else if(getIntent().getStringExtra("root").equals("RouteCreationActivity")){
-              //  intent = new Intent(view.getContext(), RouteCreationActivity.class);
+            } else if (getIntent().getStringExtra("root").equals("RouteCreationActivity")) {
+                //  intent = new Intent(view.getContext(), RouteCreationActivity.class);
                 route = (Route) getIntent().getExtras().get("route");
                 openDialog();
-                intent = new Intent(view.getContext(),RouteCreationActivity.class);
+                intent = new Intent(view.getContext(), RouteCreationActivity.class);
 
-            }else{
+            } else {
                 //intent extra should be one of the checked above
             }
-
         });
-
     }
 
-    public void openDialog(){
+    public void openDialog() {
         DurratoinDialog duration = new DurratoinDialog();
-        duration.show(getSupportFragmentManager(),"duration dialog");
+        duration.show(getSupportFragmentManager(), "duration dialog");
     }
+
     @Override
     public void applyText(String inputDuration) {
         duration = Duration.ofMinutes(Integer.parseInt(inputDuration));
         route.addWaypoint(new RouteWaypoint(waypoint, duration));
-        intent.putExtra("route",route);
+        intent.putExtra("route", route);
         startActivity(intent);
         finish();
+
     }
 }
 

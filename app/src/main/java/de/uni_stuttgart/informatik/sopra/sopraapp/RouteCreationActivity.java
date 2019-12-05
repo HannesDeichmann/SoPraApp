@@ -34,7 +34,7 @@ public class RouteCreationActivity extends AppCompatActivity {
         tvRouteName = findViewById(R.id.routeName);
         selectedWaypointList.setAdapter(myArrayAdapter);
         btnSaveRoute.setOnClickListener(v -> {
-            route.setName(tvRouteName.getText().toString());
+            route.setRouteName(tvRouteName.getText().toString());
             //TODO add Route Object to Database
             i = 0;
             finish();

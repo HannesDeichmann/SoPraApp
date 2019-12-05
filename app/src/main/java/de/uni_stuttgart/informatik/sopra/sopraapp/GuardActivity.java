@@ -4,25 +4,64 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.content.Intent;
+import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import static java.lang.Integer.parseInt;
+import static java.lang.String.valueOf;
 
 public class GuardActivity extends AppCompatActivity {
     Button btnEditGuardRef;
     Button btnAcceptGuardRef;
     Button btnDeleteGuardRef;
+    Button btnNewId;
     EditText etForenameRef;
     EditText etSurnameRef;
-    EditText etGuardIdRef;
+    TextView tvGuardIdRef;
+    TextView tvAkivity;
     EditText etPasswordRef;
-    Guard editedGuard;
+    DatabaseGuard guardDatabase;
+    public static boolean newGuard = true;
 
-    private void clearTextFields(){
+    private void clearTextFields() {
         etSurnameRef.setText("");
         etForenameRef.setText("");
-        etGuardIdRef.setText("");
         etPasswordRef.setText("");
+    }
+
+    private Guard getEditedGuard() {
+        return guardDatabase.getGuardById(getIntent().getIntExtra("editedGuardId", 0));
+    }
+
+    private void setNewUserId(){
+        //int a = Integer.valueOf(guardDatabase.getGuard(guardDatabase.getGuardCount() - 1).getUserId()) + 1;
+        //int b = Integer.valueOf(guardDatabase.getGuardById(getIntent().getIntExtra("editedGuardId", 0)).getUserId());
+        //maxUserId = Integer.max(Integer.max(a,b),maxUserId);
+        //TODO Bugfix, lösche Guard mit höchster nummer -> autoincrement geht bei dieser Nummer weiter, angezeigt wird allerdings die kleinere
+        tvGuardIdRef.setText(String.valueOf(Integer.valueOf(Integer.valueOf(guardDatabase.getGuard(guardDatabase.getGuardCount() - 1).getUserId()) + 1)));
+    }
+
+    private void checkEditNewGuard() {
+        if (newGuard == true) {
+            tvAkivity.setText("Create a new guard:");
+            btnDeleteGuardRef.setVisibility(View.INVISIBLE);
+            btnNewId.setVisibility(View.INVISIBLE);
+            setNewUserId();
+        } else {
+            tvAkivity.setText("Edit your guard:");
+            tvGuardIdRef.setText(getEditedGuard().getUserId());
+
+            btnDeleteGuardRef.setVisibility(View.VISIBLE);
+            btnNewId.setVisibility(View.VISIBLE);
+
+            etSurnameRef.setText(getEditedGuard().getSurname());
+            etForenameRef.setText(getEditedGuard().getForename());
+            etPasswordRef.setText(getEditedGuard().getUserPassword());
+        }
     }
 
     @Override
@@ -33,71 +72,52 @@ public class GuardActivity extends AppCompatActivity {
         btnEditGuardRef = findViewById(R.id.btnEditGuard);
         btnAcceptGuardRef = findViewById(R.id.btnAcceptGuard);
         btnDeleteGuardRef = findViewById(R.id.btnDeleteGuard);
+        btnNewId = findViewById(R.id.btnNewId);
         etForenameRef = findViewById(R.id.etForname);
         etSurnameRef = findViewById(R.id.etSurname);
-        etGuardIdRef = findViewById(R.id.etUserId);
         etPasswordRef = findViewById(R.id.pwUserPassword);
+        tvGuardIdRef = findViewById(R.id.tvGuardId);
+        tvAkivity = findViewById(R.id.tvAktivity);
+        guardDatabase = new DatabaseGuard(this);
 
-        String deleteGuardString = "";
-        deleteGuardString += getIntent().getStringExtra("deleteGuard");
-        editedGuard = null;
-        if (deleteGuardString.contains(Guard.userIdIndicator)) {
-            int indexOfId = deleteGuardString.indexOf(Guard.userIdIndicator);
-            deleteGuardString = deleteGuardString.substring(indexOfId, indexOfId + Guard.userIdIndicator.length()
-                    + Guard.userIdLength);
-
-            for (Guard guard : Guard.getGuardList()) {
-                if (guard.toString().contains(deleteGuardString)) {
-                    editedGuard = guard;
-                    etSurnameRef.setText(guard.getSurname());
-                    etForenameRef.setText(guard.getForename());
-                    etGuardIdRef.setText(guard.getUserId());
-                    etPasswordRef.setText(guard.getUserPassword());
-                }
-            }
-        } else {
-            clearTextFields();
-        }
+        checkEditNewGuard();
 
         btnAcceptGuardRef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (etGuardIdRef.getText().length() == 6) {
-                    Guard createdGuard;
-                    if (editedGuard == null) {
-                        createdGuard = new Guard();
-                    } else {
-                        createdGuard = editedGuard;
-                    }
-                    createdGuard.setForename(etForenameRef.getText().toString());
-                    createdGuard.setSurname(etSurnameRef.getText().toString());
-                    createdGuard.setUserId(etGuardIdRef.getText().toString());
-                    createdGuard.setUserPassword(etPasswordRef.getText().toString());
-
-                    clearTextFields();
-
-                } else {
-                    //TODO Allertfenster
-                    etGuardIdRef.setText("UserId needs 6 chars");
+                Guard createdGuard = new Guard();
+                createdGuard.setForename(etForenameRef.getText().toString());
+                createdGuard.setSurname(etSurnameRef.getText().toString());
+                createdGuard.setUserPassword(etPasswordRef.getText().toString());
+                if(newGuard) guardDatabase.addGuard(createdGuard);
+                else{
+                    guardDatabase.deleteGuard(guardDatabase.getGuardById(Integer.parseInt(tvGuardIdRef.getText().toString())));
+                    guardDatabase.editGuardById(Integer.parseInt(tvGuardIdRef.getText().toString()), createdGuard);
                 }
+                newGuard = true;
+                Intent intent = new Intent(view.getContext(), GuardActivity.class);
+                startActivity(intent);
+                clearTextFields();
             }
         });
-
         btnDeleteGuardRef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (editedGuard != null && Guard.getGuardList().contains(editedGuard)) {
-                    Guard.getGuardList().remove(editedGuard);
-                    editedGuard = null;
-                    clearTextFields();
-                }else {
-                    //TODO Alertfenster
-                    clearTextFields();
-                    etForenameRef.setText("There is no Guard to delete");
-                }
+                guardDatabase.deleteGuard(getEditedGuard());
+                newGuard = true;
+                Intent intent = new Intent(view.getContext(), GuardActivity.class);
+                startActivity(intent);
+                clearTextFields();
             }
         });
-
+        btnNewId.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                newGuard = true;
+                Intent intent = new Intent(view.getContext(), GuardActivity.class);
+                startActivity(intent);
+            }
+        });
         btnEditGuardRef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

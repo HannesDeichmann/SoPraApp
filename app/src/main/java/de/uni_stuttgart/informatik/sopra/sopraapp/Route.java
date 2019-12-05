@@ -7,21 +7,25 @@ import java.util.LinkedList;
 
 public class Route implements Serializable {
 
-    private String name;
+    private String routeName;
     private ArrayList<RouteWaypoint> waypoints;
+    private int startTime;
+    private int finishTime;
+    private String routeId;
 
-    //default constructor
     public Route(){
-        this.name = "dfault";
+        this.routeName = "default";
         this.waypoints = new ArrayList<RouteWaypoint>();
     }
+    public void setRouteId(String id) { this.routeId = id; }
 
-    public String getName() {
-        return name;
+    public String getRouteName() {
+        return routeName;
     }
+    public String getRouteId() { return routeId; }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRouteName(String name) {
+        this.routeName = name;
     }
 
     public ArrayList<RouteWaypoint> getWaypoints() {
@@ -30,6 +34,14 @@ public class Route implements Serializable {
 
     public void setWaypoints(ArrayList waypoints) {
         this.waypoints = waypoints;
+    }
+
+    public int getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(int startTime) {
+        this.startTime = startTime;
     }
 
     public void addWaypoint(RouteWaypoint waypoint){
