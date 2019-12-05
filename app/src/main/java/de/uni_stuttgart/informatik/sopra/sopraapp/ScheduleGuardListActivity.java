@@ -12,26 +12,17 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class GuardListActivity extends AppCompatActivity {
+public class ScheduleGuardListActivity extends AppCompatActivity {
 
     Button btnCancel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_guard_list);
+        setContentView(R.layout.activity_schedule_guard_list);
 
         DatabaseGuard guardDatabase = new DatabaseGuard(this);
-        btnCancel = findViewById(R.id.btnCancel);
         ListView listView = findViewById(R.id.guardList);
 
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                GuardActivity.newGuard = true;
-                Intent intent = new Intent(view.getContext(), GuardActivity.class);
-                startActivity(intent);
-            }
-        });
         ArrayList<String> guardStringList = new ArrayList<>();
 
         for(Guard guard : guardDatabase.getAllGuards()){
@@ -49,12 +40,13 @@ public class GuardListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Intent intent = new Intent(view.getContext(), GuardActivity.class);
-                GuardActivity.newGuard = false;
+                Intent intent = new Intent(view.getContext(), ScheduleActivity.class);
+
                 //EIGENTLICH: Item.at(position) oder so ...
-                int guardId = Integer.parseInt(guardDatabase.getAllGuards().get(position).getUserId());
-                intent.putExtra("editedGuardId", guardId);
+                Guard selectedGuard = guardDatabase.getAllGuards().get(position);
+                intent.putExtra("selectedGuard", selectedGuard);
                 startActivity(intent);
+                finish();
             }
         });
     }

@@ -20,7 +20,7 @@ public class RouteWaypoint implements Serializable {
     }
 
     public Waypoint getWaypoint() {
-        return waypoint;
+        return this.waypoint;
     }
 
     public void setWaypoint(Waypoint waypoint) {

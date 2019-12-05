@@ -9,7 +9,7 @@
     tools:context=".GuardListActivity">
 
     <ListView
-        android:id="@+id/waypointList"
+        android:id="@+id/guardList"
         android:layout_width="349dp"
         android:layout_height="532dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -18,17 +18,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/btnCancel"
         />
-
-    <Button
-        android:id="@+id/btnCancelWaypoint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Cancel"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/waypointList"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

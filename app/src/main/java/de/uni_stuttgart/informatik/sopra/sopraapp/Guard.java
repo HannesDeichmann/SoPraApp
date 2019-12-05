@@ -9,16 +9,18 @@ public class Guard implements Serializable {
     private String surname;
     private String userId;
     private String userPassword;
-    private static ArrayList<Guard> guardList = new ArrayList<Guard>();
-    public static final int userIdLength = 6;
-    public static final String userIdIndicator = "Login-Daten: ";
 
     public Guard(String forname, String surname, String userId, String userPassword) {
         this.forename = forname;
         this.surname = surname;
         this.userId = userId;
         this.userPassword = userPassword;
-        this.guardList.add(this);
+    }
+    public Guard(String forname, String surname, String userPassword) {
+        this.forename = forname;
+        this.surname = surname;
+        this.userId = "";
+        this.userPassword = userPassword;
     }
 
     public Guard() {
@@ -26,25 +28,16 @@ public class Guard implements Serializable {
         this.surname = "";
         this.userId = "";
         this.userPassword = "";
-        this.guardList.add(this);
     }
 
     @Override
     public String toString(){
         String guardString = "";
-        guardString += "Name: " + this.forename + " ";
-        guardString += this.surname + "; ";
-        guardString += "Login-Daten: " + this.userId + " ";
-        guardString += this.userPassword;
+        guardString +=  this.userId + ": ";
+        guardString += this.forename + " ";
+        guardString += this.surname + ",   ";
+        guardString += "Password: " + this.userPassword;
         return guardString;
-    }
-
-    public static ArrayList<Guard> getGuardList() {
-        return guardList;
-    }
-
-    public static void setGuardList(ArrayList<Guard> guardList) {
-        Guard.guardList = guardList;
     }
 
     public void setForename(String forename) {

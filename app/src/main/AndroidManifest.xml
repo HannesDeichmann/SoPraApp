@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MyTheme.DayNight">
-        <activity android:name=".ScheduleActivity"></activity>
+        <activity android:name=".ScheduleGuardListActivity"></activity>
+        <activity android:name=".ScheduleActivity" />
         <activity android:name=".RouteActivity" />
         <activity android:name=".WaypointListActivity" />
         <activity android:name=".GuardListActivity" />
