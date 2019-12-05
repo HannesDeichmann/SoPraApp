@@ -89,7 +89,7 @@ public class GuardActivity extends AppCompatActivity {
                 createdGuard.setForename(etForenameRef.getText().toString());
                 createdGuard.setSurname(etSurnameRef.getText().toString());
                 createdGuard.setUserPassword(etPasswordRef.getText().toString());
-                if(!newGuard) guardDatabase.addGuard(createdGuard);
+                if(newGuard) guardDatabase.addGuard(createdGuard);
                 else{
                     guardDatabase.deleteGuard(guardDatabase.getGuardById(Integer.parseInt(tvGuardIdRef.getText().toString())));
                     guardDatabase.editGuardById(Integer.parseInt(tvGuardIdRef.getText().toString()), createdGuard);

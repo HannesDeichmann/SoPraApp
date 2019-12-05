@@ -1,27 +1,34 @@
 package de.uni_stuttgart.informatik.sopra.sopraapp;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
-public class Route {
+public class Route implements Serializable {
 
     private String routeName;
-    private ArrayList<Waypoint> waypoints;
+    private ArrayList<RouteWaypoint> waypoints;
+    private int startTime;
+    private int finishTime;
     private String routeId;
 
-    public String getRouteId() { return routeId; }
-
+    public Route(){
+        this.routeName = "default";
+        this.waypoints = new ArrayList<RouteWaypoint>();
+    }
     public void setRouteId(String id) { this.routeId = id; }
 
     public String getRouteName() {
         return routeName;
     }
+    public String getRouteId() { return routeId; }
 
     public void setRouteName(String name) {
         this.routeName = name;
     }
 
-    public ArrayList getWaypoints() {
+    public ArrayList<RouteWaypoint> getWaypoints() {
         return waypoints;
     }
 
@@ -29,5 +36,17 @@ public class Route {
         this.waypoints = waypoints;
     }
 
-    public void addWaypoint(Waypoint waypoint) { this.waypoints.add(waypoint); }
+    public int getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(int startTime) {
+        this.startTime = startTime;
+    }
+
+    public void addWaypoint(RouteWaypoint waypoint){
+        this.waypoints.add(waypoint);
+    }
+
+    public void deleteWaypoint(RouteWaypoint waypoint){ this.waypoints.remove(waypoint); }
 }
