@@ -15,14 +15,16 @@ import java.util.ArrayList;
 public class GuardListActivity extends AppCompatActivity {
 
     Button btnCancel;
+    ListView listView;
+    DatabaseGuard guardDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guard_list);
 
-        DatabaseGuard guardDatabase = new DatabaseGuard(this);
+        guardDatabase = new DatabaseGuard(this);
         btnCancel = findViewById(R.id.btnCancel);
-        ListView listView = findViewById(R.id.guardList);
+        listView = findViewById(R.id.guardList);
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.time.Duration;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,6 +32,11 @@ public class MainActivity extends AppCompatActivity {
         //TODO BUG: Database darf nicht leer sein
         if(databaseGuard.getGuardCount() == 0) {
             databaseGuard.addGuard(new Guard("Damit", "Database", "!= empty"));
+            Route route = new Route();
+            Waypoint dieEckeHinterDemDönerladen= new Waypoint("DieEckeHinterDemDönerladen", "223456", "Tag1", "Hitler");
+            Duration duration = Duration.ofMinutes(600);
+            RouteWaypoint routeWaypoint= new RouteWaypoint(dieEckeHinterDemDönerladen, duration);
+            route.addWaypoint(routeWaypoint);
         }
         if(databaseWaypoint.getWaypointCount() == 0) {
             databaseWaypoint.addWaypoint(new Waypoint("FirstWaypoint", "123456", "Tag", "Note"));

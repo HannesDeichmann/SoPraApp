@@ -50,6 +50,7 @@ public class DatabaseRoute extends SQLiteOpenHelper {
         for(RouteWaypoint w:route.getWaypoints()){
             waypointIdList += DEVIDESTRING + w.getWaypoint().getWaypointId();
         }
+        waypointIdList.substring(1);
         return waypointIdList;
     }
     private String getTimeString(Route route){
@@ -98,7 +99,9 @@ public class DatabaseRoute extends SQLiteOpenHelper {
         timeList = stringIntoArrayList(time);
         if(pointsList.size() == timeList.size())
         for(int i = 0; i<timeList.size(); i++){
-            routeWaypoints.add(new RouteWaypointStrings(pointsList.get(i),timeList.get(i)));
+            if(!pointsList.get(i).isEmpty() && !timeList.get(i).isEmpty()) {
+                routeWaypoints.add(new RouteWaypointStrings(pointsList.get(i), timeList.get(i)));
+            }
         }
         return routeWaypoints;
     }

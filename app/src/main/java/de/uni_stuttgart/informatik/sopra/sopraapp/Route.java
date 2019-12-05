@@ -19,6 +19,14 @@ public class Route implements Serializable {
         this.waypoints = new ArrayList<RouteWaypoint>();
     }
 
+    @Override
+    public String toString(){
+        String string = "";
+        string += routeId + ": ";
+        string += routeName;
+        return string;
+    }
+
     public void setRouteId(String id) { this.routeId = id; }
 
     public String getRouteName() { return routeName; }
