@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Guard implements Serializable {
+
     private ArrayList<GuardRoute> routes = new ArrayList<GuardRoute>();
     private String forename;
     private String surname;

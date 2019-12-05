@@ -15,7 +15,7 @@ public class AdminActivity extends AppCompatActivity {
     Button btnWaypointsRef;
     Button btnGuardsRef;
     Button btnSchedule;
-
+    Button btnProtocol;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +26,7 @@ public class AdminActivity extends AppCompatActivity {
         btnWaypointsRef = findViewById(R.id.btnWaypoints);
         btnGuardsRef = findViewById(R.id.btnGuard);
         btnSchedule = findViewById(R.id.btnSchedule);
+        btnProtocol = findViewById(R.id.btnProtocol);
 
         btnWaypointsRef.setOnClickListener(view -> {
             Intent intent = new Intent(view.getContext(), WaypointActivity.class);
@@ -41,6 +42,10 @@ public class AdminActivity extends AppCompatActivity {
         });
         btnSchedule.setOnClickListener(view -> {
             Intent intent = new Intent(view.getContext(), ScheduleActivity.class);
+            startActivity(intent);
+        });
+        btnProtocol.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(), ProtocolActivity.class);
             startActivity(intent);
         });
     }
