@@ -19,5 +19,6 @@ public class DbContract {
     public static final String TABLE_NAME_ROUTE = "routetable";
     public static final String COLUMN_NAME_ROUTEID = "routeid";
     public static final String COLUMN_NAME_ROUTENAME = "routename";
-    //public static final ArrayList<Waypoint> COLUMN_NAME_ROUTEPOINTLIST = new ArrayList<Waypoint>();
+    public static final String COLUMN_NAME_ROUTETIMELIST = "routetimes";
+    public static final String COLUMN_NAME_ROUTEWAYPOINTIDLIST = "routewaypointid";
 }
