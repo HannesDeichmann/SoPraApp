@@ -13,7 +13,7 @@ public class Route implements Serializable {
     //default constructor
     public Route(){
         this.name = "dfault";
-        this.waypoints = new ArrayList<>();
+        this.waypoints = new ArrayList<RouteWaypoint>();
     }
 
     public String getName() {
@@ -24,7 +24,7 @@ public class Route implements Serializable {
         this.name = name;
     }
 
-    public ArrayList getWaypoints() {
+    public ArrayList<RouteWaypoint> getWaypoints() {
         return waypoints;
     }
 

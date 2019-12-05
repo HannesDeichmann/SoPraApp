@@ -12,11 +12,13 @@ import android.widget.ListView;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 public class WaypointListActivity extends AppCompatActivity implements DurratoinDialog.DurationDialogListener {
     private Intent intent;
     private Duration duration;
     private Waypoint waypoint;
+    private Route route;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,16 +49,19 @@ public class WaypointListActivity extends AppCompatActivity implements Durratoin
             if(getIntent().getStringExtra("root").equals("WaypointActivity")) {
                 intent = new Intent(view.getContext(), WaypointActivity.class);
                 intent.putExtra("deleteWaypoint", string);
+
                 startActivity(intent);
                 finish();
-
             }else if(getIntent().getStringExtra("root").equals("RouteCreationActivity")){
-                Route route = (Route) getIntent().getExtras().get("routeObj");
-                intent = new Intent(view.getContext(), RouteCreationActivity.class);
+              //  intent = new Intent(view.getContext(), RouteCreationActivity.class);
+                route = (Route) getIntent().getExtras().get("route");
                 openDialog();
+                intent = new Intent(view.getContext(),RouteCreationActivity.class);
+
             }else{
                 //intent extra should be one of the checked above
             }
+
         });
 
     }
@@ -65,13 +70,13 @@ public class WaypointListActivity extends AppCompatActivity implements Durratoin
         DurratoinDialog duration = new DurratoinDialog();
         duration.show(getSupportFragmentManager(),"duration dialog");
     }
-
     @Override
     public void applyText(String inputDuration) {
         duration = Duration.ofMinutes(Integer.parseInt(inputDuration));
-        RouteWaypoint routeWaypoint = new RouteWaypoint(waypoint, duration);
-        intent.putExtra("selectedWaypoint", routeWaypoint);
+        route.addWaypoint(new RouteWaypoint(waypoint, duration));
+        intent.putExtra("route",route);
         startActivity(intent);
+        finish();
     }
 }
 
