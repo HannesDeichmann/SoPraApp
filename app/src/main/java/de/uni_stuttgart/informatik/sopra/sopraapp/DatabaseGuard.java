@@ -12,7 +12,7 @@ public class DatabaseGuard extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "GuardData.db";
     public static final String SQL_CREATE_GUARD_ENTRIES = "CREATE TABLE " +
             DbContract.TABLE_NAME_GUARD + "(" +
-            DbContract.COLUMN_NAME_GUARDID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+            DbContract.COLUMN_NAME_GUARDID + " INTEGER PRIMARY KEY," +
             DbContract.COLUMN_NAME_GUARDPASSWORD + " TEXT," +
             DbContract.COLUMN_NAME_GUARDFORNAME + " TEXT," +
             DbContract.COLUMN_NAME_GUARDSURNAME + " TEXT" + " )";
@@ -38,6 +38,29 @@ public class DatabaseGuard extends SQLiteOpenHelper {
         values.put(DbContract.COLUMN_NAME_GUARDPASSWORD, guard.getUserPassword());
         values.put(DbContract.COLUMN_NAME_GUARDFORNAME, guard.getForename());
         values.put(DbContract.COLUMN_NAME_GUARDSURNAME, guard.getSurname());
+        db.insert(DbContract.TABLE_NAME_GUARD, null, values);
+        db.close();
+    }
+
+    //Fixen dann andere damit ersetzen
+    /*public void editGuardById(int id, Guard guard){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        Cursor c = db.rawQuery("UPDATE " + DbContract.TABLE_NAME_GUARD
+                + " SET " + DbContract.COLUMN_NAME_GUARDFORNAME + " =  '"
+                + guard.getForename()
+                + "' WHERE " + DbContract.COLUMN_NAME_GUARDID + " = " + id
+                , null);
+        c.close();
+    }*/
+
+    public void editGuardById(int id, Guard guard){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(DbContract.COLUMN_NAME_GUARDPASSWORD, guard.getUserPassword());
+        values.put(DbContract.COLUMN_NAME_GUARDFORNAME, guard.getForename());
+        values.put(DbContract.COLUMN_NAME_GUARDSURNAME, guard.getSurname());
+        values.put(DbContract.COLUMN_NAME_GUARDID, id);
         db.insert(DbContract.TABLE_NAME_GUARD, null, values);
         db.close();
     }

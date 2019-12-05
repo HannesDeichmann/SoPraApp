@@ -24,13 +24,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //TODO BUG: Database darf nicht leer sein
+
         databaseGuard = new DatabaseGuard(this);
         databaseWaypoint = new DatabaseWaypoint(this);
 
-        databaseGuard.addGuard(new Guard("Erster","Wächter","Password"));
-        databaseWaypoint.addWaypoint(new Waypoint("FirstWaypoint","1111111", "Tag"));
-
+        //TODO BUG: Database darf nicht leer sein
+        if(databaseGuard.getGuardCount() == 0) {
+            databaseGuard.addGuard(new Guard("Damit", "Database", "!= empty"));
+        }
+        if(databaseWaypoint.getWaypointCount() == 0) {
+            databaseWaypoint.addWaypoint(new Waypoint("FirstWaypoint", "123456", "Tag", "Note"));
+        }
 
         tvLoginRef = (TextView) findViewById(R.id.tvLogin);
         btnLoginRef = (Button) findViewById(R.id.btnLogin);

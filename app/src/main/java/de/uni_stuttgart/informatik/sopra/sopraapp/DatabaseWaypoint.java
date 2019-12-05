@@ -12,9 +12,10 @@ public class DatabaseWaypoint extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "WaypointData.db";
     public static final String SQL_CREATE_WAYPOINT_ENTRIES = "CREATE TABLE " +
             DbContract.TABLE_NAME_WAYPOINT + "(" +
-            DbContract.COLUMN_NAME_WAYPOINTID + " TEXT," +
+            DbContract.COLUMN_NAME_WAYPOINTID + " TEXT PRIMARY KEY," +
             DbContract.COLUMN_NAME_WAYPOINTNAME + " TEXT," +
-            DbContract.COLUMN_NAME_WAYPOINTNFC + " TEXT" + " )";
+            DbContract.COLUMN_NAME_WAYPOINTPOSITION+ " TEXT," +
+            DbContract.COLUMN_NAME_WAYPOINTNOTE + " TEXT" + " )";
 
     private static final String SQL_DELETE_WAYPOINT_ENTRIES = "DROP TABLE IF EXISTS " + DbContract.TABLE_NAME_WAYPOINT;
 
@@ -36,7 +37,8 @@ public class DatabaseWaypoint extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(DbContract.COLUMN_NAME_WAYPOINTID, waypoint.getWaypointId());
         values.put(DbContract.COLUMN_NAME_WAYPOINTNAME, waypoint.getWaypointName());
-        values.put(DbContract.COLUMN_NAME_WAYPOINTNFC, waypoint.getWaypointNfcTag());
+        values.put(DbContract.COLUMN_NAME_WAYPOINTPOSITION, waypoint.getWaypointPosition());
+        values.put(DbContract.COLUMN_NAME_WAYPOINTNOTE, waypoint.getWaypointNote());
         db.insert(DbContract.TABLE_NAME_WAYPOINT, null, values);
         db.close();
     }
@@ -54,7 +56,8 @@ public class DatabaseWaypoint extends SQLiteOpenHelper {
     private void addWaypointInfos(Waypoint waypoint, Cursor c){
         waypoint.setWaypointId(c.getString(c.getColumnIndex(DbContract.COLUMN_NAME_WAYPOINTID)));
         waypoint.setWaypointName(c.getString(c.getColumnIndex(DbContract.COLUMN_NAME_WAYPOINTNAME)));
-        waypoint.setWaypointNfcTag(c.getString(c.getColumnIndex(DbContract.COLUMN_NAME_WAYPOINTNFC)));
+        waypoint.setWaypointPosition(c.getString(c.getColumnIndex(DbContract.COLUMN_NAME_WAYPOINTPOSITION)));
+        waypoint.setWaypointNote(c.getString(c.getColumnIndex(DbContract.COLUMN_NAME_WAYPOINTNOTE)));
     }
     public Waypoint getWaypointById(int id) {
         SQLiteDatabase db = this.getReadableDatabase();

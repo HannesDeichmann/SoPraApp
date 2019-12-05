@@ -12,7 +12,9 @@ public class DbContract {
     public static final String TABLE_NAME_WAYPOINT = "waypointtable";
     public static final String COLUMN_NAME_WAYPOINTID = "waypointid";
     public static final String COLUMN_NAME_WAYPOINTNAME = "waypointname";
-    public static final String COLUMN_NAME_WAYPOINTNFC = "waypointnfctag";
+    public static final String COLUMN_NAME_WAYPOINTPOSITION = "waypointposition";
+    public static final String COLUMN_NAME_WAYPOINTNOTE = "waypointnote";
+
 
     public static final String TABLE_NAME_ROUTE = "routetable";
     public static final String COLUMN_NAME_ROUTEID = "routeid";
