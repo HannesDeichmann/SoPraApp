@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -15,44 +16,56 @@ public class RouteCreationActivity extends AppCompatActivity {
     private ArrayList<String> list = new ArrayList<>();
     private ListView selectedWaypointList;
     private ArrayAdapter<String> myArrayAdapter;
-    private Button addWaypointRef;
+    private Button btnAddWaypointRef;
     private Button btnSaveRoute;
     private Button btnDeleteRoute;
-    private TextView tvRouteName;
+    private EditText etRouteName;
     private Route route;
+    DatabaseRoute databaseRoute;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route_creation);
-        route = new Route();
-        selectedWaypointList = findViewById(R.id.selectedWaypointList);
-        addWaypointRef = findViewById(R.id.addWaypoint);
         myArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, list);
+        route = new Route();
+        databaseRoute = new DatabaseRoute(this);
+
+        selectedWaypointList = findViewById(R.id.selectedWaypointList);
+        btnAddWaypointRef = findViewById(R.id.addWaypoint);
         btnSaveRoute = findViewById(R.id.saveRoute);
         btnDeleteRoute = findViewById(R.id.deleteRoute);
-        tvRouteName = findViewById(R.id.routeName);
+        etRouteName = findViewById(R.id.etRouteName);
         selectedWaypointList.setAdapter(myArrayAdapter);
+
+        if(getIntent().hasExtra("editGuard")){
+            Route editRoute = (Route)getIntent().getExtras().get("editRoute");
+            etRouteName.setText(editRoute.getRouteName());
+        } else if(getIntent().hasExtra("route")) {
+            etRouteName.setText(route.getRouteName());
+        }
+
         btnSaveRoute.setOnClickListener(v -> {
-            route.setRouteName(tvRouteName.getText().toString());
-            //TODO add Route Object to Database
+            route.setRouteName(etRouteName.getText().toString());
+            //wegpunkte wurden schon in der Waypointlistaktivity hinzugefügt
+            databaseRoute.addRoute(route);
             i = 0;
             finish();
         });
+
         btnDeleteRoute.setOnClickListener(v -> {
-            //TODO delete route from database
+            databaseRoute.deleteRoute(route);
             i = 0;
             finish();
         });
-        addWaypointRef.setOnClickListener(view -> {
+
+        btnAddWaypointRef.setOnClickListener(view -> {
             Intent intent = new Intent(view.getContext(), WaypointListActivity.class);
             intent.putExtra("root", "RouteCreationActivity");
             intent.putExtra("route", route);
             startActivity(intent);
             finish();
         });
-
-
     }
 
     private static int i = 0;
