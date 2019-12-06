@@ -28,13 +28,13 @@ public class GuardModeRouteListActivity extends AppCompatActivity {
 
         ///////////////////////////////////////////////////
         Route route = new Route();
-        route.setRouteName("Route um die Ecke The One");
+        route.setRouteName("Route um die Ecke The One (HartCode)");
         route.setRouteId("123123");
         Route route2 = new Route();
-        route2.setRouteName("Route um die Ecke2/3");
-        Waypoint DieEckeHinterDemDönerladen= new Waypoint("Die Ecke Hinter Dem Doenerladen", "123456", "Tag1", "Bitte schnell laufen");
-        Waypoint DieEckeVorDemDönerladen= new Waypoint("Die Ecke Vor Dem Doenerladen", "223456", "Tag2", "Noch schneller bitte");
-        Waypoint DieEckeHinterDemDönerladenTheRevenge= new Waypoint("Die Ecke Hinter Dem Doenerladen The Revenge", "323456", "Tag3", "Und nicht stolpern");
+        route2.setRouteName("Route um die Ecke2/3 (HartCode)");
+        Waypoint DieEckeHinterDemDönerladen= new Waypoint("Die Ecke Hinter Dem Doenerladen(HartCode)", "123456", "Tag1", "Bitte schnell laufen");
+        Waypoint DieEckeVorDemDönerladen= new Waypoint("Die Ecke Vor Dem Doenerladen(HartCode)", "223456", "Tag2", "Noch schneller bitte");
+        Waypoint DieEckeHinterDemDönerladenTheRevenge= new Waypoint("Die Ecke Hinter Dem Doenerladen The Revenge(HartCode)", "323456", "Tag3", "Und nicht stolpern");
         String minutes1 = "1";
         String minutes2 = "5";
         String minutes3 = "3";
@@ -51,21 +51,21 @@ public class GuardModeRouteListActivity extends AppCompatActivity {
         GuardRoute guardRoute2 = new GuardRoute(route2, "1401");
         GuardRoute guardRoute3 = new GuardRoute(route2, "1401");
         Guard otto = new Guard("Otto", "Muellerich", "2", "1234");
-        otto.addRoute(guardRoute1);
-        otto.addRoute(guardRoute2);
-        otto.addRoute(guardRoute3);
-        Guard loggedInGuard = otto;
+
+        //Guard loggedInGuard = otto;
         ///////////////////////////////////////////////////////////
 
-        //Guard loggedInGuard = (Guard) getIntent().getExtras().get("loggedInGuard");
+        Guard loggedInGuard = (Guard) getIntent().getExtras().get("loggedInGuard");
+        loggedInGuard.addRoute(guardRoute1);
+        loggedInGuard.addRoute(guardRoute2);
+        loggedInGuard.addRoute(guardRoute3);
         ArrayList<GuardRoute> guardRouteList = loggedInGuard.getGuardRouteList();
 
         ArrayList<String> routeStringList = new ArrayList<>();
 
 
         for(GuardRoute guardRoute : guardRouteList){
-                routeStringList.add(guardRoute.getRoute().getRouteName());
-
+            routeStringList.add(guardRoute.getRoute().getRouteName());
         }
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(
