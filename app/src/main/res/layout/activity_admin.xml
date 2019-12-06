@@ -15,7 +15,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="@string/admin_modus"
+        android:text="@string/admin_mode"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@id/btnRoutes"
         app:layout_constraintEnd_toEndOf="parent"

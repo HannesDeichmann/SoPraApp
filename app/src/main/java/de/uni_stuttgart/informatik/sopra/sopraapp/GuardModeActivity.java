@@ -25,7 +25,7 @@ public class GuardModeActivity extends AppCompatActivity {
         btnSelectARouteToStartRef = findViewById(R.id.btnSelectARouteToStart);
         btnLogOutRef = findViewById(R.id.btnLogOut);
         tvUsernameRef = findViewById(R.id.tvUsername);
-        tvUsernameRef.setText(loggedInGuard.getUserId());
+        tvUsernameRef.setText(loggedInGuard.getForename()+ " " + loggedInGuard.getSurname());
 
         btnSelectARouteToStartRef.setOnClickListener(new View.OnClickListener() {
             @Override

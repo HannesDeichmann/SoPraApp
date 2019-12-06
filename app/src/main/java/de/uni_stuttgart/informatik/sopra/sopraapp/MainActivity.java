@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     String guardUsername;
     String guardPassword;
     TextView tvLoginFeedbackRef;
+    boolean loggedIn;
     private Duration duration;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +43,10 @@ public class MainActivity extends AppCompatActivity {
         if(databaseWaypoint.getWaypointCount() == 0) {
             databaseWaypoint.addWaypoint(new Waypoint("FirstWaypoint", "123456", "Tag", "Note"));
         }
-        Guard otto = new Guard("otto", "müllerich", "2", "1234");
+        /*Guard otto = new Guard("Otto", "Muellerich", "2", "1234");
         databaseGuard = new DatabaseGuard(this);
         databaseGuard.addGuard(otto);
-
+        */
         tvLoginRef = (TextView) findViewById(R.id.tvLogin);
         btnAdminLoginRef = (Button) findViewById(R.id.btnAdminLogin);
         etUsernameRef = findViewById(R.id.etUsername);
@@ -67,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 guardUsername=etUsernameRef.getText().toString();
                 guardPassword=etPasswordRef.getText().toString();
+                loggedIn=false;
 
                 //the admin mode is accessable with the username "admin and password "admin"
                 if(guardUsername.equals("admin") && guardPassword.equals("admin")){
@@ -80,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
                     for (Guard guard : databaseGuard.getAllGuards()) {
                         if (guard.getUserId().equals(guardUsername)) {
                             if (guard.getUserPassword().equals(guardPassword)) {
+                                loggedIn = true;
                                 Intent intent = new Intent(view.getContext(), GuardModeActivity.class);
                                 intent.putExtra("loggedInGuard", guard);
                                 startActivity(intent);
@@ -92,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                     }
-                    if (!tvLoginFeedbackRef.getText().toString().equals("Wrong password")) {
+                    if (!loggedIn && !tvLoginFeedbackRef.getText().equals("Wrong password")) {
                         tvLoginFeedbackRef.setText("No such username");
                     }
                 }

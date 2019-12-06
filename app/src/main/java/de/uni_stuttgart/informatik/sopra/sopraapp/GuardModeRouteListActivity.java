@@ -15,7 +15,9 @@ import java.util.ArrayList;
 public class GuardModeRouteListActivity extends AppCompatActivity {
 
 
-    private Duration duration;
+    private Duration duration1;
+    private Duration duration2;
+    private Duration duration3;
     DatabaseGuard databaseGuard;
 
     @Override
@@ -30,23 +32,25 @@ public class GuardModeRouteListActivity extends AppCompatActivity {
         route.setRouteId("123123");
         Route route2 = new Route();
         route2.setRouteName("Route um die Ecke2/3");
-        Waypoint DieEckeHinterDemDönerladen= new Waypoint("DieEckeHinterDemDoenerladen", "123456", "Tag1", "Hitler");
-        Waypoint DieEckeVorDemDönerladen= new Waypoint("DieEckeVorDemDoenerladen", "223456", "Tag2", "Hitler");
-        Waypoint DieEckeHinterDemDönerladenTheRevenge= new Waypoint("DieEckeHinterDemDoenerladenTheRevenge", "323456", "Tag3", "Hitler");
-        String minutes = "2";
-        duration = Duration.ofMinutes(Integer.parseInt(minutes));
-        RouteWaypoint routeWaypoint1= new RouteWaypoint(DieEckeHinterDemDönerladen, duration);
-        RouteWaypoint routeWaypoint2= new RouteWaypoint(DieEckeVorDemDönerladen, duration);
-        RouteWaypoint routeWaypoint3= new RouteWaypoint(DieEckeHinterDemDönerladenTheRevenge, duration);
+        Waypoint DieEckeHinterDemDönerladen= new Waypoint("Die Ecke Hinter Dem Doenerladen", "123456", "Tag1", "Bitte schnell laufen");
+        Waypoint DieEckeVorDemDönerladen= new Waypoint("Die Ecke Vor Dem Doenerladen", "223456", "Tag2", "Noch schneller bitte");
+        Waypoint DieEckeHinterDemDönerladenTheRevenge= new Waypoint("Die Ecke Hinter Dem Doenerladen The Revenge", "323456", "Tag3", "Und nicht stolpern");
+        String minutes1 = "1";
+        String minutes2 = "5";
+        String minutes3 = "3";
+        duration1 = Duration.ofMinutes(Integer.parseInt(minutes1));
+        duration2 = Duration.ofMinutes(Integer.parseInt(minutes2));
+        duration3 = Duration.ofMinutes(Integer.parseInt(minutes3));
+        RouteWaypoint routeWaypoint1= new RouteWaypoint(DieEckeHinterDemDönerladen, duration1);
+        RouteWaypoint routeWaypoint2= new RouteWaypoint(DieEckeVorDemDönerladen, duration2);
+        RouteWaypoint routeWaypoint3= new RouteWaypoint(DieEckeHinterDemDönerladenTheRevenge, duration3);
         route.addWaypoint(routeWaypoint1);
         route.addWaypoint(routeWaypoint2);
         route.addWaypoint(routeWaypoint3);
         GuardRoute guardRoute1 = new GuardRoute(route, "1401");
         GuardRoute guardRoute2 = new GuardRoute(route2, "1401");
         GuardRoute guardRoute3 = new GuardRoute(route2, "1401");
-        Guard otto = new Guard("otto", "muellerich", "2", "1234");
-        databaseGuard = new DatabaseGuard(this);
-        databaseGuard.addGuard(otto);
+        Guard otto = new Guard("Otto", "Muellerich", "2", "1234");
         otto.addRoute(guardRoute1);
         otto.addRoute(guardRoute2);
         otto.addRoute(guardRoute3);
@@ -63,8 +67,6 @@ public class GuardModeRouteListActivity extends AppCompatActivity {
                 routeStringList.add(guardRoute.getRoute().getRouteName());
 
         }
-
-        routeStringList.add(loggedInGuard.getForename());
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(
                 this,

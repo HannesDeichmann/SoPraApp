@@ -10,19 +10,17 @@
         android:id="@+id/tvStartTime"
         android:layout_width="72dp"
         android:layout_height="24dp"
-        android:layout_marginStart="268dp"
         android:layout_marginTop="14dp"
         android:text="@string/start_time"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvRouteName"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvTime"
-        android:layout_width="50dp"
+        android:layout_width="63dp"
         android:layout_height="24dp"
-        android:layout_marginStart="356dp"
         android:layout_marginTop="14dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvStartTime"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -37,23 +35,32 @@
 
     <TextView
         android:id="@+id/tvRouteName"
-        android:layout_width="186dp"
-        android:layout_height="24dp"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
         android:layout_marginTop="14dp"
-        android:layout_marginEnd="155dp"
         android:text=""
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvRoute"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvNextWaypointName"
         android:layout_width="236dp"
         android:layout_height="60dp"
-        android:layout_marginStart="156dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="50dp"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvNextWaypoint"
         app:layout_constraintTop_toBottomOf="@+id/tvRouteName" />
+
+    <TextView
+        android:id="@+id/tvNote"
+        android:layout_width="236dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="30dp"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/tvWaypointNote"
+        app:layout_constraintTop_toBottomOf="@+id/tvNextWaypointName" />
 
     <TextView
         android:id="@+id/tvNextWaypoint"
@@ -67,56 +74,98 @@
         app:layout_constraintTop_toBottomOf="@+id/tvRouteName" />
 
     <TextView
-        android:id="@+id/tvRemainingTime"
-        android:layout_width="152dp"
+        android:id="@+id/tvWaypointNote"
+        android:layout_width="130dp"
         android:layout_height="60dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/note"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNextWaypoint" />
+
+    <TextView
+        android:id="@+id/tvRemainingTime"
+        android:layout_width="145dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="22dp"
         android:text="@string/remaining_time"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvNextWaypointName" />
+        app:layout_constraintTop_toBottomOf="@+id/tvWaypointNote" />
 
     <TextView
         android:id="@+id/tvCountdown"
         android:layout_width="69dp"
         android:layout_height="60dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:background="#00692C2C"
         android:text="@string/next_waypoint"
+        android:textColor="#CE8B2D00"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/tvRemainingTime"
-        app:layout_constraintTop_toBottomOf="@+id/tvNextWaypointName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvRemainingTime"
         tools:text="00:00" />
 
     <Button
         android:id="@+id/btnStartCountdown"
         android:layout_width="109dp"
         android:layout_height="60dp"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="5dp"
         android:text="@string/start"
-        app:layout_constraintStart_toEndOf="@+id/tvCountdown"
-        app:layout_constraintTop_toBottomOf="@+id/tvNextWaypointName" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCountdown" />
 
     <Button
         android:id="@+id/btnScanWaypoint"
         android:layout_width="161dp"
         android:layout_height="67dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:foregroundTint="#FFFFFF"
         android:text="@string/scan_waypoint"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCountdown" />
+        app:layout_constraintTop_toBottomOf="@+id/btnStartCountdown" />
 
     <TextView
         android:id="@+id/tvScanFeedback"
-        android:layout_width="267dp"
-        android:layout_height="40dp"
+        android:layout_width="176dp"
+        android:layout_height="106dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
         android:textAlignment="center"
         android:textColor="#E91E1E"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnScanWaypoint" />
+
+    <Button
+        android:id="@+id/btnCancelActiveRoute"
+        android:layout_width="151dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="5dp"
+        android:text="@string/cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ListView
+        android:id="@+id/lvCompleteRoute"
+        android:layout_width="172dp"
+        android:layout_height="392dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tvCompleteRoute"
+        android:layout_width="172dp"
+        android:layout_height="33dp"
+        android:layout_marginEnd="5dp"
+        android:text="@string/complete_route"
+        app:layout_constraintBottom_toTopOf="@+id/lvCompleteRoute"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

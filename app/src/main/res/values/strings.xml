@@ -46,6 +46,8 @@
     <string name="remaining_time">Remaining time:</string>
     <string name="next_waypoint">Next waypoint:</string>
     <string name="start">Start</string>
-    <string name="admin_modus">admin_modus</string>
     <string name="scan_waypoint">Scan Waypoint</string>
+    <string name="note">Note:</string>
+    <string name="cancel">Cancel</string>
+    <string name="complete_route">Complete Route:</string>
 </resources>
