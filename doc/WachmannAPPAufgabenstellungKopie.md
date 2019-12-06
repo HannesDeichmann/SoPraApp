@@ -19,7 +19,7 @@ Der Admin nutzt die App, um Wegmarken und Patrouillen (Liste von Wegmarken) sowi
 
 - Aufwandsschätzung: *TODO*
 - Akzeptanztests:
-  - [ ] Wegmarken können erstellt werden.
+  - [X] Wegmarken können erstellt werden.
   - [ ] Wegmarken haben Namen, Position, ID/Barcode, Bemerkung
   - [ ] Wegmarken können bearbeitet und gelöscht werden. 
   - [ ] Patrouillen können aus beliebig vielen Wegmarken erstellt werden. 
