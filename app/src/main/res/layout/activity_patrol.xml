@@ -98,4 +98,25 @@
         android:text="@string/start"
         app:layout_constraintStart_toEndOf="@+id/tvCountdown"
         app:layout_constraintTop_toBottomOf="@+id/tvNextWaypointName" />
+
+    <Button
+        android:id="@+id/btnScanWaypoint"
+        android:layout_width="161dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="36dp"
+        android:text="@string/scan_waypoint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCountdown" />
+
+    <TextView
+        android:id="@+id/tvScanFeedback"
+        android:layout_width="267dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center"
+        android:textColor="#E91E1E"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnScanWaypoint" />
 </androidx.constraintlayout.widget.ConstraintLayout>

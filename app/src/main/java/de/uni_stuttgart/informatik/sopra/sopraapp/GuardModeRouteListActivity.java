@@ -27,15 +27,23 @@ public class GuardModeRouteListActivity extends AppCompatActivity {
         ///////////////////////////////////////////////////
         databaseGuard = new DatabaseGuard(this);
         Route route = new Route();
-        route.setRouteName("Route um die Ecke");
-        Waypoint DieEckeHinterDemDönerladen= new Waypoint("DieEckeHinterDemDönerladen", "223456", "Tag1", "Hitler");
+        route.setRouteName("Route um die Ecke The One");
+        Route route2 = new Route();
+        route2.setRouteName("Route um die Ecke2/3");
+        Waypoint DieEckeHinterDemDönerladen= new Waypoint("DieEckeHinterDemDönerladen", "123456", "Tag1", "Hitler");
+        Waypoint DieEckeVorDemDönerladen= new Waypoint("DieEckeVorDemDönerladen", "223456", "Tag2", "Hitler");
+        Waypoint DieEckeHinterDemDönerladenTheRevenge= new Waypoint("DieEckeHinterDemDönerladenTheRevenge", "323456", "Tag3", "Hitler");
         String minutes = "2";
         duration = Duration.ofMinutes(Integer.parseInt(minutes));
-        RouteWaypoint routeWaypoint= new RouteWaypoint(DieEckeHinterDemDönerladen, duration);
-        route.addWaypoint(routeWaypoint);
+        RouteWaypoint routeWaypoint1= new RouteWaypoint(DieEckeHinterDemDönerladen, duration);
+        RouteWaypoint routeWaypoint2= new RouteWaypoint(DieEckeVorDemDönerladen, duration);
+        RouteWaypoint routeWaypoint3= new RouteWaypoint(DieEckeHinterDemDönerladenTheRevenge, duration);
+        route.addWaypoint(routeWaypoint1);
+        route.addWaypoint(routeWaypoint2);
+        route.addWaypoint(routeWaypoint3);
         GuardRoute guardRoute1 = new GuardRoute(route, "1401");
-        GuardRoute guardRoute2 = new GuardRoute(route, "1401");
-        GuardRoute guardRoute3 = new GuardRoute(route, "1401");
+        GuardRoute guardRoute2 = new GuardRoute(route2, "1401");
+        GuardRoute guardRoute3 = new GuardRoute(route2, "1401");
         Guard otto = new Guard("otto", "müllerich", "2", "1234");
         otto.addRoute(guardRoute1);
         otto.addRoute(guardRoute2);
@@ -72,7 +80,7 @@ public class GuardModeRouteListActivity extends AppCompatActivity {
                 intent.putExtra("selectedRoute", selectedRoute);
                 intent.putExtra("loggedInGuard", loggedInGuard);
                 startActivity(intent);
-
+                finish();
             }
         });
     }

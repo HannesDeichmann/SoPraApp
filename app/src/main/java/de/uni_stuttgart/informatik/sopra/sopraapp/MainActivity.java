@@ -43,23 +43,6 @@ public class MainActivity extends AppCompatActivity {
             databaseWaypoint.addWaypoint(new Waypoint("FirstWaypoint", "123456", "Tag", "Note"));
         }
 
-
-        Route route = new Route();
-        Waypoint DieEckeHinterDemDönerladen= new Waypoint("DieEckeHinterDemDönerladen", "223456", "Tag1", "Hitler");
-        String minutes = "600";
-        duration = Duration.ofMinutes(Integer.parseInt(minutes));
-        RouteWaypoint routeWaypoint= new RouteWaypoint(DieEckeHinterDemDönerladen, duration);
-        route.addWaypoint(routeWaypoint);
-        GuardRoute guardRoute1 = new GuardRoute(route, "1401");
-        GuardRoute guardRoute2 = new GuardRoute(route, "1401");
-        GuardRoute guardRoute3 = new GuardRoute(route, "1401");
-
-        Guard otto = new Guard("otto", "müllerich", "1234");
-        otto.addRoute(guardRoute1);
-        otto.addRoute(guardRoute2);
-        otto.addRoute(guardRoute3);
-        databaseGuard.addGuard(otto);
-
         tvLoginRef = (TextView) findViewById(R.id.tvLogin);
         btnAdminLoginRef = (Button) findViewById(R.id.btnAdminLogin);
         etUsernameRef = findViewById(R.id.etUsername);
