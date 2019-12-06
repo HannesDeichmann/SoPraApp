@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PatrolActivity">
+
+    <TextView
+        android:id="@+id/tvStartTime"
+        android:layout_width="72dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="268dp"
+        android:layout_marginTop="14dp"
+        android:text="@string/start_time"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="50dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="356dp"
+        android:layout_marginTop="14dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvRoute"
+        android:layout_width="49dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="14dp"
+        android:text="@string/route"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvRouteName"
+        android:layout_width="186dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="155dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvNextWaypointName"
+        android:layout_width="236dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="50dp"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvRouteName" />
+
+    <TextView
+        android:id="@+id/tvNextWaypoint"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/next_waypoint"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvRouteName" />
+
+    <TextView
+        android:id="@+id/tvRemainingTime"
+        android:layout_width="152dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="112dp"
+        android:text="@string/remaining_time"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNextWaypointName" />
+
+    <TextView
+        android:id="@+id/tvCountdown"
+        android:layout_width="69dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="112dp"
+        android:text="@string/next_waypoint"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/tvRemainingTime"
+        app:layout_constraintTop_toBottomOf="@+id/tvNextWaypointName"
+        tools:text="00:00" />
+
+    <Button
+        android:id="@+id/btnStartCountdown"
+        android:layout_width="109dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="112dp"
+        android:text="@string/start"
+        app:layout_constraintStart_toEndOf="@+id/tvCountdown"
+        app:layout_constraintTop_toBottomOf="@+id/tvNextWaypointName" />
+</androidx.constraintlayout.widget.ConstraintLayout>

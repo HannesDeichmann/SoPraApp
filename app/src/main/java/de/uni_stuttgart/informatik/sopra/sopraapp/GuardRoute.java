@@ -1,11 +1,12 @@
 package de.uni_stuttgart.informatik.sopra.sopraapp;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.stream.Stream;
 
-public class GuardRoute {
+public class GuardRoute implements Serializable {
     private Route route;
     private String time;
 
