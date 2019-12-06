@@ -1,8 +1,11 @@
 package de.uni_stuttgart.informatik.sopra.sopraapp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Guard {
+public class Guard implements Serializable {
+
+    private ArrayList<GuardRoute> routes = new ArrayList<GuardRoute>();
     private String forename;
     private String surname;
     private String userId;
@@ -68,5 +71,13 @@ public class Guard {
 
     public String getUserPassword() {
         return userPassword;
+    }
+
+    public ArrayList<GuardRoute> getRoutes() {
+        return routes;
+    }
+
+    public void addRoute(GuardRoute route) {
+        this.routes.add(route);
     }
 }

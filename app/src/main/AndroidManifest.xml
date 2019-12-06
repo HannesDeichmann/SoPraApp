@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.uni_stuttgart.informatik.sopra.sopraapp">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +10,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MyTheme.DayNight">
-        <activity android:name=".RouteActivity"></activity>
+        <activity android:name=".PatrolActivity"></activity>
+        <activity android:name=".ScheduleGuardListActivity" />
+        <activity android:name=".ProtocolActivity"></activity>
+        <activity android:name=".ScheduleGuardListActivity" />
+
+        <activity android:name=".GuardModeRouteListActivity" />
+        <activity android:name=".ScheduleActivity" />
+        <activity android:name=".RouteActivity" />
+        <activity android:name=".GuardModeActivity" />
         <activity android:name=".WaypointListActivity" />
         <activity android:name=".GuardListActivity" />
         <activity android:name=".GuardActivity" />
@@ -24,5 +33,6 @@
         </activity>
         <activity android:name=".AdminActivity" />
     </application>
+
 
 </manifest>
