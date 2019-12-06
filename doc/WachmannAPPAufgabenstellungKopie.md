@@ -20,11 +20,11 @@ Der Admin nutzt die App, um Wegmarken und Patrouillen (Liste von Wegmarken) sowi
 - Aufwandsschätzung: *TODO*
 - Akzeptanztests:
   - [X] Wegmarken können erstellt werden.
-  - [ ] Wegmarken haben Namen, Position, ID/Barcode, Bemerkung
-  - [ ] Wegmarken können bearbeitet und gelöscht werden. 
-  - [ ] Patrouillen können aus beliebig vielen Wegmarken erstellt werden. 
-  - [ ] Patrouillen können bearbeitet und gelöscht werden. 
-  - [ ] Nach vorhandenen Wegmarken und Patrouillen kann gesucht werden. 
+  - [X] Wegmarken haben Namen, Position, ID/Barcode, Bemerkung
+  - [X] Wegmarken können bearbeitet und gelöscht werden. 
+  - [X] Patrouillen können aus beliebig vielen Wegmarken erstellt werden. 
+  - [X] Patrouillen können bearbeitet und gelöscht werden. 
+  - [ ] Nach vorhandenen Wegmarken und Patrouillen kann gesucht werden.  //nur aus liste selbst ausgewählt
 
 
 ### Planen von Zeitfenster für Patrouillen/Wegmarken (Admin-Modus)
@@ -35,9 +35,9 @@ Der Admin nutzt die App, um Wegmarken und Patrouillen (Liste von Wegmarken) sowi
 
 - Aufwandsschätzung: *TODO*
 - Akzeptanztests:
-  - [ ] Zeitfenster/Zeiten können erstellt werden.
-  - [ ] Zeitfenster/Zeiten können bearbeitet und gelöscht werden. 
-  - [ ] Nach vorhandenen Zeitfenstern/Zeiten kann gesucht werden. 
+  - [X] Zeitfenster/Zeiten können erstellt werden.
+  - [X] Zeitfenster/Zeiten können bearbeitet und gelöscht werden. 
+  - [ ] Nach vorhandenen Zeitfenstern/Zeiten kann gesucht werden. //Zeiten werden direkt zu jeden Wegpunkt bei dem zur Route hinzufügen individuel hinzugefügt
   - [ ] Zeitfenster/Zeiten können in einer Patrouille den Wegpunkten zugeordnet werden. 
  
 
@@ -46,10 +46,10 @@ Der Admin nutzt die App, um Wegmarken und Patrouillen (Liste von Wegmarken) sowi
 
 - Aufwandsschätzung: *TODO*
 - Akzeptanztests:
-  - [ ] Es gibt eine Übersicht über abgelaufene Patrouillen.
+  - [X] Es gibt eine Übersicht über abgelaufene Patrouillen.
   - [ ] Für jede Patrouille gibt es eine Übersicht (chronologisch) über die Gesamtdauer und die abgelaufenen (und verpassten) Wegmarken (mit Soll- und ist Zeit).
-  - [ ] Komplette Patrouillen-Parotokolle können gelöscht werden (ggf. mit Mehrfach-Selektion).
-  - [ ] Einzelne Daten, insbesondere Ist-Zeiten der Scans, können nicht gelöscht werden. 
+  - [X] Komplette Patrouillen-Parotokolle können gelöscht werden (ggf. mit Mehrfach-Selektion).//exportierte Datei kann gelöscht werden
+  - [X] Einzelne Daten, insbesondere Ist-Zeiten der Scans, können nicht gelöscht werden. 
   
 
 ### Ablaufen und Abhaken von Patrouillen (Wachmann-Modus)
@@ -57,8 +57,8 @@ Der Admin nutzt die App, um Wegmarken und Patrouillen (Liste von Wegmarken) sowi
 
 - Aufwandsschätzung: *TODO*
 - Akzeptanztests:
-  - [ ] Nach Beginn eine Patrouille wird mir die nächste Wegmarke angezeigt: Name, Position, Bemerkung sowie den Zeitpunkt, an dem ich dort scannen sollte.
-  - [ ] Nach Erreichen einer Wegmarke wird nach dem Scannen automatisch die nächste Wegmarke angezeigt.
-  - [ ] Es kann jederzeit die gesamte Patrouille angezeigt werden, um Pausen besser einplanen zu können. 
+  - [X] Nach Beginn eine Patrouille wird mir die nächste Wegmarke angezeigt: Name, Position, Bemerkung sowie den Zeitpunkt, an dem ich dort scannen sollte.
+  - [X] Nach Erreichen einer Wegmarke wird nach dem Scannen automatisch die nächste Wegmarke angezeigt.
+  - [X] Es kann jederzeit die gesamte Patrouille angezeigt werden, um Pausen besser einplanen zu können. 
  
 
