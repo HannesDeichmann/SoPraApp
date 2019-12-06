@@ -16,7 +16,15 @@ public class GuardRoute implements Serializable {
     }
     public GuardRoute(){
         this.route = new Route();
-        this.time = "";
+        this.time = "-1";
+    }
+
+    @Override
+    public String toString(){
+        String string = "";
+        string += this.route.toString();
+        string += " | " + this.time;
+        return string;
     }
 
     public String getTime() {

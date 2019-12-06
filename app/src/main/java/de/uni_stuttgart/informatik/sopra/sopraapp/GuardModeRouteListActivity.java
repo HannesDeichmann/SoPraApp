@@ -54,7 +54,7 @@ public class GuardModeRouteListActivity extends AppCompatActivity {
         ///////////////////////////////////////////////////////////
 
         //Guard loggedInGuard = (Guard) getIntent().getExtras().get("loggedInGuard");
-        ArrayList<GuardRoute> guardRouteList = loggedInGuard.getRoutes();
+        ArrayList<GuardRoute> guardRouteList = loggedInGuard.getGuardRouteList();
 
         ArrayList<String> routeStringList = new ArrayList<>();
 

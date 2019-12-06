@@ -19,6 +19,7 @@ public class DatabaseGuard extends SQLiteOpenHelper {
             DbContract.COLUMN_NAME_GUARDSURNAME + " TEXT," +
             DbContract.COLUMN_NAME_GUARDROUTEIDLIST + " TEXT," +
             DbContract.COLUMN_NAME_GUARDSTARTTIMELIST + " TEXT" + " )";
+    private static boolean guardWithRoutes = false;
 
     private static final String SQL_DELETE_GUARD_ENTRIES = "DROP TABLE IF EXISTS " + DbContract.TABLE_NAME_GUARD;
 
@@ -52,8 +53,8 @@ public class DatabaseGuard extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = db.rawQuery("UPDATE " + DbContract.TABLE_NAME_GUARD
                 + " SET " +
-                DbContract.COLUMN_NAME_GUARDSTARTTIMELIST + " = '" + guard.getTimeListString() + "', " +
-                DbContract.COLUMN_NAME_GUARDROUTEIDLIST + " = '" + guard.getRouteIdListString() + "' WHERE " +
+                DbContract.COLUMN_NAME_GUARDROUTEIDLIST + " = '" + guard.getRouteIdListString() + "', " +
+                DbContract.COLUMN_NAME_GUARDSTARTTIMELIST + " = '" + guard.getTimeListString() + "' WHERE " +
                 DbContract.COLUMN_NAME_GUARDID + " = " + guard.getUserId(), null);
         c.moveToFirst();
         c.close();
@@ -82,15 +83,19 @@ public class DatabaseGuard extends SQLiteOpenHelper {
         return guard;
     }
 
+    public Guard getGuardWithRoutes(Guard guard){
+        this.guardWithRoutes = true;
+        return this.getGuardById(Integer.parseInt(guard.getUserId()));
+    }
     private void addGuardInfos(Guard guard, Cursor c) {
         guard.setUserPassword(c.getString(c.getColumnIndex(DbContract.COLUMN_NAME_GUARDPASSWORD)));
         guard.setForename(c.getString(c.getColumnIndex(DbContract.COLUMN_NAME_GUARDFORNAME)));
         guard.setSurname(c.getString(c.getColumnIndex(DbContract.COLUMN_NAME_GUARDSURNAME)));
         guard.setUserId(c.getString(c.getColumnIndex(DbContract.COLUMN_NAME_GUARDID)));
-        if (!c.getString(c.getColumnIndex(DbContract.COLUMN_NAME_GUARDROUTEIDLIST)).equals("") &&
-                !c.getString(c.getColumnIndex(DbContract.COLUMN_NAME_ROUTETIMELIST)).equals("")) {
+        if(guardWithRoutes){
             guard.setRouteIdString(DbContract.stringIntoArrayList(c.getString(c.getColumnIndex(DbContract.COLUMN_NAME_GUARDROUTEIDLIST))));
-            guard.setRouteTimeString(DbContract.stringIntoArrayList(c.getString(c.getColumnIndex(DbContract.COLUMN_NAME_ROUTETIMELIST))));
+            guard.setRouteTimeString(DbContract.stringIntoArrayList(c.getString(c.getColumnIndex(DbContract.COLUMN_NAME_GUARDSTARTTIMELIST))));
+            guardWithRoutes = false;
         }
     }
     public Guard getGuardById(int id) {
@@ -106,7 +111,7 @@ public class DatabaseGuard extends SQLiteOpenHelper {
 
     public ArrayList<Guard> getAllGuards() {
         ArrayList<Guard> guardList = new ArrayList<>();
-        for (int i = 0; i <= this.getGuardCount() - 1; i++) {
+        for (int i = 0; i < this.getGuardCount(); i++) {
             guardList.add(getGuard(i));
         }
         return guardList;

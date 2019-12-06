@@ -28,6 +28,7 @@ public class DbContract {
         ArrayList<String> arrayList = new ArrayList<>();
         String[] split = string.split(DIVIDESTRING);
         for(String text:split) {
+            if(!text.equals(""))
             arrayList.add(text);
         }
         return arrayList;
