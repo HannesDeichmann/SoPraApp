@@ -1,17 +1,22 @@
-# App-Name
+# App-Name Sopra Team 8
 
-![Screenshot of CyanogenMod 12 / 12.1 homescreen by Florian838, CC BY-SA 3.0](doc/images/app-screenshot.png)  
-Screenshot of CyanogenMod 12 / 12.1 homescreen by Florian838, CC BY-SA 3.0
+| Screenshot of  of the Admin Mode                                      | Screenshot of  of the Guard Mode                                      |
+| ------                                                                | ------                                                                |
+| ![Screenshot of the Admin Mode](doc/images/AdminMode_Screenshot.jpg)  | ![Screenshot of the Guard Mode](doc/images/GuardMode_Screenshot.jpg)  |
 
-**TODO:** Kurze Beschreibung der App inklusive der Beschreibung des Problems, welches durch die App gelöst wird. Hier wäre auch ein Screenshot oder Logo zu platzieren.
+    
+                                        
+
+
+
+
+Mit dieser App kann man eigene Wachrundgänge erstellen, den Wärtern Routen zuweisen und die gemachten Routen überprüfen.
 
 ## Features
 
-**TODO:** Hier die Features456 (Additional Features) aufzählen und evtl. mit einem Screenshot/Gif demonstrieren o. ä.
+**TODO:** Additional Features
 
 ## Installation
-
-**TODO:** Beschreibung der durchzuführenden Schritte um die App zu installieren bzw. zum laufen zu bekommen.
 
 1. Repository klonen: `git clone`
 2. Android Studio Projekt öffnen
@@ -20,11 +25,28 @@ Screenshot of CyanogenMod 12 / 12.1 homescreen by Florian838, CC BY-SA 3.0
 
 ## Verwendung der App
 
-**TODO:** Beschreibung der wichtigsten Anwendungsfälle
+Um den Guarde Mode zu starten:
+    Anmelden mit Daten:  Benutzername:   1 
+                         Passwort:       1234
+Um den Admin Mode zu starten:
+    Anmelden mit Daten:  Benutzername:   admin 
+                         Passwort:       admin
+                         
+
+Zur Zeit muss eventuell mehrmals die Zurück-Taste betätigt werden um zum vorherigen Menü zu gelangen, da sich
+nicht alle Activities automatisch schließen.
+Dies wird jedoch in naher Zukunft geändert.
 
 ### Wichtiger Anwendungsfall 1
 
+Routen können geplant werden, indem man verfügbare Wegpunkte sieht und diese 
+untereinander verbinden kann mit der jeweils benötigten Zeit, um von A nach B
+zu kommen.
+
 ### Wichtiger Anwendungsfall 2
+
+Der Wächter bekommt Informationen darüber, welche Routen er wann ablaufen 
+soll und kann seine geleistete Arbeit dokumentieren
 
 ## Changelog
 
@@ -32,8 +54,8 @@ Die Entwicklungsgeschichte befindet sich in [CHANGELOG.md](CHANGELOG.md).
 
 ## Verwendete Bibliotheken
 
-**TODO:** Verwendete Bibliotheken auflisten
+Bisher keine.
 
 ## Lizenz
 
-**TODO Lizenz nennen**. Genaue Bedingungen der Lizenz können in [LICENSE](LICENSE) nachgelesen werden.
+Genaue Bedingungen der Lizenz können in [LICENSE](LICENSE) nachgelesen werden.
