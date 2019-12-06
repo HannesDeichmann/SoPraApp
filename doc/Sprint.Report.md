@@ -4,9 +4,9 @@ In diesem Sprint wurden die bis zum [Meilenstein X](meilenstein-url) erledigten 
 
 ## Verbesserte Dokumente
 
--readme.md
--WachmannAPPAufgabenstellungKopie.md
--implementierung der Critical Features wurde vorgenommen
+- readme.md
+- WachmannAPPAufgabenstellungKopie.md
+- implementierung der Critical Features wurde vorgenommen
 
 ## Tests/Testprotokolle/Nachweis der Testabdeckung
 
