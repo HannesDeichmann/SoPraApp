@@ -37,15 +37,12 @@ public class MainActivity extends AppCompatActivity {
 
         //TODO BUG: Database darf nicht leer sein
         if(databaseGuard.getGuardCount() == 0) {
-            databaseGuard.addGuard(new Guard("Damit", "Database", "123"));
+            databaseGuard.addGuard(new Guard("otto", "müllerich", "1234"));
+
         }
         if(databaseWaypoint.getWaypointCount() == 0) {
             databaseWaypoint.addWaypoint(new Waypoint("FirstWaypoint", "123456", "Tag", "Note"));
         }
-        Guard otto = new Guard("otto", "müllerich", "2", "1234");
-        databaseGuard = new DatabaseGuard(this);
-        databaseGuard.addGuard(otto);
-
         tvLoginRef = (TextView) findViewById(R.id.tvLogin);
         btnAdminLoginRef = (Button) findViewById(R.id.btnAdminLogin);
         etUsernameRef = findViewById(R.id.etUsername);

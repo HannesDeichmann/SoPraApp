@@ -29,15 +29,6 @@ public class DatabaseRoute extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    private ArrayList<String> stringIntoArrayList(String string){
-        ArrayList<String> arrayList = new ArrayList<>();
-        String[] split = string.split(DEVIDESTRING);
-        for(String text:split) {
-            arrayList.add(text);
-        }
-        return arrayList;
-    }
-
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_ROUTE_ENTRIES);
     }
@@ -97,8 +88,8 @@ public class DatabaseRoute extends SQLiteOpenHelper {
         ArrayList<String> pointsList = new ArrayList<>();
         ArrayList<String> timeList = new ArrayList<>();
         ArrayList<RouteWaypointStrings> routeWaypoints = new ArrayList<>();
-        pointsList = stringIntoArrayList(points);
-        timeList = stringIntoArrayList(time);
+        pointsList = DbContract.stringIntoArrayList(points);
+        timeList = DbContract.stringIntoArrayList(time);
         if(pointsList.size() == timeList.size())
         for(int i = 0; i < timeList.size(); i++){
             if(!pointsList.get(i).isEmpty() && !timeList.get(i).isEmpty()) {
