@@ -42,22 +42,8 @@ public class MainActivity extends AppCompatActivity {
         if(databaseWaypoint.getWaypointCount() == 0) {
             databaseWaypoint.addWaypoint(new Waypoint("FirstWaypoint", "123456", "Tag", "Note"));
         }
-
-
-        Route route = new Route();
-        Waypoint DieEckeHinterDemDönerladen= new Waypoint("DieEckeHinterDemDönerladen", "223456", "Tag1", "Hitler");
-        String minutes = "600";
-        duration = Duration.ofMinutes(Integer.parseInt(minutes));
-        RouteWaypoint routeWaypoint= new RouteWaypoint(DieEckeHinterDemDönerladen, duration);
-        route.addWaypoint(routeWaypoint);
-        GuardRoute guardRoute1 = new GuardRoute(route, "1401");
-        GuardRoute guardRoute2 = new GuardRoute(route, "1401");
-        GuardRoute guardRoute3 = new GuardRoute(route, "1401");
-
-        Guard otto = new Guard("otto", "müllerich", "1234");
-        otto.addRoute(guardRoute1);
-        otto.addRoute(guardRoute2);
-        otto.addRoute(guardRoute3);
+        Guard otto = new Guard("otto", "müllerich", "2", "1234");
+        databaseGuard = new DatabaseGuard(this);
         databaseGuard.addGuard(otto);
 
         tvLoginRef = (TextView) findViewById(R.id.tvLogin);
@@ -95,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                         if (guard.getUserId().equals(guardUsername)) {
                             if (guard.getUserPassword().equals(guardPassword)) {
                                 Intent intent = new Intent(view.getContext(), GuardModeActivity.class);
-                                intent.putExtra("guard", guard);
+                                intent.putExtra("loggedInGuard", guard);
                                 startActivity(intent);
                                 tvLoginFeedbackRef.setText("");
                                 etUsernameRef.setText("");

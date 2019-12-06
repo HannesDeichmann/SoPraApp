@@ -20,7 +20,7 @@ public class GuardModeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guard_mode);
 
-        loggedInGuard = (Guard) getIntent().getExtras().get("guard");
+        loggedInGuard = (Guard) getIntent().getExtras().get("loggedInGuard");
 
         btnSelectARouteToStartRef = findViewById(R.id.btnSelectARouteToStart);
         btnLogOutRef = findViewById(R.id.btnLogOut);

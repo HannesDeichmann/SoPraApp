@@ -47,5 +47,5 @@
     <string name="next_waypoint">Next waypoint:</string>
     <string name="start">Start</string>
     <string name="admin_modus">admin_modus</string>
-
+    <string name="scan_waypoint">Scan Waypoint</string>
 </resources>
