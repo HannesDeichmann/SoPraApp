@@ -13,16 +13,18 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 public class GuardListActivity extends AppCompatActivity {
-
     Button btnCancel;
+    ListView listView;
+    DatabaseGuard guardDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guard_list);
 
-        DatabaseGuard guardDatabase = new DatabaseGuard(this);
+        guardDatabase = new DatabaseGuard(this);
         btnCancel = findViewById(R.id.btnCancel);
-        ListView listView = findViewById(R.id.guardList);
+        listView = findViewById(R.id.guardList);
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,8 +36,10 @@ public class GuardListActivity extends AppCompatActivity {
         });
         ArrayList<String> guardStringList = new ArrayList<>();
 
-        for(Guard guard : guardDatabase.getAllGuards()){
-            guardStringList.add(guard.toString());
+        if (guardDatabase.getGuardCount() > 0) {
+            for (Guard guard : guardDatabase.getAllGuards()) {
+                guardStringList.add(guard.toString());
+            }
         }
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(
@@ -51,9 +55,10 @@ public class GuardListActivity extends AppCompatActivity {
                                     int position, long id) {
                 Intent intent = new Intent(view.getContext(), GuardActivity.class);
                 GuardActivity.newGuard = false;
-                //EIGENTLICH: Item.at(position) oder so ...
-                int guardId = Integer.parseInt(guardDatabase.getAllGuards().get(position).getUserId());
-                intent.putExtra("editedGuardId", guardId);
+                if(guardDatabase.getGuardCount()>0) {
+                    int guardId = Integer.parseInt(guardDatabase.getAllGuards().get(position).getUserId());
+                    intent.putExtra("editedGuardId", guardId);
+                }
                 startActivity(intent);
             }
         });

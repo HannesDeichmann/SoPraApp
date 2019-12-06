@@ -17,7 +17,6 @@ public class WaypointListActivity extends AppCompatActivity implements DurationD
     private Duration duration;
     private Waypoint waypoint;
     private Route route;
-    Button btnCancelWaypoint;
     ListView listView;
     DatabaseWaypoint databaseWaypoint;
     ArrayList<String> waypointStringList;
@@ -29,15 +28,8 @@ public class WaypointListActivity extends AppCompatActivity implements DurationD
         setContentView(R.layout.activity_waypoint_list);
 
         databaseWaypoint = new DatabaseWaypoint(this);
-        btnCancelWaypoint = findViewById(R.id.btnCancelWaypoint);
         listView = findViewById(R.id.waypointList);
         waypointStringList = new ArrayList<>();
-
-        btnCancelWaypoint.setOnClickListener(view -> {
-            WaypointActivity.newWaypoint = true;
-            Intent intent = new Intent(view.getContext(), WaypointActivity.class);
-            startActivity(intent);
-        });
 
         for (Waypoint waypoint : databaseWaypoint.getAllWaypoints()) {
             waypointStringList.add(waypoint.toString());
@@ -54,21 +46,27 @@ public class WaypointListActivity extends AppCompatActivity implements DurationD
             //EIGENTLICH: Item.at(position) oder so ...
             waypoint = databaseWaypoint.getAllWaypoints().get(position);
             waypointId = Integer.parseInt(waypoint.getWaypointId());
-            if (getIntent().getStringExtra("root").equals("WaypointActivity")) {
-                WaypointActivity.newWaypoint = false;
-                intent = new Intent(view.getContext(), WaypointActivity.class);
-                intent.putExtra("editedWaypointId", waypointId);
-
-                startActivity(intent);
-                finish();
-            } else if (getIntent().getStringExtra("root").equals("RouteCreationActivity")) {
-                //  intent = new Intent(view.getContext(), RouteCreationActivity.class);
+            if (getIntent().hasExtra("position")){
                 route = (Route) getIntent().getExtras().get("route");
                 openDialog();
                 intent = new Intent(view.getContext(), RouteCreationActivity.class);
+            }else {
+                if (getIntent().getStringExtra("root").equals("WaypointActivity")) {
+                    WaypointActivity.newWaypoint = false;
+                    intent = new Intent(view.getContext(), WaypointActivity.class);
+                    intent.putExtra("editedWaypointId", waypointId);
 
-            } else {
-                //intent extra should be one of the checked above
+                    startActivity(intent);
+                    finish();
+                } else if (getIntent().getStringExtra("root").equals("RouteCreationActivity")) {
+                    //  intent = new Intent(view.getContext(), RouteCreationActivity.class);
+                    route = (Route) getIntent().getExtras().get("route");
+                    openDialog();
+                    intent = new Intent(view.getContext(), RouteCreationActivity.class);
+
+                } else {
+                    //intent extra should be one of the checked above
+                }
             }
         });
     }
@@ -81,7 +79,11 @@ public class WaypointListActivity extends AppCompatActivity implements DurationD
     @Override
     public void applyText(String inputDuration) {
         duration = Duration.ofMinutes(Integer.parseInt(inputDuration));
-        route.addWaypoint(new RouteWaypoint(waypoint, duration));
+        if(getIntent().hasExtra("position")){
+            route.replaceWaypointAt(new RouteWaypoint(waypoint, duration), (int) getIntent().getExtras().get("position"));
+        }else {
+            route.addWaypoint(new RouteWaypoint(waypoint, duration));
+        }
         intent.putExtra("route", route);
         startActivity(intent);
         finish();

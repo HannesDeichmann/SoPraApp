@@ -19,6 +19,15 @@ public class Route implements Serializable {
         this.waypoints = new ArrayList<RouteWaypoint>();
     }
 
+
+    @Override
+    public String toString(){
+        String string = "";
+        string += routeId + ": ";
+        string += routeName;
+        return string;
+    }
+
     public void setRouteId(String id) { this.routeId = id; }
 
     public String getRouteName() { return routeName; }
@@ -34,6 +43,10 @@ public class Route implements Serializable {
     public void addWaypoint(RouteWaypoint waypoint){
         this.waypoints.add(waypoint);
     }
+
+    public void replaceWaypointAt(RouteWaypoint waypoint, int position){
+        this.waypoints.remove(position);
+        this.waypoints.add(position, waypoint);}
 
     public void deleteWaypoint(RouteWaypoint waypoint){ this.waypoints.remove(waypoint); }
 

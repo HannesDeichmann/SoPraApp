@@ -25,8 +25,10 @@ public class ScheduleGuardListActivity extends AppCompatActivity {
 
         ArrayList<String> guardStringList = new ArrayList<>();
 
-        for(Guard guard : guardDatabase.getAllGuards()){
-            guardStringList.add(guard.toString());
+        if(guardDatabase.getGuardCount()>0) {
+            for (Guard guard : guardDatabase.getAllGuards()) {
+                guardStringList.add(guard.toString());
+            }
         }
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(
@@ -41,8 +43,6 @@ public class ScheduleGuardListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 Intent intent = new Intent(view.getContext(), ScheduleActivity.class);
-
-                //EIGENTLICH: Item.at(position) oder so ...
                 Guard selectedGuard = guardDatabase.getAllGuards().get(position);
                 intent.putExtra("selectedGuard", selectedGuard);
                 startActivity(intent);

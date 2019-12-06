@@ -4,24 +4,31 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Guard implements Serializable {
-
-    private ArrayList<GuardRoute> routes = new ArrayList<GuardRoute>();
     private String forename;
     private String surname;
     private String userId;
     private String userPassword;
+    private ArrayList<String>  routeIdString;
+    private ArrayList<GuardRoute> guardRouteList;
+    private ArrayList<String> routeTimeString;
 
     public Guard(String forname, String surname, String userId, String userPassword) {
         this.forename = forname;
         this.surname = surname;
         this.userId = userId;
         this.userPassword = userPassword;
+        this.routeIdString = new ArrayList<>();
+        this.routeTimeString= new ArrayList<>();;
+        this.guardRouteList= new ArrayList<>();
     }
     public Guard(String forname, String surname, String userPassword) {
         this.forename = forname;
         this.surname = surname;
         this.userId = "";
         this.userPassword = userPassword;
+        this.routeIdString= new ArrayList<>();
+        this.routeTimeString= new ArrayList<>();
+        this.guardRouteList= new ArrayList<>();
     }
 
     public Guard() {
@@ -29,6 +36,9 @@ public class Guard implements Serializable {
         this.surname = "";
         this.userId = "";
         this.userPassword = "";
+        this.routeIdString= new ArrayList<>();
+        this.routeTimeString= new ArrayList<>();
+        this.guardRouteList= new ArrayList<>();
     }
 
     @Override
@@ -40,6 +50,22 @@ public class Guard implements Serializable {
         guardString += "Password: " + this.userPassword;
         return guardString;
     }
+
+    public String getTimeListString(){
+        String string ="";
+        for(GuardRoute g: this.getGuardRouteList()){
+            string += DbContract.DIVIDESTRING + g.getRoute().getRouteId();
+        }
+        return string;
+    }
+    public String getRouteIdListString(){
+        String string ="";
+        for(GuardRoute g: this.getGuardRouteList()){
+            string += DbContract.DIVIDESTRING + g.getTime();
+        }
+        return string;
+    }
+
 
     public void setForename(String forename) {
         this.forename = forename;
@@ -73,11 +99,31 @@ public class Guard implements Serializable {
         return userPassword;
     }
 
-    public ArrayList<GuardRoute> getRoutes() {
-        return routes;
+    public void addRoute(GuardRoute route) {
+        this.guardRouteList.add(route);
     }
 
-    public void addRoute(GuardRoute route) {
-        this.routes.add(route);
+    public ArrayList<String> getRouteIdString() {
+        return routeIdString;
+    }
+
+    public void setRouteIdString(ArrayList<String> routeIdString) {
+        this.routeIdString = routeIdString;
+    }
+
+    public ArrayList<GuardRoute> getGuardRouteList() {
+        return guardRouteList;
+    }
+
+    public void setGuardRouteList(ArrayList<GuardRoute> guardRouteString) {
+        this.guardRouteList = guardRouteString;
+    }
+
+    public ArrayList<String> getRouteTimeString() {
+        return routeTimeString;
+    }
+
+    public void setRouteTimeString(ArrayList<String> routeTimeString) {
+        this.routeTimeString = routeTimeString;
     }
 }

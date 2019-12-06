@@ -6,17 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".GuardListActivity">
+    tools:context=".GuardModeRouteListActivity">
 
     <ListView
-        android:id="@+id/waypointList"
-        android:layout_width="349dp"
-        android:layout_height="532dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        android:id="@+id/guardRouteList"
+        android:layout_width="385dp"
+        android:layout_height="686dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

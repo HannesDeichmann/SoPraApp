@@ -6,22 +6,39 @@
     android:layout_height="match_parent"
     tools:context=".RouteCreationActivity">
 
+    <TextView
+        android:id="@+id/tvRouteName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="16dp"
+        android:text="Routename:"
+        app:layout_constraintEnd_toStartOf="@id/etRouteName"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
-        android:id="@+id/routeName"
-        android:layout_width="351dp"
-        android:layout_height="64dp"
+        android:id="@+id/etRouteName"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="13dp"
-        android:layout_marginTop="21dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:inputType="text"
-        android:text="Routen Name"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/addWaypoint"
         android:layout_width="wrap_content"
@@ -36,13 +53,13 @@
         android:text="Add Waypoint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/routeName"
+        app:layout_constraintTop_toBottomOf="@+id/etRouteName"
         />
 
     <ListView
         android:id="@+id/selectedWaypointList"
-        android:layout_width="376dp"
-        android:layout_height="391dp"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -52,6 +69,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addWaypoint" />
+
+    <Button
+        android:id="@+id/btnAddOldWaypoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="get old Waypoints"
+        app:layout_constraintTop_toBottomOf="@+id/saveRoute"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
     <Button
         android:id="@+id/saveRoute"

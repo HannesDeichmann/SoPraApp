@@ -6,6 +6,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
 import java.util.ArrayList;
 
 public class DatabaseRoute extends SQLiteOpenHelper {
@@ -27,15 +29,6 @@ public class DatabaseRoute extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    private ArrayList<String> stringIntoArrayList(String string){
-        ArrayList<String> arrayList = new ArrayList<>();
-        String[] split = string.split(DEVIDESTRING);
-        for(String text:split) {
-            arrayList.add(text);
-        }
-        return arrayList;
-    }
-
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_ROUTE_ENTRIES);
     }
@@ -50,6 +43,7 @@ public class DatabaseRoute extends SQLiteOpenHelper {
         for(RouteWaypoint w:route.getWaypoints()){
             waypointIdList += DEVIDESTRING + w.getWaypoint().getWaypointId();
         }
+        waypointIdList.substring(1);
         return waypointIdList;
     }
     private String getTimeString(Route route){
@@ -77,10 +71,10 @@ public class DatabaseRoute extends SQLiteOpenHelper {
         Cursor c = db.rawQuery("select * from " + DbContract.TABLE_NAME_ROUTE + " order by "
                 + DbContract.COLUMN_NAME_ROUTEID + " asc limit 1 offset " + position, null);
         c.moveToFirst();
-        Route Route = new Route();
-        addRouteInfos(Route,c);
+        Route route = new Route();
+        addRouteInfos(route,c);
         c.close();
-        return Route;
+        return route;
     }
     private void addRouteInfos(Route route, Cursor c){
         route.setRouteId(c.getString(c.getColumnIndex(DbContract.COLUMN_NAME_ROUTEID)));
@@ -94,11 +88,13 @@ public class DatabaseRoute extends SQLiteOpenHelper {
         ArrayList<String> pointsList = new ArrayList<>();
         ArrayList<String> timeList = new ArrayList<>();
         ArrayList<RouteWaypointStrings> routeWaypoints = new ArrayList<>();
-        pointsList = stringIntoArrayList(points);
-        timeList = stringIntoArrayList(time);
+        pointsList = DbContract.stringIntoArrayList(points);
+        timeList = DbContract.stringIntoArrayList(time);
         if(pointsList.size() == timeList.size())
-        for(int i = 0; i<timeList.size(); i++){
-            routeWaypoints.add(new RouteWaypointStrings(pointsList.get(i),timeList.get(i)));
+        for(int i = 0; i < timeList.size(); i++){
+            if(!pointsList.get(i).isEmpty() && !timeList.get(i).isEmpty()) {
+                routeWaypoints.add(new RouteWaypointStrings(pointsList.get(i), timeList.get(i)));
+            }
         }
         return routeWaypoints;
     }

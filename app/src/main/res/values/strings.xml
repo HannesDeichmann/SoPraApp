@@ -17,7 +17,7 @@
 <resources>
     <string name="app_name">SoPra App</string>
     <string name="login">Login</string>
-    <string name="admin_modus">Admin Modus</string>
+    <string name="admin_mode">Admin Mode</string>
     <string name="routes">Routes</string>
     <string name="waypoints">Waypoints</string>
     <string name="close">Close</string>
@@ -34,5 +34,20 @@
     <string name="id">ID</string>
     <string name="edit_guard">Edit Guard</string>
     <string name="edit_waypoint">Edit Waypoint</string>
-
+    <string name="guard_mode">Guard Mode</string>
+    <string name="select_a_route_to_start">Select a route to start</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="schedule">Schedule</string>
+    <string name="log_out">Log out</string>
+    <string name="logged_in_as">Logged in as:</string>
+    <string name="route">Route:</string>
+    <string name="start_time">Start time:</string>
+    <string name="remaining_time">Remaining time:</string>
+    <string name="next_waypoint">Next waypoint:</string>
+    <string name="start">Start</string>
+    <string name="scan_waypoint">Scan Waypoint</string>
+    <string name="note">Note:</string>
+    <string name="cancel">Cancel</string>
+    <string name="complete_route">Complete Route:</string>
 </resources>
