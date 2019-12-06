@@ -1,10 +1,12 @@
 package de.uni_stuttgart.informatik.sopra.sopraapp;
 
-public class RouteWaypointStrings {
+import java.io.Serializable;
+
+public class RouteWaypointStrings implements Serializable {
     private String time;
     private String userId;
 
-    public RouteWaypointStrings( String time, String userId){
+    public RouteWaypointStrings( String userId, String time){
         this.time = time;
         this.userId = userId;
     }
