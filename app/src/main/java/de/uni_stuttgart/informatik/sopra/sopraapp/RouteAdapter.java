@@ -38,7 +38,6 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position){
-        holder.tvNoteTextRef.setText("test");
         holder.tvNoteTextRef.setText(databaseRoute.getRouteFromPosition(position).toString());
     }
     @Override

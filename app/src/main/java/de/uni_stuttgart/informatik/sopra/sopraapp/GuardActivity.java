@@ -37,12 +37,13 @@ public class GuardActivity extends AppCompatActivity {
         return guardDatabase.getGuardById(getIntent().getIntExtra("editedGuardId", 0));
     }
 
-    private void setNewUserId(){
-        //int a = Integer.valueOf(guardDatabase.getGuard(guardDatabase.getGuardCount() - 1).getUserId()) + 1;
-        //int b = Integer.valueOf(guardDatabase.getGuardById(getIntent().getIntExtra("editedGuardId", 0)).getUserId());
-        //maxUserId = Integer.max(Integer.max(a,b),maxUserId);
-        //TODO Bugfix, lösche Guard mit höchster nummer -> autoincrement geht bei dieser Nummer weiter, angezeigt wird allerdings die kleinere
-        tvGuardIdRef.setText(String.valueOf(Integer.valueOf(Integer.valueOf(guardDatabase.getGuard(guardDatabase.getGuardCount() - 1).getUserId()) + 1)));
+    private void setNewUserId() {
+        if (guardDatabase.getGuardCount() == 0) {
+            tvGuardIdRef.setText("1");
+        } else {
+            //TODO Bugfix, lösche Guard mit höchster nummer -> autoincrement geht bei dieser Nummer weiter, angezeigt wird allerdings die kleinere
+            tvGuardIdRef.setText(String.valueOf(Integer.valueOf(Integer.valueOf(guardDatabase.getGuard(guardDatabase.getGuardCount() - 1).getUserId()) + 1)));
+        }
     }
 
     private void checkEditNewGuard() {
@@ -89,11 +90,9 @@ public class GuardActivity extends AppCompatActivity {
                 createdGuard.setForename(etForenameRef.getText().toString());
                 createdGuard.setSurname(etSurnameRef.getText().toString());
                 createdGuard.setUserPassword(etPasswordRef.getText().toString());
-                if(newGuard) guardDatabase.addGuard(createdGuard);
-                else{
-                    guardDatabase.deleteGuard(guardDatabase.getGuardById(Integer.parseInt(tvGuardIdRef.getText().toString())));
-                    guardDatabase.editGuardById(Integer.parseInt(tvGuardIdRef.getText().toString()), createdGuard);
-                }
+                createdGuard.setUserId(tvGuardIdRef.getText().toString());
+                if (newGuard) guardDatabase.addGuard(createdGuard);
+                else guardDatabase.editGuard(createdGuard);
                 newGuard = true;
                 Intent intent = new Intent(view.getContext(), GuardActivity.class);
                 startActivity(intent);

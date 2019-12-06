@@ -38,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
         //TODO BUG: Database darf nicht leer sein
         if(databaseGuard.getGuardCount() == 0) {
-            databaseGuard.addGuard(new Guard("Damit", "Database", "123"));
+            databaseGuard.addGuard(new Guard("otto", "müllerich", "1234"));
+
         }
         if(databaseWaypoint.getWaypointCount() == 0) {
             databaseWaypoint.addWaypoint(new Waypoint("FirstWaypoint", "123456", "Tag", "Note"));

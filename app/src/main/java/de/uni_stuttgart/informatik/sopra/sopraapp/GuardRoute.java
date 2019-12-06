@@ -14,6 +14,10 @@ public class GuardRoute implements Serializable {
         this.route = route;
         this.time = time;
     }
+    public GuardRoute(){
+        this.route = new Route();
+        this.time = "";
+    }
 
     public String getTime() {
         return time;
