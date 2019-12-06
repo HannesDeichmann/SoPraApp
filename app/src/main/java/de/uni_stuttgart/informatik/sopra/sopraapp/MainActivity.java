@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
         tvLoginFeedbackRef = findViewById(R.id.tvLoginFeedback);
         tvLoginFeedbackRef.setText("");
 
+        //btnAdminLoginRef ist only there for development so while testing you dont need to log in every time
+        btnAdminLoginRef.setVisibility(View.GONE);
         btnAdminLoginRef.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
