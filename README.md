@@ -25,12 +25,14 @@ Mit dieser App kann man eigene Wachrundgänge erstellen, den Wärtern Routen zuw
 
 ## Verwendung der App
 
-Um den Guarde Mode zu starten:
-    Anmelden mit Daten:  Benutzername:   1 
-                         Passwort:       1234
-Um den Admin Mode zu starten:
-    Anmelden mit Daten:  Benutzername:   admin 
-                         Passwort:       admin
+Um den Guarde Mode zu starten: Login mit Daten:  
+    
+*   Benutzername:   1 
+*   Passwort:       1234
+
+Um den Admin Mode zu starten: Login mit Daten:  
+*   Benutzername:   admin
+*   Passwort:       admin
                          
 
 Zur Zeit muss eventuell mehrmals die Zurück-Taste betätigt werden um zum vorherigen Menü zu gelangen, da sich
