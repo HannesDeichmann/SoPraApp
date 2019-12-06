@@ -4,7 +4,7 @@ In diesem Sprint wurden die bis zum [Meilenstein X](meilenstein-url) erledigten 
 
 ## Verbesserte Dokumente
 
-*TODO: Dokumente aufführen die verbessert wurden.*
+readme.md
 
 ## Tests/Testprotokolle/Nachweis der Testabdeckung
 
