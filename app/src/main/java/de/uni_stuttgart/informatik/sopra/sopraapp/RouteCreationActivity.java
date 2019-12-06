@@ -68,7 +68,14 @@ public class RouteCreationActivity extends AppCompatActivity {
         } else {
             btnAddOldWaypoints.setVisibility(View.INVISIBLE);
         }
-
+        selectedWaypointList.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(view.getContext(), WaypointListActivity.class);
+            intent.putExtra("position", position);
+            intent.putExtra("route", route);
+            list.remove(position);
+            startActivity(intent);
+            finish();
+        });
         btnAddOldWaypoints.setOnClickListener(v -> {
             route= ((Route) getIntent().getExtras().get("editRoute"));
             for (int i = 0; i < route.getWaypointStrings().size(); i++) {
