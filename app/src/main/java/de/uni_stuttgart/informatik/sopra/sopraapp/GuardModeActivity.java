@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.time.Duration;
 import java.util.ArrayList;
 
 public class GuardModeActivity extends AppCompatActivity {
@@ -19,7 +20,7 @@ public class GuardModeActivity extends AppCompatActivity {
     private Guard loggedInGuard;
     DatabaseGuard databaseGuard;
     DatabaseRoute databaseRoute;
-
+    DatabaseWaypoint databaseWaypoint;
 
     private void addRoutesFromDatabase(){
         ArrayList<String> timeList = databaseGuard.getGuardWithRoutes(loggedInGuard).getRouteIdString();
@@ -30,9 +31,19 @@ public class GuardModeActivity extends AppCompatActivity {
                 Route route = databaseRoute.getRouteById(Integer.parseInt(idList.get(i)));
                 GuardRoute guardRoute = new GuardRoute(route, timeList.get(i));
                 if(!loggedInGuard.getGuardRouteList().contains(guardRoute)){
+                    addWaypointsToRoute(route);
                     loggedInGuard.addRoute(guardRoute);
                 }
             }
+        }
+    }
+    private void addWaypointsToRoute(Route route){
+        Route routeFromData = databaseRoute.getRouteById(Integer.parseInt(route.getRouteId()));
+        for(RouteWaypointStrings s: routeFromData.getWaypointStrings()){
+            RouteWaypoint routeWaypoint = new RouteWaypoint();
+            routeWaypoint.setWaypoint(databaseWaypoint.getWaypointById(Integer.parseInt(s.getUserId())));
+            routeWaypoint.setDuration(Duration.ofMinutes(Integer.parseInt(s.getTime())));
+            route.addWaypoint(routeWaypoint);
         }
     }
     @Override
@@ -41,6 +52,7 @@ public class GuardModeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_guard_mode);
         databaseGuard = new DatabaseGuard(this);
         databaseRoute = new DatabaseRoute(this);
+        databaseWaypoint = new DatabaseWaypoint(this);
         loggedInGuard = (Guard) getIntent().getExtras().get("loggedInGuard");
 
         btnSelectARouteToStartRef = findViewById(R.id.btnSelectARouteToStart);
