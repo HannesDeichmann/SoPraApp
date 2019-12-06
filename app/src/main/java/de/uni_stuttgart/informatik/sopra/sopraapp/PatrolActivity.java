@@ -92,7 +92,6 @@ public class PatrolActivity extends AppCompatActivity {
             public void onClick(View view) {
                 startStop();
             }
-
         });
         btnCancelActiveRouteRef.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -231,6 +230,13 @@ public class PatrolActivity extends AppCompatActivity {
             /**
              * TODO Log Entry when the alarm is send
              */
+        }
+    }
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        if(timerRunning) {
+            stopTimer();
         }
     }
 }
