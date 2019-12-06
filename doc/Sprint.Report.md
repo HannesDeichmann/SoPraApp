@@ -5,6 +5,7 @@ In diesem Sprint wurden die bis zum [Meilenstein X](meilenstein-url) erledigten 
 ## Verbesserte Dokumente
 
 readme.md
+WachmannAPPAufgabenstellungKopie.md
 
 ## Tests/Testprotokolle/Nachweis der Testabdeckung
 
