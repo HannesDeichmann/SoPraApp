@@ -29,6 +29,20 @@ public class ScheduleActivity extends AppCompatActivity {
     DatabaseGuard databaseGuard;
     DatabaseRoute databaseRoute;
 
+
+    private void addRoutesFromDatabase(Guard guard){
+        ArrayList<String> timeList = databaseGuard.getGuardWithRoutes(guard).getRouteIdString();
+        ArrayList<String> idList = databaseGuard.getGuardWithRoutes(guard).getRouteTimeString();
+        if (idList.size() == timeList.size()) {
+            for (int i = 0; i < idList.size(); i++) {
+                Route route = databaseRoute.getRouteById(Integer.parseInt(idList.get(i)));
+                GuardRoute guardRoute = new GuardRoute(route, timeList.get(i));
+                if(!guard.getGuardRouteList().contains(guardRoute)){
+                    guard.addRoute(guardRoute);
+                }
+            }
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +80,9 @@ public class ScheduleActivity extends AppCompatActivity {
         });
         btnSave.setOnClickListener(v -> {
             if (selectedGuard != null && selectedRoute != null && !etSetTime.getText().toString().equals("")) {
+
+                addRoutesFromDatabase(selectedGuard);
+
                 selectedGuard.addRoute(new GuardRoute(selectedRoute, etSetTime.getText().toString()));
                 etSetTime.setText("");
                 routeStringList = new ArrayList<>();
@@ -107,6 +124,23 @@ public class ScheduleActivity extends AppCompatActivity {
         if (getIntent().hasExtra("scheduleRoute")) {
             selectedRoute = (Route) getIntent().getExtras().get("scheduleRoute");
             tvSelectedRoute.setText(selectedRoute.toString());
+        }
+        if (selectedGuard != null) {
+            Guard guard = databaseGuard.getGuardWithRoutes(selectedGuard);
+            ArrayList<String> idList = guard.getRouteTimeString();
+            ArrayList<String> timeList = guard.getRouteIdString();
+            routeStringList = new ArrayList<>();
+            if (idList.size() == timeList.size()) {
+                for (int i = 0; i < idList.size(); i++) {
+                    Route route = databaseRoute.getRouteById(Integer.parseInt(idList.get(i)));
+                    routeStringList.add((new GuardRoute(route, timeList.get(i))).toString());
+                }
+            }
+            ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(
+                    this,
+                    android.R.layout.simple_list_item_1,
+                    routeStringList);
+            listView.setAdapter(dataAdapter);
         }
     }
 }

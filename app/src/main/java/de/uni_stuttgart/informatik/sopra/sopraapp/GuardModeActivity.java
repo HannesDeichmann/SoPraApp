@@ -25,7 +25,6 @@ public class GuardModeActivity extends AppCompatActivity {
     private void addRoutesFromDatabase(){
         ArrayList<String> timeList = databaseGuard.getGuardWithRoutes(loggedInGuard).getRouteIdString();
         ArrayList<String> idList = databaseGuard.getGuardWithRoutes(loggedInGuard).getRouteTimeString();
-        System.out.println("HIERTOll:" + timeList.size());
         if (idList.size() == timeList.size()) {
             for (int i = 0; i < idList.size(); i++) {
                 Route route = databaseRoute.getRouteById(Integer.parseInt(idList.get(i)));

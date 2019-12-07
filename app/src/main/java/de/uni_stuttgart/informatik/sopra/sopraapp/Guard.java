@@ -91,9 +91,7 @@ public class Guard implements Serializable {
         return surname;
     }
 
-    public String getUserId() {
-        return userId;
-    }
+    public String getUserId() { return userId;}
 
     public String getUserPassword() {
         return userPassword;
