@@ -19,8 +19,8 @@ public class DatabaseRoute extends SQLiteOpenHelper {
             DbContract.TABLE_NAME_ROUTE + "(" +
             DbContract.COLUMN_NAME_ROUTEID + " INTEGER PRIMARY KEY," +
             DbContract.COLUMN_NAME_ROUTENAME + " TEXT,"  +
-            DbContract.COLUMN_NAME_ROUTETIMELIST + " TEXT," +
-            DbContract.COLUMN_NAME_ROUTEWAYPOINTIDLIST + " TEXT" + " )";
+            DbContract.COLUMN_NAME_ROUTEWAYPOINTIDLIST + " TEXT," +
+            DbContract.COLUMN_NAME_ROUTETIMELIST+ " TEXT" + " )";
 
 
     private static final String SQL_DELETE_ROUTE_ENTRIES = "DROP TABLE IF EXISTS " + DbContract.TABLE_NAME_ROUTE;
@@ -60,8 +60,8 @@ public class DatabaseRoute extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(DbContract.COLUMN_NAME_ROUTEID, route.getRouteId());
         values.put(DbContract.COLUMN_NAME_ROUTENAME, route.getRouteName());
-        values.put(DbContract.COLUMN_NAME_ROUTETIMELIST, getTimeString(route));
         values.put(DbContract.COLUMN_NAME_ROUTEWAYPOINTIDLIST, getWaypointIdString(route));
+        values.put(DbContract.COLUMN_NAME_ROUTETIMELIST, getTimeString(route));
         db.insert(DbContract.TABLE_NAME_ROUTE, null, values);
         db.close();
     }
@@ -94,6 +94,7 @@ public class DatabaseRoute extends SQLiteOpenHelper {
         for(int i = 0; i < timeList.size(); i++){
             if(!pointsList.get(i).isEmpty() && !timeList.get(i).isEmpty()) {
                 routeWaypoints.add(new RouteWaypointStrings(pointsList.get(i), timeList.get(i)));
+
             }
         }
         return routeWaypoints;

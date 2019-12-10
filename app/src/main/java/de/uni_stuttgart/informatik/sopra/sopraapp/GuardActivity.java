@@ -97,6 +97,7 @@ public class GuardActivity extends AppCompatActivity {
                 Intent intent = new Intent(view.getContext(), GuardActivity.class);
                 startActivity(intent);
                 clearTextFields();
+                finish();
             }
         });
         btnDeleteGuardRef.setOnClickListener(new View.OnClickListener() {
@@ -107,6 +108,7 @@ public class GuardActivity extends AppCompatActivity {
                 Intent intent = new Intent(view.getContext(), GuardActivity.class);
                 startActivity(intent);
                 clearTextFields();
+                finish();
             }
         });
         btnNewId.setOnClickListener(new View.OnClickListener() {
@@ -115,6 +117,7 @@ public class GuardActivity extends AppCompatActivity {
                 newGuard = true;
                 Intent intent = new Intent(view.getContext(), GuardActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         btnEditGuardRef.setOnClickListener(new View.OnClickListener() {
@@ -122,6 +125,7 @@ public class GuardActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), GuardListActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

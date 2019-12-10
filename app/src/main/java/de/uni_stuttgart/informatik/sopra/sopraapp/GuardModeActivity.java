@@ -23,8 +23,10 @@ public class GuardModeActivity extends AppCompatActivity {
     DatabaseWaypoint databaseWaypoint;
 
     private void addRoutesFromDatabase(){
-        ArrayList<String> timeList = databaseGuard.getGuardWithRoutes(loggedInGuard).getRouteIdString();
-        ArrayList<String> idList = databaseGuard.getGuardWithRoutes(loggedInGuard).getRouteTimeString();
+        Guard guard = databaseGuard.getGuardWithRoutes(loggedInGuard);
+
+        ArrayList<String> timeList = guard.getRouteIdString();
+        ArrayList<String> idList = guard.getRouteTimeString();
         if (idList.size() == timeList.size()) {
             for (int i = 0; i < idList.size(); i++) {
                 Route route = databaseRoute.getRouteById(Integer.parseInt(idList.get(i)));

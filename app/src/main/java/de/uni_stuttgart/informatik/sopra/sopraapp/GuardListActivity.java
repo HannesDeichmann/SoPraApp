@@ -32,6 +32,7 @@ public class GuardListActivity extends AppCompatActivity {
                 GuardActivity.newGuard = true;
                 Intent intent = new Intent(view.getContext(), GuardActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         ArrayList<String> guardStringList = new ArrayList<>();
@@ -60,6 +61,7 @@ public class GuardListActivity extends AppCompatActivity {
                     intent.putExtra("editedGuardId", guardId);
                 }
                 startActivity(intent);
+                finish();
             }
         });
     }
