@@ -13,7 +13,6 @@
         <activity android:name=".PatrolActivity"></activity>
         <activity android:name=".ScheduleGuardListActivity" />
         <activity android:name=".ProtocolActivity"></activity>
-        <activity android:name=".ScheduleGuardListActivity" />
 
         <activity android:name=".GuardModeRouteListActivity" />
         <activity android:name=".ScheduleActivity" />
