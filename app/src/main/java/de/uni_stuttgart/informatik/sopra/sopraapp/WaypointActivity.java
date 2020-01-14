@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class WaypointActivity extends AppCompatActivity {
 
@@ -84,7 +85,9 @@ public class WaypointActivity extends AppCompatActivity {
                     clearTextFields();
                 } else {
                     //TODO Alertfenster
-                    etWaypointIdRef.setText("WaypointId needs" + Waypoint.waypointIdLength +"chars");
+                    //etWaypointIdRef.setText("WaypointId needs " + Waypoint.waypointIdLength +" chars");
+                    Toast toast = Toast.makeText(getApplicationContext(), "ID needs 6 chars", Toast.LENGTH_SHORT);
+                    toast.show();
                 }
             }
         });

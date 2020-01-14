@@ -90,6 +90,7 @@ public class RouteCreationActivity extends AppCompatActivity {
 
         btnSaveRoute.setOnClickListener(v -> {
             //wegpunkte wurden schon in der Waypointlistaktivity hinzugefügt
+            route.setRouteName(etRouteName.getText().toString());
             for(Route r:databaseRoute.getAllRoutes()){
                 if(r.getRouteId().equals(route.getRouteId())){
                     databaseRoute.deleteRoute(route);

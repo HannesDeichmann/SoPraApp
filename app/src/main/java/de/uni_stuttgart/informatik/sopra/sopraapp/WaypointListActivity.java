@@ -50,6 +50,7 @@ public class WaypointListActivity extends AppCompatActivity implements DurationD
                 route = (Route) getIntent().getExtras().get("route");
                 openDialog();
                 intent = new Intent(view.getContext(), RouteCreationActivity.class);
+                intent.putExtra("route", route);
             }else {
                 if (getIntent().getStringExtra("root").equals("WaypointActivity")) {
                     WaypointActivity.newWaypoint = false;
