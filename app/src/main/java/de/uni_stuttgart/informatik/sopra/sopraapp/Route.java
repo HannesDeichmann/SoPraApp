@@ -19,7 +19,6 @@ public class Route implements Serializable {
         this.waypoints = new ArrayList<RouteWaypoint>();
     }
 
-
     @Override
     public String toString(){
         String string = "";
@@ -39,6 +38,14 @@ public class Route implements Serializable {
     public ArrayList<RouteWaypoint> getWaypoints() { return waypoints; }
 
     public void setWaypoints(ArrayList waypoints) { this.waypoints = waypoints; }
+
+    public ArrayList<Waypoint> getOnlyWaypoints(){
+        ArrayList<Waypoint> wpList = new ArrayList<>();
+        for(RouteWaypoint rwp: this.waypoints){
+            wpList.add(rwp.getWaypoint());
+        }
+        return wpList;
+    }
 
     public void addWaypoint(RouteWaypoint waypoint){
         this.waypoints.add(waypoint);
