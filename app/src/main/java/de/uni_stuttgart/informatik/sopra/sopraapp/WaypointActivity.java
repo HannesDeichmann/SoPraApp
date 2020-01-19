@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class WaypointActivity extends AppCompatActivity {
 
@@ -20,6 +21,7 @@ public class WaypointActivity extends AppCompatActivity {
     EditText etWaypointNoteRef;
 
     DatabaseWaypoint databaseWaypoint;
+    DatabaseRoute databaseRoute;
     public static boolean newWaypoint = true;
 
     private void clearTextFields(){
@@ -60,6 +62,7 @@ public class WaypointActivity extends AppCompatActivity {
         etWaypointNoteRef = findViewById(R.id.etWaypointNote);
 
         databaseWaypoint = new DatabaseWaypoint(this);
+        databaseRoute = new DatabaseRoute(this);
 
         checkEditNewWaypoint();
 
@@ -81,23 +84,37 @@ public class WaypointActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(view.getContext(), WaypointActivity.class);
                     startActivity(intent);
-                    clearTextFields();
+                    finish();
+                   // clearTextFields();
                 } else {
                     //TODO Alertfenster
-                    etWaypointIdRef.setText("WaypointId needs" + Waypoint.waypointIdLength +"chars");
+                    //etWaypointIdRef.setText("WaypointId needs " + Waypoint.waypointIdLength +" chars");
+                    Toast toast = Toast.makeText(getApplicationContext(), "ID needs 6 chars", Toast.LENGTH_SHORT);
+                    toast.show();
                 }
             }
         });
-
+        //wp needs to be deleted out of the routes that use the wp
         btnDeleteWaypointRef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                for (Route route : databaseRoute.getAllRoutes()){
+                    for (int i = 0; i < route.getWaypointStrings().size(); i++){
+                        int wpId = Integer.parseInt(route.getWaypointStrings().get(i).getUserId());
+                        if(Integer.parseInt(getEditedWaypoint().getWaypointId()) == wpId){
+                            route.getWaypointStrings().remove(i);
+
+                            databaseRoute.deleteRoute(route);
+                            databaseRoute.addRoute(route);
+                        }
+                    }
+                }
                 databaseWaypoint.deleteWaypoint(getEditedWaypoint());
                 newWaypoint = true;
                 Intent intent = new Intent(view.getContext(), WaypointActivity.class);
                 startActivity(intent);
-                clearTextFields();
-            }
+                finish();
+                }
         });
 
         btnEditWaypointRef.setOnClickListener(new View.OnClickListener() {

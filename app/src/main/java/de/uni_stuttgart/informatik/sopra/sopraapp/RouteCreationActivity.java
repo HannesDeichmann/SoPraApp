@@ -71,13 +71,14 @@ public class RouteCreationActivity extends AppCompatActivity {
         selectedWaypointList.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(view.getContext(), WaypointListActivity.class);
             intent.putExtra("position", position);
+            intent.putExtra("root", "RouteCreationActivity");
             intent.putExtra("route", route);
             list.remove(position);
             startActivity(intent);
             finish();
         });
         btnAddOldWaypoints.setOnClickListener(v -> {
-            route= ((Route) getIntent().getExtras().get("editRoute"));
+            route = ((Route) getIntent().getExtras().get("editRoute"));
             for (int i = 0; i < route.getWaypointStrings().size(); i++) {
                 route.addWaypoint(createRouteWaypointByPos(i));
             }
@@ -90,6 +91,7 @@ public class RouteCreationActivity extends AppCompatActivity {
 
         btnSaveRoute.setOnClickListener(v -> {
             //wegpunkte wurden schon in der Waypointlistaktivity hinzugefügt
+            route.setRouteName(etRouteName.getText().toString());
             for(Route r:databaseRoute.getAllRoutes()){
                 if(r.getRouteId().equals(route.getRouteId())){
                     databaseRoute.deleteRoute(route);

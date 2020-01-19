@@ -17,6 +17,7 @@ public class WaypointListActivity extends AppCompatActivity implements DurationD
     private Duration duration;
     private Waypoint waypoint;
     private Route route;
+    private Button btnCancelWPSelect;
     ListView listView;
     DatabaseWaypoint databaseWaypoint;
     ArrayList<String> waypointStringList;
@@ -27,7 +28,13 @@ public class WaypointListActivity extends AppCompatActivity implements DurationD
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waypoint_list);
 
-        databaseWaypoint = new DatabaseWaypoint(this);
+        btnCancelWPSelect = findViewById(R.id.btnCancelWPSelect);
+        btnCancelWPSelect.setVisibility(View.GONE);
+        if (getIntent().hasExtra("position")) {
+            btnCancelWPSelect.setVisibility(View.VISIBLE);
+        }
+            databaseWaypoint = new DatabaseWaypoint(this);
+        btnCancelWPSelect = findViewById(R.id.btnCancelWPSelect);
         listView = findViewById(R.id.waypointList);
         waypointStringList = new ArrayList<>();
 
@@ -42,6 +49,19 @@ public class WaypointListActivity extends AppCompatActivity implements DurationD
 
         listView.setAdapter(dataAdapter);
 
+        btnCancelWPSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            String root = getIntent().getStringExtra("root");
+                route = (Route) getIntent().getExtras().get("route");
+                route.deleteWaypoint(route.getWaypoints().get(getIntent().getIntExtra("position",0)));
+                intent = new Intent(view.getContext(), RouteCreationActivity.class);
+                intent.putExtra("route", route);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         listView.setOnItemClickListener((parent, view, position, id) -> {
             //EIGENTLICH: Item.at(position) oder so ...
             waypoint = databaseWaypoint.getAllWaypoints().get(position);
@@ -50,12 +70,12 @@ public class WaypointListActivity extends AppCompatActivity implements DurationD
                 route = (Route) getIntent().getExtras().get("route");
                 openDialog();
                 intent = new Intent(view.getContext(), RouteCreationActivity.class);
+                intent.putExtra("route", route);
             }else {
                 if (getIntent().getStringExtra("root").equals("WaypointActivity")) {
                     WaypointActivity.newWaypoint = false;
                     intent = new Intent(view.getContext(), WaypointActivity.class);
                     intent.putExtra("editedWaypointId", waypointId);
-
                     startActivity(intent);
                     finish();
                 } else if (getIntent().getStringExtra("root").equals("RouteCreationActivity")) {
