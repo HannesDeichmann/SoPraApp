@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,7 +28,6 @@ public class RouteCreationActivity extends AppCompatActivity {
     private Route route;
     DatabaseRoute databaseRoute;
     DatabaseWaypoint databaseWaypoint;
-    Route editRoute;
 
     private RouteWaypoint createRouteWaypointByPos(int pos){
         RouteWaypoint routeWaypoint = new RouteWaypoint();
@@ -120,9 +120,13 @@ public class RouteCreationActivity extends AppCompatActivity {
         });
 
         btnShowMapRef.setOnClickListener(view -> {
-            Intent intent = new Intent(view.getContext(), MapActivity.class);
-            intent.putExtra("route", route);
-            startActivity(intent);
+            if(list.size()>0 ){
+                Intent intent = new Intent(view.getContext(), MapActivity.class);
+                intent.putExtra("route", route);
+                startActivity(intent);
+            }else {
+                Toast.makeText(getApplicationContext(),"There are 0 Waypoints in the List",Toast.LENGTH_SHORT).show();
+            }
         });
     }
 

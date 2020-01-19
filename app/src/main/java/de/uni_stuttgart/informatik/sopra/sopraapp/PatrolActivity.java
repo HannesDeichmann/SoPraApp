@@ -58,11 +58,9 @@ public class PatrolActivity extends AppCompatActivity {
         btnCancelActiveRouteRef = findViewById(R.id.btnCancelActiveRoute);
         btnShowMapRef = findViewById(R.id.btnShowMap);
         lvCompleteRouteRef = findViewById(R.id.lvCompleteRoute);
-
-
+        
         GuardRoute selectedRoute = (GuardRoute) getIntent().getExtras().get("selectedRoute");
         Route route = selectedRoute.getRoute();
-
 
         /**
          * Creating the listView for the whole route
@@ -79,7 +77,6 @@ public class PatrolActivity extends AppCompatActivity {
                     + " " + duration + "min");
 
         }
-
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(
                 this,

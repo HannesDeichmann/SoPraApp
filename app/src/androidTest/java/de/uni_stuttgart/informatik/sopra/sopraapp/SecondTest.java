@@ -1,6 +1,7 @@
 package de.uni_stuttgart.informatik.sopra.sopraapp;
 
 
+import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -14,6 +15,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.typeText;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertEquals;
@@ -27,14 +35,16 @@ import static org.junit.Assert.assertThat;
 @RunWith(AndroidJUnit4.class)
 public class SecondTest {
 
+    //Instrumentation.ActivityMonitor monitor = getInstrumetation().addMonitor(GuardActivity.class)
+
     @Rule
-    public ActivityTestRule<DisplayActivity> rule = new ActivityTestRule<DisplayActivity>(DisplayActivity.class)
+    public ActivityTestRule<MainActivity> rule = new ActivityTestRule<MainActivity>(MainActivity.class)
     {
         @Override
         protected Intent getActivityIntent() {
             Context targetContext = InstrumentationRegistry.getInstrumentation()
                     .getTargetContext();
-            Intent intent = new Intent(targetContext, DisplayActivity.class);
+            Intent intent = new Intent(targetContext, MainActivity.class);
             intent.putExtra("Message", "Hello");
             return intent;
         }
@@ -44,14 +54,11 @@ public class SecondTest {
     @Test
     public void useAppContext() throws Exception {
 
-        DisplayActivity activity = rule.getActivity();
+        MainActivity activity = rule.getActivity();
 
-
-        TextView tvMessage = (TextView) activity.findViewById(R.id.tvMessage);
-        assertThat(tvMessage,notNullValue());
-        assertEquals("TextView text compare", "Hello", tvMessage.getText().toString());
-
-
-
+        onView(withId(R.id.etUsername)).perform(typeText("1"));
+        onView(withId(R.id.etPassword)).perform(typeText("1234"));
+        onView(withId(R.id.btnLogin)).perform(click());
+        onView(withId(R.id.tvUsername)).check(matches(withText("otto müllerich")));
     }
 }

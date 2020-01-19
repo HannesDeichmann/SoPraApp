@@ -19,10 +19,10 @@
         <activity android:name=".ProtocolActivity" />
         <activity android:name=".GuardModeRouteListActivity" />
         <activity android:name=".ScheduleActivity" />
-        <activity android:name=".RouteActivity" />
+        <activity android:name=".RouteActivity" android:windowSoftInputMode="adjustNothing"/>
         <activity android:name=".GuardModeActivity" />
-        <activity android:name=".WaypointListActivity" />
-        <activity android:name=".GuardListActivity" />
+        <activity android:name=".WaypointListActivity" android:windowSoftInputMode="adjustNothing"/>
+        <activity android:name=".GuardListActivity" android:windowSoftInputMode="adjustNothing"/>
         <activity android:name=".GuardActivity" />
         <activity android:name=".RouteCreationActivity" />
         <activity android:name=".WaypointActivity" />

@@ -9,6 +9,7 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -115,8 +116,8 @@ public class DrawingView extends View {
             }
         }
         /////////////////////////////////////TESSSST
-        this.addDoneWaypoint(waypointList.get(0));
-        this.addDoneWaypoint(waypointList.get(1));
+        //this.addDoneWaypoint(waypointList.get(0));
+        //this.addDoneWaypoint(waypointList.get(1));
         //////////////////////////////////////////
         Waypoint lastwp = new Waypoint();
         Paint wpPaint = getRoutePaint();

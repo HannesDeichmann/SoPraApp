@@ -150,6 +150,5 @@ public class WaypointActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 }
