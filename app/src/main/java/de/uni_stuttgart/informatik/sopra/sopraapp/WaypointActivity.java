@@ -94,7 +94,7 @@ public class WaypointActivity extends AppCompatActivity {
                 }
             }
         });
-
+        //wp needs to be deleted out of the routes that use the wp
         btnDeleteWaypointRef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
