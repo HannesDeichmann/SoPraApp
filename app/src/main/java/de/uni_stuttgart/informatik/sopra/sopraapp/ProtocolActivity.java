@@ -32,6 +32,8 @@ public class ProtocolActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_protocol);
         tvProtocol = findViewById(R.id.protocol);
+        //hardcode for examples
+
         list.add("1; Peter; 17:00; 18:00; false; 17:02; 17:13; 17:33; 17:42; 17:50; 18:00");
         list.add("1; Peter; 17:00; 18:00; false; 17:02; 17:13; 17:33; 17:42; 17:50; 18:00");
         list.add("1; Peter; 17:00; 18:00; false; 17:02; 17:13; 17:33; 17:42; 17:50; 18:00");

@@ -21,6 +21,7 @@ public class WaypointActivity extends AppCompatActivity {
     EditText etWaypointNoteRef;
 
     DatabaseWaypoint databaseWaypoint;
+    DatabaseRoute databaseRoute;
     public static boolean newWaypoint = true;
 
     private void clearTextFields(){
@@ -61,6 +62,7 @@ public class WaypointActivity extends AppCompatActivity {
         etWaypointNoteRef = findViewById(R.id.etWaypointNote);
 
         databaseWaypoint = new DatabaseWaypoint(this);
+        databaseRoute = new DatabaseRoute(this);
 
         checkEditNewWaypoint();
 
@@ -82,7 +84,8 @@ public class WaypointActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(view.getContext(), WaypointActivity.class);
                     startActivity(intent);
-                    clearTextFields();
+                    finish();
+                   // clearTextFields();
                 } else {
                     //TODO Alertfenster
                     //etWaypointIdRef.setText("WaypointId needs " + Waypoint.waypointIdLength +" chars");
@@ -95,12 +98,23 @@ public class WaypointActivity extends AppCompatActivity {
         btnDeleteWaypointRef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                for (Route route : databaseRoute.getAllRoutes()){
+                    for (int i = 0; i < route.getWaypointStrings().size(); i++){
+                        int wpId = Integer.parseInt(route.getWaypointStrings().get(i).getUserId());
+                        if(Integer.parseInt(getEditedWaypoint().getWaypointId()) == wpId){
+                            route.getWaypointStrings().remove(i);
+
+                            databaseRoute.deleteRoute(route);
+                            databaseRoute.addRoute(route);
+                        }
+                    }
+                }
                 databaseWaypoint.deleteWaypoint(getEditedWaypoint());
                 newWaypoint = true;
                 Intent intent = new Intent(view.getContext(), WaypointActivity.class);
                 startActivity(intent);
-                clearTextFields();
-            }
+                finish();
+                }
         });
 
         btnEditWaypointRef.setOnClickListener(new View.OnClickListener() {

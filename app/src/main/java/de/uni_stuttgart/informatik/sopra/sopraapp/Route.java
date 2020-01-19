@@ -50,6 +50,7 @@ public class Route implements Serializable {
 
     public void deleteWaypoint(RouteWaypoint waypoint){ this.waypoints.remove(waypoint); }
 
+
     public ArrayList<RouteWaypointStrings> getWaypointStrings() {
         return waypointStrings;
     }
