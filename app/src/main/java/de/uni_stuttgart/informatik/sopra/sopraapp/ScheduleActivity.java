@@ -1,23 +1,25 @@
 package de.uni_stuttgart.informatik.sopra.sopraapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import java.util.ArrayList;
 
-public class ScheduleActivity extends AppCompatActivity {
+public class ScheduleActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
     Button btnSelectGuard;
     Button btnSelectRoute;
-    EditText etSetTime;
+    Button btnSelectStartTime;
+    TextView tvSetTime;
     Button btnSave;
     Guard selectedGuard;
     Route selectedRoute;
@@ -28,6 +30,18 @@ public class ScheduleActivity extends AppCompatActivity {
     DatabaseGuard databaseGuard;
     DatabaseRoute databaseRoute;
 
+    @Override
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        String hourString = hourOfDay + "";
+        String minuteString = minute + "";
+        if (hourOfDay<10){
+            hourString = "0"+hourOfDay;
+        }
+        if(minute<10){
+            minuteString = "0"+minute;
+        }
+        tvSetTime.setText(hourString+":"+minuteString);
+    }
 
     private void addRoutesFromDbToEmptyGuard(Guard guard){
         ArrayList<String> timeList = databaseGuard.getGuardWithRoutes(guard).getRouteIdString();
@@ -47,14 +61,19 @@ public class ScheduleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_schedule);
         btnSelectGuard = findViewById(R.id.selectGuard);
         btnSelectRoute = findViewById(R.id.selectRoute);
-        etSetTime = findViewById(R.id.etSetStartTime);
+        tvSetTime = findViewById(R.id.tvStartTime);
         btnSave = findViewById(R.id.saveScheduleItem);
         tvSelectedGuard = findViewById(R.id.tvSelectedGuard);
         listView = findViewById(R.id.routeList);
         tvSelectedRoute = findViewById(R.id.tvSelectedRoute);
+        btnSelectStartTime = findViewById(R.id.btnSelectStartTime);
         databaseGuard = new DatabaseGuard(this);
         databaseRoute = new DatabaseRoute(this);
 
+        btnSelectStartTime.setOnClickListener(v -> {
+            DialogFragment timePicker = new TimePickerFragment();
+            timePicker.show(getSupportFragmentManager(), "time picker");
+        });
         btnSelectGuard.setOnClickListener(view -> {
             Intent intent = new Intent(view.getContext(), ScheduleGuardListActivity.class);
             startActivity(intent);
@@ -81,13 +100,13 @@ public class ScheduleActivity extends AppCompatActivity {
         });
 
         btnSave.setOnClickListener(v -> {
-            if (selectedGuard != null && selectedRoute != null && !etSetTime.getText().toString().equals("")) {
+            if (selectedGuard != null && selectedRoute != null) {
                 //System.out.println(selectedGuard.getGuardRouteList().size());
                 selectedGuard.setGuardRouteList(new ArrayList<GuardRoute>());
                 addRoutesFromDbToEmptyGuard(selectedGuard);
-                selectedGuard.addRoute(new GuardRoute(selectedRoute, etSetTime.getText().toString()));
+                selectedGuard.addRoute(new GuardRoute(selectedRoute, tvSetTime.getText().toString()));
 
-                etSetTime.setText("");
+                tvSetTime.setText("00:00");
                 routeStringList = new ArrayList<>();
                 databaseGuard.addGuardRoute(selectedGuard);
                 Guard guard = databaseGuard.getGuardWithRoutes(selectedGuard);
@@ -116,7 +135,7 @@ public class ScheduleActivity extends AppCompatActivity {
             System.out.println(selectedGuard.getGuardRouteList().size());
             GuardRoute guardRoute = selectedGuard.getGuardRouteList().get(position);
             selectedRoute = guardRoute.getRoute();
-            etSetTime.setText(guardRoute.getTime());
+            tvSetTime.setText(guardRoute.getTime());
             ArrayList<GuardRoute> guardRouteList =  selectedGuard.getGuardRouteList();
             guardRouteList.remove(position);
             selectedGuard.setGuardRouteList(guardRouteList);

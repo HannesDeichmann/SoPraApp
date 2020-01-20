@@ -59,7 +59,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="35dp"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789-,.?!"/>
 
     <EditText
         android:id="@+id/etWaypointPosition"
@@ -69,7 +70,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="35dp"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789-,.?!"/>
 
 
     <EditText
@@ -80,7 +82,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="35dp"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789-,.?!"/>
 
     <EditText
         android:id="@+id/etWaypointId"
@@ -90,8 +93,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="35dp"
         android:ems="10"
-        android:inputType="number"
-        />
+        android:inputType="number" />
 
     <Button
         android:id="@+id/btnEditWaypoint"
