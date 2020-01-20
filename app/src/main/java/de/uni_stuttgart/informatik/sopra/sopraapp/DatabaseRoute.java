@@ -22,7 +22,6 @@ public class DatabaseRoute extends SQLiteOpenHelper {
             DbContract.COLUMN_NAME_ROUTEWAYPOINTIDLIST + " TEXT," +
             DbContract.COLUMN_NAME_ROUTETIMELIST + " TEXT" + " )";
 
-
     private static final String SQL_DELETE_ROUTE_ENTRIES = "DROP TABLE IF EXISTS " + DbContract.TABLE_NAME_ROUTE;
 
     public DatabaseRoute(Context context) {
@@ -82,7 +81,6 @@ public class DatabaseRoute extends SQLiteOpenHelper {
 
         return timeString;
     }
-
 
     public void addRoute(Route route) {
         SQLiteDatabase db = this.getWritableDatabase();

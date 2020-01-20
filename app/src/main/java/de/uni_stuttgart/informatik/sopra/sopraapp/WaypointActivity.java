@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class WaypointActivity extends AppCompatActivity {
@@ -14,20 +15,31 @@ public class WaypointActivity extends AppCompatActivity {
     Button btnEditWaypointRef;
     Button btnAcceptWaypointRef;
     Button btnDeleteWaypointRef;
+    Button btnAddLocationRef;
 
     EditText etWaypointNameRef;
     EditText etWaypointIdRef;
-    EditText etWaypointPositionRef;
+    TextView tvWaypointPositionRef;
     EditText etWaypointNoteRef;
 
     DatabaseWaypoint databaseWaypoint;
     DatabaseRoute databaseRoute;
     public static boolean newWaypoint = true;
+    public static String waypointLocation = "";
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(getIntent().hasExtra("wpLocation")){
+            setTextFields((Waypoint) getIntent().getExtras().get("wpLocation"));
+
+        }
+    }
 
     private void clearTextFields(){
         etWaypointNameRef.setText("");
         etWaypointIdRef.setText("");
-        etWaypointPositionRef.setText("");
+        tvWaypointPositionRef.setText("");
         etWaypointNoteRef.setText("");
     }
 
@@ -36,15 +48,28 @@ public class WaypointActivity extends AppCompatActivity {
     }
 
     private void checkEditNewWaypoint() {
-        if (newWaypoint == true) {
+        if (newWaypoint) {
             btnDeleteWaypointRef.setVisibility(View.INVISIBLE);
         } else {
             btnDeleteWaypointRef.setVisibility(View.VISIBLE);
-            etWaypointNameRef.setText(getEditedWaypoint().getWaypointName());
-            etWaypointIdRef.setText(getEditedWaypoint().getWaypointId());
-            etWaypointPositionRef.setText(getEditedWaypoint().getWaypointPosition());
-            etWaypointNoteRef.setText(getEditedWaypoint().getWaypointNote());
+            setTextFields(getEditedWaypoint());
         }
+    }
+
+    private void setTextFields(Waypoint waypoint){
+        etWaypointNameRef.setText(waypoint.getWaypointName());
+        etWaypointIdRef.setText(waypoint.getWaypointId());
+        tvWaypointPositionRef.setText(waypoint.getWaypointPosition());
+        etWaypointNoteRef.setText(waypoint.getWaypointNote());
+    }
+
+    private Waypoint addWaypointInfos(){
+        Waypoint createdWaypoint = new Waypoint();
+        createdWaypoint.setWaypointName(etWaypointNameRef.getText().toString());
+        createdWaypoint.setWaypointId(etWaypointIdRef.getText().toString());
+        createdWaypoint.setWaypointPosition(tvWaypointPositionRef.getText().toString());
+        createdWaypoint.setWaypointNote(etWaypointNoteRef.getText().toString());
+        return createdWaypoint;
     }
 
     @Override
@@ -55,33 +80,31 @@ public class WaypointActivity extends AppCompatActivity {
         btnEditWaypointRef = findViewById(R.id.btnEditWaypoint);
         btnAcceptWaypointRef = findViewById(R.id.btnAcceptWaypoint);
         btnDeleteWaypointRef = findViewById(R.id.btnDeleteWaypoint);
+        btnAddLocationRef = findViewById(R.id.btnAddLocation);
 
         etWaypointNameRef = findViewById(R.id.etWaypointName);
         etWaypointIdRef = findViewById(R.id.etWaypointId);
-        etWaypointPositionRef = findViewById(R.id.etWaypointPosition);
+        tvWaypointPositionRef = findViewById(R.id.tvLocationDisplay);
         etWaypointNoteRef = findViewById(R.id.etWaypointNote);
 
         databaseWaypoint = new DatabaseWaypoint(this);
         databaseRoute = new DatabaseRoute(this);
 
-        checkEditNewWaypoint();
+        if(!getIntent().hasExtra("wpLocation")){
+            checkEditNewWaypoint();
+        }
 
         btnAcceptWaypointRef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (etWaypointIdRef.getText().length() == Waypoint.waypointIdLength) {
-                    Waypoint createdWaypoint = new Waypoint();
-                    createdWaypoint.setWaypointName(etWaypointNameRef.getText().toString());
-                    createdWaypoint.setWaypointId(etWaypointIdRef.getText().toString());
-                    createdWaypoint.setWaypointPosition(etWaypointPositionRef.getText().toString());
-                    createdWaypoint.setWaypointNote(etWaypointNoteRef.getText().toString());
+                    Waypoint createdWaypoint = addWaypointInfos();
                     if(newWaypoint)databaseWaypoint.addWaypoint(createdWaypoint);
                     else{
                         databaseWaypoint.deleteWaypoint(createdWaypoint);
                         databaseWaypoint.addWaypoint(createdWaypoint);
                     }
                     newWaypoint = true;
-
                     Intent intent = new Intent(view.getContext(), WaypointActivity.class);
                     startActivity(intent);
                     finish();
@@ -124,6 +147,23 @@ public class WaypointActivity extends AppCompatActivity {
                 intent.putExtra("root", "WaypointActivity");
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        btnAddLocationRef.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if ((etWaypointIdRef.getText().length() == Waypoint.waypointIdLength )/*&&
+                        (DrawingView.getBitmap() != null)*/){
+                    Intent intent = new Intent(v.getContext(), DrawActivity.class);
+                    Waypoint waypoint = addWaypointInfos();
+                    intent.putExtra("waypoint",waypoint);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast toast = Toast.makeText(getApplicationContext(),"Id must have 6 chars", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
             }
         });
     }

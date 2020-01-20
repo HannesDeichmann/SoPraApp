@@ -18,7 +18,6 @@ public class GuardModeRouteListActivity extends AppCompatActivity {
     private Duration duration1;
     private Duration duration2;
     private Duration duration3;
-    DatabaseGuard databaseGuard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,8 +76,7 @@ public class GuardModeRouteListActivity extends AppCompatActivity {
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(view.getContext(), PatrolActivity.class);
                 GuardRoute selectedRoute= guardRouteList.get(position);
                 intent.putExtra("selectedRoute", selectedRoute);

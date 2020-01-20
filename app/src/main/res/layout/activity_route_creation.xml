@@ -14,11 +14,12 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="16dp"
         android:text="Routename:"
         app:layout_constraintEnd_toStartOf="@id/etRouteName"
         app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintBottom_toTopOf="@id/btnAddWaypoint"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,18 +31,18 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="13dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:inputType="text"
         android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvRouteName"
+        app:layout_constraintTop_toTopOf="@id/tvRouteName"
+        app:layout_constraintBottom_toBottomOf="@id/tvRouteName"
         android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789-,.?!"/>
 
     <Button
-        android:id="@+id/addWaypoint"
+        android:id="@+id/btnAddWaypoint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -54,7 +55,8 @@
         android:text="Add Waypoint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etRouteName"
+        app:layout_constraintTop_toBottomOf="@+id/tvRouteName"
+        app:layout_constraintBottom_toTopOf="@+id/selectedWaypointList"
         />
 
     <ListView
@@ -69,7 +71,8 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addWaypoint" />
+        app:layout_constraintTop_toBottomOf="@+id/btnAddWaypoint"
+        app:layout_constraintBottom_toTopOf="@+id/saveRoute"/>
 
     <Button
         android:id="@+id/btnAddOldWaypoints"
@@ -78,7 +81,19 @@
         android:text="get old Waypoints"
         app:layout_constraintTop_toBottomOf="@+id/saveRoute"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnShowMapInRouteActivity"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btnShowMapInRouteActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Map"
+        app:layout_constraintTop_toBottomOf="@+id/btnAddOldWaypoints"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="50dp"
         />
 
     <Button
@@ -88,7 +103,8 @@
         android:text="save"
         app:layout_constraintTop_toBottomOf="@+id/selectedWaypointList"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/deleteRoute"
+        app:layout_constraintEnd_toStartOf="@id/deleteRoute"
+        app:layout_constraintBottom_toTopOf="@id/btnAddOldWaypoints"
         />
 
     <Button
@@ -97,7 +113,8 @@
         android:layout_height="wrap_content"
         android:text="delete"
         app:layout_constraintTop_toBottomOf="@+id/selectedWaypointList"
-        app:layout_constraintStart_toStartOf="@id/saveRoute"
+        app:layout_constraintStart_toEndOf="@id/saveRoute"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintBottom_toTopOf="@+id/btnAddOldWaypoints" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

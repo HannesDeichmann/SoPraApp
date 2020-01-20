@@ -33,6 +33,15 @@ public class Waypoint implements Serializable {
         return waypointString;
     }
 
+    public Float getXKoordinate(){
+        String[] splitted = this.waypointPosition.split(";");
+        return Float.valueOf(splitted[0]);
+    }
+    public Float getYKoordinate(){
+        String[] splitted = this.waypointPosition.split(";");
+        return Float.valueOf(splitted[1]);
+    }
+
     public void setWaypointName(String waypointName) {
         this.waypointName = waypointName;
     }

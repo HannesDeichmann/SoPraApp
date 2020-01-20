@@ -33,6 +33,7 @@ public class PatrolActivity extends AppCompatActivity {
     private Button btnStartCountdownRef;
     private Button btnScanWaypointRef;
     private Button btnCancelActiveRouteRef;
+    private Button btnShowMapRef;
     public int nextWaypointCounter;
     private CountDownTimer countDownTimer;
     private long timeLeftInMilliseconds = 0;
@@ -55,12 +56,11 @@ public class PatrolActivity extends AppCompatActivity {
         btnStartCountdownRef = findViewById(R.id.btnStartCountdown);
         btnScanWaypointRef = findViewById(R.id.btnScanWaypoint);
         btnCancelActiveRouteRef = findViewById(R.id.btnCancelActiveRoute);
+        btnShowMapRef = findViewById(R.id.btnShowMap);
         lvCompleteRouteRef = findViewById(R.id.lvCompleteRoute);
-
-
+        
         GuardRoute selectedRoute = (GuardRoute) getIntent().getExtras().get("selectedRoute");
         Route route = selectedRoute.getRoute();
-
 
         /**
          * Creating the listView for the whole route
@@ -78,7 +78,6 @@ public class PatrolActivity extends AppCompatActivity {
 
         }
 
-
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
@@ -86,6 +85,15 @@ public class PatrolActivity extends AppCompatActivity {
 
         lvCompleteRouteRef.setAdapter(dataAdapter);
         lvCompleteRouteRef.setDividerHeight(5);
+
+        btnShowMapRef.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), MapActivity.class);
+                intent.putExtra("route", route);
+                startActivity(intent);
+            }
+        });
 
         btnStartCountdownRef.setOnClickListener(new View.OnClickListener() {
             @Override
