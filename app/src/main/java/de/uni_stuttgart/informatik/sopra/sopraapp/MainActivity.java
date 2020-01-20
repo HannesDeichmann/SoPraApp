@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     String guardUsername;
     String guardPassword;
     TextView tvLoginFeedbackRef;
+
     boolean loggedIn;
     private Duration duration;
     @Override
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         btnLoginRef = findViewById(R.id.btnLogin);
         tvLoginFeedbackRef = findViewById(R.id.tvLoginFeedback);
         tvLoginFeedbackRef.setText("");
+
 
         //btnAdminLoginRef ist only there for development so while testing you dont need to log in every time
         btnAdminLoginRef.setVisibility(View.GONE);

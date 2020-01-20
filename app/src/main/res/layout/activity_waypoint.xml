@@ -123,4 +123,13 @@
         android:layout_marginEnd="91dp"
         android:layout_marginBottom="70dp"
         android:text="@string/deleteGuard" />
+
+    <Button
+        android:id="@+id/btnAssignWaypoint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="215dp"
+        android:text="Assign Waypoint" />
 </RelativeLayout>

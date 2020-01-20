@@ -135,13 +135,13 @@
         app:layout_constraintTop_toBottomOf="@+id/tvCountdown" />
 
     <Button
-        android:id="@+id/btnScanWaypoint"
+        android:id="@+id/btnFinishRoute"
         android:layout_width="161dp"
         android:layout_height="67dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="30dp"
         android:foregroundTint="#FFFFFF"
-        android:text="@string/scan_waypoint"
+        android:text="@string/finish_route"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnStartCountdown" />
 
@@ -154,7 +154,7 @@
         android:textAlignment="center"
         android:textColor="#E91E1E"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnScanWaypoint" />
+        app:layout_constraintTop_toBottomOf="@+id/btnFinishRoute" />
 
     <Button
         android:id="@+id/btnCancelActiveRoute"
