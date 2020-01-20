@@ -16,7 +16,8 @@
         android:layout_marginTop="35dp"
         android:layout_marginEnd="95dp"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789-,.?!"/>
 
     <EditText
         android:id="@+id/etSurname"
@@ -27,7 +28,8 @@
         android:layout_marginTop="41dp"
         android:layout_marginEnd="95dp"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789-,.?!"/>
 
     <EditText
         android:id="@+id/pwUserPassword"
