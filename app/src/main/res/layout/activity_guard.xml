@@ -50,7 +50,7 @@
         android:layout_below="@+id/tvGuardId"
         android:layout_alignParentStart="true"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="41dp"
+        android:layout_marginTop="66dp"
         android:text="@string/userpw"
         android:textAlignment="center"
         android:textAllCaps="false" />
@@ -83,15 +83,15 @@
 
     <TextView
         android:id="@+id/tvGuardSurname"
-        android:layout_width="88dp"
-        android:layout_height="39dp"
+        android:layout_width="84dp"
+        android:layout_height="30dp"
         android:layout_above="@+id/tvGuardId"
         android:layout_below="@id/tvGuardId"
         android:layout_alignTop="@+id/etSurname"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="11dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="1dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="69dp"
         android:text="@string/surname"
         android:textAlignment="center"
         android:textAllCaps="false" />
@@ -102,8 +102,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/pwUserPassword"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="31dp"
-        android:layout_marginEnd="18dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="36dp"
         android:text="@string/accept" />
 
     <Button
@@ -112,7 +112,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/pwUserPassword"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="38dp"
         android:layout_marginTop="30dp"
         android:text="@string/deleteGuard" />
 
@@ -153,8 +153,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/pwUserPassword"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="32dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="54dp"
+        android:layout_marginTop="30dp"
         android:layout_toEndOf="@+id/btnDeleteGuard"
         android:text="Cancel" />
 

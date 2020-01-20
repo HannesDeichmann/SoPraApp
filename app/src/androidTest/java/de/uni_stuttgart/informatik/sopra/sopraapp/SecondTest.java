@@ -15,8 +15,11 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
+
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -53,12 +56,20 @@ public class SecondTest {
 
     @Test
     public void useAppContext() throws Exception {
-
-        MainActivity activity = rule.getActivity();
-
-        onView(withId(R.id.etUsername)).perform(typeText("1"));
-        onView(withId(R.id.etPassword)).perform(typeText("1234"));
         onView(withId(R.id.btnLogin)).perform(click());
-        onView(withId(R.id.tvUsername)).check(matches(withText("otto müllerich")));
+        onView(withId(R.id.btnGuard)).perform(click());
+
+        String[] guardList = {"Georgios","Solakis","133709","Arne","Bartenbach","000000","Kai","Braun","015775","Phil","Smponi","01814381514781"};
+        for(int i = 0; i<guardList.length/3;i++){
+            onView(withId(R.id.etForname)).perform(typeText(guardList[i*3]),closeSoftKeyboard());
+            onView(withId(R.id.etSurname)).perform(typeText(guardList[3*i+1]),closeSoftKeyboard());
+            onView(withId(R.id.pwUserPassword)).perform(typeText(guardList[3*i+2]),closeSoftKeyboard());
+            onView(withId(R.id.btnAcceptGuard)).perform(click());
+        }
+        onView(withId(R.id.btnEditGuard)).perform(click());
+    }
+
+    private void myText(int id,String text){
+        onView(withId(id)).perform(typeText(text));
     }
 }

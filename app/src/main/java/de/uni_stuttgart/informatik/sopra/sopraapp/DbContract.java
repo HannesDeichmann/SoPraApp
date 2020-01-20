@@ -24,6 +24,7 @@ public class DbContract {
     public static final String COLUMN_NAME_ROUTEWAYPOINTIDLIST = "routewaypointid";
 
     public static final String DIVIDESTRING = "/";
+
     public static ArrayList<String> stringIntoArrayList(String string){
         ArrayList<String> arrayList = new ArrayList<>();
         String[] split = string.split(DIVIDESTRING);
