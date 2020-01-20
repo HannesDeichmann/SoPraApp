@@ -52,10 +52,16 @@ public class GuardListActivity extends AppCompatActivity {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                GuardActivity.newGuard = true;
-                Intent intent = new Intent(view.getContext(), GuardActivity.class);
-                startActivity(intent);
-                finish();
+                if(getIntent().hasExtra("Schedule")){
+                    Intent intent = new Intent(view.getContext(), ScheduleActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else{
+                    GuardActivity.newGuard = true;
+                    Intent intent = new Intent(view.getContext(), GuardActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 
@@ -84,10 +90,17 @@ public class GuardListActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(view.getContext(), GuardActivity.class);
-                GuardActivity.newGuard = false;
                 int guardId = Integer.parseInt(guardStringList.get(position).split(":")[0]);
-                intent.putExtra("editedGuardId", guardId);
+                Intent intent;
+                if(getIntent().hasExtra("Schedule")){
+                    intent = new Intent(view.getContext(), ScheduleActivity.class);
+                    Guard selectedGuard = databaseGuard.getGuardById(guardId);
+                    intent.putExtra("selectedGuard", selectedGuard);
+                }else{
+                    intent = new Intent(view.getContext(), GuardActivity.class);
+                    GuardActivity.newGuard = false;
+                    intent.putExtra("editedGuardId", guardId);
+                }
                 startActivity(intent);
                 finish();
             }

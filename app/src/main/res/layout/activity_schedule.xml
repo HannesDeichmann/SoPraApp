@@ -81,12 +81,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/saveScheduleItem" />
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/routeList"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
+        android:layout_width="350dp"
+        android:layout_height="400dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvSelectedGuard" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

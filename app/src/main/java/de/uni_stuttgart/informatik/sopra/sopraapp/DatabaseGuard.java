@@ -44,7 +44,6 @@ public class DatabaseGuard extends SQLiteOpenHelper {
         values.put(DbContract.COLUMN_NAME_GUARDSURNAME, guard.getSurname());
         values.put(DbContract.COLUMN_NAME_GUARDROUTEIDLIST, guard.getTimeListString());
         values.put(DbContract.COLUMN_NAME_GUARDSTARTTIMELIST, guard.getRouteIdListString());
-
         db.insert(DbContract.TABLE_NAME_GUARD, null, values);
         db.close();
     }

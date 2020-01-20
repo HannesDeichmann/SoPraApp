@@ -159,7 +159,6 @@ public class PatrolActivity extends AppCompatActivity {
         GuardRoute selectedRoute = (GuardRoute) getIntent().getExtras().get("selectedRoute");
         Route route = selectedRoute.getRoute();
 
-
         if (nextWaypointCounter == route.getWaypoints().size()) {
             tvNextWaypointNameRef.setText("");
             btnScanWaypointRef.setText("Finish route");
