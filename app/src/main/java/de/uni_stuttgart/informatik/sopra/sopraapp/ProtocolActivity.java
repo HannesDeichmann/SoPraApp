@@ -12,10 +12,12 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -26,7 +28,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class ProtocolActivity extends AppCompatActivity {
-    Boolean access;
     Button btnExport;
     RecyclerView tvProtocol;
     DatabasePatrol databasePatrol;
@@ -46,12 +47,13 @@ public class ProtocolActivity extends AppCompatActivity {
         dataAdapter = new ProtocolAdapter();
         tvProtocol.setAdapter(dataAdapter);
         dataAdapter.notifyDataSetChanged();
-
-        if (ContextCompat.checkSelfPermission(ProtocolActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(ProtocolActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-        } else {
-            writeFile();
-        }
+        btnExport.setOnClickListener(view -> {
+            if (ContextCompat.checkSelfPermission(ProtocolActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(ProtocolActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            } else {
+                writeFile();
+            }
+        });
     }
 
     @Override
@@ -72,7 +74,11 @@ public class ProtocolActivity extends AppCompatActivity {
 
     public void writeFile() {
         try {
-            File folder = new File(Environment.getExternalStorageDirectory().getPath() + "/Protocol/Protocol" + System.currentTimeMillis() + ".csv");
+            File folder = new File(Environment.getExternalStorageDirectory().getPath() +
+                    "/Protocol/Protocol" + System.currentTimeMillis() + ".csv");
+            Toast.makeText(getApplicationContext(),"Protocol saved as: " +
+                    Environment.getExternalStorageDirectory().getPath() + "/Protocol/Protocol" +
+                    System.currentTimeMillis() + ".csv" , Toast.LENGTH_SHORT).show();
             if (!folder.exists()) {
                 folder.getParentFile().mkdirs();
                 folder.createNewFile();
@@ -122,9 +128,14 @@ public class ProtocolActivity extends AppCompatActivity {
         for(String s: stringArray){
             waypoints.add(s);
         }
-        for(int i = 0; i < 4;i++){
-            waypoints.remove(i);
+        //remove guardname/routename/time...
+        for(int i = 0; i < 5;i++){
+            if(waypoints.size()!= 0){
+                waypoints.remove(0);
+            }
         }
+        //remove the finish time
+        waypoints.remove(waypoints.size()-1);
         return waypoints;
     }
 }
