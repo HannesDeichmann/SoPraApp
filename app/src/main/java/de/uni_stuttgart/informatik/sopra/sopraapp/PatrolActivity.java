@@ -6,18 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
-import static de.uni_stuttgart.informatik.sopra.sopraapp.ProtocolActivity.list;
 
 public class PatrolActivity extends AppCompatActivity {
     private TextView tvCountdownRef;
@@ -27,9 +23,7 @@ public class PatrolActivity extends AppCompatActivity {
     private TextView tvScanFeedbackRef;
     private TextView tvNoteRef;
     private Date date;
-    private String protocolString;
     private Guard guard;
-    private String protocolStringTimes = "";
     private Button btnStartCountdownRef;
     private Button btnScanWaypointRef;
     private Button btnCancelActiveRouteRef;
@@ -39,7 +33,8 @@ public class PatrolActivity extends AppCompatActivity {
     private long timeLeftInMilliseconds = 0;
     private boolean timerRunning;
     private ListView lvCompleteRouteRef;
-    DatabaseGuard databaseGuard;
+    DatabasePatrol databasePatrol;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,15 +53,10 @@ public class PatrolActivity extends AppCompatActivity {
         btnCancelActiveRouteRef = findViewById(R.id.btnCancelActiveRoute);
         btnShowMapRef = findViewById(R.id.btnShowMap);
         lvCompleteRouteRef = findViewById(R.id.lvCompleteRoute);
-        
+        databasePatrol = new DatabasePatrol(this);
         GuardRoute selectedRoute = (GuardRoute) getIntent().getExtras().get("selectedRoute");
         Route route = selectedRoute.getRoute();
-
-        /**
-         * Creating the listView for the whole route
-         */
         ArrayList<RouteWaypoint> waypointList = route.getWaypoints();
-
         ArrayList<String> waypointsStringList = new ArrayList<>();
 
 
@@ -85,7 +75,7 @@ public class PatrolActivity extends AppCompatActivity {
 
         lvCompleteRouteRef.setAdapter(dataAdapter);
         lvCompleteRouteRef.setDividerHeight(5);
-
+        setupInformation();
         btnShowMapRef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,7 +84,6 @@ public class PatrolActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         btnStartCountdownRef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,21 +93,14 @@ public class PatrolActivity extends AppCompatActivity {
         btnCancelActiveRouteRef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                databasePatrol.updatePatrolString("(interrupted)");
                 finish();
-
-                /**
-                 * TODO Log Entry Cancelled Route
-                 */
             }
-
         });
-        setupInformation();
-
         btnScanWaypointRef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-
 
                 //check if timer is running or the scanned waypoint was the last one
                 if (timerRunning || nextWaypointCounter == route.getWaypoints().size()) {
@@ -126,17 +108,15 @@ public class PatrolActivity extends AppCompatActivity {
                     //check if the scanned waypoint was the last one
                     if (nextWaypointCounter == route.getWaypoints().size()) {
                         date = new Date();
-                        protocolString += sdf.format(date) + "; " + "false" + protocolStringTimes;
-                        list.add(protocolString);
+                        databasePatrol.updatePatrolString("finished at:" + sdf.format(date));
                         Guard loggedInGuard = (Guard) getIntent().getExtras().get("loggedInGuard");
                         Intent intent = new Intent(view.getContext(), GuardModeActivity.class);
-                        /*intent.putExtra("loggedInGuard", loggedInGuard);
-                        startActivity(intent);
-                        */
                         finish();
                     } else {
                         date = new Date();
-                        protocolStringTimes += " ;" + sdf.format(date);
+                        String actuallWaypointName = route.getWaypoints().get(nextWaypointCounter).getWaypoint().getWaypointName();
+                        DrawingView.addDoneWaypoint(route.getWaypoints().get(nextWaypointCounter).getWaypoint());
+                        databasePatrol.updatePatrolString(actuallWaypointName + ": " + sdf.format(date) + ";");
                         nextWaypointCounter += 1;
                         stopTimer();
                         setupInformation();
@@ -155,7 +135,6 @@ public class PatrolActivity extends AppCompatActivity {
      * If the last waypoint is reached, no new timer is set and no next waypoint is shown
      */
     public void setupInformation() {
-
         GuardRoute selectedRoute = (GuardRoute) getIntent().getExtras().get("selectedRoute");
         Route route = selectedRoute.getRoute();
 
@@ -176,7 +155,6 @@ public class PatrolActivity extends AppCompatActivity {
             startTimer();
         }
         guard = (Guard) getIntent().getExtras().get("loggedInGuard");
-        protocolString = route.getRouteName() + route.getRouteId() + "; " + guard.getForename() + " " + guard.getSurname() + "; " + selectedRoute.getTime() + "; ";
     }
 
     public String formatStartTime(String time){
@@ -188,6 +166,7 @@ public class PatrolActivity extends AppCompatActivity {
     public void startStop() {
         if (timerRunning) {
             stopTimer();
+            databasePatrol.updatePatrolString("(break)");
         } else {
             startTimer();
         }
@@ -200,7 +179,6 @@ public class PatrolActivity extends AppCompatActivity {
                 timeLeftInMilliseconds = millisUntilFinished;
                 updateTimer();
             }
-
             @Override
             public void onFinish() {
 
@@ -215,9 +193,6 @@ public class PatrolActivity extends AppCompatActivity {
         countDownTimer.cancel();
         btnStartCountdownRef.setText("START");
         timerRunning = false;
-        /**
-         *TODO log Entry
-         */
     }
 
     public void updateTimer() {
@@ -234,9 +209,7 @@ public class PatrolActivity extends AppCompatActivity {
         if(timeLeftText.equals("0:00")){
             Toast.makeText(PatrolActivity.this, "Silent alarm would now be sent",
                     Toast.LENGTH_SHORT).show();
-            /**
-             * TODO Log Entry when the alarm is send
-             */
+           databasePatrol.updatePatrolString("(alarm)");
         }
     }
     @Override

@@ -8,12 +8,8 @@ import android.graphics.Paint;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-
 import java.util.ArrayList;
 
 public class DrawingView extends View {
@@ -24,7 +20,7 @@ public class DrawingView extends View {
         super(context);
     }
     private static boolean drawRouteOnMap = false;
-    private ArrayList<Waypoint> doneWaypoints = new ArrayList<>();
+    private static ArrayList<Waypoint> doneWaypoints = new ArrayList<>();
 
     public DrawingView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -43,9 +39,9 @@ public class DrawingView extends View {
         drawRouteOnMap = boo;
     }
 
-    public void setDoneWaypoints(ArrayList<Waypoint> list){ this.doneWaypoints = list; }
+    public static void setDoneWaypoints(ArrayList<Waypoint> list){ doneWaypoints = list; }
 
-    public void addDoneWaypoint(Waypoint wp){ this.doneWaypoints.add(wp);}
+    public static void addDoneWaypoint(Waypoint wp){ doneWaypoints.add(wp);}
 
     public void addCurentCircle(Circle circle) {
         this.circle = circle;
@@ -115,17 +111,13 @@ public class DrawingView extends View {
                 }
             }
         }
-        /////////////////////////////////////TESSSST
-        //this.addDoneWaypoint(waypointList.get(0));
-        //this.addDoneWaypoint(waypointList.get(1));
-        //////////////////////////////////////////
         Waypoint lastwp = new Waypoint();
         Paint wpPaint = getRoutePaint();
         Paint routePaint = getRoutePaint();
         for (Waypoint wp:waypointList) {
-            if(this.doneWaypoints.contains(wp)){
+            if(checkIfIdIsInDoneWaypointList(wp)){
                 wpPaint.setColor(Color.GREEN);
-                if(this.doneWaypoints.contains(lastwp)){
+                if(checkIfIdIsInDoneWaypointList(lastwp)){
                     routePaint.setColor(Color.GREEN);
                 } else {
                     routePaint = getRoutePaint();
@@ -144,6 +136,16 @@ public class DrawingView extends View {
             drawWaypointText(wp,canvas);
         }
     }
+
+    private boolean checkIfIdIsInDoneWaypointList(Waypoint waypoint){
+        for(Waypoint wp:doneWaypoints){
+            if(wp.getWaypointId().equals(waypoint.getWaypointId())){
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void drawWaypointText(Waypoint wp, Canvas canvas){
         Paint paint = new Paint();
         paint.setColor(Color.WHITE);

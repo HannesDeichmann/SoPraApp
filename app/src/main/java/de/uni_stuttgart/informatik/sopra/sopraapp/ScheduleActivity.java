@@ -39,6 +39,7 @@ public class ScheduleActivity extends AppCompatActivity {
     RecyclerView listView;
     RecyclerView.Adapter dataAdapter;
     RecyclerView.LayoutManager rvManagerRef;
+
     /*
     <ListView
         android:id="@+id/routeList"
