@@ -18,9 +18,9 @@ public class DatabaseRoute extends SQLiteOpenHelper {
     public static final String SQL_CREATE_ROUTE_ENTRIES = "CREATE TABLE " +
             DbContract.TABLE_NAME_ROUTE + "(" +
             DbContract.COLUMN_NAME_ROUTEID + " INTEGER PRIMARY KEY," +
-            DbContract.COLUMN_NAME_ROUTENAME + " TEXT,"  +
+            DbContract.COLUMN_NAME_ROUTENAME + " TEXT," +
             DbContract.COLUMN_NAME_ROUTEWAYPOINTIDLIST + " TEXT," +
-            DbContract.COLUMN_NAME_ROUTETIMELIST+ " TEXT" + " )";
+            DbContract.COLUMN_NAME_ROUTETIMELIST + " TEXT" + " )";
 
     private static final String SQL_DELETE_ROUTE_ENTRIES = "DROP TABLE IF EXISTS " + DbContract.TABLE_NAME_ROUTE;
 
@@ -37,19 +37,48 @@ public class DatabaseRoute extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    private String getWaypointIdString(Route route){
+    private String getWaypointIdString(Route route) {
         String waypointIdList = "";
-        for(RouteWaypoint w:route.getWaypoints()){
-            waypointIdList += DEVIDESTRING + w.getWaypoint().getWaypointId();
+        if (route.getWaypointStrings() != null) {
+            if (route.getWaypointStrings().size() <= route.getWaypoints().size()) {
+                for (RouteWaypoint w : route.getWaypoints()) {
+                    waypointIdList += DEVIDESTRING + w.getWaypoint().getWaypointId();
+                }
+            } else {
+                for (RouteWaypointStrings rwps : route.getWaypointStrings()) {
+                    waypointIdList += DEVIDESTRING + rwps.getUserId();
+                }
+            }
+        } else {
+            for (RouteWaypoint w : route.getWaypoints()) {
+                waypointIdList += DEVIDESTRING + w.getWaypoint().getWaypointId();
+            }
         }
-        waypointIdList.substring(1);
+        if (!waypointIdList.equals("")) {
+            waypointIdList.substring(1);
+        }
         return waypointIdList;
     }
-    private String getTimeString(Route route){
+
+    //gleich wie getWapoinIdString anpassen
+    private String getTimeString(Route route) {
         String timeString = "";
-        for(RouteWaypoint w: route.getWaypoints()){
-            timeString += DEVIDESTRING + String.valueOf(w.getDuration().toMinutes());
+        if (route.getWaypointStrings() != null) {
+            if (route.getWaypointStrings().size() <= route.getWaypoints().size()) {
+                for (RouteWaypoint w : route.getWaypoints()) {
+                    timeString += DEVIDESTRING + String.valueOf(w.getDuration().toMinutes());
+                }
+            } else {
+                for (RouteWaypointStrings rwps : route.getWaypointStrings()) {
+                    timeString += DEVIDESTRING + rwps.getTime();
+                }
+            }
+        } else {
+            for (RouteWaypoint w : route.getWaypoints()) {
+                timeString += DEVIDESTRING + String.valueOf(w.getDuration().toMinutes());
+            }
         }
+
         return timeString;
     }
 
@@ -70,31 +99,32 @@ public class DatabaseRoute extends SQLiteOpenHelper {
                 + DbContract.COLUMN_NAME_ROUTEID + " asc limit 1 offset " + position, null);
         c.moveToFirst();
         Route route = new Route();
-        addRouteInfos(route,c);
+        addRouteInfos(route, c);
         c.close();
         return route;
     }
-    private void addRouteInfos(Route route, Cursor c){
+
+    private void addRouteInfos(Route route, Cursor c) {
         route.setRouteId(c.getString(c.getColumnIndex(DbContract.COLUMN_NAME_ROUTEID)));
         String waypointid = c.getString(c.getColumnIndex(DbContract.COLUMN_NAME_ROUTEWAYPOINTIDLIST));
         String time = c.getString(c.getColumnIndex(DbContract.COLUMN_NAME_ROUTETIMELIST));
-        route.setWaypointStrings(createRouteWaypoints(waypointid,time));
+        route.setWaypointStrings(createRouteWaypoints(waypointid, time));
         route.setRouteName(c.getString(c.getColumnIndex(DbContract.COLUMN_NAME_ROUTENAME)));
     }
 
-    private ArrayList<RouteWaypointStrings> createRouteWaypoints(String points, String time){
+    private ArrayList<RouteWaypointStrings> createRouteWaypoints(String points, String time) {
         ArrayList<String> pointsList = new ArrayList<>();
         ArrayList<String> timeList = new ArrayList<>();
         ArrayList<RouteWaypointStrings> routeWaypoints = new ArrayList<>();
         pointsList = DbContract.stringIntoArrayList(points);
         timeList = DbContract.stringIntoArrayList(time);
-        if(pointsList.size() == timeList.size())
-        for(int i = 0; i < timeList.size(); i++){
-            if(!pointsList.get(i).isEmpty() && !timeList.get(i).isEmpty()) {
-                routeWaypoints.add(new RouteWaypointStrings(pointsList.get(i), timeList.get(i)));
+        if (pointsList.size() == timeList.size())
+            for (int i = 0; i < timeList.size(); i++) {
+                if (!pointsList.get(i).isEmpty() && !timeList.get(i).isEmpty()) {
+                    routeWaypoints.add(new RouteWaypointStrings(pointsList.get(i), timeList.get(i)));
 
+                }
             }
-        }
         return routeWaypoints;
     }
 
@@ -104,7 +134,7 @@ public class DatabaseRoute extends SQLiteOpenHelper {
                 + DbContract.COLUMN_NAME_ROUTEID + "=" + id, null);
         c.moveToFirst();
         Route route = new Route();
-        addRouteInfos(route,c);
+        addRouteInfos(route, c);
         c.close();
         return route;
     }

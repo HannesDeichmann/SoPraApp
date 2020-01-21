@@ -77,7 +77,7 @@ public class GuardActivity extends AppCompatActivity {
         etForenameRef = findViewById(R.id.etForname);
         etSurnameRef = findViewById(R.id.etSurname);
         etPasswordRef = findViewById(R.id.pwUserPassword);
-        tvGuardIdRef = findViewById(R.id.tvGuardId);
+        tvGuardIdRef = findViewById(R.id.tvGuardIDNumber);
         tvAkivity = findViewById(R.id.tvAktivity);
         guardDatabase = new DatabaseGuard(this);
 

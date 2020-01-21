@@ -22,6 +22,7 @@ public class WaypointListActivity extends AppCompatActivity implements DurationD
     private Duration duration;
     private Waypoint waypoint;
     private Route route;
+    private Button btnCancelWPSelect;
     ListView listView;
     DatabaseWaypoint databaseWaypoint;
     ArrayList<String> waypointStringList;
@@ -33,7 +34,13 @@ public class WaypointListActivity extends AppCompatActivity implements DurationD
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waypoint_list);
 
-        databaseWaypoint = new DatabaseWaypoint(this);
+        btnCancelWPSelect = findViewById(R.id.btnCancelWPSelect);
+        btnCancelWPSelect.setVisibility(View.GONE);
+        if (getIntent().hasExtra("position")) {
+            btnCancelWPSelect.setVisibility(View.VISIBLE);
+        }
+            databaseWaypoint = new DatabaseWaypoint(this);
+        btnCancelWPSelect = findViewById(R.id.btnCancelWPSelect);
         listView = findViewById(R.id.waypointList);
         waypointStringList = new ArrayList<>();
         etSearchText = findViewById(R.id.etSearchWaypoint);
@@ -66,6 +73,15 @@ public class WaypointListActivity extends AppCompatActivity implements DurationD
             public void afterTextChanged(Editable s) { }
         });
 
+        btnCancelWPSelect.setOnClickListener(view -> {
+            route = (Route) getIntent().getExtras().get("route");
+            route.deleteWaypoint(route.getWaypoints().get(getIntent().getIntExtra("position",0)));
+            intent = new Intent(view.getContext(), RouteCreationActivity.class);
+            intent.putExtra("route", route);
+            startActivity(intent);
+            finish();
+        });
+
         listView.setOnItemClickListener((parent, view, position, id) -> {
             String clickedWaypoint = waypointStringList.get(position);
             for(Waypoint wp: allWaypoints){
@@ -78,6 +94,7 @@ public class WaypointListActivity extends AppCompatActivity implements DurationD
                 route = (Route) getIntent().getExtras().get("route");
                 openDialog();
                 intent = new Intent(view.getContext(), RouteCreationActivity.class);
+                intent.putExtra("route", route);
             }else {
                 if (getIntent().getStringExtra("root").equals("WaypointActivity")) {
                     WaypointActivity.newWaypoint = false;

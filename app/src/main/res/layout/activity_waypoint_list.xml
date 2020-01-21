@@ -13,7 +13,7 @@
     <EditText
         android:id="@+id/etSearchWaypoint"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:hint="Search"
         android:layout_weight="1"/>
 
@@ -21,6 +21,13 @@
         android:id="@+id/waypointList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="19" />
+        android:layout_weight="18" />
+
+    <Button
+        android:id="@+id/btnCancelWPSelect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:layout_weight="1"/>
 
 </LinearLayout>
