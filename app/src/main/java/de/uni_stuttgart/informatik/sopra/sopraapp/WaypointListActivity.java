@@ -73,18 +73,15 @@ public class WaypointListActivity extends AppCompatActivity implements DurationD
             public void afterTextChanged(Editable s) { }
         });
 
-        btnCancelWPSelect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String root = getIntent().getStringExtra("root");
-                route = (Route) getIntent().getExtras().get("route");
-                route.deleteWaypoint(route.getWaypoints().get(getIntent().getIntExtra("position",0)));
-                intent = new Intent(view.getContext(), RouteCreationActivity.class);
-                intent.putExtra("route", route);
-                startActivity(intent);
-                finish();
-            }
+        btnCancelWPSelect.setOnClickListener(view -> {
+            route = (Route) getIntent().getExtras().get("route");
+            route.deleteWaypoint(route.getWaypoints().get(getIntent().getIntExtra("position",0)));
+            intent = new Intent(view.getContext(), RouteCreationActivity.class);
+            intent.putExtra("route", route);
+            startActivity(intent);
+            finish();
         });
+
         listView.setOnItemClickListener((parent, view, position, id) -> {
             String clickedWaypoint = waypointStringList.get(position);
             for(Waypoint wp: allWaypoints){

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 import static de.uni_stuttgart.informatik.sopra.sopraapp.DbContract.DIVIDESTRING;
 import static de.uni_stuttgart.informatik.sopra.sopraapp.ScheduleActivity.addRoutesFromDbToEmptyGuard;
-import static de.uni_stuttgart.informatik.sopra.sopraapp.ScheduleActivity.etSetTime;
+import static de.uni_stuttgart.informatik.sopra.sopraapp.ScheduleActivity.tvSetTime;
 import static de.uni_stuttgart.informatik.sopra.sopraapp.ScheduleActivity.routeStringList;
 import static de.uni_stuttgart.informatik.sopra.sopraapp.ScheduleActivity.selectedGuard;
 import static de.uni_stuttgart.informatik.sopra.sopraapp.ScheduleActivity.selectedRoute;
@@ -45,7 +45,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
                     String time =splitted[4].split(DIVIDESTRING)[1];
                     selectedGuard = databaseGuard.getGuardById(guardId);
                     selectedRoute = databaseRoute.getRouteById(routeId);
-                    etSetTime.setText(time);
+                    tvSetTime.setText(time);
                     tvSelectedRoute.setText(selectedRoute.getRouteName());
                     tvSelectedGuard.setText(selectedGuard.getUserId() + ": " + selectedGuard.getForename());
                     selectedGuard = createGuardWithoutDeletedRoute(selectedGuard,time);
@@ -69,7 +69,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
                     databaseGuard.addGuardRoute(selectedGuard);
                     routeStringList.remove(getAdapterPosition());
 
-                    etSetTime.setText("");
+                    tvSetTime.setText("");
                     tvSelectedRoute.setText("");
                     tvSelectedGuard.setText("");
                     selectedGuard = null;

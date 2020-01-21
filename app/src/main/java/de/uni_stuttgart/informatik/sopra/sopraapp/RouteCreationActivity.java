@@ -25,6 +25,7 @@ public class RouteCreationActivity extends AppCompatActivity {
     private Button btnShowMapRef;
     private EditText etRouteName;
     private Route route;
+    private boolean oldWPcklick;
     DatabaseRoute databaseRoute;
     DatabaseWaypoint databaseWaypoint;
 
@@ -69,7 +70,6 @@ public class RouteCreationActivity extends AppCompatActivity {
         } else {
             btnAddOldWaypoints.setVisibility(View.INVISIBLE);
         }
-
         selectedWaypointList.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(view.getContext(), WaypointListActivity.class);
             intent.putExtra("position", position);
@@ -81,7 +81,8 @@ public class RouteCreationActivity extends AppCompatActivity {
         });
 
         btnAddOldWaypoints.setOnClickListener(v -> {
-            route = ((Route) getIntent().getExtras().get("editRoute"));
+            oldWPcklick = true;
+            route = (Route) getIntent().getExtras().get("editRoute");
             for (int i = 0; i < route.getWaypointStrings().size(); i++) {
                 route.addWaypoint(createRouteWaypointByPos(i));
             }
@@ -125,7 +126,9 @@ public class RouteCreationActivity extends AppCompatActivity {
                 Intent intent = new Intent(view.getContext(), MapActivity.class);
                 intent.putExtra("route", route);
                 startActivity(intent);
-                myArrayAdapter.clear();
+                if(getIntent().hasExtra("route")){
+                    myArrayAdapter.clear();
+                }
             }else {
                 Toast.makeText(getApplicationContext(),"There are 0 Waypoints in the List",Toast.LENGTH_SHORT).show();
             }
