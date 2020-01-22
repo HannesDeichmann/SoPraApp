@@ -8,6 +8,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 
+
+/**
+ * DatabaseGuard saves all patrols in the database. It handles the update/add and delete methods.
+ * The Database transforms a patrol in a String.
+ *
+ * @author Gabriel Bonnet 3410781
+ */
 public class DatabasePatrol extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "Patrol" + "Data.db";

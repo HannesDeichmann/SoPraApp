@@ -8,6 +8,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 
+/**
+ * DatabaseGuard saves all guards in the database. It handles the update/add and delete methods.
+ * The Database transforms a Guard in a String and saves each atribute in his own Column.
+ *
+ * @author Gabriel Bonnet 3410781
+ */
 public class DatabaseGuard extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "GuardData.db";
@@ -36,6 +42,11 @@ public class DatabaseGuard extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    /**
+     * Add a guard to the last column of the Database
+     *
+     * @param guard
+     */
     public void addGuard(Guard guard) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -48,6 +59,12 @@ public class DatabaseGuard extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Updates the Routes from a guard.
+     * The Routes are saved as Strings of Waypoint ids and Time Ids to save them as String.
+     *
+     * @param guard
+     */
     public void addGuardRoute(Guard guard) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = db.rawQuery("UPDATE " + DbContract.TABLE_NAME_GUARD
@@ -59,6 +76,11 @@ public class DatabaseGuard extends SQLiteOpenHelper {
         c.close();
     }
 
+    /**
+     * Edit a guard without the GuardRoute List.
+     *
+     * @param guard
+     */
     public void editGuard(Guard guard) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = db.rawQuery("UPDATE " + DbContract.TABLE_NAME_GUARD
@@ -71,6 +93,12 @@ public class DatabaseGuard extends SQLiteOpenHelper {
         c.close();
     }
 
+    /**
+     * Gets a Guard by his position in the database.
+     *
+     * @param position
+     * @return
+     */
     public Guard getGuard(int position) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery("select * from " + DbContract.TABLE_NAME_GUARD + " order by "
@@ -82,10 +110,17 @@ public class DatabaseGuard extends SQLiteOpenHelper {
         return guard;
     }
 
+    /**
+     * To add the routes to a guard
+     *
+     * @param guard
+     * @return guard with Routes
+     */
     public Guard getGuardWithRoutes(Guard guard){
         this.guardWithRoutes = true;
         return this.getGuardById(Integer.parseInt(guard.getUserId()));
     }
+
     private void addGuardInfos(Guard guard, Cursor c) {
         guard.setUserPassword(c.getString(c.getColumnIndex(DbContract.COLUMN_NAME_GUARDPASSWORD)));
         guard.setForename(c.getString(c.getColumnIndex(DbContract.COLUMN_NAME_GUARDFORNAME)));
@@ -97,6 +132,7 @@ public class DatabaseGuard extends SQLiteOpenHelper {
             guardWithRoutes = false;
         }
     }
+
     public Guard getGuardById(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery("select * from " + DbContract.TABLE_NAME_GUARD + " where "
