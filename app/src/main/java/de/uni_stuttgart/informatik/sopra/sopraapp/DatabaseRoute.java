@@ -93,6 +93,17 @@ public class DatabaseRoute extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void updateWaypointStrings(Route route){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c2 = db.rawQuery("UPDATE " + DbContract.TABLE_NAME_ROUTE
+                + " SET " +
+                DbContract.COLUMN_NAME_ROUTEWAYPOINTIDLIST + " = '" + getWaypointIdString(route) + "', " +
+                DbContract.COLUMN_NAME_ROUTETIMELIST + " = '" + getTimeString(route) + "' WHERE " +
+                DbContract.COLUMN_NAME_ROUTEID + " = " + route.getRouteId(), null);
+        c2.moveToFirst();
+        c2.close();
+    }
+
     public Route getRouteFromPosition(int position) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery("select * from " + DbContract.TABLE_NAME_ROUTE + " order by "

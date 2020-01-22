@@ -8,7 +8,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.security.InvalidKeyException;
+import java.security.Key;
+import java.security.NoSuchAlgorithmException;
 import java.time.Duration;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.SecretKeySpec;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -54,14 +64,14 @@ public class MainActivity extends AppCompatActivity {
         tvLoginFeedbackRef.setText("");
 
         //btnAdminLoginRef ist only there for development so while testing you dont need to log in every time
-        btnAdminLoginRef.setVisibility(View.INVISIBLE);
+        btnAdminLoginRef.setVisibility(View.VISIBLE);
         btnAdminLoginRef.setText("ImageTest");
         btnAdminLoginRef.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 //Intent intent = new Intent(view.getContext(), DrawActivity.class);
                 //startActivity(intent);
-                finish();
+                //finish();
             }
         });
 

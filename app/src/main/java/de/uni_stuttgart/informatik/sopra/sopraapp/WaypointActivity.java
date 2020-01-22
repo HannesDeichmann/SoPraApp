@@ -110,8 +110,6 @@ public class WaypointActivity extends AppCompatActivity {
                     finish();
                    // clearTextFields();
                 } else {
-                    //TODO Alertfenster
-                    //etWaypointIdRef.setText("WaypointId needs " + Waypoint.waypointIdLength +" chars");
                     Toast toast = Toast.makeText(getApplicationContext(), "ID needs 6 chars", Toast.LENGTH_SHORT);
                     toast.show();
                 }
@@ -160,6 +158,7 @@ public class WaypointActivity extends AppCompatActivity {
                     intent.putExtra("waypoint",waypoint);
                     startActivity(intent);
                     finish();
+                    onResume();
                 } else {
                     Toast toast = Toast.makeText(getApplicationContext(),"Id must have 6 chars", Toast.LENGTH_SHORT);
                     toast.show();

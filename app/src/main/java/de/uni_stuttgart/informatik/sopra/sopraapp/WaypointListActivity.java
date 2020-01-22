@@ -25,6 +25,7 @@ public class WaypointListActivity extends AppCompatActivity implements DurationD
     private Button btnCancelWPSelect;
     ListView listView;
     DatabaseWaypoint databaseWaypoint;
+    DatabaseRoute databaseRoute;
     ArrayList<String> waypointStringList;
     int waypointId;
     EditText etSearchText;
@@ -45,6 +46,7 @@ public class WaypointListActivity extends AppCompatActivity implements DurationD
         waypointStringList = new ArrayList<>();
         etSearchText = findViewById(R.id.etSearchWaypoint);
         ArrayList<Waypoint> allWaypoints = databaseWaypoint.getAllWaypoints();
+        databaseRoute = new DatabaseRoute(this);
         for (Waypoint waypoint : allWaypoints) {
             waypointStringList.add(waypoint.toString());
         }
@@ -75,7 +77,10 @@ public class WaypointListActivity extends AppCompatActivity implements DurationD
 
         btnCancelWPSelect.setOnClickListener(view -> {
             route = (Route) getIntent().getExtras().get("route");
-            route.deleteWaypoint(route.getWaypoints().get(getIntent().getIntExtra("position",0)));
+            int position = getIntent().getIntExtra("position",0);
+            route.deleteWaypoint(route.getWaypoints().get(position));
+            route.getWaypointStrings().remove(position);
+            databaseRoute.updateWaypointStrings(route);
             intent = new Intent(view.getContext(), RouteCreationActivity.class);
             intent.putExtra("route", route);
             startActivity(intent);

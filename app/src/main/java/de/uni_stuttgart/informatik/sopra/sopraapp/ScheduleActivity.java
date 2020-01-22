@@ -85,7 +85,6 @@ public class ScheduleActivity extends AppCompatActivity implements TimePickerDia
         tvSetTime = findViewById(R.id.tvStartTime);
         btnSave = findViewById(R.id.saveScheduleItem);
         tvSelectedGuard = findViewById(R.id.tvSelectedGuard);
-        //listView = findViewById(R.id.routeList);
         tvSelectedRoute = findViewById(R.id.tvSelectedRoute);
         btnSelectStartTime = findViewById(R.id.btnSelectStartTime);
         databaseGuard = new DatabaseGuard(this);
@@ -93,16 +92,11 @@ public class ScheduleActivity extends AppCompatActivity implements TimePickerDia
         ScheduleAdapter.databaseGuard = databaseGuard;
         ScheduleAdapter.databaseRoute = databaseRoute;
         routeStringList=new ArrayList<>();
-        //dataAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,routeStringList);
-        //listView.setAdapter(dataAdapter);
-        // dataAdapter.notifyDataSetChanged();
-
         listView = findViewById(R.id.routeList);
         rvManagerRef = new LinearLayoutManager(this);
         listView.setLayoutManager(rvManagerRef);
         dataAdapter = new ScheduleAdapter(routeStringList);
         listView.setAdapter(dataAdapter);
-
 
         btnSelectStartTime.setOnClickListener(v -> {
             DialogFragment timePicker = new TimePickerFragment();
@@ -114,7 +108,6 @@ public class ScheduleActivity extends AppCompatActivity implements TimePickerDia
             startActivity(intent);
             finish();
         });
-
         btnSelectRoute.setOnClickListener(view -> {
             if (selectedGuard != null && !tvSelectedGuard.getText().equals("")) {
                 Intent intent = new Intent(view.getContext(), RouteActivity.class);
@@ -126,20 +119,19 @@ public class ScheduleActivity extends AppCompatActivity implements TimePickerDia
                 Toast.makeText(getApplicationContext(),"First select a guard",Toast.LENGTH_SHORT).show();
             }
         });
-
         btnSave.setOnClickListener(v -> {
             if (selectedGuard != null && selectedRoute != null) {
-                //System.out.println(selectedGuard.getGuardRouteList().size());
                 if(checkForDublicate()){
                     Toast.makeText(getApplicationContext(),"It exists allready",Toast.LENGTH_SHORT).show();
                 }else {
                     selectedGuard.setGuardRouteList(new ArrayList<GuardRoute>());
                     addRoutesFromDbToEmptyGuard(selectedGuard);
                     selectedGuard.addRoute(new GuardRoute(selectedRoute, tvSetTime.getText().toString()));
-
+                    databaseGuard.addGuardRoute(selectedGuard);
+                    addAllGuardRoutesToList();
+                    dataAdapter.notifyDataSetChanged();
                     tvSetTime.setText("00:00");
                     routeStringList = new ArrayList<>();
-                    databaseGuard.addGuardRoute(selectedGuard);
                     onResume();
 
                 }
