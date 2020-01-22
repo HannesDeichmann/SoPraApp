@@ -1,6 +1,5 @@
 package de.uni_stuttgart.informatik.sopra.sopraapp;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,20 +7,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.security.InvalidKeyException;
-import java.security.Key;
-import java.security.NoSuchAlgorithmException;
 import java.time.Duration;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.spec.SecretKeySpec;
-
 public class MainActivity extends AppCompatActivity {
-
     TextView tvLoginRef;
     Button btnAdminLoginRef;
     DatabaseGuard databaseGuard;
@@ -46,15 +34,10 @@ public class MainActivity extends AppCompatActivity {
         //TODO BUG: Database darf nicht leer sein
         if(databaseGuard.getGuardCount() == 0) {
             databaseGuard.addGuard(new Guard("otto", "müllerich", "1234"));
-
         }
         if(databaseWaypoint.getWaypointCount() == 0) {
             databaseWaypoint.addWaypoint(new Waypoint("FirstWaypoint", "123456", "Tag", "Note"));
         }
-        /*Guard otto = new Guard("Otto", "Muellerich", "2", "1234");
-        databaseGuard = new DatabaseGuard(this);
-        databaseGuard.addGuard(otto);
-        */
         tvLoginRef = (TextView) findViewById(R.id.tvLogin);
         btnAdminLoginRef = (Button) findViewById(R.id.btnAdminLogin);
         etUsernameRef = findViewById(R.id.etUsername);

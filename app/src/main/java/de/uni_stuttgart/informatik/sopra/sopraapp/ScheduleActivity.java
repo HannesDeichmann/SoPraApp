@@ -4,22 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
-import java.lang.reflect.Array;
-import java.lang.reflect.GenericArrayType;
 import java.util.ArrayList;
-
 import static de.uni_stuttgart.informatik.sopra.sopraapp.DbContract.DIVIDESTRING;
 
 public class ScheduleActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
@@ -30,27 +22,15 @@ public class ScheduleActivity extends AppCompatActivity implements TimePickerDia
     Button btnSave;
     static Guard selectedGuard;
     static Route selectedRoute;
-    //ListView listView;
     static TextView tvSelectedGuard;
     static TextView tvSelectedRoute;
     static ArrayList<String> routeStringList;
     static DatabaseGuard databaseGuard;
     static DatabaseRoute databaseRoute;
-    //ArrayAdapter<String> dataAdapter;
     RecyclerView listView;
     RecyclerView.Adapter dataAdapter;
     RecyclerView.LayoutManager rvManagerRef;
 
-    /*
-    <ListView
-        android:id="@+id/routeList"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvSelectedGuard" />
-     */
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         String hourString = hourOfDay + "";
@@ -97,6 +77,7 @@ public class ScheduleActivity extends AppCompatActivity implements TimePickerDia
         listView.setLayoutManager(rvManagerRef);
         dataAdapter = new ScheduleAdapter(routeStringList);
         listView.setAdapter(dataAdapter);
+
 
         btnSelectStartTime.setOnClickListener(v -> {
             DialogFragment timePicker = new TimePickerFragment();

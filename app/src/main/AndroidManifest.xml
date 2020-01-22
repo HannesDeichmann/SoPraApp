@@ -3,6 +3,9 @@
     package="de.uni_stuttgart.informatik.sopra.sopraapp">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.NFC" />
+    <uses-feature android:name="android.hardware.nfc" android:required="true" />
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -12,10 +15,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MyTheme.DayNight">
+        <activity android:name=".PatrolActivity">
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+            <meta-data
+                android:name="android.nfc.action.TECH_DISCOVERED"
+                android:resource="@xml/nfc_tech_filter" />
+        </activity>
+        <activity android:name=".ProtocolActivity" />
         <activity android:name=".MapActivity"></activity>
         <activity android:name=".DrawActivity" />
-        <activity android:name=".PatrolActivity" />
-        <activity android:name=".ProtocolActivity" />
         <activity android:name=".GuardModeRouteListActivity" />
         <activity android:name=".ScheduleActivity" />
         <activity android:name=".RouteActivity" android:windowSoftInputMode="adjustNothing"/>
@@ -24,7 +36,16 @@
         <activity android:name=".GuardListActivity" android:windowSoftInputMode="adjustNothing"/>
         <activity android:name=".GuardActivity" />
         <activity android:name=".RouteCreationActivity" />
-        <activity android:name=".WaypointActivity" />
+        <activity android:name=".WaypointActivity">
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+            <meta-data
+                android:name="android.nfc.action.TECH_DISCOVERED"
+                android:resource="@xml/nfc_tech_filter" />
+        </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,5 +55,6 @@
         </activity>
         <activity android:name=".AdminActivity" />
     </application>
+
 
 </manifest>
