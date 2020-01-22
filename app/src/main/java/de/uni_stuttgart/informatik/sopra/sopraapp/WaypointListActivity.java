@@ -27,7 +27,7 @@ public class WaypointListActivity extends AppCompatActivity implements DurationD
     DatabaseWaypoint databaseWaypoint;
     DatabaseRoute databaseRoute;
     ArrayList<String> waypointStringList;
-    int waypointId;
+    String waypointId;
     EditText etSearchText;
 
     @Override
@@ -94,7 +94,7 @@ public class WaypointListActivity extends AppCompatActivity implements DurationD
                     waypoint = wp;
                 }
             }
-            waypointId = Integer.parseInt(waypoint.getWaypointId());
+            waypointId = waypoint.getWaypointId();
             if (getIntent().hasExtra("position")){
                 route = (Route) getIntent().getExtras().get("route");
                 openDialog();

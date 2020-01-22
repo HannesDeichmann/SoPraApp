@@ -42,7 +42,7 @@ public class GuardModeActivity extends AppCompatActivity {
         Route routeFromData = databaseRoute.getRouteById(Integer.parseInt(route.getRouteId()));
         for(RouteWaypointStrings s: routeFromData.getWaypointStrings()){
             RouteWaypoint routeWaypoint = new RouteWaypoint();
-            routeWaypoint.setWaypoint(databaseWaypoint.getWaypointById(Integer.parseInt(s.getUserId())));
+            routeWaypoint.setWaypoint(databaseWaypoint.getWaypointById(s.getUserId()));
             routeWaypoint.setDuration(Duration.ofMinutes(Integer.parseInt(s.getTime())));
             route.addWaypoint(routeWaypoint);
         }

@@ -59,7 +59,7 @@ public class DatabaseWaypoint extends SQLiteOpenHelper {
         waypoint.setWaypointPosition(c.getString(c.getColumnIndex(DbContract.COLUMN_NAME_WAYPOINTPOSITION)));
         waypoint.setWaypointNote(c.getString(c.getColumnIndex(DbContract.COLUMN_NAME_WAYPOINTNOTE)));
     }
-    public Waypoint getWaypointById(int id) {
+    public Waypoint getWaypointById(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery("select * from " + DbContract.TABLE_NAME_WAYPOINT+ " where "
                 + DbContract.COLUMN_NAME_WAYPOINTID + "=" + id, null);
