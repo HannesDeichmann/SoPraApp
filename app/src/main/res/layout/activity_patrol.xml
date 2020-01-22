@@ -132,7 +132,14 @@
         android:layout_marginTop="5dp"
         android:text="@string/start"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCountdown" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCountdown"
+        android:backgroundTint="#F3F1F1"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:textColor="#D40F6B"
+        android:textSize="20sp"/>
 
     <Button
         android:id="@+id/btnShowMap"
@@ -142,7 +149,14 @@
         android:layout_marginTop="4dp"
         android:text="Show Map"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCountdown" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCountdown"
+        android:backgroundTint="#F3F1F1"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:textColor="#D40F6B"
+        android:textSize="20sp"/>
 
     <Button
         android:id="@+id/btnFinishRoute"
@@ -153,7 +167,14 @@
         android:foregroundTint="#FFFFFF"
         android:text="@string/finish_route"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnStartCountdown" />
+        app:layout_constraintTop_toBottomOf="@+id/btnStartCountdown"
+        android:backgroundTint="#F3F1F1"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:textColor="#D40F6B"
+        android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/tvScanFeedback"
@@ -174,7 +195,14 @@
         android:layout_marginBottom="5dp"
         android:text="@string/cancel"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:backgroundTint="#F3F1F1"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:textColor="#D40F6B"
+        android:textSize="20sp"/>
 
     <ListView
         android:id="@+id/lvCompleteRoute"

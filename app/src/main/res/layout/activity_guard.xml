@@ -104,7 +104,14 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="36dp"
-        android:text="@string/accept" />
+        android:text="@string/accept"
+        android:backgroundTint="#F3F1F1"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:textColor="#D40F6B"
+        android:textSize="20sp"/>
 
     <Button
         android:id="@+id/btnDeleteGuard"
@@ -114,7 +121,14 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="38dp"
         android:layout_marginTop="30dp"
-        android:text="@string/deleteGuard" />
+        android:text="@string/deleteGuard"
+        android:backgroundTint="#F3F1F1"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:textColor="#D40F6B"
+        android:textSize="20sp"/>
 
     <Button
         android:id="@+id/btnEditGuard"
@@ -123,7 +137,14 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="55dp"
-        android:text="@string/edit_guard" />
+        android:text="@string/edit_guard"
+        android:backgroundTint="#F3F1F1"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:textColor="#D40F6B"
+        android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/tvAktivity"
@@ -157,7 +178,14 @@
         android:layout_marginStart="54dp"
         android:layout_marginTop="30dp"
         android:layout_toEndOf="@+id/btnDeleteGuard"
-        android:text="Cancel" />
+        android:text="Cancel"
+        android:backgroundTint="#F3F1F1"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:textColor="#D40F6B"
+        android:textSize="20sp"/>
 
     <ProgressBar
         android:id="@+id/progressBar"

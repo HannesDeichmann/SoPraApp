@@ -3,6 +3,7 @@ package de.uni_stuttgart.informatik.sopra.sopraapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -55,6 +56,7 @@ public class WaypointActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        checkEditNewWaypoint();
         if (wpLocation != null) {
             setTextFields(wpLocation);
 
@@ -305,6 +307,7 @@ public class WaypointActivity extends AppCompatActivity {
         return recordNFC;
     }
 
+    @SuppressLint("MissingSuperCall")
     @Override
     protected void onNewIntent(Intent intent) {
         setIntent(intent);

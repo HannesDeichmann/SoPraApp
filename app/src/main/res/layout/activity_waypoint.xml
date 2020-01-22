@@ -17,7 +17,14 @@
         app:layout_constraintBottom_toTopOf="@id/tvWaypointName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:backgroundTint="#F3F1F1"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:textColor="#D40F6B"
+        android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/tvWaypointName"
@@ -115,7 +122,8 @@
         app:layout_constraintBottom_toBottomOf="@id/tvWaypointNote"
         app:layout_constraintEnd_toEndOf="@id/etWaypointName"
         app:layout_constraintStart_toStartOf="@id/etWaypointName"
-        app:layout_constraintTop_toTopOf="@id/tvWaypointNote"/>
+        app:layout_constraintTop_toTopOf="@id/tvWaypointNote"
+        />
 
     <Button
         android:id="@+id/btnAssignWaypoint"
@@ -127,7 +135,14 @@
         app:layout_constraintBottom_toTopOf="@id/btnAddLocation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvWaypointNote"/>
+        app:layout_constraintTop_toBottomOf="@id/tvWaypointNote"
+        android:backgroundTint="#F3F1F1"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:textColor="#D40F6B"
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/btnAddLocation"
@@ -140,7 +155,14 @@
         app:layout_constraintBottom_toTopOf="@id/btnAcceptWaypoint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnAssignWaypoint"/>
+        app:layout_constraintTop_toBottomOf="@id/btnAssignWaypoint"
+        android:backgroundTint="#F3F1F1"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:textColor="#D40F6B"
+        android:textSize="20sp"/>
 
     <Button
         android:id="@+id/btnAcceptWaypoint"
@@ -152,7 +174,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btnDeleteWaypoint"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnAddLocation"/>
+        app:layout_constraintTop_toBottomOf="@id/btnAddLocation"
+        android:backgroundTint="#F3F1F1"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:textColor="#D40F6B"
+        android:textSize="20sp"/>
 
     <Button
         android:id="@+id/btnDeleteWaypoint"
@@ -164,6 +193,13 @@
         app:layout_constraintBottom_toBottomOf="@id/btnAcceptWaypoint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btnAcceptWaypoint"
-        app:layout_constraintTop_toTopOf="@id/btnAcceptWaypoint"/>
+        app:layout_constraintTop_toTopOf="@id/btnAcceptWaypoint"
+        android:backgroundTint="#F3F1F1"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:textColor="#D40F6B"
+        android:textSize="20sp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
