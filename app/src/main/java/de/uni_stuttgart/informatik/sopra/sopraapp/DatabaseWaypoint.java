@@ -35,6 +35,7 @@ public class DatabaseWaypoint extends SQLiteOpenHelper {
     public void addWaypoint(Waypoint waypoint) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.put(DbContract.COLUMN_NAME_WAYPOINTID,getWaypointCount()+1);
         values.put(DbContract.COLUMN_NAME_WAYPOINTNAME, waypoint.getWaypointName());
         values.put(DbContract.COLUMN_NAME_WAYPOINTPOSITION, waypoint.getWaypointPosition());
         values.put(DbContract.COLUMN_NAME_WAYPOINTNOTE, waypoint.getWaypointNote());

@@ -1,6 +1,7 @@
 package de.uni_stuttgart.informatik.sopra.sopraapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.app.PendingIntent;
 import android.content.Context;
@@ -117,7 +118,6 @@ public class WaypointActivity extends AppCompatActivity {
 
         databaseWaypoint = new DatabaseWaypoint(this);
         databaseRoute = new DatabaseRoute(this);
-
 
         if (getIntent().hasExtra("editedWaypointId")) {
             this.setEditedWaypoint(databaseWaypoint.getWaypointById(getIntent().getStringExtra("editedWaypointId")));
