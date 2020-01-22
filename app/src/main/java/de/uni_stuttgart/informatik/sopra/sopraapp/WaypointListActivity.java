@@ -1,6 +1,8 @@
 package de.uni_stuttgart.informatik.sopra.sopraapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,20 +31,21 @@ public class WaypointListActivity extends AppCompatActivity implements DurationD
     ArrayList<String> waypointStringList;
     String waypointId;
     EditText etSearchText;
+    ArrayAdapter<String> dataAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waypoint_list);
-
+        boolean editbtnClicked = false;
         btnCancelWPSelect = findViewById(R.id.btnCancelWPSelect);
         btnCancelWPSelect.setVisibility(View.GONE);
         if (getIntent().hasExtra("position")) {
             btnCancelWPSelect.setVisibility(View.VISIBLE);
         }
-            databaseWaypoint = new DatabaseWaypoint(this);
+        databaseWaypoint = new DatabaseWaypoint(this);
         btnCancelWPSelect = findViewById(R.id.btnCancelWPSelect);
-        listView = findViewById(R.id.waypointList);
+        listView = findViewById(R.id.recyclerListWp);
         waypointStringList = new ArrayList<>();
         etSearchText = findViewById(R.id.etSearchWaypoint);
         ArrayList<Waypoint> allWaypoints = databaseWaypoint.getAllWaypoints();
@@ -50,12 +53,7 @@ public class WaypointListActivity extends AppCompatActivity implements DurationD
         for (Waypoint waypoint : allWaypoints) {
             waypointStringList.add(waypoint.toString());
         }
-
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_list_item_1,
-                waypointStringList);
-
+        dataAdapter= new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, waypointStringList);
         listView.setAdapter(dataAdapter);
 
         etSearchText.addTextChangedListener(new TextWatcher() {
@@ -88,9 +86,9 @@ public class WaypointListActivity extends AppCompatActivity implements DurationD
         });
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
-            String clickedWaypoint = waypointStringList.get(position);
+            String clickedWaypointid = waypointStringList.get(position);
             for(Waypoint wp: allWaypoints){
-                if(wp.getWaypointId().equals(clickedWaypoint.substring(0,Waypoint.waypointIdLength))){
+                if(clickedWaypointid.split(":")[0].equals(wp.getWaypointId())){
                     waypoint = wp;
                 }
             }
@@ -136,7 +134,6 @@ public class WaypointListActivity extends AppCompatActivity implements DurationD
         intent.putExtra("route", route);
         startActivity(intent);
         finish();
-
     }
 }
 

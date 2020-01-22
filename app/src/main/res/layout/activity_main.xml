@@ -74,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/button_background"
-        android:backgroundTint="#00FFFFFF"
+        android:backgroundTint="#FFFFFF"
         android:text="@string/login"
 
         android:textColor="#D40F6B"

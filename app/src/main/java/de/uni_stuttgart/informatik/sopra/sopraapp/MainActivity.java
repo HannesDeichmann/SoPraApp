@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     String guardPassword;
     TextView tvLoginFeedbackRef;
     boolean loggedIn;
-    private Duration duration;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,12 +31,12 @@ public class MainActivity extends AppCompatActivity {
         databaseWaypoint = new DatabaseWaypoint(this);
 
         //TODO BUG: Database darf nicht leer sein
-        if(databaseGuard.getGuardCount() == 0) {
-            databaseGuard.addGuard(new Guard("otto", "müllerich", "1234"));
-        }
-        if(databaseWaypoint.getWaypointCount() == 0) {
-            databaseWaypoint.addWaypoint(new Waypoint("FirstWaypoint", "123456", "Tag", "Note"));
-        }
+        //if(databaseGuard.getGuardCount() == 0) {
+            //databaseGuard.addGuard(new Guard("otto", "müllerich", "1234"));
+        //}
+        //if(databaseWaypoint.getWaypointCount() == 0) {
+            //databaseWaypoint.addWaypoint(new Waypoint("FirstWaypoint", "123456", "Tag", "Note"));
+        //}
         etUsernameRef = findViewById(R.id.etUsername);
         etPasswordRef = findViewById(R.id.etPassword);
         btnLoginRef = findViewById(R.id.btnLogin);
