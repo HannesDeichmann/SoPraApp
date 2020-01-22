@@ -79,7 +79,7 @@ public class SecondTest {
             onView(withId(R.id.btnAcceptGuard)).perform(click());
         }
         onView(withId(R.id.btnEditGuard)).perform(click());
-        onView(withId(R.id.guardList)).perform(click());
+        onData(hasToString(startsWith("")))
         onView(withId(R.id.etForname)).perform(clearText(), typeText("Max"), closeSoftKeyboard());
         onView(withId(R.id.etSurname)).perform(clearText(), typeText("Mustermann"), closeSoftKeyboard());
         onView(withId(R.id.pwUserPassword)).perform(clearText(), typeText("sicheresPW123"), closeSoftKeyboard());
@@ -87,7 +87,7 @@ public class SecondTest {
         Espresso.pressBack();
         //Waypoint creation
         onView(withId(R.id.btnWaypoints)).perform(click());
-        String[] wpList = {"Eingang", "000001", "Hier geht es los", "Schatzkammer", "000002", "Nichts mitgehen lassen!", "WC", "000003", "Auch das muss bewacht werden", "Ausgang", "000004", "Jetzt aber raus hier"};
+        String[] wpList = {"Eingang", "100000", "Hier geht es los", "Schatzkammer", "200000", "Nichts mitgehen lassen!", "WC", "300000", "Auch das muss bewacht werden", "Ausgang", "400000", "Jetzt aber raus hier"};
         for (int i = 0; i < wpList.length / 3; i++) {
             onView(withId(R.id.etWaypointName)).perform(typeText(wpList[i * 3]), closeSoftKeyboard());
             onView(withId(R.id.etWaypointId)).perform(typeText(wpList[i * 3 + 1]), closeSoftKeyboard());
@@ -96,9 +96,9 @@ public class SecondTest {
             onView(withId(R.id.btnAcceptWaypoint)).perform(click());
         }
         onView(withId(R.id.btnEditWaypoint)).perform(click());
-        onData(hasToString(startsWith("000004"))).perform(click());
+        onData(hasToString(startsWith("400000"))).perform(click());
         onView(withId(R.id.etWaypointName)).perform(typeText("Geheimtuer"), closeSoftKeyboard());
-        onView(withId(R.id.etWaypointId)).perform(typeText("000005"), closeSoftKeyboard());
+        onView(withId(R.id.etWaypointId)).perform(typeText("500000"), closeSoftKeyboard());
         onView(withId(R.id.etWaypointNote)).perform(typeText("Vorsicht!"), closeSoftKeyboard());
         //onView(withId(R.id.btnAddLocation)).perform(click());
         onView(withId(R.id.btnAcceptWaypoint)).perform(click());
@@ -111,22 +111,22 @@ public class SecondTest {
         onView(withId(R.id.etRouteName)).perform(typeText("Marathon"),closeSoftKeyboard());
         //add wp1
         onView(withId(R.id.btnAddWaypoint)).perform(click());
-        onData(hasToString(startsWith("000001"))).perform(click());
+        onData(hasToString(startsWith("100000"))).perform(click());
         onView(withId(R.id.durationInput)).perform(typeText("2"), closeSoftKeyboard());
         onView(withText("OK")).perform(click());
         //add wp2
         onView(withId(R.id.btnAddWaypoint)).perform(click());
-        onData(hasToString(startsWith("000002"))).perform(click());
+        onData(hasToString(startsWith("200000"))).perform(click());
         onView(withId(R.id.durationInput)).perform(typeText("9"), closeSoftKeyboard());
         onView(withText("OK")).perform(click());
         //add wp3
         onView(withId(R.id.btnAddWaypoint)).perform(click());
-        onData(hasToString(startsWith("000002"))).perform(click());
+        onData(hasToString(startsWith("200000"))).perform(click());
         onView(withId(R.id.durationInput)).perform(typeText("9"), closeSoftKeyboard());
         onView(withText("OK")).perform(click());
         // add wp4
         onView(withId(R.id.btnAddWaypoint)).perform(click());
-        onData(hasToString(startsWith("000001"))).perform(click());
+        onData(hasToString(startsWith("100000"))).perform(click());
         onView(withId(R.id.durationInput)).perform(typeText("7"), closeSoftKeyboard());
         onView(withText("CANCEL")).perform(click());
         onView(withId(R.id.waypointList)).perform(click());
@@ -134,27 +134,28 @@ public class SecondTest {
         onView(withText("OK")).perform(click());
         //replace wp
         onData(hasToString(startsWith("Eingang"))).perform(click());
-        onView(withId(R.id.waypointList)).perform(click());
+        onData(hasToString(startsWith("500000"))).perform(click());
         onView(withId(R.id.durationInput)).perform(typeText("99"), closeSoftKeyboard());
         onView(withText("OK")).perform(click());
         onView(withId(R.id.saveRoute)).perform(click());
         // Route 2
         onView(withId(R.id.newRoute)).perform(click());
-        onView(withId(R.id.etWaypointName)).perform(typeText("Tour de France"), closeSoftKeyboard());
+        onView(withId(R.id.etRouteName)).perform(typeText("Marathon"),closeSoftKeyboard());
         //add wp1
         onView(withId(R.id.btnAddWaypoint)).perform(click());
-        onView(withId(R.id.waypointList)).perform(click());
-        onView(withId(R.id.durationInput)).perform(typeText("4"), closeSoftKeyboard());
+        onData(hasToString(startsWith("100000"))).perform(click());
+        onView(withId(R.id.durationInput)).perform(typeText("2"), closeSoftKeyboard());
         onView(withText("OK")).perform(click());
         //add wp2
         onView(withId(R.id.btnAddWaypoint)).perform(click());
-        onView(withId(R.id.waypointList)).perform(click());
-        onView(withId(R.id.durationInput)).perform(typeText("2"), closeSoftKeyboard());
+        onData(hasToString(startsWith("500000"))).perform(click());
+        onView(withId(R.id.durationInput)).perform(typeText("9"), closeSoftKeyboard());
         onView(withText("OK")).perform(click());
-        //del. wp
-        onView(withId(R.id.selectedWaypointList)).perform(click());
-        onView(withId(R.id.btnCancelWPSelect)).perform(click());
-        onView(withId(R.id.saveRoute)).perform(click());
+        //add wp3
+        onView(withId(R.id.btnAddWaypoint)).perform(click());
+        onData(hasToString(startsWith("300000"))).perform(click());
+        onView(withId(R.id.durationInput)).perform(typeText("9"), closeSoftKeyboard());
+        onView(withText("OK")).perform(click());
         // open Route and get old WPs
         onView(withId(R.id.routeList)).perform(click());
         onView(withId(R.id.btnAddOldWaypoints)).perform(click());

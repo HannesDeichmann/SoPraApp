@@ -40,7 +40,8 @@ public class GuardActivity extends AppCompatActivity {
     TextView tvAkivity;
     EditText etPasswordRef;
     DatabaseGuard guardDatabase;
-    final static String secretKey = "ssshhhhhhhhhhh!!!!";
+    final static String secretKey = "dasistdiesichereverschluesselung";
+    boolean edit;
 
     public static boolean newGuard = true;
 
@@ -65,6 +66,9 @@ public class GuardActivity extends AppCompatActivity {
     private void checkEditNewGuard() {
         if (newGuard == true) {
             tvAkivity.setText("Create a new guard:");
+
+            edit = false;
+
             btnDeleteGuardRef.setVisibility(View.INVISIBLE);
             btnNewId.setVisibility(View.INVISIBLE);
             setNewUserId();
@@ -72,12 +76,14 @@ public class GuardActivity extends AppCompatActivity {
             tvAkivity.setText("Edit your guard:");
             tvGuardIdRef.setText(getEditedGuard().getUserId());
 
+            edit = true;
+
             btnDeleteGuardRef.setVisibility(View.VISIBLE);
             btnNewId.setVisibility(View.VISIBLE);
 
             etSurnameRef.setText(getEditedGuard().getSurname());
             etForenameRef.setText(getEditedGuard().getForename());
-            etPasswordRef.setText(getEditedGuard().getUserPassword());
+            etPasswordRef.setText(AesCrypto.decrypt(getEditedGuard().getUserPassword(), secretKey));
         }
     }
 
@@ -116,7 +122,7 @@ public class GuardActivity extends AppCompatActivity {
             createdGuard.setSurname(etSurnameRef.getText().toString());
             createdGuard.setUserPassword(AesCrypto.encrypt(etPasswordRef.getText().toString(),secretKey));
             createdGuard.setUserId(tvGuardIdRef.getText().toString());
-            if (checkDublicates(createdGuard)) {
+            if (checkDublicates(createdGuard)&&!edit) {
                 Toast.makeText(getApplicationContext(),"The guard allready exists, select the Guard to edit him.",Toast.LENGTH_SHORT).show();
             }else{
                 if (newGuard) guardDatabase.addGuard(createdGuard);

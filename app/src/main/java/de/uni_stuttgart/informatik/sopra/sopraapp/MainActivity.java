@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                     //passwords match
                     for (Guard guard : databaseGuard.getAllGuards()) {
                         if (guard.getUserId().equals(guardUsername)) {
-                            if (guard.getUserPassword().equals(guardPassword)) {
+                            if (AesCrypto.decrypt(guard.getUserPassword(), GuardActivity.secretKey).equals(guardPassword)) {
                                 loggedIn = true;
                                 Intent intent = new Intent(view.getContext(), GuardModeActivity.class);
                                 intent.putExtra("loggedInGuard", guard);
