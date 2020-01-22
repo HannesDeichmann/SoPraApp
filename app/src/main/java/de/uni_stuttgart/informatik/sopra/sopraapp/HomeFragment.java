@@ -107,6 +107,7 @@ public class HomeFragment extends Fragment {
         if (nextWaypointCounter == getRoute().getWaypoints().size()) {
             btnFinishRouteRef.setVisibility(View.VISIBLE);
             btnStartCountdownRef.setVisibility(View.INVISIBLE);
+            btnCancelActiveRouteRef.setVisibility(View.INVISIBLE);
             tvNextWaypointNameRef.setText("");
             tvNoteRef.setText("Please finish route");
         } else {
