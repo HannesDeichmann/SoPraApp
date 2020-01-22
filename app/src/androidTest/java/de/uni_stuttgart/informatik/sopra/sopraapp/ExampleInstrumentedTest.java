@@ -27,10 +27,8 @@ public class ExampleInstrumentedTest {
     @Rule
     public ActivityTestRule<MainActivity> rule = new ActivityTestRule<MainActivity>(MainActivity.class);
 
-
     @Test
     public void useAppContext() throws Exception {
-
         MainActivity activity = rule.getActivity();
 
     }
