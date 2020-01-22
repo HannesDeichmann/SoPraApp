@@ -49,6 +49,7 @@ public class WaypointListActivity extends AppCompatActivity implements DurationD
         }
         dataAdapter= new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, waypointStringList);
         listView.setAdapter(dataAdapter);
+        dataAdapter.notifyDataSetChanged();
 
         etSearchText.addTextChangedListener(new TextWatcher() {
             @Override
