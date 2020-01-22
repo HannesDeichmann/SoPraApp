@@ -26,6 +26,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Cancel"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:backgroundTint="#F3F1F1"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:textColor="#D40F6B"
+        android:textSize="20sp"/>
 
 </LinearLayout>

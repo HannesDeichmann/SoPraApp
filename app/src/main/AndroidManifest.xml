@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MyTheme.DayNight">
-        <activity android:name=".PatrolActivity">
+        <activity android:name=".PatrolActivity" android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -25,18 +25,18 @@
                 android:name="android.nfc.action.TECH_DISCOVERED"
                 android:resource="@xml/nfc_tech_filter" />
         </activity>
-        <activity android:name=".ProtocolActivity" />
-        <activity android:name=".MapActivity"></activity>
-        <activity android:name=".DrawActivity" />
-        <activity android:name=".GuardModeRouteListActivity" />
-        <activity android:name=".ScheduleActivity" />
+        <activity android:name=".ProtocolActivity" android:windowSoftInputMode="adjustNothing"/>
+        <activity android:name=".MapActivity" android:windowSoftInputMode="adjustNothing"></activity>
+        <activity android:name=".DrawActivity" android:windowSoftInputMode="adjustNothing"/>
+        <activity android:name=".GuardModeRouteListActivity" android:windowSoftInputMode="adjustNothing"/>
+        <activity android:name=".ScheduleActivity" android:windowSoftInputMode="adjustNothing"/>
         <activity android:name=".RouteActivity" android:windowSoftInputMode="adjustNothing"/>
-        <activity android:name=".GuardModeActivity" />
+        <activity android:name=".GuardModeActivity" android:windowSoftInputMode="adjustNothing"/>
         <activity android:name=".WaypointListActivity" android:windowSoftInputMode="adjustNothing"/>
         <activity android:name=".GuardListActivity" android:windowSoftInputMode="adjustNothing"/>
-        <activity android:name=".GuardActivity" />
-        <activity android:name=".RouteCreationActivity" />
-        <activity android:name=".WaypointActivity">
+        <activity android:name=".GuardActivity" android:windowSoftInputMode="adjustNothing"/>
+        <activity android:name=".RouteCreationActivity" android:windowSoftInputMode="adjustNothing"/>
+        <activity android:name=".WaypointActivity" android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -46,14 +46,14 @@
                 android:name="android.nfc.action.TECH_DISCOVERED"
                 android:resource="@xml/nfc_tech_filter" />
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AdminActivity" />
+        <activity android:name=".AdminActivity" android:windowSoftInputMode="adjustNothing"/>
     </application>
 
 

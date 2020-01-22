@@ -3,6 +3,7 @@ package de.uni_stuttgart.informatik.sopra.sopraapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -56,11 +57,12 @@ public class WaypointActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        checkEditNewWaypoint();
         if (wpLocation != null) {
             setTextFields(wpLocation);
 
         }
-        //WriteModeOn();---------------------------------------------------------------------------
+        WriteModeOn();
     }
 
     private Waypoint getEditedWaypoint() {
@@ -186,7 +188,7 @@ public class WaypointActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
-/*--------------------------------------------------------------------------------------------------------------
+
         btnAssignWaypointRef.setOnClickListener(view -> {
             try {
                 if (myTag == null) {
@@ -209,7 +211,7 @@ public class WaypointActivity extends AppCompatActivity {
             // Stop here, we definitely need NFC
             Toast.makeText(this, "This device doesn't support NFC.", Toast.LENGTH_LONG).show();
             finish();
-        }*/
+        }
         readFromIntent(getIntent());
 
         pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
@@ -315,6 +317,7 @@ public class WaypointActivity extends AppCompatActivity {
         return recordNFC;
     }
 
+    @SuppressLint("MissingSuperCall")
     @Override
     protected void onNewIntent(Intent intent) {
         setIntent(intent);
@@ -323,12 +326,12 @@ public class WaypointActivity extends AppCompatActivity {
             myTag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         }
     }
-/*------------------------------------------------------------------------------------------------------------
+
     @Override
     public void onPause() {
         super.onPause();
         WriteModeOff();
-    }*/
+    }
 
     /******************************************************************************
      **********************************Enable Write********************************

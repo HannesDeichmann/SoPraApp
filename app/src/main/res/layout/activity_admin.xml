@@ -16,11 +16,12 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:text="@string/admin_mode"
-        android:textSize="24sp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@id/btnRoutes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <Button
         android:id="@+id/btnRoutes"
@@ -32,7 +33,14 @@
         app:layout_constraintBottom_toTopOf="@id/btnWaypoints"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvAdminModus" />
+        app:layout_constraintTop_toBottomOf="@id/tvAdminModus"
+        android:backgroundTint="#F3F1F1"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:textColor="#D40F6B"
+        android:textSize="20sp"/>
 
     <Button
         android:id="@+id/btnWaypoints"
@@ -44,7 +52,14 @@
         app:layout_constraintBottom_toTopOf="@id/btnGuard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnRoutes" />
+        app:layout_constraintTop_toBottomOf="@id/btnRoutes"
+        android:backgroundTint="#F3F1F1"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:textColor="#D40F6B"
+        android:textSize="20sp"/>
 
     <Button
         android:id="@+id/btnGuard"
@@ -56,7 +71,14 @@
         app:layout_constraintBottom_toTopOf="@id/btnSchedule"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnWaypoints" />
+        app:layout_constraintTop_toBottomOf="@id/btnWaypoints"
+        android:backgroundTint="#F3F1F1"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:textColor="#D40F6B"
+        android:textSize="20sp"/>
 
     <Button
         android:id="@+id/btnSchedule"
@@ -68,7 +90,14 @@
         app:layout_constraintBottom_toTopOf="@id/btnProtocol"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnGuard" />
+        app:layout_constraintTop_toBottomOf="@id/btnGuard"
+        android:backgroundTint="#F3F1F1"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:textColor="#D40F6B"
+        android:textSize="20sp"/>
     <Button
         android:id="@+id/btnProtocol"
         android:layout_width="wrap_content"
@@ -79,6 +108,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnSchedule" />
+        app:layout_constraintTop_toBottomOf="@id/btnSchedule"
+        android:backgroundTint="#F3F1F1"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:textColor="#D40F6B"
+        android:textSize="20sp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

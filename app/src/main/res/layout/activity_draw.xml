@@ -28,7 +28,14 @@
             android:layout_height="fill_parent"
             android:layout_weight="3"
             android:foregroundTint="#FFFFFF"
-            android:text="Save Waypoint" />
+            android:text="Save Waypoint"
+            android:backgroundTint="#F3F1F1"
+            android:shadowColor="#000000"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="2"
+            android:textColor="#D40F6B"
+            android:textSize="20sp"/>
 
         <Button
             android:id="@+id/btnPickImg"
@@ -36,7 +43,14 @@
             android:layout_height="fill_parent"
             android:layout_weight="3"
             android:foregroundTint="#FFFFFF"
-            android:text="Select Image" />
+            android:text="Select Image"
+            android:backgroundTint="#F3F1F1"
+            android:shadowColor="#000000"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="2"
+            android:textColor="#D40F6B"
+            android:textSize="20sp"/>
 
     </LinearLayout>
 </LinearLayout>
