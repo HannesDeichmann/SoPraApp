@@ -59,7 +59,6 @@ public class MapActivity extends AppCompatActivity {
         drawingView.setWaypoints(actualRoute.getOnlyWaypoints());
         drawingView.setDrawRouteOnMap(true);
 
-
         if(getBitmapFromPreferences(this)!= null){
             if(!getBitmapFromPreferences(this).equals("")) {
                 drawingView.setBitmap(getBitmapFromPreferences(this));

@@ -148,11 +148,6 @@ public class RouteCreationActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
-
     public void updateLists(RouteWaypoint waypoint) {
         route.getWaypoints().add(waypoint);
         list.add(waypoint.getWaypoint().getWaypointName() + " - " + waypoint.getDuration().toMinutes() + "min.");

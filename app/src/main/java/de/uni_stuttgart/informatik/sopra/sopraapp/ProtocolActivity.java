@@ -4,14 +4,20 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -22,29 +28,32 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class ProtocolActivity extends AppCompatActivity {
-    Boolean access;
-    ListView tvProtocol;
-    public static ArrayList<String> list = new ArrayList<>();
-    ArrayAdapter<String> adapter;
+    Button btnExport;
+    RecyclerView tvProtocol;
+    DatabasePatrol databasePatrol;
+    RecyclerView.Adapter dataAdapter;
+    RecyclerView.LayoutManager rvManagerRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_protocol);
         tvProtocol = findViewById(R.id.protocol);
-        //hardcode for examples
-
-        list.add("1; Peter; 17:00; 18:00; false; 17:02; 17:13; 17:33; 17:42; 17:50; 18:00");
-        list.add("1; Peter; 17:00; 18:00; false; 17:02; 17:13; 17:33; 17:42; 17:50; 18:00");
-        list.add("1; Peter; 17:00; 18:00; false; 17:02; 17:13; 17:33; 17:42; 17:50; 18:00");
-
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
-        tvProtocol.setAdapter(adapter);
-        if (ContextCompat.checkSelfPermission(ProtocolActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(ProtocolActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-        } else {
-            writeFile();
-        }
+        btnExport = findViewById(R.id.btnExport);
+        databasePatrol = new DatabasePatrol(this);
+        ProtocolAdapter.databasePatrol = databasePatrol;
+        rvManagerRef = new LinearLayoutManager(this);
+        tvProtocol.setLayoutManager(rvManagerRef);
+        dataAdapter = new ProtocolAdapter();
+        tvProtocol.setAdapter(dataAdapter);
+        dataAdapter.notifyDataSetChanged();
+        btnExport.setOnClickListener(view -> {
+            if (ContextCompat.checkSelfPermission(ProtocolActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(ProtocolActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            } else {
+                writeFile();
+            }
+        });
     }
 
     @Override
@@ -65,22 +74,19 @@ public class ProtocolActivity extends AppCompatActivity {
 
     public void writeFile() {
         try {
-            File folder = new File(Environment.getExternalStorageDirectory().getPath() + "/Protocol/Protocol" + System.currentTimeMillis() + ".csv");
+            File folder = new File(Environment.getExternalStorageDirectory().getPath() +
+                    "/Protocol/Protocol" + System.currentTimeMillis() + ".csv");
+            Toast.makeText(getApplicationContext(),"Protocol saved as: " +
+                    Environment.getExternalStorageDirectory().getPath() + "/Protocol/Protocol" +
+                    System.currentTimeMillis() + ".csv" , Toast.LENGTH_SHORT).show();
             if (!folder.exists()) {
                 folder.getParentFile().mkdirs();
                 folder.createNewFile();
             }
             BufferedWriter out = new BufferedWriter(new FileWriter(folder));
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("Route; Guard; Start; End; Interrupted");
-            for (int i = 0; i < 100; i++) {
-                stringBuilder.append(";WP" + (i + 1));
-            }
-            stringBuilder.append("\n");
-            for (int i = 0; i < list.size(); i++) {
-                stringBuilder.append(list.get(i));
-                stringBuilder.append("\n");
-            }
+            addFirstRow(stringBuilder);
+            addAllPatrols(stringBuilder);
             out.write(stringBuilder.toString());
             out.close();
         } catch (FileNotFoundException e) {
@@ -88,5 +94,48 @@ public class ProtocolActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void addAllPatrols(StringBuilder stringBuilder){
+        for(int i = 0; i < databasePatrol.getPatrolCount(); i++){
+            stringBuilder.append(databasePatrol.getPatrol(i));
+            stringBuilder.append("\n");
+        }
+    }
+
+    private void addFirstRow(StringBuilder stringBuilder){
+        stringBuilder.append("Number; Route; Guard; planned Start; actual Start");
+        for(int i = 1; i <= this.getMaxWaypoints(); i++) {
+            stringBuilder.append(";WP" + i);
+        }
+        stringBuilder.append("; End");
+        stringBuilder.append("\n");
+    }
+
+    private int getMaxWaypoints(){
+        int max = 0;
+        for(int i = 0; i< databasePatrol.getPatrolCount(); i++){
+            if(getWaypointList(i).size() > max){
+                max = getWaypointList(i).size();
+            }
+        }
+        return max;
+    }
+
+    private ArrayList<String> getWaypointList(int position){
+        ArrayList<String> waypoints = new ArrayList<>();
+        String[] stringArray =  databasePatrol.getPatrol(position).split(";");
+        for(String s: stringArray){
+            waypoints.add(s);
+        }
+        //remove guardname/routename/time...
+        for(int i = 0; i < 5;i++){
+            if(waypoints.size()!= 0){
+                waypoints.remove(0);
+            }
+        }
+        //remove the finish time
+        waypoints.remove(waypoints.size()-1);
+        return waypoints;
     }
 }

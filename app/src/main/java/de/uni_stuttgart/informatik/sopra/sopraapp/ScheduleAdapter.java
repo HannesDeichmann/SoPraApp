@@ -60,7 +60,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
                     String[] splitted = routeStringList.get(getAdapterPosition()).split(":");
                     int routeId = Integer.valueOf(splitted[3].trim());
                     int guardId = Integer.valueOf(splitted[0].trim());
-                    String time =splitted[4].split(DIVIDESTRING)[1];
+                    String time = routeStringList.get(getAdapterPosition()).split(DIVIDESTRING)[1];
                     selectedGuard = databaseGuard.getGuardById(guardId);;
                     selectedRoute = databaseRoute.getRouteById(routeId);
                     selectedGuard.setGuardRouteList(new ArrayList<GuardRoute>());

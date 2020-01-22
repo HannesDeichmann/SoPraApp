@@ -23,6 +23,10 @@ public class DbContract {
     public static final String COLUMN_NAME_ROUTETIMELIST = "routetimes";
     public static final String COLUMN_NAME_ROUTEWAYPOINTIDLIST = "routewaypointid";
 
+    public static final String TABLE_NAME_PATROL = "patroltable";
+    public static final String COLUMN_NAME_PATROL= "patrolguarid";
+    public static final String COLUMN_NAME_PATROLID= "patrolid";
+
     public static final String DIVIDESTRING = "/";
 
     public static ArrayList<String> stringIntoArrayList(String string){

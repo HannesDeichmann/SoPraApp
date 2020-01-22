@@ -1,6 +1,5 @@
 package de.uni_stuttgart.informatik.sopra.sopraapp;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.time.Duration;
 
 public class MainActivity extends AppCompatActivity {
-
     TextView tvLoginRef;
     Button btnAdminLoginRef;
     DatabaseGuard databaseGuard;
@@ -36,15 +34,10 @@ public class MainActivity extends AppCompatActivity {
         //TODO BUG: Database darf nicht leer sein
         if(databaseGuard.getGuardCount() == 0) {
             databaseGuard.addGuard(new Guard("otto", "müllerich", "1234"));
-
         }
         if(databaseWaypoint.getWaypointCount() == 0) {
             databaseWaypoint.addWaypoint(new Waypoint("FirstWaypoint", "123456", "Tag", "Note"));
         }
-        /*Guard otto = new Guard("Otto", "Muellerich", "2", "1234");
-        databaseGuard = new DatabaseGuard(this);
-        databaseGuard.addGuard(otto);
-        */
         tvLoginRef = (TextView) findViewById(R.id.tvLogin);
         btnAdminLoginRef = (Button) findViewById(R.id.btnAdminLogin);
         etUsernameRef = findViewById(R.id.etUsername);
@@ -54,14 +47,14 @@ public class MainActivity extends AppCompatActivity {
         tvLoginFeedbackRef.setText("");
 
         //btnAdminLoginRef ist only there for development so while testing you dont need to log in every time
-        btnAdminLoginRef.setVisibility(View.INVISIBLE);
+        btnAdminLoginRef.setVisibility(View.VISIBLE);
         btnAdminLoginRef.setText("ImageTest");
         btnAdminLoginRef.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 //Intent intent = new Intent(view.getContext(), DrawActivity.class);
                 //startActivity(intent);
-                finish();
+                //finish();
             }
         });
 
