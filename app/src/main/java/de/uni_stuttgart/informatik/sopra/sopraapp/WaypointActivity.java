@@ -38,10 +38,8 @@ public class WaypointActivity extends AppCompatActivity {
     EditText etWaypointNoteRef;
 
     public static final String ERROR_DETECTED = "No NFC tag detected!";
-    public static final String WRITE_SUCCESS = "Text written to the NFC tag successfully!";
-    public static final String WRITE_ERROR = "No NFC Tag discovered. " +
-            "Hold the NFC Tag to the device and wait for the vibration. " +
-            "Then press the 'assign' button";
+    public static final String WRITE_SUCCESS = "NFC Tag successfully assigned";
+    public static final String WRITE_ERROR = "No NFC Tag discovered. Hold the NFC Tag to the device and wait for the vibration. Then press the 'assign' button";
     NfcAdapter nfcAdapter;
     PendingIntent pendingIntent;
     IntentFilter writeTagFilters[];

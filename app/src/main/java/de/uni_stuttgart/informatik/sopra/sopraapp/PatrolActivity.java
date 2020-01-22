@@ -255,6 +255,7 @@ public class PatrolActivity extends AppCompatActivity {
                     date = new Date();
                     protocolStringTimes += " ;" + sdf.format(date);
                     nextWaypointCounter += 1;
+                    Toast.makeText(this, "Waypoint succesfully scanned", Toast.LENGTH_LONG).show();
                     stopTimer();
                     setupInformation();
                 } else {
@@ -262,7 +263,7 @@ public class PatrolActivity extends AppCompatActivity {
                 }
 
             } else {
-                Toast.makeText(this, "Please press start before scanning", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Please continue the countdown before scanning", Toast.LENGTH_LONG).show();
             }
         }
 
