@@ -1,11 +1,15 @@
 package de.uni_stuttgart.informatik.sopra.sopraapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.nfc.FormatException;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
@@ -16,6 +20,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Parcelable;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,21 +29,18 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static de.uni_stuttgart.informatik.sopra.sopraapp.DrawActivity.stringToBitmap;
 import static de.uni_stuttgart.informatik.sopra.sopraapp.ProtocolActivity.list;
 
 public class PatrolActivity extends AppCompatActivity {
-    private TextView tvCountdownRef;
-    private TextView tvTimeRef;
-    private TextView tvNextWaypointNameRef;
-    private TextView tvRouteNameRef;
-    private TextView tvScanFeedbackRef;
-    private TextView tvNoteRef;
     private Date date;
     private String protocolString;
     private Guard guard;
@@ -51,11 +53,14 @@ public class PatrolActivity extends AppCompatActivity {
     private CountDownTimer countDownTimer;
     private long timeLeftInMilliseconds = 0;
     private boolean timerRunning;
-    private ListView lvCompleteRouteRef;
     private Route route;
     private GuardRoute selectedRoute;
     private Guard loggedInGuard;
     DatabaseGuard databaseGuard;
+    public String bitmapString;
+
+    private FragmentRefreshListener fragmentRefreshListener;
+
 
 
     /****************************NFC-Tag*******************************************/
@@ -75,6 +80,7 @@ public class PatrolActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patrol);
         context = this;
+        bitmapString = getBitmapString(this);
 
         GuardRoute selectedRoute = (GuardRoute) getIntent().getExtras().get("selectedRoute");
         this.setSelectedRoute(selectedRoute);
@@ -95,88 +101,56 @@ public class PatrolActivity extends AppCompatActivity {
         writeTagFilters = new IntentFilter[]{tagDetected};
 
         nextWaypointCounter = 0;
-        tvTimeRef = findViewById(R.id.tvTime);
-        tvCountdownRef = findViewById(R.id.tvCountdown);
-        tvRouteNameRef = findViewById(R.id.tvRouteName);
-        tvNoteRef = findViewById(R.id.tvNote);
-        tvNextWaypointNameRef = findViewById(R.id.tvNextWaypointName);
-        tvScanFeedbackRef = findViewById(R.id.tvScanFeedback);
-        btnStartCountdownRef = findViewById(R.id.btnStartCountdown);
-        btnFinishRouteRef = findViewById(R.id.btnFinishRoute);
-        btnCancelActiveRouteRef = findViewById(R.id.btnCancelActiveRoute);
-        btnShowMapRef = findViewById(R.id.btnShowMap);
-        lvCompleteRouteRef = findViewById(R.id.lvCompleteRoute);
 
-        btnFinishRouteRef.setVisibility(View.INVISIBLE);
-
-        /**
-         * Creating the listView for the whole route
-         */
-        ArrayList<RouteWaypoint> waypointList = route.getWaypoints();
-
-        ArrayList<String> waypointsStringList = new ArrayList<>();
-
-
-        for (RouteWaypoint routeWaypoint : waypointList) {
-            int durationInt = (int) routeWaypoint.getDuration().toMinutes();
-            String duration = Integer.toString(durationInt);
-            waypointsStringList.add(routeWaypoint.getWaypoint().getWaypointName()
-                    + " " + duration + "min");
-
-        }
-
-
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_list_item_1,
-                waypointsStringList);
-
-        lvCompleteRouteRef.setAdapter(dataAdapter);
-        lvCompleteRouteRef.setDividerHeight(5);
-
-        btnShowMapRef.setOnClickListener(new View.OnClickListener() {
+        /**btnShowMapRef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), MapActivity.class);
                 intent.putExtra("route", route);
                 startActivity(intent);
             }
-        });
-
-        btnStartCountdownRef.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startStop();
-            }
-        });
-        btnCancelActiveRouteRef.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-
-                /**
-                 * TODO Log Entry Cancelled Route
-                 */
-            }
-
-        });
+        });*/
         setupInformation();
 
-        btnFinishRouteRef.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-                date = new Date();
-                protocolString += sdf.format(date) + "; " + "Route completed" +
-                        ";" + protocolStringTimes;
-                list.add(protocolString);
-                finish();
-            }
-
-        });
+        route = getRoute();
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
+        Fragment fragment = HomeFragment.newInstance(route, nextWaypointCounter);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                fragment).commit();
 
     }
 
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    Fragment selectedFragment = null;
+                    route = getRoute();
+                    switch (item.getItemId()){
+                        case R.id.nav_home:
+                            selectedFragment = HomeFragment.newInstance(route, nextWaypointCounter);
+                            break;
+                        case R.id.nav_map:
+                            selectedFragment = MapFragment.newInstance(route, bitmapString);
+                            break;
+                        case R.id.nav_route:
+                            selectedFragment = RouteFragment.newInstance(route);
+                            break;
+                    }
+
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            selectedFragment).commit();
+
+                    return true;
+                }
+            };
+
+    public String getBitmapString(Context context){
+        SharedPreferences mPrefs = getSharedPreferences("saved_bitmap",0);
+        String str = mPrefs.getString("Save", "");
+        return str;
+    }
 
     public Route getRoute() {
         return this.route;
@@ -202,9 +176,28 @@ public class PatrolActivity extends AppCompatActivity {
         return this.loggedInGuard;
     }
 
-    /******************************************************************************
-     **********************************Read From NFC Tag***************************
-     ******************************************************************************/
+    public void finishRoute(){
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        date = new Date();
+        protocolString += sdf.format(date) + "; " + "Route completed" +
+                ";" + protocolStringTimes;
+        list.add(protocolString);
+        DrawingView.setDoneWaypoints(new ArrayList<Waypoint>());
+        finish();
+    }
+
+    public void cancelActiveRoute(){
+        DrawingView.setDoneWaypoints(new ArrayList<Waypoint>());
+        finish();
+
+        /**
+         * TODO Log Entry Cancelled Route
+         */
+    }
+
+    /*********************************************************************************
+     ***************************************************************************
+     **********************************Read From NFC Tag***************************/
     private void readFromIntent(Intent intent) {
         String action = intent.getAction();
         if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)
@@ -254,8 +247,12 @@ public class PatrolActivity extends AppCompatActivity {
                 if (text.equals(route.getWaypoints().get(nextWaypointCounter).getWaypoint().getWaypointId())) {
                     date = new Date();
                     protocolStringTimes += " ;" + sdf.format(date);
+                    DrawingView.addDoneWaypoint(route.getWaypoints().get(nextWaypointCounter).getWaypoint());
                     nextWaypointCounter += 1;
                     Toast.makeText(this, "Waypoint succesfully scanned", Toast.LENGTH_LONG).show();
+                    Fragment selectedFragment = HomeFragment.newInstance(route,nextWaypointCounter);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            selectedFragment).commit();
                     stopTimer();
                     setupInformation();
                 } else {
@@ -281,20 +278,14 @@ public class PatrolActivity extends AppCompatActivity {
         Guard guard = this.getLoggedInGuard();
 
 
-        if (nextWaypointCounter == route.getWaypoints().size()) {
-            btnFinishRouteRef.setVisibility(View.VISIBLE);
-            btnStartCountdownRef.setVisibility(View.INVISIBLE);
-            tvNextWaypointNameRef.setText("");
-            tvNoteRef.setText("Please finish route");
-        } else {
+        if (nextWaypointCounter < route.getWaypoints().size()) {
             RouteWaypoint nextWaypoint = route.getWaypoints().get(nextWaypointCounter);
             long timeLeft = nextWaypoint.getDuration().toMinutes();
             timeLeftInMilliseconds = 60000 * timeLeft; // 60000 millisec = 1 min
             String formattedStartTime = formatStartTime(selectedRoute.getTime());
-            tvTimeRef.setText(formattedStartTime);
-            tvRouteNameRef.setText(route.getRouteName());
-            tvNoteRef.setText(nextWaypoint.getWaypoint().getWaypointNote());
-            tvNextWaypointNameRef.setText(nextWaypoint.getWaypoint().getWaypointName());
+            if(getFragmentRefreshListener()!= null) {
+                getFragmentRefreshListener().onRefresh(formattedStartTime);
+            }
             updateTimer();
             startTimer();
         }
@@ -329,14 +320,11 @@ public class PatrolActivity extends AppCompatActivity {
 
             }
         }.start();
-
-        btnStartCountdownRef.setText("PAUSE");
         timerRunning = true;
     }
 
     public void stopTimer() {
         countDownTimer.cancel();
-        btnStartCountdownRef.setText("START");
         timerRunning = false;
         /**
          *TODO log Entry
@@ -353,7 +341,9 @@ public class PatrolActivity extends AppCompatActivity {
         if (seconds < 10) timeLeftText += "0";
         timeLeftText += seconds;
 
-        tvCountdownRef.setText(timeLeftText);
+        if(getFragmentRefreshListener()!= null){
+            getFragmentRefreshListener().onRefresh(timeLeftText);
+        }
         if (timeLeftText.equals("0:00")) {
             Toast.makeText(PatrolActivity.this, "Silent alarm would now be sent",
                     Toast.LENGTH_SHORT).show();
@@ -370,6 +360,19 @@ public class PatrolActivity extends AppCompatActivity {
             stopTimer();
         }
     }
+
+    public FragmentRefreshListener getFragmentRefreshListener() {
+        return fragmentRefreshListener;
+    }
+
+    public void setFragmentRefreshListener(FragmentRefreshListener fragmentRefreshListener) {
+        this.fragmentRefreshListener = fragmentRefreshListener;
+    }
+
+    public interface FragmentRefreshListener{
+        void onRefresh(String formattedStringTime);
+    }
+
 
     /******************************************************************************
      **********************************Write to NFC Tag****************************

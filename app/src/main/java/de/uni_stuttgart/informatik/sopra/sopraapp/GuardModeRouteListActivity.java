@@ -81,6 +81,7 @@ public class GuardModeRouteListActivity extends AppCompatActivity {
                 GuardRoute selectedRoute= guardRouteList.get(position);
                 intent.putExtra("selectedRoute", selectedRoute);
                 intent.putExtra("loggedInGuard", loggedInGuard);
+                DrawingView.setDoneWaypoints(new ArrayList<Waypoint>());
                 startActivity(intent);
                 finish();
             }

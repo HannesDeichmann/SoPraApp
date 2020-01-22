@@ -24,7 +24,7 @@ public class DrawingView extends View {
         super(context);
     }
     private static boolean drawRouteOnMap = false;
-    private ArrayList<Waypoint> doneWaypoints = new ArrayList<>();
+    private static ArrayList<Waypoint> doneWaypoints = new ArrayList<>();
 
     public DrawingView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -43,9 +43,9 @@ public class DrawingView extends View {
         drawRouteOnMap = boo;
     }
 
-    public void setDoneWaypoints(ArrayList<Waypoint> list){ this.doneWaypoints = list; }
+    public static void setDoneWaypoints(ArrayList<Waypoint> list){ doneWaypoints = list; }
 
-    public void addDoneWaypoint(Waypoint wp){ this.doneWaypoints.add(wp);}
+    public static void addDoneWaypoint(Waypoint wp){ doneWaypoints.add(wp);}
 
     public void addCurentCircle(Circle circle) {
         this.circle = circle;
@@ -82,7 +82,7 @@ public class DrawingView extends View {
             }
             drawOldWaypoints(canvas);
         }else {
-            drawRoute(MapActivity.getActualRoute(), canvas);
+            drawRoute(MapFragment.getActualRoute(), canvas);
         }
     }
     private void drawOldWaypoints(Canvas canvas){

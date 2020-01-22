@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tvNextWaypoint"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:textAlignment="center">
+
+    <TextView
+        android:id="@+id/tvNextWaypointName"
+        android:layout_width="236dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="211dp"
+        android:layout_marginEnd="87dp"
+        android:textSize="20sp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.965"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="522dp" />
+
+    <ImageButton
+        android:id="@+id/btnCancelActiveRoute"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="587dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/ic_exit_to_app_black_24dp" />
+
+    <TextView
+        android:id="@+id/tvNote"
+        android:layout_width="236dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="487dp"
+        android:layout_marginEnd="84dp"
+        android:gravity="center"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="138dp"
+        tools:layout_editor_absoluteY="100dp" />
+
+    <TextView
+        android:id="@+id/tvCountdown"
+        android:layout_width="105dp"
+        android:layout_height="110dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="150dp"
+        android:layout_marginBottom="338dp"
+        android:gravity="center"
+        android:textColor="#D40F6B"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="183dp"
+        tools:layout_editor_absoluteY="349dp"
+        tools:text="00:00" />
+
+    <ImageButton
+        android:id="@+id/btnStartCountdown"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="70dp"
+        android:layout_marginBottom="284dp"
+        android:background="@drawable/ic_pause_circle_filled_black_24dp"
+        android:text="@string/pause"
+        tools:layout_editor_absoluteX="42dp"
+        tools:layout_editor_absoluteY="358dp" />
+
+    <ImageButton
+        android:id="@+id/btnFinishRoute"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="173dp"
+        android:layout_marginBottom="364dp"
+        android:background="@drawable/ic_check_circle_black_24dp"
+        android:foregroundTint="#FFFFFF"
+        android:text="@string/finish_route"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="185dp"
+        android:layout_height="37dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="155dp"
+        android:gravity="center"
+        android:text="Next waypoint"
+        android:textSize="20sp" />
+
+
+</RelativeLayout>
