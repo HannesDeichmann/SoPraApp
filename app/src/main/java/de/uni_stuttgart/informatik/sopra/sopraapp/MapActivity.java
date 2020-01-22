@@ -53,12 +53,12 @@ public class MapActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
-        actualRoute = (Route) getIntent().getExtras().get("route");
+        actualRoute = (Route) getIntent().getExtras().get("RouteActivity");
         btnBackToPatrolRef = findViewById(R.id.btnBackToPatrol);
         drawingView = (DrawingView) findViewById(R.id.canvas);
         drawingView.setWaypoints(actualRoute.getOnlyWaypoints());
+        drawingView.drawRouteInRouteActivity=true;
         drawingView.setDrawRouteOnMap(true);
-
 
         if(getBitmapFromPreferences(this)!= null){
             if(!getBitmapFromPreferences(this).equals("")) {
@@ -73,7 +73,7 @@ public class MapActivity extends AppCompatActivity {
         btnBackToPatrolRef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                drawingView.setDrawRouteOnMap(false);
+                drawingView.drawRouteInRouteActivity=false;
                 finish();
             }
         });

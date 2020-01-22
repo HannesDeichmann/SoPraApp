@@ -25,6 +25,7 @@ public class DrawingView extends View {
     }
     private static boolean drawRouteOnMap = false;
     private static ArrayList<Waypoint> doneWaypoints = new ArrayList<>();
+    public static boolean drawRouteInRouteActivity = false;
 
     public DrawingView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -81,7 +82,9 @@ public class DrawingView extends View {
                 canvas.drawCircle(circle.cx, circle.cy, circle.radius, circle.paint);
             }
             drawOldWaypoints(canvas);
-        }else {
+        }else if(drawRouteInRouteActivity) {
+            drawRoute(MapActivity.getActualRoute(), canvas);
+        }else{
             drawRoute(MapFragment.getActualRoute(), canvas);
         }
     }

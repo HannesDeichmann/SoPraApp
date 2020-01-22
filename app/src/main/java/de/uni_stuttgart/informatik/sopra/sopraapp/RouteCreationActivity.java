@@ -124,7 +124,8 @@ public class RouteCreationActivity extends AppCompatActivity {
         btnShowMapRef.setOnClickListener(view -> {
             if(list.size()>0 ){
                 Intent intent = new Intent(view.getContext(), MapActivity.class);
-                intent.putExtra("route", route);
+                intent.putExtra("RouteActivity", route);
+                DrawingView.drawRouteInRouteActivity = true;
                 startActivity(intent);
                 if(getIntent().hasExtra("route")){
                     myArrayAdapter.clear();
