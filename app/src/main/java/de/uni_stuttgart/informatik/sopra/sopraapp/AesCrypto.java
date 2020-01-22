@@ -6,6 +6,13 @@ import java.util.Base64;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
+
+/**
+ * Class to decrypt and encrypt the Guard Password.
+ *
+ * @author Gabriel Bonnet 3410781
+ * @version 21.01.2020
+ */
 public class AesCrypto {
     private static SecretKeySpec secretKey;
     private static byte[] key;

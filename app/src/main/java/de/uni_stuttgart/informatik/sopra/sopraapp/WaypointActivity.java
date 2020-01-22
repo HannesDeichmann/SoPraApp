@@ -3,6 +3,7 @@ package de.uni_stuttgart.informatik.sopra.sopraapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -43,6 +44,7 @@ public class WaypointActivity extends AppCompatActivity {
     IntentFilter writeTagFilters[];
     boolean writeMode;
     Tag myTag;
+    String waypointID;
     Context context;
 
     DatabaseWaypoint databaseWaypoint;
@@ -55,6 +57,7 @@ public class WaypointActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        checkEditNewWaypoint();
         if (wpLocation != null) {
             setTextFields(wpLocation);
 
@@ -129,7 +132,14 @@ public class WaypointActivity extends AppCompatActivity {
             checkEditNewWaypoint();
         }
         if(newWaypoint){
-            showWaypointIdRef.setText((Integer.valueOf(databaseWaypoint.getWaypointCount()+1)).toString());
+            if(databaseWaypoint.getWaypointCount()!=0) {
+                 waypointID = databaseWaypoint.getWaypoint(databaseWaypoint.getWaypointCount()-1).getWaypointId();
+                 int id = Integer.valueOf(waypointID);
+                 showWaypointIdRef.setText(Integer.valueOf(id+1).toString());
+            } else{
+                waypointID = "1";
+                showWaypointIdRef.setText(waypointID);
+            }
         }
 
         btnAcceptWaypointRef.setOnClickListener(view -> {
@@ -139,6 +149,7 @@ public class WaypointActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "The Waypointname allready exits",
                             Toast.LENGTH_SHORT).show();
                 }else {
+                    createdWaypoint.setWaypointId(waypointID);
                     databaseWaypoint.addWaypoint(createdWaypoint);
                 }
             }else {
@@ -213,6 +224,8 @@ public class WaypointActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), DrawActivity.class);
                 Waypoint waypoint = addWaypointInfos();
+                DrawingView.setWaypoints(databaseWaypoint.getAllWaypoints());
+                DrawingView.setDrawRouteOnMap(false);
                 intent.putExtra("waypoint", waypoint);
                 startActivity(intent);
                 finish();
@@ -304,6 +317,7 @@ public class WaypointActivity extends AppCompatActivity {
         return recordNFC;
     }
 
+    @SuppressLint("MissingSuperCall")
     @Override
     protected void onNewIntent(Intent intent) {
         setIntent(intent);

@@ -14,7 +14,14 @@
         app:layout_constraintBottom_toTopOf="@id/tvStartTime"
         app:layout_constraintEnd_toStartOf="@id/selectRoute"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:backgroundTint="#F3F1F1"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:textColor="#D40F6B"
+        android:textSize="20sp"/>
 
     <Button
         android:id="@+id/selectRoute"
@@ -24,7 +31,14 @@
         app:layout_constraintBottom_toBottomOf="@id/selectGuard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/selectGuard"
-        app:layout_constraintTop_toTopOf="@id/selectGuard" />
+        app:layout_constraintTop_toTopOf="@id/selectGuard"
+        android:backgroundTint="#F3F1F1"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:textColor="#D40F6B"
+        android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/tvStartTime"
@@ -52,7 +66,14 @@
         app:layout_constraintTop_toBottomOf="@id/selectGuard"
         app:layout_constraintBottom_toTopOf="@+id/tvStartTime"
         app:layout_constraintEnd_toEndOf="@id/tvStartTime"
-        app:layout_constraintStart_toStartOf="@id/tvStartTime" />
+        app:layout_constraintStart_toStartOf="@id/tvStartTime"
+        android:backgroundTint="#F3F1F1"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:textColor="#D40F6B"
+        android:textSize="20sp"/>
 
     <Button
         android:id="@+id/saveScheduleItem"
@@ -62,7 +83,14 @@
         app:layout_constraintBottom_toTopOf="@id/tvSelectedGuard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvStartTime" />
+        app:layout_constraintTop_toBottomOf="@id/tvStartTime"
+        android:backgroundTint="#F3F1F1"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:textColor="#D40F6B"
+        android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/tvSelectedGuard"

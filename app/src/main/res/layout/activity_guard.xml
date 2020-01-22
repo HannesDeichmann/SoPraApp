@@ -104,7 +104,14 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="36dp"
-        android:text="@string/accept" />
+        android:text="@string/accept"
+        android:backgroundTint="#F3F1F1"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:textColor="#D40F6B"
+        android:textSize="20sp"/>
 
     <Button
         android:id="@+id/btnDeleteGuard"
@@ -114,7 +121,14 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="38dp"
         android:layout_marginTop="30dp"
-        android:text="@string/deleteGuard" />
+        android:text="@string/deleteGuard"
+        android:backgroundTint="#F3F1F1"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:textColor="#D40F6B"
+        android:textSize="20sp"/>
 
     <Button
         android:id="@+id/btnEditGuard"
@@ -123,7 +137,14 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="55dp"
-        android:text="@string/edit_guard" />
+        android:text="@string/edit_guard"
+        android:backgroundTint="#F3F1F1"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:textColor="#D40F6B"
+        android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/tvAktivity"
@@ -154,27 +175,16 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/pwUserPassword"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="54dp"
+        android:layout_marginStart="9dp"
         android:layout_marginTop="30dp"
         android:layout_toEndOf="@+id/btnDeleteGuard"
-        android:text="Cancel" />
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="145dp"
-        android:layout_height="135dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="53dp" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="111dp"
-        android:text="TextView" />
+        android:backgroundTint="#F3F1F1"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:text="Cancel"
+        android:textColor="#D40F6B"
+        android:textSize="20sp" />
 
 </RelativeLayout>

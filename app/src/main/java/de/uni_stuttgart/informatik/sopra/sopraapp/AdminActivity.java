@@ -8,6 +8,12 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
+/**
+ * Activity to navigate through the Admin Mode.
+ *
+ * @author Arne Bartenbach 3392087
+ */
 public class AdminActivity extends AppCompatActivity {
 
     TextView tvAdminModusRef;
