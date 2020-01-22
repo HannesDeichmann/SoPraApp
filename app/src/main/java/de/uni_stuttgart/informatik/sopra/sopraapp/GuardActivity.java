@@ -65,7 +65,7 @@ public class GuardActivity extends AppCompatActivity {
 
     private void checkEditNewGuard() {
         if (newGuard == true) {
-            tvAkivity.setText("Create a new guard:");
+            tvAkivity.setText("Create a new guard with ID");
 
             edit = false;
 
@@ -73,7 +73,7 @@ public class GuardActivity extends AppCompatActivity {
             btnNewId.setVisibility(View.INVISIBLE);
             setNewUserId();
         } else {
-            tvAkivity.setText("Edit your guard:");
+            tvAkivity.setText("Edit your guard with ID");
             tvGuardIdRef.setText(getEditedGuard().getUserId());
 
             edit = true;

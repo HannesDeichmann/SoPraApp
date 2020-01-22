@@ -1,134 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="de.uni_stuttgart.informatik.sopra.sopraapp.GuardActivity"
-    tools:layout_editor_absoluteY="81dp"
-    tools:layout_editor_absoluteX="0dp">
-
-    <EditText
-        android:id="@+id/etForname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnEditGuard"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="95dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789-,.?!"/>
-
-    <EditText
-        android:id="@+id/etSurname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/etForname"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="41dp"
-        android:layout_marginEnd="95dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789-,.?!"/>
-
-    <EditText
-        android:id="@+id/pwUserPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvGuardIDNumber"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="91dp"
-        android:inputType="textPassword"
-        android:ems="10" />
-
-    <TextView
-        android:id="@+id/tvGuardPassword"
-        android:layout_width="88dp"
-        android:layout_height="39dp"
-        android:layout_below="@+id/tvGuardId"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="66dp"
-        android:text="@string/userpw"
-        android:textAlignment="center"
-        android:textAllCaps="false" />
-
-    <TextView
-        android:id="@+id/tvGuardId"
-        android:layout_width="88dp"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/tvGuardIDNumber"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="87dp"
-        android:layout_marginTop="-4dp"
-        android:layout_marginEnd="65dp"
-        android:layout_toStartOf="@+id/tvGuardIDNumber"
-        android:text="@string/guard_id"
-        android:textAlignment="center"
-        android:textAllCaps="false" />
-
-    <TextView
-        android:id="@+id/tvGuardForename"
-        android:layout_width="88dp"
-        android:layout_height="39dp"
-        android:layout_alignTop="@+id/etForname"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="2dp"
-        android:text="@string/forename"
-        android:textAlignment="center"
-        android:textAllCaps="false" />
-
-    <TextView
-        android:id="@+id/tvGuardSurname"
-        android:layout_width="84dp"
-        android:layout_height="30dp"
-        android:layout_above="@+id/tvGuardId"
-        android:layout_below="@id/tvGuardId"
-        android:layout_alignTop="@+id/etSurname"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="69dp"
-        android:text="@string/surname"
-        android:textAlignment="center"
-        android:textAllCaps="false" />
-
-    <Button
-        android:id="@+id/btnAcceptGuard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/pwUserPassword"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="36dp"
-        android:text="@string/accept"
-        android:backgroundTint="#F3F1F1"
-        android:shadowColor="#000000"
-        android:shadowDx="2"
-        android:shadowDy="2"
-        android:shadowRadius="2"
-        android:textColor="#D40F6B"
-        android:textSize="20sp"/>
-
-    <Button
-        android:id="@+id/btnDeleteGuard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/pwUserPassword"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="38dp"
-        android:layout_marginTop="30dp"
-        android:text="@string/deleteGuard"
-        android:backgroundTint="#F3F1F1"
-        android:shadowColor="#000000"
-        android:shadowDx="2"
-        android:shadowDy="2"
-        android:shadowRadius="2"
-        android:textColor="#D40F6B"
-        android:textSize="20sp"/>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="de.uni_stuttgart.informatik.sopra.sopraapp.GuardActivity">
 
     <Button
         android:id="@+id/btnEditGuard"
@@ -136,27 +12,31 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="55dp"
-        android:text="@string/edit_guard"
         android:backgroundTint="#F3F1F1"
         android:shadowColor="#000000"
         android:shadowDx="2"
         android:shadowDy="2"
         android:shadowRadius="2"
+        android:text="@string/edit_guard"
         android:textColor="#D40F6B"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/tvAktivity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvAktivity"
-        android:layout_width="233dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="110dp"
-        android:layout_marginEnd="163dp"
-        android:text="Create new Guard:" />
+        android:text="Create new Guard with ID"
+        app:layout_constraintBottom_toTopOf="@id/tvGuardIDNumber"
+        app:layout_constraintEnd_toEndOf="@id/btnEditGuard"
+        app:layout_constraintStart_toStartOf="@id/btnEditGuard"
+        app:layout_constraintTop_toBottomOf="@id/btnEditGuard"/>
 
     <TextView
         android:id="@+id/tvGuardIDNumber"
@@ -164,20 +44,114 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="328dp"
-        android:layout_marginEnd="122dp"
         android:text=""
+        app:layout_constraintBottom_toTopOf="@id/tvGuardForename"
+        app:layout_constraintEnd_toEndOf="@id/tvAktivity"
+        app:layout_constraintStart_toStartOf="@id/tvAktivity"
+        app:layout_constraintTop_toBottomOf="@id/btnEditGuard"
+        android:textSize="20sp"
         />
+
+    <TextView
+        android:id="@+id/tvGuardForename"
+        android:layout_width="88dp"
+        android:layout_height="39dp"
+        android:layout_alignParentStart="true"
+        android:text="@string/forename"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@id/tvGuardSurname"
+        app:layout_constraintEnd_toStartOf="@id/etSurname"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvGuardIDNumber"/>
+
+    <EditText
+        android:id="@+id/etForname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789-,.?!"
+        app:layout_constraintBottom_toBottomOf="@id/tvGuardForename"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvGuardForename"
+        app:layout_constraintTop_toTopOf="@id/tvGuardForename"/>
+
+    <TextView
+        android:id="@+id/tvGuardSurname"
+        android:layout_width="84dp"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:text="@string/surname"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@id/tvGuardPassword"
+        app:layout_constraintEnd_toEndOf="@id/tvGuardForename"
+        app:layout_constraintStart_toStartOf="@id/tvGuardForename"
+        app:layout_constraintTop_toBottomOf="@id/tvGuardForename"/>
+
+    <EditText
+        android:id="@+id/etSurname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789-,.?!"
+        app:layout_constraintBottom_toBottomOf="@id/tvGuardSurname"
+        app:layout_constraintEnd_toEndOf="@id/etForname"
+        app:layout_constraintStart_toStartOf="@id/etForname"
+        app:layout_constraintTop_toTopOf="@id/tvGuardSurname"/>
+
+    <TextView
+        android:id="@+id/tvGuardPassword"
+        android:layout_width="88dp"
+        android:layout_height="39dp"
+        android:layout_alignParentStart="true"
+        android:text="@string/userpw"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@id/btnAcceptGuard"
+        app:layout_constraintEnd_toEndOf="@id/tvGuardSurname"
+        app:layout_constraintStart_toStartOf="@id/tvGuardSurname"
+        app:layout_constraintTop_toBottomOf="@id/tvGuardSurname"/>
+
+    <EditText
+        android:id="@+id/pwUserPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:inputType="textPassword"
+        android:ems="10"
+        app:layout_constraintBottom_toBottomOf="@id/tvGuardPassword"
+        app:layout_constraintEnd_toEndOf="@id/etSurname"
+        app:layout_constraintStart_toStartOf="@id/etSurname"
+        app:layout_constraintTop_toTopOf="@id/tvGuardPassword"/>
+
+    <Button
+        android:id="@+id/btnAcceptGuard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:text="@string/accept"
+        android:backgroundTint="#F3F1F1"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:textColor="#D40F6B"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/btnNewId"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvGuardPassword"/>
 
     <Button
         android:id="@+id/btnNewId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/pwUserPassword"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="54dp"
-        android:layout_marginTop="30dp"
-        android:layout_toEndOf="@+id/btnDeleteGuard"
         android:text="Cancel"
         android:backgroundTint="#F3F1F1"
         android:shadowColor="#000000"
@@ -185,24 +159,28 @@
         android:shadowDy="2"
         android:shadowRadius="2"
         android:textColor="#D40F6B"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnDeleteGuard"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnAcceptGuard"/>
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="145dp"
-        android:layout_height="135dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="53dp" />
-
-    <TextView
-        android:id="@+id/textView"
+    <Button
+        android:id="@+id/btnDeleteGuard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="111dp"
-        android:text="TextView" />
+        android:layout_alignParentStart="true"
+        android:text="@string/deleteGuard"
+        android:backgroundTint="#F3F1F1"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:textColor="#D40F6B"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/btnNewId"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnNewId"
+        app:layout_constraintTop_toTopOf="@id/btnNewId"/>
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
