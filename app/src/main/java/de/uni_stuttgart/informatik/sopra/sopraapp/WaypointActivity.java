@@ -58,7 +58,8 @@ public class WaypointActivity extends AppCompatActivity {
             setTextFields(wpLocation);
 
         }
-        WriteModeOn();
+        //-----------------------------------------------------------------------------
+        //WriteModeOn();
     }
 
     private Waypoint getEditedWaypoint() {
@@ -118,6 +119,7 @@ public class WaypointActivity extends AppCompatActivity {
         databaseWaypoint = new DatabaseWaypoint(this);
         databaseRoute = new DatabaseRoute(this);
 
+
         if (getIntent().hasExtra("editedWaypointId")) {
             this.setEditedWaypoint(databaseWaypoint.getWaypointById(getIntent().getStringExtra("editedWaypointId")));
         }
@@ -127,23 +129,26 @@ public class WaypointActivity extends AppCompatActivity {
         if (wpLocation == null) {
             checkEditNewWaypoint();
         }
+        if(newWaypoint){
+            showWaypointIdRef.setText((Integer.valueOf(databaseWaypoint.getWaypointCount()+1)).toString());
+        }
 
-        btnAcceptWaypointRef.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Waypoint createdWaypoint = addWaypointInfos();
-                if (newWaypoint) databaseWaypoint.addWaypoint(createdWaypoint);
-                else if(checkDublicates(etWaypointNameRef.getText().toString())){
-                    Toast.makeText(getApplicationContext(),"The Waypointname allready exits",Toast.LENGTH_SHORT).show();
+        btnAcceptWaypointRef.setOnClickListener(view -> {
+            Waypoint createdWaypoint = addWaypointInfos();
+            if (newWaypoint){
+                if(checkDublicates(etWaypointNameRef.getText().toString())){
+                    Toast.makeText(getApplicationContext(), "The Waypointname allready exits",
+                            Toast.LENGTH_SHORT).show();
                 }else {
-                    databaseWaypoint.deleteWaypoint(createdWaypoint);
                     databaseWaypoint.addWaypoint(createdWaypoint);
                 }
-                newWaypoint = true;
-                Intent intent = new Intent(view.getContext(), WaypointActivity.class);
-                startActivity(intent);
-                finish();
+            }else {
+                databaseWaypoint.editWaypoint(createdWaypoint);
             }
+            newWaypoint = true;
+            Intent intent = new Intent(view.getContext(), WaypointActivity.class);
+            startActivity(intent);
+            finish();
         });
         //wp needs to be deleted out of the routes that use the wp
         btnDeleteWaypointRef.setOnClickListener(new View.OnClickListener() {
@@ -190,7 +195,7 @@ public class WaypointActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         });
-
+/*---------------------------------------------------------------------------------------------------------
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (nfcAdapter == null) {
             // Stop here, we definitely need NFC
@@ -203,7 +208,7 @@ public class WaypointActivity extends AppCompatActivity {
         IntentFilter tagDetected = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED);
         tagDetected.addCategory(Intent.CATEGORY_DEFAULT);
         writeTagFilters = new IntentFilter[]{tagDetected};
-
+*/
         btnAddLocationRef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -312,7 +317,8 @@ public class WaypointActivity extends AppCompatActivity {
     @Override
     public void onPause() {
         super.onPause();
-        WriteModeOff();
+        //---------------------------------------------------------------------------------------------------------------
+        //WriteModeOff();
     }
 
     /******************************************************************************

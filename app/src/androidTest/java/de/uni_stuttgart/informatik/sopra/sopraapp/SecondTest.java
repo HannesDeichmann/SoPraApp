@@ -96,7 +96,6 @@ public class SecondTest {
         onView(withId(R.id.btnEditWaypoint)).perform(click());
         onData(hasToString(startsWith("4"))).perform(click());
         onView(withId(R.id.etWaypointName)).perform(typeText("Geheimtuer"), closeSoftKeyboard());
-        onView(withId(R.id.showWaypointId)).perform(typeText("500000"), closeSoftKeyboard());
         onView(withId(R.id.etWaypointNote)).perform(typeText("Vorsicht!"), closeSoftKeyboard());
         //onView(withId(R.id.btnAddLocation)).perform(click());
         onView(withId(R.id.btnAcceptWaypoint)).perform(click());
@@ -128,7 +127,7 @@ public class SecondTest {
         onData(hasToString(startsWith("1"))).perform(click());
         onView(withId(R.id.durationInput)).perform(typeText("7"), closeSoftKeyboard());
         onView(withText("CANCEL")).perform(click());
-        onView(withId(R.id.waypointList)).perform(click());
+        onView(withId(R.id.recyclerListWp)).perform(click());
         onView(withId(R.id.durationInput)).perform(typeText("9"), closeSoftKeyboard());
         onView(withText("OK")).perform(click());
         //replace wp

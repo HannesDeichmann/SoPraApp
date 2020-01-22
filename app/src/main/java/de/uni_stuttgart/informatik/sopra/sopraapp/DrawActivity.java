@@ -143,12 +143,16 @@ public class DrawActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (ContextCompat.checkSelfPermission(DrawActivity.this,
                         Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(DrawActivity.this,
-                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, GALLERY_REQUEST_CODE);
+                    String[] permissions = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE};
+                    ActivityCompat.requestPermissions(DrawActivity.this, permissions, GALLERY_REQUEST_CODE);
+                }else {
+                    openGallery();
                 }
-                openGallery();
             }
         });
+
+
+
 
         btnSaveRef.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,15 +178,16 @@ public class DrawActivity extends AppCompatActivity {
         });
     }
 
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
-            case Activity.RESULT_OK:
+            case 1:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    System.out.println("onRequestPermissionsResult: EXTERNAL_STORAGE_READ permission granted");
+                    System.out.println("onRequestPermissionsResult: EXTERNAL_STORAGE_READ permission granted--------------------------------------------------------------------------------------------------");
                     openGallery();
                 } else {
-                    System.out.println("onRequestPermissionsResult: EXTERNAL_STORAGE_READ permission denied");
+                    System.out.println("onRequestPermissionsResult: EXTERNAL_STORAGE_READ permission denied-------------------------------------------------------------------------------------------------------------");
                 }
                 break;
             default:

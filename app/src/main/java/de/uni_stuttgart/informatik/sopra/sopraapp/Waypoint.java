@@ -8,7 +8,6 @@ public class Waypoint implements Serializable {
     private String waypointPosition;
     private String waypointId;
     private String waypointNote;
-    public static final int waypointIdLength = 6;
 
     public Waypoint(String waypointName, String waypointId, String waypointPosition, String waypointNote) {
         this.setWaypointName(waypointName);

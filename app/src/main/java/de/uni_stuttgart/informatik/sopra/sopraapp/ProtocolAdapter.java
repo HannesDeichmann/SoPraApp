@@ -1,5 +1,6 @@
 package de.uni_stuttgart.informatik.sopra.sopraapp;
 
+import android.content.Intent;
 import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class ProtocolAdapter extends RecyclerView.Adapter<ProtocolAdapter.ViewHolder> {
-    ArrayList<String> adapterList;
     static DatabasePatrol databasePatrol;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -34,6 +34,7 @@ public class ProtocolAdapter extends RecyclerView.Adapter<ProtocolAdapter.ViewHo
             });
         }
     }
+
 
     @Override
     public ProtocolAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

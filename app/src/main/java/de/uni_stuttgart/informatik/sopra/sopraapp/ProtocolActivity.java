@@ -47,6 +47,7 @@ public class ProtocolActivity extends AppCompatActivity {
         dataAdapter = new ProtocolAdapter();
         tvProtocol.setAdapter(dataAdapter);
         dataAdapter.notifyDataSetChanged();
+
         btnExport.setOnClickListener(view -> {
             if (ContextCompat.checkSelfPermission(ProtocolActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(ProtocolActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
