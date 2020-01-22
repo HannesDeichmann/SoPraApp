@@ -16,7 +16,9 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedWriter;
@@ -33,6 +35,7 @@ public class ProtocolActivity extends AppCompatActivity {
     DatabasePatrol databasePatrol;
     RecyclerView.Adapter dataAdapter;
     RecyclerView.LayoutManager rvManagerRef;
+    EditText etPathRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,10 @@ public class ProtocolActivity extends AppCompatActivity {
         dataAdapter = new ProtocolAdapter();
         tvProtocol.setAdapter(dataAdapter);
         dataAdapter.notifyDataSetChanged();
+        String path = Environment.getExternalStorageDirectory().getPath() +
+                "/Protocol/Protocol" + System.currentTimeMillis() + ".csv";
+        etPathRef = findViewById(R.id.etPath);
+        etPathRef.setText(path);
 
         btnExport.setOnClickListener(view -> {
             if (ContextCompat.checkSelfPermission(ProtocolActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -75,11 +82,9 @@ public class ProtocolActivity extends AppCompatActivity {
 
     public void writeFile() {
         try {
-            File folder = new File(Environment.getExternalStorageDirectory().getPath() +
-                    "/Protocol/Protocol" + System.currentTimeMillis() + ".csv");
+            File folder = new File(etPathRef.getText().toString());
             Toast.makeText(getApplicationContext(),"Protocol saved as: " +
-                    Environment.getExternalStorageDirectory().getPath() + "/Protocol/Protocol" +
-                    System.currentTimeMillis() + ".csv" , Toast.LENGTH_SHORT).show();
+                    etPathRef.getText().toString(), Toast.LENGTH_SHORT).show();
             if (!folder.exists()) {
                 folder.getParentFile().mkdirs();
                 folder.createNewFile();
@@ -91,6 +96,8 @@ public class ProtocolActivity extends AppCompatActivity {
             out.write(stringBuilder.toString());
             out.close();
         } catch (FileNotFoundException e) {
+            Toast.makeText(getApplicationContext(),"The Path doesnt exist, restart the protocol " +
+                    "activity to generete automated pathfile", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
@@ -106,9 +113,7 @@ public class ProtocolActivity extends AppCompatActivity {
 
     private void addFirstRow(StringBuilder stringBuilder){
         stringBuilder.append("Number; Route; Guard; planned Start; actual Start");
-        for(int i = 1; i <= this.getMaxWaypoints(); i++) {
-            stringBuilder.append(";WP" + i);
-        }
+        stringBuilder.append(";Waypoints: ");
         stringBuilder.append("; End");
         stringBuilder.append("\n");
     }
@@ -130,11 +135,6 @@ public class ProtocolActivity extends AppCompatActivity {
             waypoints.add(s);
         }
         //remove guardname/routename/time...
-        for(int i = 0; i < 5;i++){
-            if(waypoints.size()!= 0){
-                waypoints.remove(0);
-            }
-        }
         //remove the finish time
         waypoints.remove(waypoints.size()-1);
         return waypoints;

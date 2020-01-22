@@ -97,7 +97,6 @@ public class DrawingView extends View {
     }
 
     private void drawRoute(Route route, Canvas canvas){
-
         ArrayList<Waypoint> waypointList = new ArrayList<>();
         if(route.getWaypointStrings()!= null && route.getWaypoints()!=null){
             if(route.getWaypointStrings().size() <= route.getWaypoints().size()){

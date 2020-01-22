@@ -43,6 +43,7 @@ public class WaypointActivity extends AppCompatActivity {
     IntentFilter writeTagFilters[];
     boolean writeMode;
     Tag myTag;
+    String waypointID;
     Context context;
 
     DatabaseWaypoint databaseWaypoint;
@@ -129,7 +130,14 @@ public class WaypointActivity extends AppCompatActivity {
             checkEditNewWaypoint();
         }
         if(newWaypoint){
-            showWaypointIdRef.setText((Integer.valueOf(databaseWaypoint.getWaypointCount()+1)).toString());
+            if(databaseWaypoint.getWaypointCount()!=0) {
+                 waypointID = databaseWaypoint.getWaypoint(databaseWaypoint.getWaypointCount()-1).getWaypointId();
+                 int id = Integer.valueOf(waypointID);
+                 showWaypointIdRef.setText(Integer.valueOf(id+1).toString());
+            } else{
+                waypointID = "1";
+                showWaypointIdRef.setText(waypointID);
+            }
         }
 
         btnAcceptWaypointRef.setOnClickListener(view -> {
@@ -139,6 +147,7 @@ public class WaypointActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "The Waypointname allready exits",
                             Toast.LENGTH_SHORT).show();
                 }else {
+                    createdWaypoint.setWaypointId(waypointID);
                     databaseWaypoint.addWaypoint(createdWaypoint);
                 }
             }else {
