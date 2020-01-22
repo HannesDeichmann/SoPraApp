@@ -14,6 +14,7 @@ import java.util.ArrayList;
  * The Database transforms a patrol in a String.
  *
  * @author Gabriel Bonnet 3410781
+ * @version 22.01.2020
  */
 public class DatabasePatrol extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
@@ -48,6 +49,10 @@ public class DatabasePatrol extends SQLiteOpenHelper {
     }
 
 
+    /**
+     * Updates the actual
+     * @param patrol
+     */
     public void updatePatrolString(String patrol) {
         SQLiteDatabase db = this.getWritableDatabase();
         Integer actuallPosition = Integer.valueOf(this.getPatrolCount()) -1;

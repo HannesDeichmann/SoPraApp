@@ -46,8 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 loggedIn=false;
 
                 //the admin mode is accessable with the username "admin and password "admin"
-                if((guardUsername.equals("admin") && guardPassword.equals("admin")) ||
-                        (guardUsername.equals("") && guardPassword.equals(""))){
+                if((guardUsername.equals("admin") && guardPassword.equals("admin"))){
                     Intent intent = new Intent(view.getContext(), AdminActivity.class);
                     startActivity(intent);
                 }else if(guardUsername.equals("") || guardPassword.equals("")) {

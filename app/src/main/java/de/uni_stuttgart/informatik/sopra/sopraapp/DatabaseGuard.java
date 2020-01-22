@@ -13,6 +13,7 @@ import java.util.ArrayList;
  * The Database transforms a Guard in a String and saves each atribute in his own Column.
  *
  * @author Gabriel Bonnet 3410781
+ * @version 22.01.2020
  */
 public class DatabaseGuard extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
