@@ -79,7 +79,7 @@ public class SecondTest {
             onView(withId(R.id.btnAcceptGuard)).perform(click());
         }
         onView(withId(R.id.btnEditGuard)).perform(click());
-        onData(hasToString(startsWith("")))
+        onData(hasToString(startsWith("1:"))).perform(click());
         onView(withId(R.id.etForname)).perform(clearText(), typeText("Max"), closeSoftKeyboard());
         onView(withId(R.id.etSurname)).perform(clearText(), typeText("Mustermann"), closeSoftKeyboard());
         onView(withId(R.id.pwUserPassword)).perform(clearText(), typeText("sicheresPW123"), closeSoftKeyboard());
