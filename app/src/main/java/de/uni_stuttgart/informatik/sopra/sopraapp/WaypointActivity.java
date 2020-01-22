@@ -59,7 +59,7 @@ public class WaypointActivity extends AppCompatActivity {
             setTextFields(wpLocation);
 
         }
-        WriteModeOn();
+        //WriteModeOn();---------------------------------------------------------------------------
     }
 
     private Waypoint getEditedWaypoint() {
@@ -177,7 +177,7 @@ public class WaypointActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
-
+/*--------------------------------------------------------------------------------------------------------------
         btnAssignWaypointRef.setOnClickListener(view -> {
             try {
                 if (myTag == null) {
@@ -200,7 +200,7 @@ public class WaypointActivity extends AppCompatActivity {
             // Stop here, we definitely need NFC
             Toast.makeText(this, "This device doesn't support NFC.", Toast.LENGTH_LONG).show();
             finish();
-        }
+        }*/
         readFromIntent(getIntent());
 
         pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
@@ -213,6 +213,8 @@ public class WaypointActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), DrawActivity.class);
                 Waypoint waypoint = addWaypointInfos();
+                DrawingView.setWaypoints(databaseWaypoint.getAllWaypoints());
+                DrawingView.setDrawRouteOnMap(false);
                 intent.putExtra("waypoint", waypoint);
                 startActivity(intent);
                 finish();
@@ -312,12 +314,12 @@ public class WaypointActivity extends AppCompatActivity {
             myTag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         }
     }
-
+/*------------------------------------------------------------------------------------------------------------
     @Override
     public void onPause() {
         super.onPause();
         WriteModeOff();
-    }
+    }*/
 
     /******************************************************************************
      **********************************Enable Write********************************

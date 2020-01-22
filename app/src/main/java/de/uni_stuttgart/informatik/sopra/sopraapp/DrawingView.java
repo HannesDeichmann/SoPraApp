@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class DrawingView extends View {
     private static Bitmap bitmap;
-    private ArrayList<Waypoint> waypoints = new ArrayList<>();
+    private static ArrayList<Waypoint> waypoints = new ArrayList<>();
     private static Circle circle;
     public DrawingView(Context context) {
         super(context);
@@ -36,7 +36,7 @@ public class DrawingView extends View {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    public void setDrawRouteOnMap(Boolean boo){
+    public static void setDrawRouteOnMap(Boolean boo){
         drawRouteOnMap = boo;
     }
 
@@ -48,8 +48,8 @@ public class DrawingView extends View {
         this.circle = circle;
     }
 
-    public void setWaypoints(ArrayList<Waypoint> waypointList) {
-        this.waypoints = waypointList;
+    public static void setWaypoints(ArrayList<Waypoint> waypointList) {
+        waypoints = waypointList;
     }
 
     public Circle getLastCircle() {
