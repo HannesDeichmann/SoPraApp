@@ -209,11 +209,7 @@ public class SecondTest {
         onView(withId(R.id.btnExport)).perform(click());
         pressBack();
         pressBack();
-
-
     }
-
-
     private void myText(int id, String text) {
         onView(withId(id)).perform(typeText(text));
     }
