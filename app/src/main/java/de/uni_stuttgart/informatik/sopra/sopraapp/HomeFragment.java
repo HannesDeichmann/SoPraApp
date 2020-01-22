@@ -1,5 +1,6 @@
 package de.uni_stuttgart.informatik.sopra.sopraapp;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
@@ -51,6 +52,13 @@ public class HomeFragment extends Fragment {
         btnCancelActiveRouteRef = view.findViewById(R.id.btnCancelActiveRoute);
         btnFinishRouteRef.setVisibility(View.INVISIBLE);
 
+        if(((PatrolActivity)getActivity()).getTimerRunning()){
+            btnStartCountdownRef.setBackgroundResource(R.drawable.ic_pause_circle_filled_black_24dp);
+            timeRunning = true;
+        }else {
+            btnStartCountdownRef.setBackgroundResource(R.drawable.ic_play_circle_filled_black_24dp);
+            timeRunning = false;
+        }
         ((PatrolActivity)getActivity()).setFragmentRefreshListener(new PatrolActivity.FragmentRefreshListener() {
             @Override
             public void onRefresh(String formattedStartTime) {
