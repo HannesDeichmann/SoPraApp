@@ -223,7 +223,6 @@ public class WaypointActivity extends AppCompatActivity {
         tagDetected.addCategory(Intent.CATEGORY_DEFAULT);
         writeTagFilters = new IntentFilter[] { tagDetected };
 
-
         btnAddLocationRef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
