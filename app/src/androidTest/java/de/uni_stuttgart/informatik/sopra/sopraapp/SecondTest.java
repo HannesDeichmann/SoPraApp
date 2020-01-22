@@ -94,7 +94,7 @@ public class SecondTest {
         }
 
         onView(withId(R.id.btnEditWaypoint)).perform(click());
-        onData(hasToString(startsWith("400000"))).perform(click());
+        onData(hasToString(startsWith("4"))).perform(click());
         onView(withId(R.id.etWaypointName)).perform(typeText("Geheimtuer"), closeSoftKeyboard());
         onView(withId(R.id.showWaypointId)).perform(typeText("500000"), closeSoftKeyboard());
         onView(withId(R.id.etWaypointNote)).perform(typeText("Vorsicht!"), closeSoftKeyboard());
