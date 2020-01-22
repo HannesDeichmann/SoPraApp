@@ -25,19 +25,16 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 public class WaypointActivity extends AppCompatActivity {
-
     Button btnEditWaypointRef;
     Button btnAcceptWaypointRef;
     Button btnDeleteWaypointRef;
-    Button btnAssignWaypointRef;
     Button btnAddLocationRef;
-
+    Button btnAssignWaypointRef;
     EditText etWaypointNameRef;
-    EditText etWaypointIdRef;
+    TextView showWaypointIdRef;
     TextView tvWaypointPositionRef;
     EditText etWaypointNoteRef;
 
-    public static final String ERROR_DETECTED = "No NFC tag detected!";
     public static final String WRITE_SUCCESS = "NFC Tag successfully assigned";
     public static final String WRITE_ERROR = "No NFC Tag discovered. Hold the NFC Tag to the device and wait for the vibration. Then press the 'assign' button";
     NfcAdapter nfcAdapter;
@@ -52,37 +49,28 @@ public class WaypointActivity extends AppCompatActivity {
     public static boolean newWaypoint = true;
     public static String waypointLocation = "";
     private Waypoint editedWaypoint;
-    private Waypoint wpLocation  = null;
+    private Waypoint wpLocation = null;
 
     @Override
     protected void onResume() {
         super.onResume();
-        if(wpLocation!=null){
+        if (wpLocation != null) {
             setTextFields(wpLocation);
 
         }
         WriteModeOn();
     }
 
-    private void clearTextFields() {
-        etWaypointNameRef.setText("");
-        etWaypointIdRef.setText("");
-        tvWaypointPositionRef.setText("");
-        etWaypointNoteRef.setText("");
-    }
-
     private Waypoint getEditedWaypoint() {
         return this.editedWaypoint;
     }
+
     private void setEditedWaypoint(Waypoint waypoint) {
-        this.editedWaypoint=waypoint;
+        this.editedWaypoint = waypoint;
     }
 
-    private void setWpLocation(Waypoint waypoint){
+    private void setWpLocation(Waypoint waypoint) {
         this.wpLocation = waypoint;
-    }
-    private Waypoint getWpLocation(){
-        return this.wpLocation;
     }
 
     private void checkEditNewWaypoint() {
@@ -90,21 +78,21 @@ public class WaypointActivity extends AppCompatActivity {
             btnDeleteWaypointRef.setVisibility(View.INVISIBLE);
         } else {
             btnDeleteWaypointRef.setVisibility(View.VISIBLE);
-            setTextFields(this.getEditedWaypoint());
+            setTextFields(getEditedWaypoint());
         }
     }
 
-    private void setTextFields(Waypoint waypoint){
+    private void setTextFields(Waypoint waypoint) {
         etWaypointNameRef.setText(waypoint.getWaypointName());
-        etWaypointIdRef.setText(waypoint.getWaypointId());
+        showWaypointIdRef.setText(waypoint.getWaypointId());
         tvWaypointPositionRef.setText(waypoint.getWaypointPosition());
         etWaypointNoteRef.setText(waypoint.getWaypointNote());
     }
 
-    private Waypoint addWaypointInfos(){
+    private Waypoint addWaypointInfos() {
         Waypoint createdWaypoint = new Waypoint();
         createdWaypoint.setWaypointName(etWaypointNameRef.getText().toString());
-        createdWaypoint.setWaypointId(etWaypointIdRef.getText().toString());
+        createdWaypoint.setWaypointId(showWaypointIdRef.getText().toString());
         createdWaypoint.setWaypointPosition(tvWaypointPositionRef.getText().toString());
         createdWaypoint.setWaypointNote(etWaypointNoteRef.getText().toString());
         return createdWaypoint;
@@ -116,7 +104,6 @@ public class WaypointActivity extends AppCompatActivity {
         setContentView(R.layout.activity_waypoint);
         context = this;
 
-
         btnEditWaypointRef = findViewById(R.id.btnEditWaypoint);
         btnAcceptWaypointRef = findViewById(R.id.btnAcceptWaypoint);
         btnDeleteWaypointRef = findViewById(R.id.btnDeleteWaypoint);
@@ -124,45 +111,43 @@ public class WaypointActivity extends AppCompatActivity {
         btnAddLocationRef = findViewById(R.id.btnAddLocation);
 
         etWaypointNameRef = findViewById(R.id.etWaypointName);
-        etWaypointIdRef = findViewById(R.id.etWaypointId);
+        showWaypointIdRef = findViewById(R.id.showWaypointId);
         tvWaypointPositionRef = findViewById(R.id.tvLocationDisplay);
         etWaypointNoteRef = findViewById(R.id.etWaypointNote);
 
         databaseWaypoint = new DatabaseWaypoint(this);
         databaseRoute = new DatabaseRoute(this);
 
-        if(getIntent().hasExtra("editedWaypointId")) {
-            this.setEditedWaypoint(databaseWaypoint.getWaypointById(getIntent().getIntExtra("editedWaypointId", 0)));
+
+        if (getIntent().hasExtra("editedWaypointId")) {
+            this.setEditedWaypoint(databaseWaypoint.getWaypointById(getIntent().getStringExtra("editedWaypointId")));
         }
-        if(getIntent().hasExtra("wpLocation")) {
+        if (getIntent().hasExtra("wpLocation")) {
             this.setWpLocation(((Waypoint) getIntent().getExtras().get("wpLocation")));
         }
-        if(wpLocation == null){
+        if (wpLocation == null) {
             checkEditNewWaypoint();
         }
+        if(newWaypoint){
+            showWaypointIdRef.setText((Integer.valueOf(databaseWaypoint.getWaypointCount()+1)).toString());
+        }
 
-        btnAcceptWaypointRef.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (etWaypointIdRef.getText().length() == Waypoint.waypointIdLength) {
-                    Waypoint createdWaypoint = addWaypointInfos();
-                    if(newWaypoint)databaseWaypoint.addWaypoint(createdWaypoint);
-                    else{
-                        databaseWaypoint.deleteWaypoint(createdWaypoint);
-                        databaseWaypoint.addWaypoint(createdWaypoint);
-                    }
-                    newWaypoint = true;
-                    Intent intent = new Intent(view.getContext(), WaypointActivity.class);
-                    startActivity(intent);
-                    finish();
-                    // clearTextFields();
-                } else {
-                    //TODO Alertfenster
-                    //etWaypointIdRef.setText("WaypointId needs " + Waypoint.waypointIdLength +" chars");
-                    Toast toast = Toast.makeText(getApplicationContext(), "ID needs 6 chars", Toast.LENGTH_SHORT);
-                    toast.show();
+        btnAcceptWaypointRef.setOnClickListener(view -> {
+            Waypoint createdWaypoint = addWaypointInfos();
+            if (newWaypoint){
+                if(checkDublicates(etWaypointNameRef.getText().toString())){
+                    Toast.makeText(getApplicationContext(), "The Waypointname allready exits",
+                            Toast.LENGTH_SHORT).show();
+                }else {
+                    databaseWaypoint.addWaypoint(createdWaypoint);
                 }
+            }else {
+                databaseWaypoint.editWaypoint(createdWaypoint);
             }
+            newWaypoint = true;
+            Intent intent = new Intent(view.getContext(), WaypointActivity.class);
+            startActivity(intent);
+            finish();
         });
         //wp needs to be deleted out of the routes that use the wp
         btnDeleteWaypointRef.setOnClickListener(new View.OnClickListener() {
@@ -173,7 +158,6 @@ public class WaypointActivity extends AppCompatActivity {
                         int wpId = Integer.parseInt(route.getWaypointStrings().get(i).getUserId());
                         if (Integer.parseInt(getEditedWaypoint().getWaypointId()) == wpId) {
                             route.getWaypointStrings().remove(i);
-
                             databaseRoute.deleteRoute(route);
                             databaseRoute.addRoute(route);
                         }
@@ -187,38 +171,27 @@ public class WaypointActivity extends AppCompatActivity {
             }
         });
 
-        btnEditWaypointRef.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), WaypointListActivity.class);
-                intent.putExtra("root", "WaypointActivity");
-                startActivity(intent);
-                finish();
-            }
+        btnEditWaypointRef.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(), WaypointListActivity.class);
+            intent.putExtra("root", "WaypointActivity");
+            startActivity(intent);
+            finish();
         });
 
-        btnAssignWaypointRef.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(etWaypointIdRef.getText().length() == Waypoint.waypointIdLength) {
-                    try {
-                        if(myTag ==null) {
-                            Toast.makeText(context, WRITE_ERROR, Toast.LENGTH_SHORT).show();
-                        } else {
-                            write(etWaypointIdRef.getText().toString(), myTag);
-                            Toast.makeText(context, WRITE_SUCCESS, Toast.LENGTH_LONG ).show();
-                        }
-                    } catch (IOException e) {
-                        Toast.makeText(context, WRITE_ERROR, Toast.LENGTH_LONG ).show();
-                        e.printStackTrace();
-                    } catch (FormatException e) {
-                        Toast.makeText(context, WRITE_ERROR, Toast.LENGTH_LONG ).show();
-                        e.printStackTrace();
-                    }
-                }else{
-                    Toast toast = Toast.makeText(getApplicationContext(), "ID needs 6 chars", Toast.LENGTH_SHORT);
-                    toast.show();
+        btnAssignWaypointRef.setOnClickListener(view -> {
+            try {
+                if (myTag == null) {
+                    Toast.makeText(context, WRITE_ERROR, Toast.LENGTH_SHORT).show();
+                } else {
+                    write(showWaypointIdRef.getText().toString(), myTag);
+                    Toast.makeText(context, WRITE_SUCCESS, Toast.LENGTH_LONG).show();
                 }
+            } catch (IOException e) {
+                Toast.makeText(context, WRITE_ERROR, Toast.LENGTH_LONG).show();
+                e.printStackTrace();
+            } catch (FormatException e) {
+                Toast.makeText(context, WRITE_ERROR, Toast.LENGTH_LONG).show();
+                e.printStackTrace();
             }
         });
 
@@ -233,25 +206,27 @@ public class WaypointActivity extends AppCompatActivity {
         pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
         IntentFilter tagDetected = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED);
         tagDetected.addCategory(Intent.CATEGORY_DEFAULT);
-        writeTagFilters = new IntentFilter[] { tagDetected };
-
+        writeTagFilters = new IntentFilter[]{tagDetected};
 
         btnAddLocationRef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if ((etWaypointIdRef.getText().length() == Waypoint.waypointIdLength )/*&&
-                        (DrawingView.getBitmap() != null)*/){
-                    Intent intent = new Intent(v.getContext(), DrawActivity.class);
-                    Waypoint waypoint = addWaypointInfos();
-                    intent.putExtra("waypoint",waypoint);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Toast toast = Toast.makeText(getApplicationContext(),"Id must have 6 chars", Toast.LENGTH_SHORT);
-                    toast.show();
-                }
+                Intent intent = new Intent(v.getContext(), DrawActivity.class);
+                Waypoint waypoint = addWaypointInfos();
+                intent.putExtra("waypoint", waypoint);
+                startActivity(intent);
+                finish();
             }
         });
+    }
+
+    private boolean checkDublicates(String wpName) {
+        for (Waypoint wp : databaseWaypoint.getAllWaypoints()) {
+            if (wp.getWaypointName().equals(wpName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
@@ -274,11 +249,12 @@ public class WaypointActivity extends AppCompatActivity {
             buildTagViews(msgs);
         }
     }
+
     private void buildTagViews(NdefMessage[] msgs) {
         if (msgs == null || msgs.length == 0) return;
 
         String text = "";
-//        String tagId = new String(msgs[0].getRecords()[0].getType());
+//      String tagId = new String(msgs[0].getRecords()[0].getType());
         byte[] payload = msgs[0].getRecords()[0].getPayload();
         String textEncoding = ((payload[0] & 128) == 0) ? "UTF-8" : "UTF-16"; // Get the Text Encoding
         int languageCodeLength = payload[0] & 0063; // Get the Language Code, e.g. "en"
@@ -296,7 +272,7 @@ public class WaypointActivity extends AppCompatActivity {
      **********************************Write to NFC Tag****************************
      ******************************************************************************/
     private void write(String text, Tag tag) throws IOException, FormatException {
-        NdefRecord[] records = { createRecord(text) };
+        NdefRecord[] records = {createRecord(text)};
         NdefMessage message = new NdefMessage(records);
         // Get an instance of Ndef for the tag.
         Ndef ndef = Ndef.get(tag);
@@ -307,39 +283,38 @@ public class WaypointActivity extends AppCompatActivity {
         // Close the connection
         ndef.close();
     }
+
     private NdefRecord createRecord(String text) throws UnsupportedEncodingException {
-        String lang       = "en";
-        byte[] textBytes  = text.getBytes();
-        byte[] langBytes  = lang.getBytes("US-ASCII");
-        int    langLength = langBytes.length;
-        int    textLength = textBytes.length;
-        byte[] payload    = new byte[1 + langLength + textLength];
+        String lang = "en";
+        byte[] textBytes = text.getBytes();
+        byte[] langBytes = lang.getBytes("US-ASCII");
+        int langLength = langBytes.length;
+        int textLength = textBytes.length;
+        byte[] payload = new byte[1 + langLength + textLength];
 
         // set status byte (see NDEF spec for actual bits)
         payload[0] = (byte) langLength;
 
         // copy langbytes and textbytes into payload
-        System.arraycopy(langBytes, 0, payload, 1,              langLength);
+        System.arraycopy(langBytes, 0, payload, 1, langLength);
         System.arraycopy(textBytes, 0, payload, 1 + langLength, textLength);
 
-        NdefRecord recordNFC = new NdefRecord(NdefRecord.TNF_WELL_KNOWN,  NdefRecord.RTD_TEXT,  new byte[0], payload);
+        NdefRecord recordNFC = new NdefRecord(NdefRecord.TNF_WELL_KNOWN, NdefRecord.RTD_TEXT, new byte[0], payload);
 
         return recordNFC;
     }
-
-
 
     @Override
     protected void onNewIntent(Intent intent) {
         setIntent(intent);
         readFromIntent(intent);
-        if(NfcAdapter.ACTION_TAG_DISCOVERED.equals(intent.getAction())){
+        if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(intent.getAction())) {
             myTag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         }
     }
 
     @Override
-    public void onPause(){
+    public void onPause() {
         super.onPause();
         WriteModeOff();
     }
@@ -347,14 +322,15 @@ public class WaypointActivity extends AppCompatActivity {
     /******************************************************************************
      **********************************Enable Write********************************
      ******************************************************************************/
-    private void WriteModeOn(){
+    private void WriteModeOn() {
         writeMode = true;
         nfcAdapter.enableForegroundDispatch(this, pendingIntent, writeTagFilters, null);
     }
+
     /******************************************************************************
      **********************************Disable Write*******************************
      ******************************************************************************/
-    private void WriteModeOff(){
+    private void WriteModeOff() {
         writeMode = false;
         nfcAdapter.disableForegroundDispatch(this);
     }

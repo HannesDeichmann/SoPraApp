@@ -14,12 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import static de.uni_stuttgart.informatik.sopra.sopraapp.ProtocolActivity.list;
-
-
 public class HomeFragment extends Fragment {
     private TextView tvCountdownRef;
     private TextView tvNextWaypointNameRef;

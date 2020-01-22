@@ -47,7 +47,7 @@ public class Guard implements Serializable {
         guardString +=  this.userId + ": ";
         guardString += this.forename + " ";
         guardString += this.surname + ",   ";
-        guardString += "Password: " + this.userPassword;
+        guardString += "Password: " + AesCrypto.decrypt(this.userPassword, GuardActivity.secretKey);
         return guardString;
     }
 

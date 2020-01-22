@@ -55,7 +55,9 @@ public class Route implements Serializable {
         this.waypoints.remove(position);
         this.waypoints.add(position, waypoint);}
 
-    public void deleteWaypoint(RouteWaypoint waypoint){ this.waypoints.remove(waypoint); }
+    public void deleteWaypoint(RouteWaypoint waypoint){
+        this.waypoints.remove(waypoint);
+    }
 
 
     public ArrayList<RouteWaypointStrings> getWaypointStrings() {

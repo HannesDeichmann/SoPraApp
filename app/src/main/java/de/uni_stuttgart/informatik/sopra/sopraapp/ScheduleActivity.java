@@ -4,22 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
-import java.lang.reflect.Array;
-import java.lang.reflect.GenericArrayType;
 import java.util.ArrayList;
-
 import static de.uni_stuttgart.informatik.sopra.sopraapp.DbContract.DIVIDESTRING;
 
 public class ScheduleActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
@@ -30,26 +22,15 @@ public class ScheduleActivity extends AppCompatActivity implements TimePickerDia
     Button btnSave;
     static Guard selectedGuard;
     static Route selectedRoute;
-    //ListView listView;
     static TextView tvSelectedGuard;
     static TextView tvSelectedRoute;
     static ArrayList<String> routeStringList;
     static DatabaseGuard databaseGuard;
     static DatabaseRoute databaseRoute;
-    //ArrayAdapter<String> dataAdapter;
     RecyclerView listView;
     RecyclerView.Adapter dataAdapter;
     RecyclerView.LayoutManager rvManagerRef;
-    /*
-    <ListView
-        android:id="@+id/routeList"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvSelectedGuard" />
-     */
+
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         String hourString = hourOfDay + "";
@@ -84,7 +65,6 @@ public class ScheduleActivity extends AppCompatActivity implements TimePickerDia
         tvSetTime = findViewById(R.id.tvStartTime);
         btnSave = findViewById(R.id.saveScheduleItem);
         tvSelectedGuard = findViewById(R.id.tvSelectedGuard);
-        //listView = findViewById(R.id.routeList);
         tvSelectedRoute = findViewById(R.id.tvSelectedRoute);
         btnSelectStartTime = findViewById(R.id.btnSelectStartTime);
         databaseGuard = new DatabaseGuard(this);
@@ -92,10 +72,6 @@ public class ScheduleActivity extends AppCompatActivity implements TimePickerDia
         ScheduleAdapter.databaseGuard = databaseGuard;
         ScheduleAdapter.databaseRoute = databaseRoute;
         routeStringList=new ArrayList<>();
-        //dataAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,routeStringList);
-        //listView.setAdapter(dataAdapter);
-        // dataAdapter.notifyDataSetChanged();
-
         listView = findViewById(R.id.routeList);
         rvManagerRef = new LinearLayoutManager(this);
         listView.setLayoutManager(rvManagerRef);
@@ -113,7 +89,6 @@ public class ScheduleActivity extends AppCompatActivity implements TimePickerDia
             startActivity(intent);
             finish();
         });
-
         btnSelectRoute.setOnClickListener(view -> {
             if (selectedGuard != null && !tvSelectedGuard.getText().equals("")) {
                 Intent intent = new Intent(view.getContext(), RouteActivity.class);
@@ -125,20 +100,19 @@ public class ScheduleActivity extends AppCompatActivity implements TimePickerDia
                 Toast.makeText(getApplicationContext(),"First select a guard",Toast.LENGTH_SHORT).show();
             }
         });
-
         btnSave.setOnClickListener(v -> {
             if (selectedGuard != null && selectedRoute != null) {
-                //System.out.println(selectedGuard.getGuardRouteList().size());
                 if(checkForDublicate()){
                     Toast.makeText(getApplicationContext(),"It exists allready",Toast.LENGTH_SHORT).show();
                 }else {
                     selectedGuard.setGuardRouteList(new ArrayList<GuardRoute>());
                     addRoutesFromDbToEmptyGuard(selectedGuard);
                     selectedGuard.addRoute(new GuardRoute(selectedRoute, tvSetTime.getText().toString()));
-
+                    databaseGuard.addGuardRoute(selectedGuard);
+                    addAllGuardRoutesToList();
+                    dataAdapter.notifyDataSetChanged();
                     tvSetTime.setText("00:00");
                     routeStringList = new ArrayList<>();
-                    databaseGuard.addGuardRoute(selectedGuard);
                     onResume();
 
                 }

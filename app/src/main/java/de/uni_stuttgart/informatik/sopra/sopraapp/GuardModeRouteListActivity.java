@@ -9,8 +9,10 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class GuardModeRouteListActivity extends AppCompatActivity {
 
@@ -18,6 +20,7 @@ public class GuardModeRouteListActivity extends AppCompatActivity {
     private Duration duration1;
     private Duration duration2;
     private Duration duration3;
+    DatabasePatrol databasePatrol;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +62,7 @@ public class GuardModeRouteListActivity extends AppCompatActivity {
         loggedInGuard.addRoute(guardRoute2);
         loggedInGuard.addRoute(guardRoute3);
         ArrayList<GuardRoute> guardRouteList = loggedInGuard.getGuardRouteList();
-
+        databasePatrol = new DatabasePatrol(this);
         ArrayList<String> routeStringList = new ArrayList<>();
 
 
@@ -81,7 +84,11 @@ public class GuardModeRouteListActivity extends AppCompatActivity {
                 GuardRoute selectedRoute= guardRouteList.get(position);
                 intent.putExtra("selectedRoute", selectedRoute);
                 intent.putExtra("loggedInGuard", loggedInGuard);
+                Date date = new Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
                 DrawingView.setDoneWaypoints(new ArrayList<Waypoint>());
+                databasePatrol.addNewPatrol(";" + selectedRoute.getRoute().getRouteName()+ ";" +
+                        loggedInGuard.getForename() + ";" + selectedRoute.getTime() +";" + sdf.format(date) + ";" );
                 startActivity(intent);
                 finish();
             }

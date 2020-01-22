@@ -10,6 +10,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.Key;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.Base64;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.SecretKeySpec;
 
 import static java.lang.Integer.parseInt;
 import static java.lang.String.valueOf;
@@ -25,6 +40,9 @@ public class GuardActivity extends AppCompatActivity {
     TextView tvAkivity;
     EditText etPasswordRef;
     DatabaseGuard guardDatabase;
+    final static String secretKey = "dasistdiesichereverschluesselung";
+    boolean edit;
+
     public static boolean newGuard = true;
 
     private void clearTextFields() {
@@ -41,7 +59,6 @@ public class GuardActivity extends AppCompatActivity {
         if (guardDatabase.getGuardCount() == 0) {
             tvGuardIdRef.setText("1");
         } else {
-            //TODO Bugfix, lösche Guard mit höchster nummer -> autoincrement geht bei dieser Nummer weiter, angezeigt wird allerdings die kleinere
             tvGuardIdRef.setText(String.valueOf(Integer.valueOf(Integer.valueOf(guardDatabase.getGuard(guardDatabase.getGuardCount() - 1).getUserId()) + 1)));
         }
     }
@@ -49,6 +66,9 @@ public class GuardActivity extends AppCompatActivity {
     private void checkEditNewGuard() {
         if (newGuard == true) {
             tvAkivity.setText("Create a new guard:");
+
+            edit = false;
+
             btnDeleteGuardRef.setVisibility(View.INVISIBLE);
             btnNewId.setVisibility(View.INVISIBLE);
             setNewUserId();
@@ -56,13 +76,26 @@ public class GuardActivity extends AppCompatActivity {
             tvAkivity.setText("Edit your guard:");
             tvGuardIdRef.setText(getEditedGuard().getUserId());
 
+            edit = true;
+
             btnDeleteGuardRef.setVisibility(View.VISIBLE);
             btnNewId.setVisibility(View.VISIBLE);
 
             etSurnameRef.setText(getEditedGuard().getSurname());
             etForenameRef.setText(getEditedGuard().getForename());
-            etPasswordRef.setText(getEditedGuard().getUserPassword());
+            etPasswordRef.setText(AesCrypto.decrypt(getEditedGuard().getUserPassword(), secretKey));
         }
+    }
+
+    private boolean checkDublicates(Guard guard){
+         for(Guard g: guardDatabase.getAllGuards()){
+             if((g.getUserId().equals(guard.getUserId())) ||
+                     (g.getForename().equals(guard.getForename()) &&
+                             g.getSurname().equals(guard.getSurname()))){
+                 return true;
+             }
+         }
+        return false;
     }
 
     @Override
@@ -83,14 +116,15 @@ public class GuardActivity extends AppCompatActivity {
 
         checkEditNewGuard();
 
-        btnAcceptGuardRef.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Guard createdGuard = new Guard();
-                createdGuard.setForename(etForenameRef.getText().toString());
-                createdGuard.setSurname(etSurnameRef.getText().toString());
-                createdGuard.setUserPassword(etPasswordRef.getText().toString());
-                createdGuard.setUserId(tvGuardIdRef.getText().toString());
+        btnAcceptGuardRef.setOnClickListener(view -> {
+            Guard createdGuard = new Guard();
+            createdGuard.setForename(etForenameRef.getText().toString());
+            createdGuard.setSurname(etSurnameRef.getText().toString());
+            createdGuard.setUserPassword(AesCrypto.encrypt(etPasswordRef.getText().toString(),secretKey));
+            createdGuard.setUserId(tvGuardIdRef.getText().toString());
+            if (checkDublicates(createdGuard)&&!edit) {
+                Toast.makeText(getApplicationContext(),"The guard allready exists, select the Guard to edit him.",Toast.LENGTH_SHORT).show();
+            }else{
                 if (newGuard) guardDatabase.addGuard(createdGuard);
                 else guardDatabase.editGuard(createdGuard);
                 newGuard = true;
@@ -100,33 +134,24 @@ public class GuardActivity extends AppCompatActivity {
                 finish();
             }
         });
-        btnDeleteGuardRef.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                guardDatabase.deleteGuard(getEditedGuard());
-                newGuard = true;
-                Intent intent = new Intent(view.getContext(), GuardActivity.class);
-                startActivity(intent);
-                clearTextFields();
-                finish();
-            }
+        btnDeleteGuardRef.setOnClickListener(view -> {
+            guardDatabase.deleteGuard(getEditedGuard());
+            newGuard = true;
+            Intent intent = new Intent(view.getContext(), GuardActivity.class);
+            startActivity(intent);
+            clearTextFields();
+            finish();
         });
-        btnNewId.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                newGuard = true;
-                Intent intent = new Intent(view.getContext(), GuardActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        btnNewId.setOnClickListener(view -> {
+            newGuard = true;
+            Intent intent = new Intent(view.getContext(), GuardActivity.class);
+            startActivity(intent);
+            finish();
         });
-        btnEditGuardRef.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), GuardListActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        btnEditGuardRef.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(), GuardListActivity.class);
+            startActivity(intent);
+            finish();
         });
     }
 }

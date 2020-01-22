@@ -32,8 +32,8 @@ public class RouteCreationActivity extends AppCompatActivity {
     private RouteWaypoint createRouteWaypointByPos(int pos){
         RouteWaypoint routeWaypoint = new RouteWaypoint();
 
-        routeWaypoint.setWaypoint(databaseWaypoint.getWaypointById(Integer.parseInt
-                (route.getWaypointStrings().get(pos).getUserId())));
+        routeWaypoint.setWaypoint(databaseWaypoint.getWaypointById(
+                route.getWaypointStrings().get(pos).getUserId()));
 
         routeWaypoint.setDuration(Duration.ofMinutes(Integer.parseInt
                 (route.getWaypointStrings().get(pos).getTime())));
@@ -147,11 +147,6 @@ public class RouteCreationActivity extends AppCompatActivity {
             }
             myArrayAdapter.notifyDataSetChanged();
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
     }
 
     public void updateLists(RouteWaypoint waypoint) {
