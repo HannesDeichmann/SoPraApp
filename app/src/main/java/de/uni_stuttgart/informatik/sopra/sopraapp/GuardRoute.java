@@ -6,6 +6,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.stream.Stream;
 
+import static de.uni_stuttgart.informatik.sopra.sopraapp.DbContract.DIVIDESTRING;
+
 public class GuardRoute implements Serializable {
     private Route route;
     private String time;
@@ -23,7 +25,7 @@ public class GuardRoute implements Serializable {
     public String toString(){
         String string = "";
         string += this.route.toString();
-        string += " | " + this.time;
+        string += DIVIDESTRING + this.time;
         return string;
     }
 

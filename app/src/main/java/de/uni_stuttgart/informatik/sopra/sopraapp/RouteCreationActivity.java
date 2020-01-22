@@ -7,10 +7,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.lang.reflect.Array;
 import java.time.Duration;
 import java.util.ArrayList;
 
@@ -22,11 +22,12 @@ public class RouteCreationActivity extends AppCompatActivity {
     private Button btnSaveRoute;
     private Button btnAddOldWaypoints;
     private Button btnDeleteRoute;
+    private Button btnShowMapRef;
     private EditText etRouteName;
     private Route route;
+    private boolean oldWPcklick;
     DatabaseRoute databaseRoute;
     DatabaseWaypoint databaseWaypoint;
-    Route editRoute;
 
     private RouteWaypoint createRouteWaypointByPos(int pos){
         RouteWaypoint routeWaypoint = new RouteWaypoint();
@@ -54,8 +55,9 @@ public class RouteCreationActivity extends AppCompatActivity {
         databaseWaypoint = new DatabaseWaypoint(this);
 
         selectedWaypointList = findViewById(R.id.selectedWaypointList);
-        btnAddWaypointRef = findViewById(R.id.addWaypoint);
+        btnAddWaypointRef = findViewById(R.id.btnAddWaypoint);
         btnSaveRoute = findViewById(R.id.saveRoute);
+        btnShowMapRef = findViewById(R.id.btnShowMapInRouteActivity);
         btnDeleteRoute = findViewById(R.id.deleteRoute);
         etRouteName = findViewById(R.id.etRouteName);
         selectedWaypointList.setAdapter(myArrayAdapter);
@@ -77,8 +79,10 @@ public class RouteCreationActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+
         btnAddOldWaypoints.setOnClickListener(v -> {
-            route = ((Route) getIntent().getExtras().get("editRoute"));
+            oldWPcklick = true;
+            route = (Route) getIntent().getExtras().get("editRoute");
             for (int i = 0; i < route.getWaypointStrings().size(); i++) {
                 route.addWaypoint(createRouteWaypointByPos(i));
             }
@@ -115,6 +119,19 @@ public class RouteCreationActivity extends AppCompatActivity {
             intent.putExtra("route", route);
             startActivity(intent);
             finish();
+        });
+
+        btnShowMapRef.setOnClickListener(view -> {
+            if(list.size()>0 ){
+                Intent intent = new Intent(view.getContext(), MapActivity.class);
+                intent.putExtra("route", route);
+                startActivity(intent);
+                if(getIntent().hasExtra("route")){
+                    myArrayAdapter.clear();
+                }
+            }else {
+                Toast.makeText(getApplicationContext(),"There are 0 Waypoints in the List",Toast.LENGTH_SHORT).show();
+            }
         });
     }
 

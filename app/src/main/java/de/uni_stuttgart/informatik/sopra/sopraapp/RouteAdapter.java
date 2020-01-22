@@ -18,8 +18,8 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.ViewHolder> 
 
         public ViewHolder(View itemView) {
             super(itemView);
-            tvNoteTextRef = itemView.findViewById(R.id.routeItem);
-            btDelete = itemView.findViewById(R.id.delete_button);
+            tvNoteTextRef = itemView.findViewById(R.id.tvRecyclerView);
+            btDelete = itemView.findViewById(R.id.btnDeleteRecyclerView);
 
             btDelete.setOnClickListener(v -> {
                 databaseRoute.deleteRoute(databaseRoute.getRouteById(getAdapterPosition()));

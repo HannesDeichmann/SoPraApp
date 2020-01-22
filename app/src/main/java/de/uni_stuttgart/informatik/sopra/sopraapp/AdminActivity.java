@@ -29,6 +29,7 @@ public class AdminActivity extends AppCompatActivity {
         btnProtocol = findViewById(R.id.btnProtocol);
 
         btnWaypointsRef.setOnClickListener(view -> {
+            WaypointActivity.newWaypoint = true;
             Intent intent = new Intent(view.getContext(), WaypointActivity.class);
             startActivity(intent);
         });

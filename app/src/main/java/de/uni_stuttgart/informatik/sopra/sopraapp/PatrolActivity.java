@@ -17,6 +17,7 @@ import android.os.CountDownTimer;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -45,6 +46,7 @@ public class PatrolActivity extends AppCompatActivity {
     private Button btnStartCountdownRef;
     private Button btnFinishRouteRef;
     private Button btnCancelActiveRouteRef;
+    private Button btnShowMapRef;
     public int nextWaypointCounter;
     private CountDownTimer countDownTimer;
     private long timeLeftInMilliseconds = 0;
@@ -102,6 +104,7 @@ public class PatrolActivity extends AppCompatActivity {
         btnStartCountdownRef = findViewById(R.id.btnStartCountdown);
         btnFinishRouteRef = findViewById(R.id.btnFinishRoute);
         btnCancelActiveRouteRef = findViewById(R.id.btnCancelActiveRoute);
+        btnShowMapRef = findViewById(R.id.btnShowMap);
         lvCompleteRouteRef = findViewById(R.id.lvCompleteRoute);
 
         btnFinishRouteRef.setVisibility(View.INVISIBLE);
@@ -130,6 +133,15 @@ public class PatrolActivity extends AppCompatActivity {
 
         lvCompleteRouteRef.setAdapter(dataAdapter);
         lvCompleteRouteRef.setDividerHeight(5);
+
+        btnShowMapRef.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), MapActivity.class);
+                intent.putExtra("route", route);
+                startActivity(intent);
+            }
+        });
 
         btnStartCountdownRef.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -266,6 +278,7 @@ public class PatrolActivity extends AppCompatActivity {
         GuardRoute selectedRoute = this.getSelectedRoute();
         Route route = this.getRoute();
         Guard guard = this.getLoggedInGuard();
+
 
         if (nextWaypointCounter == route.getWaypoints().size()) {
             btnFinishRouteRef.setVisibility(View.VISIBLE);

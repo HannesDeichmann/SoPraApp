@@ -1,17 +1,14 @@
 package de.uni_stuttgart.informatik.sopra.sopraapp;
 
-import android.content.ContentValues;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.time.Duration;
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -59,12 +56,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         //btnAdminLoginRef ist only there for development so while testing you dont need to log in every time
-        btnAdminLoginRef.setVisibility(View.GONE);
+        btnAdminLoginRef.setVisibility(View.INVISIBLE);
+        btnAdminLoginRef.setText("ImageTest");
         btnAdminLoginRef.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), AdminActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(view.getContext(), DrawActivity.class);
+                //startActivity(intent);
+                finish();
             }
         });
 
