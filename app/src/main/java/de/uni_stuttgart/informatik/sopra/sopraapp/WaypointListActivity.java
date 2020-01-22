@@ -1,9 +1,6 @@
 package de.uni_stuttgart.informatik.sopra.sopraapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -13,11 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-
-import java.lang.reflect.Array;
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class WaypointListActivity extends AppCompatActivity implements DurationDialog.DurationDialogListener {
     private Intent intent;
