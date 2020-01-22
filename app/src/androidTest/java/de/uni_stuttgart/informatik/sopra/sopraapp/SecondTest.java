@@ -94,9 +94,8 @@ public class SecondTest {
         }
 
         onView(withId(R.id.btnEditWaypoint)).perform(click());
-        onData(hasToString(startsWith("40000"))).perform(click());
+        onData(hasToString(startsWith("3"))).perform(click());
         onView(withId(R.id.etWaypointName)).perform(typeText("Geheimtuer"), closeSoftKeyboard());
-        onView(withId(R.id.showWaypointId)).perform(typeText("500000"), closeSoftKeyboard());
         onView(withId(R.id.etWaypointNote)).perform(typeText("Vorsicht!"), closeSoftKeyboard());
         //onView(withId(R.id.btnAddLocation)).perform(click());
         onView(withId(R.id.btnAcceptWaypoint)).perform(click());
@@ -198,8 +197,8 @@ public class SecondTest {
         onView(withId(R.id.btnLogin)).perform(click());
         onView(withId(R.id.btnSelectARouteToStart)).perform(click());
         onData(hasToString(startsWith("Marathon"))).perform(click());
-        onView(withId(R.id.btnShowMap)).perform(click());
-        onView(withId(R.id.btnBackToPatrol)).perform(click());
+        //onView(withId(R.id.btnShowMap)).perform(click());
+        /*onView(withId(R.id.btnBackToPatrol)).perform(click());
         onView(withId(R.id.btnFinishRoute)).perform(click());
         onView(withId(R.id.btnLogOut)).perform(click());
         onView(withId(R.id.etUsername)).perform(typeText("admin"),closeSoftKeyboard());
@@ -208,7 +207,7 @@ public class SecondTest {
         onView(withId(R.id.btnProtocol)).perform(click());
         onView(withId(R.id.btnExport)).perform(click());
         pressBack();
-        pressBack();
+        pressBack();*/
     }
     private void myText(int id, String text) {
         onView(withId(id)).perform(typeText(text));
