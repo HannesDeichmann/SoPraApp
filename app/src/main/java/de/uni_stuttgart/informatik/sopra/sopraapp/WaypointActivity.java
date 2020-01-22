@@ -1,7 +1,6 @@
 package de.uni_stuttgart.informatik.sopra.sopraapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -20,12 +19,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 public class WaypointActivity extends AppCompatActivity {
-
     Button btnEditWaypointRef;
     Button btnAcceptWaypointRef;
     Button btnDeleteWaypointRef;
@@ -68,7 +65,6 @@ public class WaypointActivity extends AppCompatActivity {
     private void setEditedWaypoint(Waypoint waypoint) {
         this.editedWaypoint=waypoint;
     }
-
     private void setWpLocation(Waypoint waypoint){
         this.wpLocation = waypoint;
     }
@@ -123,7 +119,7 @@ public class WaypointActivity extends AppCompatActivity {
         databaseRoute = new DatabaseRoute(this);
 
         if(getIntent().hasExtra("editedWaypointId")) {
-            this.setEditedWaypoint(databaseWaypoint.getWaypointById(getIntent().getIntExtra("editedWaypointId", 0)));
+            this.setEditedWaypoint(databaseWaypoint.getWaypointById(getIntent().getStringExtra("editedWaypointId")));
         }
         if(getIntent().hasExtra("wpLocation")) {
             this.setWpLocation(((Waypoint) getIntent().getExtras().get("wpLocation")));
@@ -175,38 +171,32 @@ public class WaypointActivity extends AppCompatActivity {
             }
         });
 
-        btnEditWaypointRef.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), WaypointListActivity.class);
-                intent.putExtra("root", "WaypointActivity");
-                startActivity(intent);
-                finish();
-            }
+        btnEditWaypointRef.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(), WaypointListActivity.class);
+            intent.putExtra("root", "WaypointActivity");
+            startActivity(intent);
+            finish();
         });
 
-        btnAssignWaypointRef.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(etWaypointIdRef.getText().length() == Waypoint.waypointIdLength) {
-                    try {
-                        if(myTag ==null) {
-                            Toast.makeText(context, WRITE_ERROR, Toast.LENGTH_SHORT).show();
-                        } else {
-                            write(etWaypointIdRef.getText().toString(), myTag);
-                            Toast.makeText(context, WRITE_SUCCESS, Toast.LENGTH_LONG ).show();
-                        }
-                    } catch (IOException e) {
-                        Toast.makeText(context, WRITE_ERROR, Toast.LENGTH_LONG ).show();
-                        e.printStackTrace();
-                    } catch (FormatException e) {
-                        Toast.makeText(context, WRITE_ERROR, Toast.LENGTH_LONG ).show();
-                        e.printStackTrace();
+        btnAssignWaypointRef.setOnClickListener(view -> {
+            if(etWaypointIdRef.getText().length() == Waypoint.waypointIdLength) {
+                try {
+                    if(myTag ==null) {
+                        Toast.makeText(context, WRITE_ERROR, Toast.LENGTH_SHORT).show();
+                    } else {
+                        write(etWaypointIdRef.getText().toString(), myTag);
+                        Toast.makeText(context, WRITE_SUCCESS, Toast.LENGTH_LONG ).show();
                     }
-                }else{
-                    Toast toast = Toast.makeText(getApplicationContext(), "ID needs 6 chars", Toast.LENGTH_SHORT);
-                    toast.show();
+                } catch (IOException e) {
+                    Toast.makeText(context, WRITE_ERROR, Toast.LENGTH_LONG ).show();
+                    e.printStackTrace();
+                } catch (FormatException e) {
+                    Toast.makeText(context, WRITE_ERROR, Toast.LENGTH_LONG ).show();
+                    e.printStackTrace();
                 }
+            }else{
+                Toast toast = Toast.makeText(getApplicationContext(), "ID needs 6 chars", Toast.LENGTH_SHORT);
+                toast.show();
             }
         });
 
@@ -222,7 +212,6 @@ public class WaypointActivity extends AppCompatActivity {
         IntentFilter tagDetected = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED);
         tagDetected.addCategory(Intent.CATEGORY_DEFAULT);
         writeTagFilters = new IntentFilter[] { tagDetected };
-
 
         btnAddLocationRef.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -241,7 +230,6 @@ public class WaypointActivity extends AppCompatActivity {
             }
         });
     }
-
 
     /******************************************************************************
      **********************************Read From NFC Tag***************************
@@ -266,7 +254,7 @@ public class WaypointActivity extends AppCompatActivity {
         if (msgs == null || msgs.length == 0) return;
 
         String text = "";
-//        String tagId = new String(msgs[0].getRecords()[0].getType());
+//      String tagId = new String(msgs[0].getRecords()[0].getType());
         byte[] payload = msgs[0].getRecords()[0].getPayload();
         String textEncoding = ((payload[0] & 128) == 0) ? "UTF-8" : "UTF-16"; // Get the Text Encoding
         int languageCodeLength = payload[0] & 0063; // Get the Language Code, e.g. "en"
@@ -314,8 +302,6 @@ public class WaypointActivity extends AppCompatActivity {
 
         return recordNFC;
     }
-
-
 
     @Override
     protected void onNewIntent(Intent intent) {

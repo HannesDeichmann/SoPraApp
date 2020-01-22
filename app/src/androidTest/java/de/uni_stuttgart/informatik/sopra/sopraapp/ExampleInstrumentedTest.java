@@ -27,20 +27,9 @@ public class ExampleInstrumentedTest {
     @Rule
     public ActivityTestRule<MainActivity> rule = new ActivityTestRule<MainActivity>(MainActivity.class);
 
-
     @Test
     public void useAppContext() throws Exception {
-
         MainActivity activity = rule.getActivity();
-
-        TextView tvHello = (TextView) activity.findViewById(R.id.tvLogin);
-        assertThat(tvHello,notNullValue());
-        assertThat(tvHello, instanceOf(TextView.class));
-        assertEquals("TextView text compare", "SoPra App", tvHello.getText().toString());
-
-        Button btnButton =(Button) activity.findViewById(R.id.btnAdminLogin);
-        assertThat(btnButton,notNullValue());
-        assertEquals("Test button text", "Click me!", btnButton.getText().toString());
 
     }
 }

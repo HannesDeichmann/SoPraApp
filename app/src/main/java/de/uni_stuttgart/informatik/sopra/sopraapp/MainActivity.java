@@ -5,13 +5,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import java.time.Duration;
 
 public class MainActivity extends AppCompatActivity {
     TextView tvLoginRef;
-    Button btnAdminLoginRef;
+    ImageView ivAebLogoRef;
     DatabaseGuard databaseGuard;
     DatabaseWaypoint databaseWaypoint;
     EditText etUsernameRef;
@@ -27,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         databaseGuard = new DatabaseGuard(this);
         databaseWaypoint = new DatabaseWaypoint(this);
 
@@ -38,25 +38,12 @@ public class MainActivity extends AppCompatActivity {
         if(databaseWaypoint.getWaypointCount() == 0) {
             databaseWaypoint.addWaypoint(new Waypoint("FirstWaypoint", "123456", "Tag", "Note"));
         }
-        tvLoginRef = (TextView) findViewById(R.id.tvLogin);
-        btnAdminLoginRef = (Button) findViewById(R.id.btnAdminLogin);
         etUsernameRef = findViewById(R.id.etUsername);
         etPasswordRef = findViewById(R.id.etPassword);
         btnLoginRef = findViewById(R.id.btnLogin);
         tvLoginFeedbackRef = findViewById(R.id.tvLoginFeedback);
+        ivAebLogoRef = findViewById(R.id.imageViewAebLogo);
         tvLoginFeedbackRef.setText("");
-
-        //btnAdminLoginRef ist only there for development so while testing you dont need to log in every time
-        btnAdminLoginRef.setVisibility(View.VISIBLE);
-        btnAdminLoginRef.setText("ImageTest");
-        btnAdminLoginRef.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                //Intent intent = new Intent(view.getContext(), DrawActivity.class);
-                //startActivity(intent);
-                //finish();
-            }
-        });
 
         btnLoginRef.setOnClickListener(new View.OnClickListener(){
             @Override
