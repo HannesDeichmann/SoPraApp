@@ -66,7 +66,7 @@
         android:id="@+id/tvLocationDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etWaypointId"
+        android:layout_below="@+id/showWaypointId"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="35dp"
         android:text=""
@@ -84,8 +84,8 @@
         android:inputType="textPersonName"
         android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789-,.?!"/>
 
-    <EditText
-        android:id="@+id/etWaypointId"
+    <TextView
+        android:id="@+id/showWaypointId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/etWaypointName"
