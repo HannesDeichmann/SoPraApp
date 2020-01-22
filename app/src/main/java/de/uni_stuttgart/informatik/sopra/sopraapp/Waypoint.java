@@ -27,8 +27,8 @@ public class Waypoint implements Serializable {
     @Override
     public String toString() {
         String waypointString = this.waypointId + ": ";
-        waypointString += this.waypointName + " Extra: ";
-        waypointString += this.waypointPosition + ", ";
+        waypointString += this.waypointName + " Pos ";
+        waypointString += this.waypointPosition + ", Note";
         waypointString += this.waypointNote + ", ";
         return waypointString;
     }

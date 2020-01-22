@@ -12,7 +12,7 @@ public class DatabaseWaypoint extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "WaypointData.db";
     public static final String SQL_CREATE_WAYPOINT_ENTRIES = "CREATE TABLE " +
             DbContract.TABLE_NAME_WAYPOINT + "(" +
-            DbContract.COLUMN_NAME_WAYPOINTID + " TEXT PRIMARY KEY," +
+            DbContract.COLUMN_NAME_WAYPOINTID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             DbContract.COLUMN_NAME_WAYPOINTNAME + " TEXT," +
             DbContract.COLUMN_NAME_WAYPOINTPOSITION+ " TEXT," +
             DbContract.COLUMN_NAME_WAYPOINTNOTE + " TEXT" + " )";
@@ -35,7 +35,7 @@ public class DatabaseWaypoint extends SQLiteOpenHelper {
     public void addWaypoint(Waypoint waypoint) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(DbContract.COLUMN_NAME_WAYPOINTID, waypoint.getWaypointId());
+        //values.put(DbContract.COLUMN_NAME_WAYPOINTID, waypoint.getWaypointId());
         values.put(DbContract.COLUMN_NAME_WAYPOINTNAME, waypoint.getWaypointName());
         values.put(DbContract.COLUMN_NAME_WAYPOINTPOSITION, waypoint.getWaypointPosition());
         values.put(DbContract.COLUMN_NAME_WAYPOINTNOTE, waypoint.getWaypointNote());
