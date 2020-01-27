@@ -65,7 +65,7 @@ public class GuardTest {
 
 
     @Test
-    public void testGuards() {
+        public void testGuards() {
         //login
         onView(withId(R.id.etUsername)).perform(typeText("admin"), closeSoftKeyboard());
         onView(withId(R.id.etPassword)).perform(typeText("admin"), closeSoftKeyboard());
