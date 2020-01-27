@@ -123,7 +123,7 @@ public class GuardActivity extends AppCompatActivity {
             createdGuard.setUserPassword(AesCrypto.encrypt(etPasswordRef.getText().toString(),secretKey));
             createdGuard.setUserId(tvGuardIdRef.getText().toString());
             if (checkDublicates(createdGuard)&&!edit) {
-                Toast.makeText(getApplicationContext(),"The guard allready exists, select the Guard to edit him.",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"The guard already exists, select the Guard to edit him.",Toast.LENGTH_SHORT).show();
             }else{
                 if (newGuard) guardDatabase.addGuard(createdGuard);
                 else guardDatabase.editGuard(createdGuard);
