@@ -71,6 +71,24 @@
         tools:layout_editor_absoluteY="349dp"
         tools:text="00:00" />
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="272dp"
+        android:background="@drawable/circle_shape"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="65"
+        android:progressDrawable="@drawable/progressbar"
+        tools:layout_editor_absoluteX="183dp"
+        tools:layout_editor_absoluteY="349dp" />
+
     <ImageButton
         android:id="@+id/btnStartCountdown"
         android:layout_width="60dp"

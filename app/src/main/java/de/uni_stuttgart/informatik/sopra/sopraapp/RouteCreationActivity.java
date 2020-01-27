@@ -14,6 +14,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.time.Duration;
 import java.util.ArrayList;
 
+
+/**
+ * Activity to create a Route.
+ * Add Waypoints with duration
+ *
+ * @author Arne Bartenbach 3392087
+ * @version 22.01.2020
+ */
 public class RouteCreationActivity extends AppCompatActivity {
     private ArrayList<String> list = new ArrayList<>();
     private ListView selectedWaypointList;
