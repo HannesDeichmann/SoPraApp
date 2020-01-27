@@ -74,33 +74,14 @@ public class Test3_ScheduleTest {
         onData(hasToString(startsWith("1:"))).perform(click());
         onView(withId(R.id.selectRoute)).perform(click());
         onData(hasToString(startsWith("1"))).perform(click());
-        /*onView(withId(R.id.btnSelectStartTime)).perform(click());
-        onView(withClassName(Matchers.equalTo(TimePicker.class.getName()))).perform(new ViewAction() {
-            @Override
-            public Matcher<View> getConstraints() {
-                return ViewMatchers.isAssignableFrom(TimePicker.class);
-            }
-
-            @Override
-            public String getDescription() {
-                return "Set the value of a TimePicker";
-            }
-
-            @Override
-            public void perform(UiController uiController, View view) {
-                ((TimePicker) view).setHour(13);
-                ((TimePicker) view).setMinute(37);
-            }
-        });*/
         onView(withId(R.id.saveScheduleItem)).perform(click());
         Espresso.pressBack();
-
         Espresso.pressBack();
         onView(withId(R.id.btnLogin)).check(matches(withText("Login")));
         logIn("1", "1234");
+        testAssignedRoute();
         testChangingPassword("newPassword1234");
         logIn("1", "newPassword1234");
-        testAssignedRoute();
         testChangingPassword("1234");
 
 
