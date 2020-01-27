@@ -44,12 +44,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:text=""
+        android:text="12"
+        android:textColor="#D40F6B"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/tvGuardForename"
         app:layout_constraintEnd_toEndOf="@id/tvAktivity"
         app:layout_constraintStart_toStartOf="@id/tvAktivity"
         app:layout_constraintTop_toBottomOf="@id/btnEditGuard"
-        android:textSize="20sp"
+        android:textSize="30sp"
         />
 
     <TextView

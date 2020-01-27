@@ -102,15 +102,24 @@ public class RouteCreationActivity extends AppCompatActivity {
         });
 
         btnSaveRoute.setOnClickListener(v -> {
-            //wegpunkte wurden schon in der Waypointlistaktivity hinzugefügt
-            route.setRouteName(etRouteName.getText().toString());
-            for(Route r:databaseRoute.getAllRoutes()){
-                if(r.getRouteId().equals(route.getRouteId())){
-                    databaseRoute.deleteRoute(route);
+            if (etRouteName.getText().toString().equals("")) {
+                Toast.makeText(getApplicationContext(), "Route name is missing!", Toast.LENGTH_SHORT).show();
+            } else if (route.getWaypoints().size() == 0 && route.getWaypointStrings() == null) {
+                Toast.makeText(getApplicationContext(), "Route has no Waypoints!", Toast.LENGTH_SHORT).show();
+            } else if(route.getWaypointStrings()!=null &&((route.getWaypointStrings().size()==0 && route.getWaypoints().size()==0))){
+
+                    Toast.makeText(getApplicationContext(), "Route has no Waypoints!", Toast.LENGTH_SHORT).show();
+            }else{
+                //wegpunkte wurden schon in der Waypointlistaktivity hinzugefügt
+                route.setRouteName(etRouteName.getText().toString());
+                for (Route r : databaseRoute.getAllRoutes()) {
+                    if (r.getRouteId().equals(route.getRouteId())) {
+                        databaseRoute.deleteRoute(route);
+                    }
                 }
+                databaseRoute.addRoute(route);
+                finish();
             }
-            databaseRoute.addRoute(route);
-            finish();
         });
 
         btnDeleteRoute.setOnClickListener(v -> {

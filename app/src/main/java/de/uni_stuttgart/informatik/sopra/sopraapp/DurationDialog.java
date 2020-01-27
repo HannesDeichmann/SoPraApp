@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 public class DurationDialog extends AppCompatDialogFragment {
     private EditText etduration;
     private DurationDialogListener listener;
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -26,7 +27,7 @@ public class DurationDialog extends AppCompatDialogFragment {
 
         builder.setView(view).setTitle("Duration").setNegativeButton("cancel", (dialog, i) -> {
 
-        }
+                }
         ).setPositiveButton("ok", (dialog, i) -> {
             String duration = etduration.getText().toString();
             listener.applyText(duration);
@@ -41,11 +42,11 @@ public class DurationDialog extends AppCompatDialogFragment {
         try {
             listener = (DurationDialogListener) context;
         } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString()+"must implement Duration DialogListener");
+            throw new ClassCastException(context.toString() + "must implement Duration DialogListener");
         }
     }
 
-    public interface DurationDialogListener{
+    public interface DurationDialogListener {
         void applyText(String duration);
     }
 }

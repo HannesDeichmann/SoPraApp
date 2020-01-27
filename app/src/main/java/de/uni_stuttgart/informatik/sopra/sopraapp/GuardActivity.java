@@ -124,6 +124,10 @@ public class GuardActivity extends AppCompatActivity {
             createdGuard.setUserId(tvGuardIdRef.getText().toString());
             if (checkDublicates(createdGuard)&&!edit) {
                 Toast.makeText(getApplicationContext(),"The guard already exists, select the Guard to edit him.",Toast.LENGTH_SHORT).show();
+            }else if (etPasswordRef.getText().toString().equals("") ||
+                         etForenameRef.getText().toString().equals("") ||
+                            etSurnameRef.getText().toString().equals("")){
+                Toast.makeText(getApplicationContext(),"Information is missing",Toast.LENGTH_SHORT).show();
             }else{
                 if (newGuard) guardDatabase.addGuard(createdGuard);
                 else guardDatabase.editGuard(createdGuard);
@@ -142,16 +146,24 @@ public class GuardActivity extends AppCompatActivity {
             clearTextFields();
             finish();
         });
+
         btnNewId.setOnClickListener(view -> {
             newGuard = true;
             Intent intent = new Intent(view.getContext(), GuardActivity.class);
             startActivity(intent);
             finish();
         });
+
         btnEditGuardRef.setOnClickListener(view -> {
             Intent intent = new Intent(view.getContext(), GuardListActivity.class);
             startActivity(intent);
             finish();
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        newGuard = true;
     }
 }

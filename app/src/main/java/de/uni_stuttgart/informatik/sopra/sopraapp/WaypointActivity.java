@@ -148,7 +148,9 @@ public class WaypointActivity extends AppCompatActivity {
                 if(checkDublicates(etWaypointNameRef.getText().toString())){
                     Toast.makeText(getApplicationContext(), "The Waypointname allready exits",
                             Toast.LENGTH_SHORT).show();
-                }else {
+                }else if (etWaypointNameRef.getText().toString().equals("")){
+                    Toast.makeText(getApplicationContext(),"Waypoint name is missing!",Toast.LENGTH_SHORT).show();
+                } else {
                     createdWaypoint.setWaypointId(waypointID);
                     databaseWaypoint.addWaypoint(createdWaypoint);
                 }
