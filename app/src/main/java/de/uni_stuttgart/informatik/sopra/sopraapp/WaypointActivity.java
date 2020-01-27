@@ -185,6 +185,9 @@ public class WaypointActivity extends AppCompatActivity {
         btnEditWaypointRef.setOnClickListener(view -> {
             Intent intent = new Intent(view.getContext(), WaypointListActivity.class);
             intent.putExtra("root", "WaypointActivity");
+            if (getIntent().hasExtra("editedWaypointId")) {
+                intent.putExtra("editedWaypointId",getEditedWaypoint().getWaypointId());
+            }
             startActivity(intent);
             finish();
         });

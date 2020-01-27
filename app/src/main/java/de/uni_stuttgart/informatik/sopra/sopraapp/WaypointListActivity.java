@@ -47,7 +47,7 @@ public class WaypointListActivity extends AppCompatActivity implements DurationD
         for (Waypoint waypoint : allWaypoints) {
             waypointStringList.add(waypoint.toString());
         }
-        dataAdapter= new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, waypointStringList);
+        dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, waypointStringList);
         listView.setAdapter(dataAdapter);
         dataAdapter.notifyDataSetChanged();
 
@@ -56,21 +56,26 @@ public class WaypointListActivity extends AppCompatActivity implements DurationD
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String searchText = etSearchText.getText().toString();
                 waypointStringList.clear();
-                for(Waypoint wp: allWaypoints){
-                    if(wp.toString().contains(searchText)){waypointStringList.add(wp.toString()); }
+                for (Waypoint wp : allWaypoints) {
+                    if (wp.toString().contains(searchText)) {
+                        waypointStringList.add(wp.toString());
+                    }
                 }
                 dataAdapter.notifyDataSetChanged();
             }
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count,int after) { }
 
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
         });
 
         btnCancelWPSelect.setOnClickListener(view -> {
             route = (Route) getIntent().getExtras().get("route");
-            int position = getIntent().getIntExtra("position",0);
+            int position = getIntent().getIntExtra("position", 0);
             route.deleteWaypoint(route.getWaypoints().get(position));
             route.getWaypointStrings().remove(position);
             databaseRoute.updateWaypointStrings(route);
@@ -82,18 +87,18 @@ public class WaypointListActivity extends AppCompatActivity implements DurationD
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
             String clickedWaypointid = waypointStringList.get(position);
-            for(Waypoint wp: allWaypoints){
-                if(clickedWaypointid.split(":")[0].equals(wp.getWaypointId())){
+            for (Waypoint wp : allWaypoints) {
+                if (clickedWaypointid.split(":")[0].equals(wp.getWaypointId())) {
                     waypoint = wp;
                 }
             }
             waypointId = waypoint.getWaypointId();
-            if (getIntent().hasExtra("position")){
+            if (getIntent().hasExtra("position")) {
                 route = (Route) getIntent().getExtras().get("route");
                 openDialog();
                 intent = new Intent(view.getContext(), RouteCreationActivity.class);
                 intent.putExtra("route", route);
-            }else {
+            } else {
                 if (getIntent().getStringExtra("root").equals("WaypointActivity")) {
                     WaypointActivity.newWaypoint = false;
                     intent = new Intent(view.getContext(), WaypointActivity.class);
@@ -121,14 +126,29 @@ public class WaypointListActivity extends AppCompatActivity implements DurationD
     @Override
     public void applyText(String inputDuration) {
         duration = Duration.ofMinutes(Integer.parseInt(inputDuration));
-        if(getIntent().hasExtra("position")){
+        if (getIntent().hasExtra("position")) {
             route.replaceWaypointAt(new RouteWaypoint(waypoint, duration), (int) getIntent().getExtras().get("position"));
-        }else {
+        } else {
             route.addWaypoint(new RouteWaypoint(waypoint, duration));
         }
         intent.putExtra("route", route);
         startActivity(intent);
         finish();
     }
-}
 
+    @Override
+    public void onBackPressed() {
+
+        if (getIntent().hasExtra("root")){
+            if (getIntent().getStringExtra("root").equals("WaypointActivity")) {
+                Intent intent = new Intent(listView.getContext(), WaypointActivity.class);
+                if (getIntent().hasExtra("editedWaypointId")) {
+                    intent.putExtra("editedWaypointId", getIntent().getStringExtra("editedWaypointId"));
+                }
+                startActivity(intent);
+                finish();
+            }
+        }
+    }
+
+}
