@@ -28,7 +28,7 @@ public class ScheduleActivity extends AppCompatActivity implements TimePickerDia
     static DatabaseGuard databaseGuard;
     static DatabaseRoute databaseRoute;
     RecyclerView listView;
-    RecyclerView.Adapter dataAdapter;
+    static RecyclerView.Adapter dataAdapter;
     RecyclerView.LayoutManager rvManagerRef;
 
     @Override
@@ -77,7 +77,7 @@ public class ScheduleActivity extends AppCompatActivity implements TimePickerDia
         listView.setLayoutManager(rvManagerRef);
         dataAdapter = new ScheduleAdapter(routeStringList);
         listView.setAdapter(dataAdapter);
-
+        dataAdapter.notifyDataSetChanged();
 
         btnSelectStartTime.setOnClickListener(v -> {
             DialogFragment timePicker = new TimePickerFragment();
@@ -100,6 +100,7 @@ public class ScheduleActivity extends AppCompatActivity implements TimePickerDia
                 Toast.makeText(getApplicationContext(),"First select a guard",Toast.LENGTH_SHORT).show();
             }
         });
+
         btnSave.setOnClickListener(v -> {
             if (selectedGuard != null && selectedRoute != null) {
                 if(checkForDublicate()){
@@ -112,9 +113,8 @@ public class ScheduleActivity extends AppCompatActivity implements TimePickerDia
                     addAllGuardRoutesToList();
                     dataAdapter.notifyDataSetChanged();
                     tvSetTime.setText("00:00");
-                    routeStringList = new ArrayList<>();
+                    addAllGuardRoutesToList();
                     onResume();
-
                 }
             } else {
                 Toast.makeText(getApplicationContext(),"Information is missing",Toast.LENGTH_SHORT).show();
@@ -163,7 +163,8 @@ public class ScheduleActivity extends AppCompatActivity implements TimePickerDia
             if (idList.size() == timeList.size()) {
                 for (int i = 0; i < idList.size(); i++) {
                     Route route = databaseRoute.getRouteById(Integer.parseInt(idList.get(i)));
-                    routeStringList.add(guard.toString() + ": " + (new GuardRoute(route, timeList.get(i))).toString());
+                    routeStringList.add(guard.getUserId() + ":" + guard.getForename() + " " + guard.getSurname()
+                            + ": " + (new GuardRoute(route, timeList.get(i))).toString());
                 }
             }
         }
@@ -172,9 +173,9 @@ public class ScheduleActivity extends AppCompatActivity implements TimePickerDia
     private boolean checkForDublicate(){
         for(String string:routeStringList) {
             String[] splitted = string.split(":");
-            if(selectedRoute.getRouteId().equals(splitted[3].trim())
+            if(selectedRoute.getRouteId().equals(splitted[2].trim())
                 && selectedGuard.getUserId().equals(splitted[0].trim())
-                && tvSetTime.getText().toString().equals(splitted[4].split(DIVIDESTRING)[1])) {
+                && tvSetTime.getText().toString().equals(string.split(DIVIDESTRING)[1])) {
               return true;
             }
         }

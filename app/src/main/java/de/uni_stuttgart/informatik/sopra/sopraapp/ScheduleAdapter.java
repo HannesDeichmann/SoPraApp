@@ -1,5 +1,6 @@
 package de.uni_stuttgart.informatik.sopra.sopraapp;
 
+import android.graphics.Color;
 import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,17 +41,20 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
                 @Override
                 public void onClick(View v) {
                     String[] splitted = routeStringList.get(getAdapterPosition()).split(":");
-                    int routeId = Integer.valueOf(splitted[3].trim());
+                    int routeId = Integer.valueOf(splitted[2].trim());
                     int guardId = Integer.valueOf(splitted[0].trim());
-                    String time =splitted[4].split(DIVIDESTRING)[1];
+                    String time =routeStringList.get(getAdapterPosition()).split(DIVIDESTRING)[1];
                     selectedGuard = databaseGuard.getGuardById(guardId);
                     selectedRoute = databaseRoute.getRouteById(routeId);
+
                     tvSetTime.setText(time);
                     tvSelectedRoute.setText(selectedRoute.getRouteName());
                     tvSelectedGuard.setText(selectedGuard.getUserId() + ": " + selectedGuard.getForename());
+
                     selectedGuard = createGuardWithoutDeletedRoute(selectedGuard,time);
                     databaseGuard.addGuardRoute(selectedGuard);
-                    routeStringList.remove(getAdapterPosition());
+
+                    adapterList.remove(getAdapterPosition());
                     notifyDataSetChanged();
                 }
             });
@@ -58,7 +62,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
                 @Override
                 public void onClick(View v) {
                     String[] splitted = routeStringList.get(getAdapterPosition()).split(":");
-                    int routeId = Integer.valueOf(splitted[3].trim());
+                    int routeId = Integer.valueOf(splitted[2].trim());
                     int guardId = Integer.valueOf(splitted[0].trim());
                     String time = routeStringList.get(getAdapterPosition()).split(DIVIDESTRING)[1];
                     selectedGuard = databaseGuard.getGuardById(guardId);;
@@ -67,13 +71,14 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
                     addRoutesFromDbToEmptyGuard(selectedGuard);
                     selectedGuard = createGuardWithoutDeletedRoute(selectedGuard,time);
                     databaseGuard.addGuardRoute(selectedGuard);
-                    routeStringList.remove(getAdapterPosition());
+                    //routeStringList.remove(getAdapterPosition());
 
                     tvSetTime.setText("");
                     tvSelectedRoute.setText("");
                     tvSelectedGuard.setText("");
                     selectedGuard = null;
                     selectedRoute = null;
+                    adapterList.remove(getAdapterPosition());
                     notifyDataSetChanged();
                 }
             });
