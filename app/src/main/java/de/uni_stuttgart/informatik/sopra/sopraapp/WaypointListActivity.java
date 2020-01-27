@@ -148,7 +148,17 @@ public class WaypointListActivity extends AppCompatActivity implements DurationD
                 startActivity(intent);
                 finish();
             }
+            if (getIntent().getStringExtra("root").equals("RouteCreationActivity")) {
+                Intent intent = new Intent(listView.getContext(), RouteCreationActivity.class);
+                route = (Route) getIntent().getExtras().get("route");
+                intent.putExtra("route",route);
+                startActivity(intent);
+                finish();
+
+            }
         }
+
+
     }
 
 }
