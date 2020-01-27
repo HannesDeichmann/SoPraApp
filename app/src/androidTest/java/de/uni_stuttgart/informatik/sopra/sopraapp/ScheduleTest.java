@@ -99,7 +99,9 @@ public class ScheduleTest {
         onView(withId(R.id.btnLogin)).check(matches(withText("Login")));
         logIn("1", "1234");
         //testAssignedRoute();
-        testChangingPassword();
+        testChangingPassword("newPassword1234");
+        logIn("1", "newPassword1234");
+        testChangingPassword("1234");
 
 
     }
@@ -114,22 +116,23 @@ public class ScheduleTest {
      * Change the password in the profile fragment.
      * Confirm first that the guard is already logged in.
      */
-    public void testChangingPassword(){
+    public void testChangingPassword(String newPassword){
 
         onView(withId(R.id.tvRoutes)).check(matches(withText("Choose a route to start")));
         onView((withId(R.id.nav_profile))).perform(click());
         onView(withId(R.id.tvUsername)).check(matches(withText("Otto Mullerich")));
-        onView(withId(R.id.etChangePassword)).perform(clearText(), typeText("newPassword1234"), closeSoftKeyboard());
-        onView(withId(R.id.etConfirmPassword)).perform(clearText(), typeText("newPassword1234"), closeSoftKeyboard());
+        onView(withId(R.id.etChangePassword)).perform(clearText(), typeText(newPassword), closeSoftKeyboard());
+        onView(withId(R.id.etConfirmPassword)).perform(clearText(), typeText(newPassword), closeSoftKeyboard());
         onView(withId(R.id.btnChangePassword)).perform(click());
         onView(withId(R.id.btnLogOut)).perform(click());
         /**
          * Log out and re-log in with the newly assigned password.
          */
-        logIn("1", "newPassword1234");
+        logIn("1", newPassword);
         onView(withId(R.id.tvRoutes)).check(matches(withText("Choose a route to start")));
         onView((withId(R.id.nav_profile))).perform(click());
         onView(withId(R.id.tvUsername)).check(matches(withText("Otto Mullerich")));
+        onView(withId(R.id.btnLogOut)).perform(click());
     }
 
     /**
