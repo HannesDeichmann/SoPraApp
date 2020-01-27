@@ -196,7 +196,7 @@ public class SecondTest {
         onView(withId(R.id.etUsername)).perform(typeText("1"), closeSoftKeyboard());
         onView(withId(R.id.etPassword)).perform(typeText("sicheresPW123"), closeSoftKeyboard());
         onView(withId(R.id.btnLogin)).perform(click());
-        onView(withId(R.id.btnSelectARouteToStart)).perform(click());
+        //onView(withId(R.id.btnSelectARouteToStart)).perform(click());
         onData(hasToString(startsWith("Marathon"))).perform(click());
         //onView(withId(R.id.btnShowMap)).perform(click());
         onView(withId(R.id.btnBackToPatrol)).perform(click());

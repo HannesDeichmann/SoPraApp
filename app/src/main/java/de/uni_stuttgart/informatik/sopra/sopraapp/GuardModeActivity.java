@@ -27,7 +27,7 @@ public class GuardModeActivity extends AppCompatActivity {
     DatabaseWaypoint databaseWaypoint;
 
 
-     public void closeActivity(){
+    public void closeActivity(){
          finish();
      }
     private void addRoutesFromDatabase() {
