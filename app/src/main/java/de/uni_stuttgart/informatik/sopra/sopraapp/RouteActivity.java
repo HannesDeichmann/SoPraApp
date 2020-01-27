@@ -20,6 +20,12 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/**
+ * Activity to show the Route-List. There you can select a Route or create a new one.
+ *
+ * @author Arne Bartenbach 3392087
+ * @version 22.01.2020
+ */
 public class RouteActivity extends AppCompatActivity {
     Button btnNewRoute;
     EditText etSearchRouteRef;

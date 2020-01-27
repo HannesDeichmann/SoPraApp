@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ public class HomeFragment extends Fragment {
     public int nextWaypointCounter;
     public boolean timeRunning = true;
     private Route route;
+    private ProgressBar progressBar;
 
     public static HomeFragment newInstance(Route route, Integer nextWaypointCounter){
         HomeFragment fragment = new HomeFragment();
@@ -46,6 +48,7 @@ public class HomeFragment extends Fragment {
         tvNoteRef = view.findViewById(R.id.tvNote);
         tvNextWaypointNameRef = view.findViewById(R.id.tvNextWaypointName);
 
+        progressBar = view.findViewById(R.id.progressBar);
         btnStartCountdownRef = view.findViewById(R.id.btnStartCountdown);
         btnFinishRouteRef = view.findViewById(R.id.btnFinishRoute);
         btnCancelActiveRouteRef = view.findViewById(R.id.btnCancelActiveRoute);
@@ -53,8 +56,14 @@ public class HomeFragment extends Fragment {
 
         ((PatrolActivity)getActivity()).setFragmentRefreshListener(new PatrolActivity.FragmentRefreshListener() {
             @Override
-            public void onRefresh(String formattedStartTime) {
-                tvCountdownRef.setText(formattedStartTime);
+            public void onRefresh(String formattedTime) {
+                tvCountdownRef.setText(formattedTime);
+                String[] s = formattedTime.split(":");
+                long minutes = Long.valueOf(s[0].trim());
+                long seconds = Long.valueOf(s[1].trim());
+                long entireSeconds = minutes*60 + seconds;
+                long duration = (route.getWaypoints().get(nextWaypointCounter).getDuration().getSeconds());
+                progressBar.setProgress(Math.toIntExact(duration/entireSeconds));
             }
         });
 
@@ -110,14 +119,11 @@ public class HomeFragment extends Fragment {
             tvNextWaypointNameRef.setText(nextWaypoint.getWaypoint().getWaypointName());
         }
     }
-
     public Route getRoute(){
         return this.route;
     }
     public void setRoute(Route route){
         this.route = route;
     }
-
-
 
 }
