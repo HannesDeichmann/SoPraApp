@@ -120,5 +120,4 @@ public class DatabaseWaypoint extends SQLiteOpenHelper {
         c.close();
         return count;
     }
-
 }
