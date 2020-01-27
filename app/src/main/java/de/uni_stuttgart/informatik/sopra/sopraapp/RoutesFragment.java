@@ -1,36 +1,48 @@
 package de.uni_stuttgart.informatik.sopra.sopraapp;
 
+
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class GuardModeRouteListActivity extends AppCompatActivity {
+public class RoutesFragment extends Fragment {
 
-
+    private ListView lvRoutesRef;
+    DatabasePatrol databasePatrol;
     private Duration duration1;
     private Duration duration2;
     private Duration duration3;
-    DatabasePatrol databasePatrol;
-    DatabaseGuard databaseGuard;
-    DatabaseRoute databaseRoute;
-    DatabaseWaypoint databaseWaypoint;
 
+    public static RoutesFragment newInstance(Guard guard){
+        RoutesFragment fragment = new RoutesFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("guard", guard);
+        fragment.setArguments(bundle);
+
+        return fragment;
+    }
+
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_guard_mode_route_list);
-        ListView listView = findViewById(R.id.guardRouteList);
-
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_routes, container,false);
+        lvRoutesRef = view.findViewById(R.id.lvRoutes);
         ///////////////////////////////////////////////////
         Route route = new Route();
         route.setRouteName("Route um die Ecke The One (HartCode)");
@@ -60,12 +72,12 @@ public class GuardModeRouteListActivity extends AppCompatActivity {
         //Guard loggedInGuard = otto;
         ///////////////////////////////////////////////////////////
 
-        Guard loggedInGuard = (Guard) getIntent().getExtras().get("loggedInGuard");
+        Guard loggedInGuard = (Guard) getArguments().getSerializable("guard");
         loggedInGuard.addRoute(guardRoute1);
         loggedInGuard.addRoute(guardRoute2);
         loggedInGuard.addRoute(guardRoute3);
         ArrayList<GuardRoute> guardRouteList = loggedInGuard.getGuardRouteList();
-        databasePatrol = new DatabasePatrol(this);
+        databasePatrol = new DatabasePatrol(getActivity());
         ArrayList<String> routeStringList = new ArrayList<>();
 
 
@@ -74,13 +86,13 @@ public class GuardModeRouteListActivity extends AppCompatActivity {
         }
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(
-                this,
+                getActivity(),
                 android.R.layout.simple_list_item_1,
                 routeStringList);
 
-        listView.setAdapter(dataAdapter);
+        lvRoutesRef.setAdapter(dataAdapter);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lvRoutesRef.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(view.getContext(), PatrolActivity.class);
@@ -93,8 +105,9 @@ public class GuardModeRouteListActivity extends AppCompatActivity {
                 databasePatrol.addNewPatrol(";" + selectedRoute.getRoute().getRouteName()+ ";" +
                         loggedInGuard.getForename() + ";" + selectedRoute.getTime() +";" + sdf.format(date) + ";" );
                 startActivity(intent);
-                finish();
             }
         });
+        return view;
+
     }
 }

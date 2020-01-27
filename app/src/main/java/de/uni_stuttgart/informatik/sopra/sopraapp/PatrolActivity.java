@@ -149,6 +149,11 @@ public class PatrolActivity extends AppCompatActivity {
 
     public Guard getLoggedInGuard() { return this.loggedInGuard; }
 
+    public boolean getTimerRunning(){
+        return timerRunning;
+    }
+
+
     public void finishRoute(){
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         date = new Date();
@@ -161,10 +166,6 @@ public class PatrolActivity extends AppCompatActivity {
         DrawingView.setDoneWaypoints(new ArrayList<Waypoint>());
         databasePatrol.updatePatrolString("(interrupted)");
         finish();
-
-        /**
-         * TODO Log Entry Cancelled Route
-         */
     }
 
     /*********************************************************************************

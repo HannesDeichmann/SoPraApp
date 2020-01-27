@@ -37,9 +37,6 @@ public class MapFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_map, container,false);
         actualRoute = (Route) getArguments().getSerializable("route");
-        System.out.println(actualRoute.getWaypoints().size());
-        System.out.println(actualRoute.getWaypointStrings().size());
-        actualRoute = (Route) getArguments().getSerializable("route");
         drawingView = (DrawingView) view.findViewById(R.id.canvas);
         drawingView.setWaypoints(actualRoute.getOnlyWaypoints());
         drawingView.setDrawRouteOnMap(true);

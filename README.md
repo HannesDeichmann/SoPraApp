@@ -21,23 +21,33 @@ Mit dieser App kann man eigene Wachrundgänge erstellen, den Wärtern Routen zuw
 1. Repository klonen: `git clone`
 2. Android Studio Projekt öffnen
 3. Android Studio Projekt bauen
-4. Android Studio Projekt im Emulator ausführen oder APK erstellen lassen
 
 ## Verwendung der App
 
-Um den Guarde Mode zu starten: Login mit Daten:  
-    
-*   Benutzername:   1 
-*   Passwort:       1234
+Um den Guarde Mode zu starten: im Admin Modus unter 'Guards' einen Neuen Guard erstellen, wo man das Passwort setzten kann. 
+Die ID des neuen Guards zur Anmeldung steht oben in der Guard erstellung.
 
 Um den Admin Mode zu starten: Login mit Daten:  
 *   Benutzername:   admin
 *   Passwort:       admin
                          
+"Standard ablauf":
+- Guards erstellen um den Guard Mode nutzen zu können und Routen zuweisen zu können.
+- Waypoints erstellen:
+    - Daten eingeben
+    - NFC Tag dran halten und auf assign Waypoint clicken um Tag zu beschreiben
+    - auf add Location wenn man will eine Karte hochladen aus der Galerie und Ort des Wp. anklicken
+    - mit accept speichern
+- Route erstellen:
+    - alle gewüschten Wegpunkte hinzufügen und speichern
+    - ggf. durch Wp in der list anklicken den Punkt ersetzten oder über cancel löschen
+- über Schedule die Routen den Guards zuweisen, alle zugewiesenen Routen erscheinen in der liste von dem Guard
 
-Zur Zeit muss eventuell mehrmals die Zurück-Taste betätigt werden um zum vorherigen Menü zu gelangen, da sich
-nicht alle Activities automatisch schließen.
-Dies wird jedoch in naher Zukunft geändert.
+- Guard mode starten indem man sich mit den in der Guard creation gewählten Daten einloggt
+- Route auswählen und Tags der Reihe nach scannen bis man fertig ist
+
+- erneut in den Admin modus gehen und über Protcoll das Protokoll einsehen und ggf. exportieren
+- (wird in den eigenen Dateinen des Geräts gespeichert... über Toast wird Ort zusätzlich angezeit)
 
 ### Wichtiger Anwendungsfall 1
 
