@@ -3,6 +3,7 @@ package de.uni_stuttgart.informatik.sopra.sopraapp;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.health.SystemHealthManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,10 @@ public class HomeFragment extends Fragment {
     public boolean timeRunning = true;
     private Route route;
     private ProgressBar progressBar;
+    public long duration = 0;
+    public double percent = 0;
+    public long progress = 0;
+    public long allSeconds = 0;
 
     public static HomeFragment newInstance(Route route, Integer nextWaypointCounter){
         HomeFragment fragment = new HomeFragment();
@@ -55,6 +60,12 @@ public class HomeFragment extends Fragment {
         btnCancelActiveRouteRef = view.findViewById(R.id.btnCancelActiveRoute);
         btnFinishRouteRef.setVisibility(View.INVISIBLE);
 
+        if (nextWaypointCounter != getRoute().getWaypoints().size()) {
+
+            duration = (route.getWaypoints().get(nextWaypointCounter).getDuration().getSeconds());
+            percent = (double) 100 / duration;
+        }
+
         if(((PatrolActivity)getActivity()).getTimerRunning()){
             btnStartCountdownRef.setBackgroundResource(R.drawable.ic_pause_circle_filled_black_24dp);
             timeRunning = true;
@@ -64,14 +75,10 @@ public class HomeFragment extends Fragment {
         }
         ((PatrolActivity)getActivity()).setFragmentRefreshListener(new PatrolActivity.FragmentRefreshListener() {
             @Override
-            public void onRefresh(String formattedTime) {
+            public void onRefresh(String formattedTime, long allSeconds) {
                 tvCountdownRef.setText(formattedTime);
-                String[] s = formattedTime.split(":");
-                long minutes = Long.valueOf(s[0].trim());
-                long seconds = Long.valueOf(s[1].trim());
-                long entireSeconds = minutes*60 + seconds;
-                long duration = (route.getWaypoints().get(nextWaypointCounter).getDuration().getSeconds());
-                progressBar.setProgress(Math.toIntExact(duration/entireSeconds));
+                progress = (long) Math.ceil(percent* allSeconds);
+                progressBar.setProgress(Math.toIntExact(progress));
             }
         });
 
@@ -125,6 +132,11 @@ public class HomeFragment extends Fragment {
             RouteWaypoint nextWaypoint = getRoute().getWaypoints().get(nextWaypointCounter);
             tvNoteRef.setText(nextWaypoint.getWaypoint().getWaypointNote());
             tvNextWaypointNameRef.setText(nextWaypoint.getWaypoint().getWaypointName());
+            progressBar.setProgress(0);
+            duration = (route.getWaypoints().get(nextWaypointCounter).getDuration().getSeconds());
+            percent = (double) 100 / duration;
+
+
         }
     }
     public Route getRoute(){

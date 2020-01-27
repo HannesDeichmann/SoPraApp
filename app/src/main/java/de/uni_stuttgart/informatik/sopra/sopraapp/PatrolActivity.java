@@ -41,6 +41,7 @@ public class PatrolActivity extends AppCompatActivity {
     private GuardRoute selectedRoute;
     private Guard loggedInGuard;
     public String bitmapString;
+    private long allSeconds;
 
     private FragmentRefreshListener fragmentRefreshListener;
 
@@ -69,6 +70,7 @@ public class PatrolActivity extends AppCompatActivity {
         this.setSelectedRoute(selectedRoute);
         this.setRoute(selectedRoute.getRoute());
         this.setLoggedInGuard((Guard) getIntent().getExtras().get("loggedInGuard"));
+        this.setAllSeconds(0);
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (nfcAdapter == null) {
@@ -149,10 +151,16 @@ public class PatrolActivity extends AppCompatActivity {
 
     public Guard getLoggedInGuard() { return this.loggedInGuard; }
 
+    public void setAllSeconds(long allSeconds) {
+        this.allSeconds = allSeconds;
+    }
+    public long getAllSeconds(){
+        return this.allSeconds;
+    }
+
     public boolean getTimerRunning(){
         return timerRunning;
     }
-
 
     public void finishRoute(){
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
@@ -255,8 +263,9 @@ public class PatrolActivity extends AppCompatActivity {
             timeLeftInMilliseconds = 60000 * timeLeft; // 60000 millisec = 1 min
             String formattedStartTime = formatStartTime(selectedRoute.getTime());
             if(getFragmentRefreshListener()!= null) {
-                getFragmentRefreshListener().onRefresh(formattedStartTime);
+                getFragmentRefreshListener().onRefresh(formattedStartTime , allSeconds);
             }
+            allSeconds=0;
             updateTimer();
             startTimer();
         }
@@ -282,6 +291,7 @@ public class PatrolActivity extends AppCompatActivity {
             @Override
             public void onTick(long millisUntilFinished) {
                 timeLeftInMilliseconds = millisUntilFinished;
+                allSeconds+=1;
                 updateTimer();
             }
 
@@ -309,7 +319,7 @@ public class PatrolActivity extends AppCompatActivity {
         timeLeftText += seconds;
 
         if(getFragmentRefreshListener()!= null){
-            getFragmentRefreshListener().onRefresh(timeLeftText);
+            getFragmentRefreshListener().onRefresh(timeLeftText, allSeconds);
         }
         if (timeLeftText.equals("0:00")) {
             Toast.makeText(PatrolActivity.this, "Silent alarm would now be sent",
@@ -335,7 +345,7 @@ public class PatrolActivity extends AppCompatActivity {
     }
 
     public interface FragmentRefreshListener{
-        void onRefresh(String formattedStringTime);
+        void onRefresh(String formattedStringTime, long allSeconds);
     }
 
 
