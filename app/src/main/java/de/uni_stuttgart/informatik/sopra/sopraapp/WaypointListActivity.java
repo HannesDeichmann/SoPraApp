@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import java.time.Duration;
 import java.util.ArrayList;
 
@@ -125,15 +127,20 @@ public class WaypointListActivity extends AppCompatActivity implements DurationD
 
     @Override
     public void applyText(String inputDuration) {
-        duration = Duration.ofMinutes(Integer.parseInt(inputDuration));
-        if (getIntent().hasExtra("position")) {
-            route.replaceWaypointAt(new RouteWaypoint(waypoint, duration), (int) getIntent().getExtras().get("position"));
-        } else {
-            route.addWaypoint(new RouteWaypoint(waypoint, duration));
+        if (!inputDuration.equals("")) {
+            duration = Duration.ofMinutes(Integer.parseInt(inputDuration));
+            if (getIntent().hasExtra("position")) {
+                route.replaceWaypointAt(new RouteWaypoint(waypoint, duration), (int) getIntent().getExtras().get("position"));
+            } else {
+                route.addWaypoint(new RouteWaypoint(waypoint, duration));
+            }
+            intent.putExtra("route", route);
+            startActivity(intent);
+            finish();
+        }else{
+            Toast toast = Toast.makeText(getApplicationContext(),"Please enter a Number", Toast.LENGTH_SHORT);
+            toast.show();
         }
-        intent.putExtra("route", route);
-        startActivity(intent);
-        finish();
     }
 
     @Override
