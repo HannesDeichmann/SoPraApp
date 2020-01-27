@@ -63,42 +63,23 @@ public class ScheduleTest {
          * setup test data
          */
         createTestGuard();
-        //createTestWaypoint();
-        //createTestRoute();
+        createTestWaypoint();
+        createTestRoute();
 
         /**
          * test the schedule Activity by assigning the guard with id 1 the route with id 1
          */
-        /*onView(withId(R.id.btnSchedule)).perform(click());
+        onView(withId(R.id.btnSchedule)).perform(click());
         onView(withId(R.id.selectGuard)).perform(click());
         onData(hasToString(startsWith("1:"))).perform(click());
         onView(withId(R.id.selectRoute)).perform(click());
         onData(hasToString(startsWith("1"))).perform(click());
-        onView(withId(R.id.btnSelectStartTime)).perform(click());
-        onView(withClassName(Matchers.equalTo(TimePicker.class.getName()))).perform(new ViewAction() {
-            @Override
-            public Matcher<View> getConstraints() {
-                return ViewMatchers.isAssignableFrom(TimePicker.class);
-            }
-
-            @Override
-            public String getDescription() {
-                return "Set the value of a TimePicker";
-            }
-
-            @Override
-            public void perform(UiController uiController, View view) {
-                ((TimePicker) view).setHour(13);
-                ((TimePicker) view).setMinute(37);
-            }
-        });
         onView(withId(R.id.saveScheduleItem)).perform(click());
         Espresso.pressBack();
-        */
         Espresso.pressBack();
         onView(withId(R.id.btnLogin)).check(matches(withText("Login")));
         logIn("1", "1234");
-        //testAssignedRoute();
+        testAssignedRoute();
         testChangingPassword("newPassword1234");
         logIn("1", "newPassword1234");
         testChangingPassword("1234");
@@ -143,8 +124,8 @@ public class ScheduleTest {
         onView(withId(R.id.tvRoutes)).check(matches(withText("Choose a route to start")));
         onData(hasToString(startsWith(""))).inAdapterView(withId(R.id.lvRoutes)).atPosition(0).check(matches(withText("TestRoute")));
         onData(hasToString(startsWith(""))).inAdapterView(withId(R.id.lvRoutes)).atPosition(0).perform(click());
-        onView(withId(R.id.tvNextWaypoint)).check(matches(withText("TestWaypoint")));
-        onView(withId(R.id.btnCancel)).perform(click());
+        onView(withId(R.id.tvNextWaypointName)).check(matches(withText("TestWaypoint")));
+        onView(withId(R.id.btnCancelActiveRoute)).perform(click());
 
     }
     public void createTestGuard(){
