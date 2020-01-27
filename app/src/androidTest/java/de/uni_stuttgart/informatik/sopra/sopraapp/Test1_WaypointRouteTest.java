@@ -13,7 +13,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.clearText;
@@ -21,12 +20,10 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.pressBack;
 import static androidx.test.espresso.action.ViewActions.typeText;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasToString;
-import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.startsWith;
 
 /**
@@ -35,7 +32,7 @@ import static org.hamcrest.Matchers.startsWith;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
-public class WaypointRouteTest {
+public class Test1_WaypointRouteTest {
 
     //Instrumentation.ActivityMonitor monitor = getInstrumetation().addMonitor(GuardActivity.class)
 
@@ -145,7 +142,30 @@ public class WaypointRouteTest {
         onView(withId(R.id.durationInput)).perform(typeText("6"), closeSoftKeyboard());
         onView(withText("OK")).perform(click());
         onView(withId(R.id.saveRoute)).perform(click());
+        Espresso.pressBack();
+        resetData();
+    }
+    private void resetData(){
+        onView(withId(R.id.btnRoutes)).perform(click());
+        onData(hasToString(startsWith("1"))).inAdapterView(withId(R.id.routeList)).atPosition(0).perform(click());
+        onView(withId(R.id.deleteRoute)).perform(click());
+        Espresso.pressBack();
+        onView(withId(R.id.btnWaypoints)).perform(click());
+        onView(withId(R.id.btnEditWaypoint)).perform(click());
+        onData(hasToString(startsWith("1"))).perform(click());
+        onView(withId(R.id.btnDeleteWaypoint)).perform(click());
+        onView(withId(R.id.btnEditWaypoint)).perform(click());
+        onData(hasToString(startsWith("2"))).perform(click());
+        onView(withId(R.id.btnDeleteWaypoint)).perform(click());
+        onView(withId(R.id.btnEditWaypoint)).perform(click());
+        onData(hasToString(startsWith("3"))).perform(click());
+        onView(withId(R.id.btnDeleteWaypoint)).perform(click());
+        onView(withId(R.id.btnEditWaypoint)).perform(click());
+        onData(hasToString(startsWith("4"))).perform(click());
+        onView(withId(R.id.btnDeleteWaypoint)).perform(click());
         pressBack();
+        pressBack();
+
     }
 
     private void myText(int id, String text) {

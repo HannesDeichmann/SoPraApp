@@ -36,7 +36,7 @@ import static org.hamcrest.Matchers.startsWith;
 
 
 @RunWith(AndroidJUnit4.class)
-public class ScheduleTest {
+public class Test3_ScheduleTest {
 
     @Rule
     public ActivityTestRule<MainActivity> rule = new ActivityTestRule<MainActivity>(MainActivity.class) {
@@ -74,7 +74,7 @@ public class ScheduleTest {
         onData(hasToString(startsWith("1:"))).perform(click());
         onView(withId(R.id.selectRoute)).perform(click());
         onData(hasToString(startsWith("1"))).perform(click());
-        onView(withId(R.id.btnSelectStartTime)).perform(click());
+        /*onView(withId(R.id.btnSelectStartTime)).perform(click());
         onView(withClassName(Matchers.equalTo(TimePicker.class.getName()))).perform(new ViewAction() {
             @Override
             public Matcher<View> getConstraints() {
@@ -91,7 +91,7 @@ public class ScheduleTest {
                 ((TimePicker) view).setHour(13);
                 ((TimePicker) view).setMinute(37);
             }
-        });
+        });*/
         onView(withId(R.id.saveScheduleItem)).perform(click());
         Espresso.pressBack();
 
@@ -143,8 +143,8 @@ public class ScheduleTest {
         onView(withId(R.id.tvRoutes)).check(matches(withText("Choose a route to start")));
         onData(hasToString(startsWith(""))).inAdapterView(withId(R.id.lvRoutes)).atPosition(0).check(matches(withText("TestRoute")));
         onData(hasToString(startsWith(""))).inAdapterView(withId(R.id.lvRoutes)).atPosition(0).perform(click());
-        onView(withId(R.id.tvNextWaypoint)).check(matches(withText("TestWaypoint")));
-        onView(withId(R.id.btnCancel)).perform(click());
+        onView(withId(R.id.tvNextWaypointName)).check(matches(withText("TestWaypoint")));
+        onView(withId(R.id.btnCancelActiveRoute)).perform(click());
 
     }
     public void createTestGuard(){

@@ -47,7 +47,7 @@ import static org.hamcrest.Matchers.startsWith;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
-public class GuardTest {
+public class Test2_GuardTest {
 
     //Instrumentation.ActivityMonitor monitor = getInstrumetation().addMonitor(GuardActivity.class)
 
