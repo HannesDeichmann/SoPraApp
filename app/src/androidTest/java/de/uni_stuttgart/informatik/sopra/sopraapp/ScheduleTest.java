@@ -63,13 +63,13 @@ public class ScheduleTest {
          * setup test data
          */
         createTestGuard();
-        //createTestWaypoint();
-        //createTestRoute();
+        createTestWaypoint();
+        createTestRoute();
 
         /**
          * test the schedule Activity by assigning the guard with id 1 the route with id 1
          */
-        /*onView(withId(R.id.btnSchedule)).perform(click());
+        onView(withId(R.id.btnSchedule)).perform(click());
         onView(withId(R.id.selectGuard)).perform(click());
         onData(hasToString(startsWith("1:"))).perform(click());
         onView(withId(R.id.selectRoute)).perform(click());
@@ -94,12 +94,14 @@ public class ScheduleTest {
         });
         onView(withId(R.id.saveScheduleItem)).perform(click());
         Espresso.pressBack();
-        */
+
         Espresso.pressBack();
         onView(withId(R.id.btnLogin)).check(matches(withText("Login")));
         logIn("1", "1234");
-        //testAssignedRoute();
         testChangingPassword("newPassword1234");
+        logIn("1", "newPassword1234");
+        testAssignedRoute();
+        testChangingPassword("1234");
 
 
     }
@@ -115,6 +117,7 @@ public class ScheduleTest {
      * Confirm first that the guard is already logged in.
      */
     public void testChangingPassword(String newPassword){
+
         onView(withId(R.id.tvRoutes)).check(matches(withText("Choose a route to start")));
         onView((withId(R.id.nav_profile))).perform(click());
         onView(withId(R.id.tvUsername)).check(matches(withText("Otto Mullerich")));
