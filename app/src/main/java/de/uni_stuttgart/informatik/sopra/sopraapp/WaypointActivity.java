@@ -127,7 +127,9 @@ public class WaypointActivity extends AppCompatActivity {
         }
         if (getIntent().hasExtra("wpLocation")) {
             this.setWpLocation(((Waypoint) getIntent().getExtras().get("wpLocation")));
+            this.editedWaypoint = (Waypoint) getIntent().getExtras().get("wpLocation");
         }
+
         if (wpLocation == null) {
             checkEditNewWaypoint();
         }
