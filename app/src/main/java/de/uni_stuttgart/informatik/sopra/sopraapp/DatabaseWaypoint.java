@@ -7,6 +7,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 
+/**
+ * This database handles all Waypoints the id is an autincrement.
+ *
+ * @author Gabriel Bonnet 3410781
+ * @version 22.01.2020
+ */
 public class DatabaseWaypoint extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "WaypointData.db";

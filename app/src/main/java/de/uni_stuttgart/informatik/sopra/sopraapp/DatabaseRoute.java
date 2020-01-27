@@ -10,6 +10,13 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+/**
+ * Database to handle Routes the route is saved as Strins.
+ * The waypoints are saved as a String of waypointids and timeLists so get the time to the waypoint.
+ *
+ * @author Gabriel Bonnet 3410781
+ * @version 22.01.2020
+ */
 public class DatabaseRoute extends SQLiteOpenHelper {
     DatabaseWaypoint databaseWaypoint;
     public static final int DATABASE_VERSION = 1;

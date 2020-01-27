@@ -25,9 +25,6 @@ public class RoutesFragment extends Fragment {
 
     private ListView lvRoutesRef;
     DatabasePatrol databasePatrol;
-    private Duration duration1;
-    private Duration duration2;
-    private Duration duration3;
 
     public static RoutesFragment newInstance(Guard guard){
         RoutesFragment fragment = new RoutesFragment();
@@ -43,39 +40,9 @@ public class RoutesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_routes, container,false);
         lvRoutesRef = view.findViewById(R.id.lvRoutes);
-        ///////////////////////////////////////////////////
-        Route route = new Route();
-        route.setRouteName("Route um die Ecke The One (HartCode)");
-        route.setRouteId("123123");
-        Route route2 = new Route();
-        route2.setRouteName("Route um die Ecke2/3 (HartCode)");
-        Waypoint DieEckeHinterDemDönerladen= new Waypoint("Die Ecke Hinter Dem Doenerladen(HartCode)", "123456", "Tag1", "Bitte schnell laufen");
-        Waypoint DieEckeVorDemDönerladen= new Waypoint("Die Ecke Vor Dem Doenerladen(HartCode)", "223456", "Tag2", "Noch schneller bitte");
-        Waypoint DieEckeHinterDemDönerladenTheRevenge= new Waypoint("Die Ecke Hinter Dem Doenerladen The Revenge(HartCode)", "323456", "Tag3", "Und nicht stolpern");
-        String minutes1 = "1";
-        String minutes2 = "5";
-        String minutes3 = "3";
-        duration1 = Duration.ofMinutes(Integer.parseInt(minutes1));
-        duration2 = Duration.ofMinutes(Integer.parseInt(minutes2));
-        duration3 = Duration.ofMinutes(Integer.parseInt(minutes3));
-        RouteWaypoint routeWaypoint1= new RouteWaypoint(DieEckeHinterDemDönerladen, duration1);
-        RouteWaypoint routeWaypoint2= new RouteWaypoint(DieEckeVorDemDönerladen, duration2);
-        RouteWaypoint routeWaypoint3= new RouteWaypoint(DieEckeHinterDemDönerladenTheRevenge, duration3);
-        route.addWaypoint(routeWaypoint1);
-        route.addWaypoint(routeWaypoint2);
-        route.addWaypoint(routeWaypoint3);
-        GuardRoute guardRoute1 = new GuardRoute(route, "1401");
-        GuardRoute guardRoute2 = new GuardRoute(route2, "1401");
-        GuardRoute guardRoute3 = new GuardRoute(route2, "1401");
-        Guard otto = new Guard("Otto", "Muellerich", "2", "1234");
 
-        //Guard loggedInGuard = otto;
-        ///////////////////////////////////////////////////////////
 
         Guard loggedInGuard = (Guard) getArguments().getSerializable("guard");
-        loggedInGuard.addRoute(guardRoute1);
-        loggedInGuard.addRoute(guardRoute2);
-        loggedInGuard.addRoute(guardRoute3);
         ArrayList<GuardRoute> guardRouteList = loggedInGuard.getGuardRouteList();
         databasePatrol = new DatabasePatrol(getActivity());
         ArrayList<String> routeStringList = new ArrayList<>();

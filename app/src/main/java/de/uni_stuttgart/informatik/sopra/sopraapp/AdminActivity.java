@@ -13,9 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
  * Activity to navigate through the Admin Mode.
  *
  * @author Arne Bartenbach 3392087
+ * @version 22.01.2020
  */
 public class AdminActivity extends AppCompatActivity {
-
     TextView tvAdminModusRef;
     Button btnRoutenRef;
     Button btnWaypointsRef;
