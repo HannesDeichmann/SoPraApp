@@ -65,7 +65,7 @@ public class GuardTest {
 
 
     @Test
-    public void testGuards() {
+        public void testGuards() {
         //login
         onView(withId(R.id.etUsername)).perform(typeText("admin"), closeSoftKeyboard());
         onView(withId(R.id.etPassword)).perform(typeText("admin"), closeSoftKeyboard());
@@ -102,7 +102,6 @@ public class GuardTest {
         onView(withId(R.id.etSearchGuard)).perform(clearText(), typeText("Arne"), closeSoftKeyboard());
         onData(hasToString(startsWith("1"))).check(matches(withText(arne.toString() + "000000")));
 
-
         testEditGuard(arne);
         testListItems(max, kai, phil);
         testDeleteGuard(max);
@@ -112,7 +111,6 @@ public class GuardTest {
     }
 
     private void testEditGuard(Guard arne) {
-        onView(withId(R.id.btnEditGuard)).perform(click());
         onData(hasToString(startsWith("1"))).check(matches(withText(arne.toString() + "000000")));
         onData(hasToString(startsWith("1:"))).perform(click());
 
